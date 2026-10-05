@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Новий сайт LIMÉRENCE</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Manrope:wght@300;400;500;600&display=swap">
+<style>
+/*
+Theme Name: LIMÉRENCE
+Version: 0.2.0
+Requires at least: 6.8
+Requires PHP: 8.1
+Text Domain: limerence
+*/
+
+:root{--ink:#30332f;--muted:#686c65;--line:#dedfd9;--green:#687361;--paper:#f5f5f2}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:#fff;font:14px/1.65 'Manrope',Arial,sans-serif}a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}button,input,select,textarea{font:inherit;color:inherit}button,.button,input[type=submit]{display:inline-flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:white;padding:12px 20px;min-height:44px;text-decoration:none;border-radius:0;font-weight:500}button:disabled{opacity:.5;cursor:not-allowed}input:not([type=checkbox]):not([type=radio]),select,textarea{border:1px solid #b9bdb4;background:white;padding:12px;width:100%;border-radius:0;min-height:46px}textarea{resize:vertical}label{display:block}input[type=checkbox],input[type=radio]{accent-color:var(--green)}:focus-visible{outline:2px solid var(--green);outline-offset:4px}h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;line-height:1.15}h1{font-size:48px;margin:16px 0 26px}h2{font-size:32px}p{margin:10px 0}img{max-width:100%;height:auto}svg{flex-shrink:0}.lm-wrap{max-width:1380px;padding:0 48px;margin:auto}.lm-page{min-height:60vh;padding-top:25px;padding-bottom:65px}.lm-local-banner{font-size:11px;text-align:center;padding:6px 16px;background:#f0f1eb;color:#525a4c}.lm-wordmark{font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;letter-spacing:4px;line-height:1;white-space:nowrap}.lm-wordmark small{display:block;font:9px 'Manrope',sans-serif;letter-spacing:5px;text-align:center;margin-top:8px}.skip-link{position:absolute;left:-9999px}.skip-link:focus{left:20px;top:20px;background:#fff;padding:12px;z-index:1000}.screen-reader-text{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.lm-categories{display:flex;gap:28px;overflow:auto;white-space:nowrap;border-bottom:1px solid var(--line);padding:0 0 20px;margin-bottom:20px}.lm-filters{display:flex;align-items:center;gap:16px;margin:18px 0}.lm-search{flex:1;max-width:420px}.lm-filters details{position:relative}.lm-filters summary{cursor:pointer;padding:12px;min-width:80px}.lm-filter-fields{position:absolute;z-index:6;top:45px;right:0;background:#fff;border:1px solid var(--line);width:300px;padding:20px}.lm-filter-fields label{margin:10px 0}.woocommerce-result-count{color:var(--muted);font-size:12px;float:left;margin:12px 0 24px}.woocommerce-ordering{float:right;margin:0 0 24px}.woocommerce-ordering select{font-size:12px;min-height:40px;padding:9px}.products{clear:both;list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:38px 22px;margin:0}.products .product{position:relative;min-width:0}.products .product img{width:100%;aspect-ratio:1;object-fit:cover;background:var(--paper);display:block}.products h2{font-family:'Manrope',sans-serif;font-size:14px;line-height:1.5;margin:13px 0 0;font-weight:500}.products .price{display:block;font-size:13px;margin-top:4px}.price del{color:var(--muted);font-size:.85em;margin-right:6px}.price ins{text-decoration:none}.lm-material{color:var(--muted);font-size:11px;margin:2px 0}.lm-wish{position:absolute;top:8px;right:8px;background:#fffffff0;border:0;color:var(--ink);padding:9px;width:40px;min-height:40px}.lm-wish[aria-pressed=true]{color:var(--green);background:#e6ecdf}.onsale{position:absolute;z-index:2;top:10px;left:10px;background:white;font-size:10px;padding:4px 9px}.woocommerce-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:24px}.single-product div.product{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px}.woocommerce-product-gallery{min-width:0;position:relative}.woocommerce-product-gallery__wrapper{margin:0}.woocommerce-product-gallery__image img{display:block;width:100%;height:auto}.woocommerce-product-gallery__trigger{position:absolute;right:15px;top:15px;z-index:3}.flex-control-thumbs{list-style:none;padding:0;display:flex;gap:10px}.flex-control-thumbs li{width:18%;cursor:pointer}.summary h1{font-size:42px;margin-top:0}.summary .price{font-size:22px}.summary .cart{margin:25px 0}.variations{width:100%;text-align:left;border-collapse:collapse}.variations th{width:85px;font-weight:400}.variations td,.variations th{padding:10px 0}.reset_variations{font-size:11px}.quantity{display:inline-block;width:75px;margin-right:10px}.quantity input{text-align:center}.single_add_to_cart_button{min-width:210px}.lm-product-facts{color:var(--muted);font-size:12px}.lm-product-facts p{white-space:pre-line}.lm-save-product{background:white;color:var(--ink);width:100%;margin-top:10px}.lm-consult{display:block;text-align:center;font-size:12px;text-decoration:underline;margin-top:20px}.stock{font-size:12px;color:var(--green)}.out-of-stock{color:#806254}.product_meta{font-size:11px;color:var(--muted)}.woocommerce-tabs,.related.products{grid-column:1/-1}.related.products{display:block}.tabs{display:flex;gap:25px;list-style:none;padding:0;border-bottom:1px solid var(--line)}.tabs li{padding:10px 0}.woocommerce-tabs p{max-width:720px}.woocommerce-message,.woocommerce-info,.woocommerce-error{padding:16px 20px;background:#f1f3ed;border:1px solid var(--line);margin:0 0 24px;list-style:none}.woocommerce-error{background:#fbf1ef;border-color:#a04336}.woocommerce-message .button{float:right;padding:6px 12px;font-size:12px}.lm-muted,.lm-intro{color:var(--muted)}.lm-inquiry{border-top:1px solid var(--line);margin-top:26px;padding-top:10px}.lm-inquiry label{margin:12px 0}.lm-consent{display:flex;gap:10px;font-size:12px}.lm-variant-media{display:flex;gap:10px;overflow:auto;margin:15px 0}.lm-variant-media img,.lm-variant-media video{width:190px;height:230px;object-fit:contain;background:var(--paper)}[hidden]{display:none!important}.lm-wishlist-items{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin:30px 0}.lm-wishlist-items article{min-width:0}.lm-wishlist-items img{width:100%;aspect-ratio:1;object-fit:cover}.lm-wishlist-items h2{font:500 14px/1.5 'Manrope',sans-serif;margin:10px 0}.lm-wishlist-items p{font-size:12px}.lm-share-result{max-width:650px;margin:20px 0}.lm-share-result button{margin-top:10px}.lm-feedback{font-size:12px}.shop_table{width:100%;border-collapse:collapse}.shop_table th,.shop_table td{padding:16px 10px;border-bottom:1px solid var(--line);text-align:left}.shop_table th{font-weight:500;font-size:12px}.product-thumbnail{width:110px}.product-thumbnail img{width:85px;height:85px;object-fit:cover}.product-remove a{font-size:24px}.coupon{display:flex;gap:8px;float:left}.coupon label{display:none}.actions>.button{float:right}.cart-collaterals{margin:35px 0}.cart_totals{max-width:520px;margin-left:auto}.wc-proceed-to-checkout{margin-top:20px}.checkout-button{width:100%}.woocommerce-checkout .col2-set{width:48%;float:left}.woocommerce-checkout #order_review_heading,.woocommerce-checkout #order_review{margin-left:54%}.form-row{margin:14px 0}.form-row label{font-size:12px;margin-bottom:5px}.form-row-first,.form-row-last{width:48%;float:left}.form-row-last{float:right}.form-row-wide,.clear{clear:both}.required{color:#8b5148}.woocommerce-billing-fields h3,#order_review_heading{font-size:28px}.wc_payment_methods{padding:0;list-style:none}.wc_payment_method{padding:16px 0;border-bottom:1px solid var(--line)}.wc_payment_method>label{display:inline;font-size:13px}.payment_box{font-size:12px;color:var(--muted);padding-left:22px}#place_order{width:100%;margin-top:12px}.woocommerce-privacy-policy-text{font-size:11px;color:var(--muted)}.woocommerce-checkout:after,.woocommerce:after{content:'';display:block;clear:both}.woocommerce-order-overview{display:flex;gap:30px;list-style:none;padding:0;flex-wrap:wrap}.woocommerce-order-overview strong{display:block}.woocommerce-customer-details{margin-top:35px}.lm-page:after{content:'';display:block;clear:both}.woocommerce-pagination ul{display:flex;gap:20px;list-style:none;padding:20px 0}.woocommerce-pagination a,.woocommerce-pagination span{padding:8px}.lm-wishlist-items button{font-size:12px;padding:8px 12px}.lm-wishlist-items .lm-edit-link{display:block;margin:10px 0;text-decoration:underline;font-size:12px}
+@media(max-width:767px){body{font-size:13px}.lm-wrap{padding-left:16px;padding-right:16px}.lm-wordmark{font-size:27px;letter-spacing:3px}.lm-local-banner{font-size:9px;line-height:1.4}h1{font-size:36px;margin:8px 0 20px}.lm-page{padding-top:20px}.lm-categories{gap:24px;font-size:12px;padding-bottom:15px}.lm-filters{gap:7px;flex-wrap:wrap}.lm-search{max-width:none;flex-basis:65%}.lm-filters button{padding:10px 14px}.lm-filters>a{font-size:11px}.lm-filter-fields{right:0;width:280px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}.products h2{font-size:12px}.products .price{font-size:12px}.lm-material{font-size:10px}.onsale{font-size:9px;left:6px;top:6px;padding:3px 6px}.lm-wish{right:4px;top:4px;width:34px;min-height:34px;padding:7px}.lm-wish svg{width:19px;height:19px}.woocommerce-ordering select{max-width:195px;font-size:10px}.woocommerce-result-count{font-size:10px}.single-product div.product{display:block}.summary{margin-top:22px}.summary h1{font-size:34px}.summary .price{font-size:21px}.single_add_to_cart_button{min-width:0;flex:1}.woocommerce-variation-add-to-cart,.cart:not(.variations_form){display:flex;gap:8px}.single-product .summary .cart{position:relative}.lm-wishlist-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}.lm-wishlist-items h2{font-size:12px}.shop_table.cart thead{display:none}.shop_table.cart tr.cart_item{display:grid;grid-template-columns:30px 80px 1fr;border-bottom:1px solid var(--line);padding:15px 0;align-items:center}.shop_table.cart td{border:0;padding:4px}.shop_table.cart .product-thumbnail{width:auto}.shop_table.cart .product-thumbnail img{width:65px;height:65px}.shop_table.cart .product-price{grid-column:3}.shop_table.cart .product-quantity{grid-column:3}.shop_table.cart .product-subtotal{grid-column:3;font-weight:600}.shop_table.cart .actions{display:block}.coupon{float:none;flex-wrap:wrap;margin:15px 0}.actions>.button{float:none}.woocommerce-checkout .col2-set{width:100%;float:none}.woocommerce-checkout #order_review_heading,.woocommerce-checkout #order_review{margin-left:0}.woocommerce-message .button{float:none;margin-bottom:10px}.woocommerce-order-overview{gap:15px}.related.products{margin-top:45px}.related h2{font-size:28px}.lm-page .woocommerce-NoticeGroup{width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+::selection{background:#dae2d4;color:#30332f}input,textarea{caret-color:var(--green)}a{text-underline-offset:4px}.price,.amount{font-variant-numeric:tabular-nums}
+
+/* Optional catalog film. Mobile keeps the approved catalog without a banner. */
+.lm-background-video{display:none}
+@media(min-width:768px){
+  .lm-background-video{display:block;position:relative;aspect-ratio:21/9;margin:0 0 40px;background:var(--paper);overflow:hidden}
+  .lm-background-video__poster,.lm-background-video__film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .lm-background-video__film{opacity:0}
+  .lm-background-video.is-playing .lm-background-video__film{opacity:1}
+  .lm-background-video__toggle{position:absolute;right:20px;bottom:20px;z-index:1;min-height:44px;padding:10px 16px;background:#fff;color:var(--ink);border:0;font-size:12px}
+  .lm-background-video__toggle:hover{background:var(--paper)}
+  .lm-background-video__toggle:focus-visible{outline-offset:-5px}
+}
+@media(prefers-reduced-motion:reduce){.lm-background-video__film{visibility:hidden}}
+
+/* ── 0.2 House format: header with sections, front page, tiles, footer ── */
+:root{--top:76px;--gutter:48px;--ink-soft:#555a52;--ease:cubic-bezier(.16,1,.3,1)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--top) + 16px)}
+html.lm-locked{overflow:hidden}
+h1,h2,h3{text-wrap:balance}
+.lm-page{padding-top:0}
+.lm-catalog{padding-top:28px;max-width:none}
+.single-product .lm-catalog{max-width:1380px}
+.lm-foot .lm-wrap{max-width:none}
+.button,button[type=submit],input[type=submit]{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:16px 28px;transition:background-color .25s var(--ease),color .25s var(--ease)}
+.button:hover,button[type=submit]:hover{background:var(--green);border-color:var(--green);text-decoration:none}
+.button--line{background:transparent;color:var(--ink)}
+.button--line:hover{color:#fff}
+.lm-link{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding-bottom:5px;border-bottom:1px solid currentColor;transition:color .25s var(--ease)}
+.lm-link:hover{color:var(--green);text-decoration:none}
+
+/* Header */
+.lm-top{position:sticky;top:0;z-index:30;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:var(--top);padding:0 var(--gutter);background:#fff;border-bottom:1px solid var(--line)}
+.lm-top .lm-wordmark{grid-column:2;text-align:center;font-size:30px}
+.lm-top__burger,.lm-drawer__close,.lm-rail__step{background:none;border:0;color:inherit;padding:10px;min-height:44px;min-width:44px}
+.lm-top__burger{display:none;justify-self:start;margin-left:-10px}
+.lm-nav ul{display:flex;gap:30px;margin:0;padding:0;list-style:none}
+.lm-nav__link{position:relative;display:block;padding:29px 0;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.lm-nav__link:hover{text-decoration:none}
+.lm-nav__link::after{content:'';position:absolute;left:0;right:0;bottom:22px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.lm-nav__item:hover>.lm-nav__link::after,.lm-nav__item:focus-within>.lm-nav__link::after,.lm-nav__link[aria-current]::after{transform:scaleX(1)}
+.lm-nav__link[aria-current]{color:var(--green)}
+.lm-mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);visibility:hidden;opacity:0;transition:opacity .2s var(--ease),visibility 0s .2s}
+.lm-nav__item:hover>.lm-mega,.lm-nav__item:focus-within>.lm-mega{visibility:visible;opacity:1;transition-delay:.08s,0s}
+.lm-mega__inner{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:64px;align-items:start;padding:44px var(--gutter) 52px}
+.lm-mega__all{display:inline-flex;align-items:baseline;gap:14px;font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;font-weight:300;line-height:1.1}
+.lm-mega__all span{font:500 11px 'Manrope',sans-serif;letter-spacing:.1em;color:var(--muted)}
+.lm-mega__list ul{display:block;columns:3;column-gap:40px;margin-top:26px}
+.lm-mega__list li{break-inside:avoid;padding:7px 0;font-size:14px}
+.lm-mega__plate img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%}
+.lm-top__actions{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin-right:-10px}
+.lm-top__actions>a,.lm-top__search summary{display:flex;padding:10px;cursor:pointer;list-style:none}
+.lm-top__search summary::-webkit-details-marker{display:none}
+.lm-top__search-panel{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);padding:28px var(--gutter)}
+.lm-search-form{display:flex;gap:12px;max-width:720px;margin:auto}
+.lm-search-form input{flex:1;border:0;border-bottom:1px solid var(--ink);padding-left:0;font-size:16px}
+.lm-search-form input:focus-visible{outline:0;border-bottom-color:var(--green);box-shadow:0 1px 0 var(--green)}
+
+/* Phone menu */
+.lm-drawer{position:fixed;inset:0;z-index:40;background:#fff;overflow-y:auto;overscroll-behavior:contain;padding:0 20px 40px}
+.lm-drawer__bar{display:flex;align-items:center;justify-content:space-between;min-height:64px;margin-right:-10px}
+.lm-drawer .lm-wordmark{font-size:24px}
+.lm-drawer .lm-search-form{margin:8px 0 24px}
+.lm-drawer ul{list-style:none;margin:0;padding:0}
+.lm-drawer__sections>li{border-top:1px solid var(--line)}
+.lm-drawer__sections>li:last-child{border-bottom:1px solid var(--line)}
+.lm-drawer__sections>li>a,.lm-drawer summary{display:flex;justify-content:space-between;align-items:center;min-height:60px;font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;cursor:pointer;list-style:none}
+.lm-drawer summary::-webkit-details-marker{display:none}
+.lm-drawer summary::after{content:'';width:9px;height:9px;border-right:1px solid;border-bottom:1px solid;transform:rotate(45deg);margin:0 6px 6px 0;transition:transform .3s var(--ease)}
+.lm-drawer details[open] summary::after{transform:rotate(225deg);margin-bottom:-4px}
+.lm-drawer details ul{padding:0 0 18px}
+.lm-drawer details li a,.lm-drawer__service a{display:block;padding:11px 0;font-size:15px}
+.lm-drawer__service{margin-top:26px!important}
+
+/* Front page: hero */
+.lm-hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);height:min(calc(100svh - var(--top) - 28px),900px);min-height:560px;border-bottom:1px solid var(--line)}
+.lm-hero__text{align-self:end;padding:0 56px 84px var(--gutter)}
+.lm-hero h1{font-size:clamp(3.4rem,5.9vw,5.75rem);font-weight:300;line-height:1.02;letter-spacing:-.012em;margin:0 0 30px}
+.lm-hero__lead{font-size:16px;line-height:1.6;color:var(--ink-soft);margin:0 0 36px;max-width:34ch}
+.lm-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 30px;margin:0}
+.lm-hero__plate{position:relative;margin:0;overflow:hidden;background:var(--paper)}
+.lm-hero__plate img{display:block;width:100%;height:100%;object-fit:cover}
+.lm-hero__plate figcaption{position:absolute;left:0;bottom:0;background:#fff;padding:12px 20px 12px 18px;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.lm-hero--plain{grid-template-columns:1fr;height:auto;min-height:0}
+.lm-hero--plain .lm-hero__text{padding:120px var(--gutter) 96px;max-width:900px}
+.lm-hero-sections{display:none}
+@media(prefers-reduced-motion:no-preference){
+  .lm-hero__plate img{animation:lm-plate 1.5s var(--ease) both}
+  .lm-hero__text>*{animation:lm-rise 1s var(--ease) both}
+  .lm-hero__text>:nth-child(2){animation-delay:.12s}
+  .lm-hero__text>:nth-child(3){animation-delay:.2s}
+  @keyframes lm-plate{from{clip-path:inset(0 0 0 100%);transform:scale(1.07)}to{clip-path:inset(0);transform:none}}
+  @keyframes lm-rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+}
+
+/* Front page: a section's photograph with its pieces sliding beside it */
+.lm-section{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:0 56px;margin-top:112px;padding-left:var(--gutter)}
+.lm-section.is-flipped{grid-template-columns:minmax(0,8fr) minmax(0,4fr);padding-left:0;padding-right:var(--gutter)}
+.lm-section.is-flipped .lm-section__plate{order:2}
+.lm-section--plain,.lm-section--plain.is-flipped{grid-template-columns:minmax(0,1fr);padding-left:var(--gutter);padding-right:0}
+.lm-section--natural,.lm-section--lab{background:var(--paper);padding-top:80px;padding-bottom:80px}
+.lm-section--natural+.lm-section--lab{margin-top:0;padding-top:16px}
+/* The photograph takes the height of the heading and rail beside it. */
+.lm-section__plate{position:relative;display:block;overflow:hidden;min-height:440px;background:var(--paper)}
+.lm-section__plate img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;transition:transform 1.4s var(--ease)}
+.lm-section__plate:hover img{transform:scale(1.035)}
+.lm-section__body{min-width:0;display:flex;flex-direction:column;gap:44px}
+.lm-section__head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-right:var(--gutter)}
+.lm-section.is-flipped .lm-section__head{padding:0 0 0 var(--gutter)}
+.lm-section__head h2{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:0 0 14px}
+.lm-section__head h2 a:hover{text-decoration:none;color:var(--green)}
+.lm-section__head p{margin:0;max-width:44ch;color:var(--ink-soft)}
+.lm-rail__nav{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.lm-rail__nav .lm-link{margin-right:22px}
+.lm-rail__step{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);transition:border-color .25s var(--ease),opacity .25s}
+.lm-rail__step:hover:not(:disabled){border-color:var(--ink)}
+.lm-rail__step:disabled{opacity:.3}
+.lm-rail{overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain}
+.lm-rail::-webkit-scrollbar{display:none}
+.lm-rail:focus-visible{outline-offset:-2px}
+.lm-rail .lm-rail__track{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:calc((100% - 66px)/3.3);gap:22px}
+.lm-section.is-flipped .lm-rail .lm-rail__track{padding-left:var(--gutter)}
+.lm-rail__track>.product{scroll-snap-align:start}
+.lm-section.is-flipped .lm-rail{scroll-padding-left:var(--gutter)}
+.lm-rail__meter{position:relative;height:1px;margin:-12px var(--gutter) 0 0;background:var(--line)}
+.lm-section.is-flipped .lm-rail__meter{margin:-12px 0 0 var(--gutter)}
+.lm-rail__meter span{position:absolute;top:-1px;left:var(--at,0%);width:var(--span,30%);height:3px;background:var(--green)}
+
+/* Front page: showroom and the catalogue heading */
+.lm-showroom{margin-top:112px;padding:112px var(--gutter);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+.lm-section--lab+.lm-showroom,.lm-section--natural+.lm-showroom{margin-top:0;border-top:0}
+.lm-showroom h2{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:0 0 18px}
+.lm-showroom p{margin:0 0 34px;font-size:16px;color:var(--ink-soft)}
+.lm-catalog__title{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:84px 0 34px}
+
+/* Product tile */
+.lm-card-media{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:var(--paper)}
+.products .product .lm-card-media img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;background:none;transition:opacity .6s var(--ease),transform 1.2s var(--ease)}
+/* A packshot shows the whole piece; its backdrop, lifted to white, multiplies into the paper frame. */
+.products .product .lm-card-media img.lm-packshot{object-fit:contain;padding:9%;mix-blend-mode:multiply}
+.lm-card-alt img{opacity:0}
+.product:hover .lm-card-alt img{opacity:1}
+.products .product:hover .lm-card-media>img:only-of-type{transform:scale(1.03)}
+.products h2{font-size:13px;letter-spacing:.01em;margin-top:14px}
+.products .price{margin-top:3px}
+.onsale{top:0;left:0;padding:7px 10px;font-weight:600;letter-spacing:.1em}
+.lm-wish{top:0;right:0;width:44px;min-height:44px;padding:11px;background:#fff;transition:color .25s var(--ease)}
+.single-product div.product{position:relative}
+.lm-single-value{display:inline-block;padding:12px 0}
+.woocommerce-variation-add-to-cart,.cart:not(.variations_form){display:flex;gap:10px}
+.single_add_to_cart_button{flex:1;min-width:0}
+.lm-consult svg{width:15px;height:15px;margin-left:6px;vertical-align:-3px}
+/* Catalogue controls drawn in the house's own line weight */
+select{appearance:none;-webkit-appearance:none;padding-right:38px!important;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2330332f' stroke-width='1.4'%3E%3Cpath d='m5 9.5 7 7 7-7'/%3E%3C/svg%3E") right 12px center/14px no-repeat}
+.lm-filters summary{display:inline-flex;align-items:center;gap:8px;list-style:none}
+.lm-filters summary::-webkit-details-marker{display:none}
+.lm-filters summary svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+.lm-filters details[open] summary svg{transform:rotate(180deg)}
+.lm-categories a[aria-current]{color:var(--green);text-decoration:underline;text-underline-offset:9px}
+/* Gallery: a drawn zoom mark instead of the default emoji, and even thumbnails. */
+.woocommerce-product-gallery__trigger{right:0;top:0;width:44px;height:44px;font-size:0;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2330332f' stroke-width='1.4'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='m16 16 4.5 4.5M11 8.5v5M8.5 11h5'/%3E%3C/svg%3E") center/22px no-repeat}
+.woocommerce-product-gallery__trigger img,.woocommerce-product-gallery__trigger span{display:none}
+.flex-control-thumbs img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.lm-wish:hover{color:var(--green)}
+/* On a paper band a packshot tile has no edge, so its marks sit bare on the paper instead of as detached white squares. */
+.lm-section--natural .product:has(.lm-card-media>.lm-packshot) :is(.lm-wish,.onsale),.lm-section--lab .product:has(.lm-card-media>.lm-packshot) :is(.lm-wish,.onsale){background:none}
+
+/* Footer */
+.lm-foot{margin-top:40px;padding:72px 0 64px;background:var(--paper)}
+.lm-foot__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:40px}
+.lm-foot h2{font:600 11px 'Manrope',sans-serif;letter-spacing:.14em;text-transform:uppercase;margin:6px 0 18px}
+.lm-foot ul{list-style:none;margin:0;padding:0}
+.lm-foot li,.lm-foot p{margin:0 0 10px;font-size:13px}
+.lm-foot__brand p{color:var(--ink-soft);margin-top:14px}
+
+@media(max-width:1023px){
+  :root{--top:64px;--gutter:20px}
+  .lm-wrap{padding-left:var(--gutter);padding-right:var(--gutter)}
+  .lm-nav,.lm-top__search{display:none}
+  .lm-top__burger{display:flex}
+  .lm-top .lm-wordmark{font-size:24px;letter-spacing:3px}
+  .lm-top .lm-wordmark small{display:none}
+}
+@media(max-width:899px){
+  .lm-catalog{padding-top:8px}
+  .lm-hero{display:flex;flex-direction:column-reverse;height:auto;min-height:0;border-bottom:0}
+  .lm-hero__plate{height:clamp(170px,27svh,260px)}
+  .lm-hero__plate figcaption{font-size:10px;padding:9px 14px}
+  .lm-hero__text,.lm-hero--plain .lm-hero__text{padding:22px var(--gutter) 6px}
+  .lm-hero h1{font-size:34px;line-height:1.06;margin-bottom:10px}
+  .lm-hero__lead{font-size:13px;margin-bottom:0}
+  .lm-hero__actions,.lm-section,.lm-showroom{display:none}
+  .lm-hero-sections{display:flex;gap:26px;overflow-x:auto;scrollbar-width:none;padding:18px var(--gutter) 16px;border-bottom:1px solid var(--line);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+  .lm-hero-sections::-webkit-scrollbar{display:none}
+  .lm-catalog__title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0}
+  .lm-categories--home{display:none}
+  .lm-categories{margin-top:6px}
+  .lm-filters{flex-wrap:nowrap}
+  .lm-filters .lm-search{flex:1;min-width:0}
+  .lm-filters button[type=submit]{padding:14px}
+  .lm-filters summary{padding:12px 6px}
+  .woocommerce-pagination ul{flex-wrap:wrap;gap:4px 10px}
+  .products h2{font-size:12px;margin-top:10px}
+  .lm-material,.woocommerce-result-count{font-size:11px}
+  .woocommerce-ordering select{font-size:11.5px;max-width:232px;padding-left:10px}
+  .onsale{font-size:10px}
+  .lm-foot{padding:44px 0 36px}
+  .lm-foot__grid{grid-template-columns:1fr 1fr;gap:32px 20px}
+  .lm-foot__brand{grid-column:1/-1}
+}
+
+/* Plain pages (cart, checkout, wishlist, delivery) keep a gap under the header. */
+.lm-wrap.lm-page{padding-top:44px}
+@media(max-width:899px){.lm-wrap.lm-page{padding-top:24px}}
+
+
+/* Preview copy only: notice bar, static gallery, safe-area sticky header. */
+.lm-share{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:center;padding:10px 20px;background:var(--paper);color:var(--ink);font-size:12px;line-height:1.5;text-align:center}
+.lm-share strong{font-weight:600}
+.lm-share nav{display:flex;gap:18px}
+.lm-share a{border-bottom:1px solid currentColor}
+.lm-share a[aria-current]{color:var(--green)}
+.lm-top{top:env(safe-area-inset-top,0px)}
+.lm-off{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;max-width:calc(100% - 32px);padding:14px 20px;background:var(--ink);color:#fff;font-size:13px;text-align:center}
+.woocommerce-product-gallery__wrapper{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.woocommerce-product-gallery__image:first-child{grid-column:1/-1}
+.woocommerce-product-gallery__image:not(:first-child) img{aspect-ratio:1;object-fit:cover;cursor:pointer}
+.woocommerce-product-gallery__trigger{display:none}
+</style>
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність — знімок вітрини від 05.10.2026.</span><nav aria-label="Сторінки перегляду"><a href="index.html">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html" aria-current="page">Сторінка товару</a></nav></div>
+<div class="wp-singular product-template-default single single-product postid-1970 wp-theme-limerence theme-limerence woocommerce woocommerce-page woocommerce-no-js">
+<a class="skip-link" href="#content">До вмісту</a>
+    <header class="lm-top" data-lm-top>
+        <button type="button" class="lm-top__burger" aria-controls="lm-drawer" aria-expanded="false" aria-label="Меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 7.5h18M3 12h18M3 16.5h18"/></svg></button>
+        <nav class="lm-nav" aria-label="Розділи каталогу">
+            <ul>
+                                <li class="lm-nav__item">
+                    <a class="lm-nav__link" href="gold.html">Золото</a>
+                    <div class="lm-mega">
+                        <div class="lm-mega__inner">
+                            <div class="lm-mega__list">
+                                <a class="lm-mega__all" href="gold.html">Золото · усі прикраси <span>408</span></a>
+                                                                <ul>
+                                    <li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Кольє</a></li><li><a href="#" data-off>Браслети</a></li><li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Дитяча колекція</a></li><li><a href="#" data-off>Кафи</a></li><li><a href="#" data-off>Заручальні каблучки</a></li><li><a href="#" data-off>Підвіски</a></li><li><a href="#" data-off>Протяжки</a></li>                                </ul>
+                                                            </div>
+                            <a class="lm-mega__plate" href="gold.html" tabindex="-1" aria-hidden="true"><img width="744" height="1024" src="img/kole643-60205290.webp" class="attachment-large size-large" alt="" loading="lazy" decoding="async" /></a>                        </div>
+                    </div>
+                </li>
+                                <li class="lm-nav__item">
+                    <a class="lm-nav__link" href="#" data-off>Срібло</a>
+                    <div class="lm-mega">
+                        <div class="lm-mega__inner">
+                            <div class="lm-mega__list">
+                                <a class="lm-mega__all" href="#" data-off>Срібло · усі прикраси <span>288</span></a>
+                                                                <ul>
+                                    <li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Кольє</a></li><li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Браслети</a></li><li><a href="#" data-off>Кафи</a></li><li><a href="#" data-off>Джекети</a></li><li><a href="#" data-off>Протяжки</a></li>                                </ul>
+                                                            </div>
+                            <a class="lm-mega__plate" href="#" data-off tabindex="-1" aria-hidden="true"><img width="682" height="1024" src="img/kafa-60767132.webp" class="attachment-large size-large" alt="" loading="lazy" decoding="async" /></a>                        </div>
+                    </div>
+                </li>
+                                <li class="lm-nav__item">
+                    <a class="lm-nav__link" href="#" data-off>Діаманти природні</a>
+                    <div class="lm-mega">
+                        <div class="lm-mega__inner">
+                            <div class="lm-mega__list">
+                                <a class="lm-mega__all" href="#" data-off>Діаманти природні · усі прикраси <span>22</span></a>
+                                                                <ul>
+                                    <li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Дитяча колекція</a></li><li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Заручальні каблучки</a></li><li><a href="#" data-off>Кольє</a></li>                                </ul>
+                                                            </div>
+                            <a class="lm-mega__plate" href="#" data-off tabindex="-1" aria-hidden="true"><img width="578" height="670" src="img/puseti7001-61694194.webp" class="attachment-large size-large" alt="" loading="lazy" decoding="async" /></a>                        </div>
+                    </div>
+                </li>
+                                <li class="lm-nav__item">
+                    <a class="lm-nav__link" href="#" data-off>Lab Diamonds</a>
+                    <div class="lm-mega">
+                        <div class="lm-mega__inner">
+                            <div class="lm-mega__list">
+                                <a class="lm-mega__all" href="#" data-off>Lab Diamonds · усі прикраси <span>9</span></a>
+                                                                <ul>
+                                    <li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Каблучки</a></li>                                </ul>
+                                                            </div>
+                            <a class="lm-mega__plate" href="#" data-off tabindex="-1" aria-hidden="true"><img width="1024" height="905" src="img/puseti-z-diamantami-klasichni-76138546.webp" class="attachment-large size-large" alt="" loading="lazy" decoding="async" /></a>                        </div>
+                    </div>
+                </li>
+                                <li class="lm-nav__item"><a class="lm-nav__link" href="#" data-off>Jewel Box</a></li>
+                            </ul>
+        </nav>
+        <a class="lm-wordmark" href="index.html">LIMÉRENCE<small>JEWELRY</small></a>
+        <div class="lm-top__actions">
+            <details class="lm-top__search">
+                <summary aria-label="Пошук"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></summary>
+                <div class="lm-top__search-panel">    <form class="lm-search-form" role="search" method="get" action="#">
+        <label class="screen-reader-text" for="lm-search-top">Пошук прикрас</label>
+        <input id="lm-search-top" type="search" name="lm_search" placeholder="Назва або артикул" autocomplete="off">
+        <button type="submit">Знайти</button>
+    </form>
+</div>
+            </details>
+            <a href="#" data-off aria-label="Мої бажання"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></a>
+            <a href="#" data-off aria-label="Кошик"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></a>
+        </div>
+    </header>
+    <div class="lm-drawer" id="lm-drawer" hidden>
+        <div class="lm-drawer__bar">
+            <span class="lm-wordmark">LIMÉRENCE</span>
+            <button type="button" class="lm-drawer__close" aria-label="Закрити меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg></button>
+        </div>
+            <form class="lm-search-form" role="search" method="get" action="#">
+        <label class="screen-reader-text" for="lm-search-drawer">Пошук прикрас</label>
+        <input id="lm-search-drawer" type="search" name="lm_search" placeholder="Назва або артикул" autocomplete="off">
+        <button type="submit">Знайти</button>
+    </form>
+        <nav aria-label="Меню">
+            <ul class="lm-drawer__sections">
+                                <li>
+                    <details>
+                        <summary>Золото</summary>
+                        <ul>
+                            <li><a href="gold.html">Усі прикраси · 408</a></li>
+                            <li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Кольє</a></li><li><a href="#" data-off>Браслети</a></li><li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Дитяча колекція</a></li><li><a href="#" data-off>Кафи</a></li><li><a href="#" data-off>Заручальні каблучки</a></li><li><a href="#" data-off>Підвіски</a></li><li><a href="#" data-off>Протяжки</a></li>                        </ul>
+                    </details>
+                </li>
+                                <li>
+                    <details>
+                        <summary>Срібло</summary>
+                        <ul>
+                            <li><a href="#" data-off>Усі прикраси · 288</a></li>
+                            <li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Кольє</a></li><li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Браслети</a></li><li><a href="#" data-off>Кафи</a></li><li><a href="#" data-off>Джекети</a></li><li><a href="#" data-off>Протяжки</a></li>                        </ul>
+                    </details>
+                </li>
+                                <li>
+                    <details>
+                        <summary>Діаманти природні</summary>
+                        <ul>
+                            <li><a href="#" data-off>Усі прикраси · 22</a></li>
+                            <li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Дитяча колекція</a></li><li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Заручальні каблучки</a></li><li><a href="#" data-off>Кольє</a></li>                        </ul>
+                    </details>
+                </li>
+                                <li>
+                    <details>
+                        <summary>Lab Diamonds</summary>
+                        <ul>
+                            <li><a href="#" data-off>Усі прикраси · 9</a></li>
+                            <li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Каблучки</a></li>                        </ul>
+                    </details>
+                </li>
+                                <li><a href="#" data-off>Jewel Box</a></li>
+                            </ul>
+            <ul class="lm-drawer__service">
+                <li><a href="index.html">Усі прикраси</a></li>
+                <li><a href="#" data-off>Мої бажання</a></li>
+                <li><a href="#" data-off>Доставка та оплата</a></li>
+                <li><a href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Консультант у Telegram</a></li>            </ul>
+        </nav>
+    </div>
+    
+	<main id="content" class="lm-page"><div class="lm-wrap lm-catalog"><nav class="woocommerce-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Головна</a>&nbsp;&#47;&nbsp;<a href="#" data-off>Кольє</a>&nbsp;&#47;&nbsp;Кольє 179</nav>
+					
+			<div class="woocommerce-notices-wrapper"></div><div id="product-1970" class="product type-product post-1970 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+
+	
+	<span class="onsale">−25%</span>
+	<div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" >
+	<div class="woocommerce-product-gallery__wrapper">
+		<div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519691-l.webp" class="wp-post-image" alt="Кольє 179" decoding="async" fetchpriority="high" /></a></div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519693.webp" class="" alt="Кольє 179 - Зображення 2" decoding="async" /></a></div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519694.webp" class="" alt="Кольє 179 - Зображення 3" decoding="async" /></a></div>	</div>
+</div>
+
+	<div class="summary entry-summary">
+		<h1 class="product_title entry-title">Кольє 179</h1><p class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>39 300&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 39 300&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>29 475&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 29 475&nbsp;&#8372;.</span></p>
+<div class="lm-product-facts"><p>Артикул: <span data-lm-article>179</span></p><p data-lm-weight></p><p data-lm-details>Червоне золото 585 проба<br />
+Довжина 38-45см<br />
+Вага 3.99-4,01 грам<br />
+Вставки фіаніти</p></div>
+<form class="variations_form cart" action="#" method="post" enctype='multipart/form-data' data-product_id="1970">
+	
+			<table class="variations" cellspacing="0" role="presentation">
+			<tbody>
+									<tr>
+						<th class="label"><label for="%d0%b2%d0%b0%d1%80%d1%96%d0%b0%d0%bd%d1%82">Варіант</label></th>
+						<td class="value">
+							<select id="%d0%b2%d0%b0%d1%80%d1%96%d0%b0%d0%bd%d1%82" class="" name="attribute_%d0%b2%d0%b0%d1%80%d1%96%d0%b0%d0%bd%d1%82" data-attribute_name="attribute_%d0%b2%d0%b0%d1%80%d1%96%d0%b0%d0%bd%d1%82" data-show_option_none="yes"><option value="">Виберіть варіант</option><option value="Стандартний"  selected='selected'>Стандартний</option></select><a class="reset_variations" href="#" aria-label="Очистити параметри">Очистити</a>						</td>
+					</tr>
+							</tbody>
+		</table>
+		<div class="reset_variations_alert screen-reader-text" role="alert" aria-live="polite" aria-relevant="all"></div>
+				<template class="wc-product-gallery-default-template"><div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" >
+	<div class="woocommerce-product-gallery__wrapper">
+		<div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519691-l.webp" class="wp-post-image" alt="Кольє 179" decoding="async" loading="lazy" /></a></div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519693.webp" class="" alt="Кольє 179 - Зображення 2" decoding="async" loading="lazy" /></a></div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519694.webp" class="" alt="Кольє 179 - Зображення 3" decoding="async" loading="lazy" /></a></div>	</div>
+</div></template>
+		
+		<div class="single_variation_wrap">
+			<div class="woocommerce-variation single_variation" role="alert" aria-relevant="additions"></div><div class="woocommerce-variation-add-to-cart variations_button">
+	
+	<div class="quantity">
+		<label class="screen-reader-text" for="quantity_6ac3f459eadd0">Кольє 179 кількість</label>
+	<input
+		type="number"
+				id="quantity_6ac3f459eadd0"
+		class="input-text qty text"
+		name="quantity"
+		value="1"
+		aria-label="Кількість товару"
+				min="1"
+							step="1"
+			placeholder=""
+			inputmode="numeric"
+			autocomplete="off"
+			/>
+	</div>
+
+	<button type="submit" class="single_add_to_cart_button button alt">Додати в кошик</button>
+
+	
+	<input type="hidden" name="add-to-cart" value="1970" />
+	<input type="hidden" name="product_id" value="1970" />
+	<input type="hidden" name="variation_id" class="variation_id" value="0" />
+</div>
+		</div>
+	
+	</form>
+
+<button type="button" class="button lm-save-product" data-product="1970"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg> Зберегти бажання</button><p class="lm-feedback" role="status"></p><div class="lm-variant-media" data-default="[]"></div>    <section class="lm-inquiry" hidden data-product="1970">
+    <h2>Під замовлення</h2><p>Залиште заявку — узгодимо деталі та терміни. Зараз оплачувати не потрібно.</p>
+    <form data-lm-inquiry><label>Ваше ім’я<input name="name" required minlength="2" maxlength="100" autocomplete="given-name"></label><label>Телефон<input name="phone" type="tel" required placeholder="+380" autocomplete="tel"></label><label>Побажання<textarea name="comment" maxlength="1500"></textarea></label><label class="lm-consent"><input type="checkbox" name="consent" required> Погоджуюся на зв’язок щодо цієї заявки.</label><button type="submit">Залишити заявку</button><p role="status"></p></form>
+    </section><p><a class="lm-consult" href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Уточнити деталі у консультанта<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 16 16.5 7.5M9.5 7.5h7v7"/></svg></a></p>
+    	</div>
+
+	
+	<div class="woocommerce-tabs wc-tabs-wrapper">
+		<ul class="tabs wc-tabs" role="tablist">
+							<li role="presentation" class="description_tab" id="tab-title-description">
+					<a href="#tab-description" role="tab" aria-controls="tab-description">
+						Опис					</a>
+				</li>
+							<li role="presentation" class="additional_information_tab" id="tab-title-additional_information">
+					<a href="#tab-additional_information" role="tab" aria-controls="tab-additional_information">
+						Додаткова інформація					</a>
+				</li>
+							<li role="presentation" class="reviews_tab" id="tab-title-reviews">
+					<a href="#tab-reviews" role="tab" aria-controls="tab-reviews">
+						Відгуки (0)					</a>
+				</li>
+					</ul>
+					<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab" id="tab-description" role="tabpanel" aria-labelledby="tab-title-description">
+				
+	<h2>Опис</h2>
+
+<p>Червоне золото 585 проба<br />
+Довжина 38-45см<br />
+Вага 3.99-4,01 грам<br />
+Вставки фіаніти</p>
+			</div>
+					<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--additional_information panel entry-content wc-tab" id="tab-additional_information" role="tabpanel" aria-labelledby="tab-title-additional_information">
+				
+	<h2>Додаткова інформація</h2>
+
+<table class="woocommerce-product-attributes shop_attributes" aria-label="Деталі товару">
+			<tr class="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_%d0%b2%d0%b0%d1%80%d1%96%d0%b0%d0%bd%d1%82">
+			<th class="woocommerce-product-attributes-item__label" scope="row">Варіант</th>
+			<td class="woocommerce-product-attributes-item__value"><p>Стандартний</p>
+</td>
+		</tr>
+	</table>
+			</div>
+					<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--reviews panel entry-content wc-tab" id="tab-reviews" role="tabpanel" aria-labelledby="tab-title-reviews">
+				<div id="reviews" class="woocommerce-Reviews">
+	<div id="comments">
+		<h2 class="woocommerce-Reviews-title">
+			Відгуки		</h2>
+
+					<p class="woocommerce-noreviews">Відгуків немає, поки що.</p>
+			</div>
+
+			<div id="review_form_wrapper">
+			<div id="review_form">
+					<div id="respond" class="comment-respond">
+		<span id="reply-title" class="comment-reply-title" role="heading" aria-level="3">Будьте першим, хто залишив відгук на &ldquo;Кольє 179&rdquo; <small><a rel="nofollow" id="cancel-comment-reply-link" href="/product/kolje179/#respond" style="display:none;">Скасувати коментар</a></small></span><form action="#" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Ваша e-mail адреса не оприлюднюватиметься.</span> <span class="required-field-message">Обов’язкові поля позначені <span class="required">*</span></span></p><div class="comment-form-rating"><label for="rating" id="comment-form-rating-label">Ваша оцінка&nbsp;<span class="required">*</span></label><select name="rating" id="rating" required>
+						<option value="">Оцінка&hellip;</option>
+						<option value="5">Ідеально</option>
+						<option value="4">Добре</option>
+						<option value="3">Середнє</option>
+						<option value="2">Задовільно</option>
+						<option value="1">Дуже погано</option>
+					</select></div><p class="comment-form-comment"><label for="comment">Ваш відгук&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required></textarea></p><p class="comment-form-author"><label for="author">Назва&nbsp;<span class="required">*</span></label><input id="author" name="author" type="text" autocomplete="name" value="" size="30" required /></p>
+<p class="comment-form-email"><label for="email">Email&nbsp;<span class="required">*</span></label><input id="email" name="email" type="email" autocomplete="email" value="" size="30" required /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Зберегти моє ім'я, e-mail, та адресу сайту в цьому браузері для моїх подальших коментарів.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Відправити" /> <input type='hidden' name='comment_post_ID' value='1970' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+				</div>
+		</div>
+	
+	<div class="clear"></div>
+</div>
+			</div>
+		
+			</div>
+
+
+	<section class="related products">
+
+					<h2>Супутні товари</h2>
+				<ul class="products columns-4">
+
+			
+					<li class="product type-product post-1914 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+	<span class="onsale">−25%</span>
+	<span class="lm-card-media"><img width="720" height="900" src="img/kol938-50035060.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє трансформер 030" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kol938-50035061.webp"></span></span><h2 class="woocommerce-loop-product__title">Кольє трансформер 030</h2><p class="lm-material">Біле золото 585 проба</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>36 065&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 36 065&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>27 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 27 050&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-product="1914" aria-label="Зберегти Кольє трансформер 030"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-1630 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+	<span class="onsale">−10%</span>
+	<span class="lm-card-media"><img width="720" height="1080" src="img/1kolje11-75824348.webp" class="lm-packshot" alt="Кольє 35325893" style="filter:brightness(1.027)" decoding="async" loading="lazy" /></span><h2 class="woocommerce-loop-product__title">Кольє 35325893</h2><p class="lm-material">Срібло 925 проба</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 800&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 800&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 620&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 620&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-product="1630" aria-label="Зберегти Кольє 35325893"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-1631 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+	<span class="onsale">−20%</span>
+	<span class="lm-card-media"><img width="720" height="1080" src="img/1kolje81-75734814.webp" class="lm-packshot" alt="Кольє 36246012" style="filter:brightness(1.007)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/1kolje81-63770389.webp"></span></span><h2 class="woocommerce-loop-product__title">Кольє 36246012</h2><p class="lm-material">Червоне золото 585 проба</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>29 010&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 29 010&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>23 210&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 23 210&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-product="1631" aria-label="Зберегти Кольє 36246012"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-1918 status-publish last instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+	<span class="onsale">−20%</span>
+	<span class="lm-card-media"><img width="720" height="1080" src="img/kole055-75879468.webp" class="lm-packshot" alt="Кольє 386055" style="filter:brightness(1.004)" decoding="async" loading="lazy" /></span><h2 class="woocommerce-loop-product__title">Кольє 386055</h2><p class="lm-material">Червоне золото 585 проба</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>46 060&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 46 060&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>36 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 36 850&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-product="1918" aria-label="Зберегти Кольє 386055"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+		</ul>
+
+	</section>
+	</div>
+
+
+		
+	</div></main>
+	
+    <footer class="lm-foot">
+        <div class="lm-wrap lm-foot__grid">
+            <div class="lm-foot__brand">
+                <a class="lm-wordmark" href="index.html">LIMÉRENCE</a>
+                <p>Прикраси, що стають особистим.</p>
+            </div>
+            <nav aria-labelledby="lm-foot-catalog">
+                <h2 id="lm-foot-catalog">Каталог</h2>
+                <ul>
+                    <li><a href="gold.html">Золото</a></li><li><a href="#" data-off>Срібло</a></li><li><a href="#" data-off>Діаманти природні</a></li><li><a href="#" data-off>Lab Diamonds</a></li>                    <li><a href="#" data-off>Jewel Box</a></li>                </ul>
+            </nav>
+            <nav aria-labelledby="lm-foot-buyers">
+                <h2 id="lm-foot-buyers">Покупцям</h2>
+                <ul>
+                    <li><a href="#" data-off>Доставка та оплата</a></li>
+                    <li><a href="#" data-off>Мої бажання</a></li>
+                    <li><a href="#" data-off>Кошик</a></li>
+                </ul>
+            </nav>
+            <div>
+                <h2>Шоурум у Києві</h2>
+                <p>вул. Саксаганського, 63/28 · щодня 11:00–19:00</p>                <p><a href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Консультант у Telegram</a></p>            </div>
+        </div>
+    </footer>
+    
+
+<div id="photoswipe-fullscreen-dialog" class="pswp" tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Повноекранне зображення">
+	<div class="pswp__bg"></div>
+	<div class="pswp__scroll-wrap">
+		<div class="pswp__container">
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+		</div>
+		<div class="pswp__ui pswp__ui--hidden">
+			<div class="pswp__top-bar">
+				<div class="pswp__counter"></div>
+				<button class="pswp__button pswp__button--zoom" aria-label="Збільшити/зменшити"></button>
+				<button class="pswp__button pswp__button--fs" aria-label="На повний екран"></button>
+				<button class="pswp__button pswp__button--share" aria-label="Поділитися"></button>
+				<button class="pswp__button pswp__button--close" aria-label="Зачинити (Esc)"></button>
+				<div class="pswp__preloader">
+					<div class="pswp__preloader__icn">
+						<div class="pswp__preloader__cut">
+							<div class="pswp__preloader__donut"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+				<div class="pswp__share-tooltip"></div>
+			</div>
+			<button class="pswp__button pswp__button--arrow--left" aria-label="Попередній (стрілка вліво)"></button>
+			<button class="pswp__button pswp__button--arrow--right" aria-label="Далі (стрілка вправо)"></button>
+			<div class="pswp__caption">
+				<div class="pswp__caption__center"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<script>
+/* Header menu, search, section rails and the second photograph of a tile. */
+(() => {
+  'use strict';
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const drawer = document.getElementById('lm-drawer');
+  const burger = document.querySelector('.lm-top__burger');
+  if (drawer && burger) {
+    const close = drawer.querySelector('.lm-drawer__close');
+    const set = open => {
+      drawer.hidden = !open;
+      burger.setAttribute('aria-expanded', String(open));
+      document.documentElement.classList.toggle('lm-locked', open);
+      (open ? close : burger).focus();
+    };
+    burger.addEventListener('click', () => set(drawer.hidden));
+    close.addEventListener('click', () => set(false));
+    drawer.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { set(false); return; }
+      if (event.key !== 'Tab') return;
+      // The page behind is covered, so focus stays inside the open menu.
+      const stops = [...drawer.querySelectorAll('a[href], button, input, summary')].filter(node => node.offsetParent);
+      const first = stops[0], last = stops[stops.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
+    matchMedia('(min-width: 1024px)').addEventListener('change', event => { if (event.matches && !drawer.hidden) set(false); });
+  }
+
+  const search = document.querySelector('.lm-top__search');
+  if (search) {
+    search.addEventListener('toggle', () => { if (search.open) search.querySelector('input').focus(); });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && search.open) { search.open = false; search.querySelector('summary').focus(); }
+    });
+    document.addEventListener('click', event => { if (search.open && !search.contains(event.target)) search.open = false; });
+  }
+
+  document.querySelectorAll('[data-lm-rail]').forEach(rail => {
+    const steps = [...rail.closest('.lm-section').querySelectorAll('[data-lm-rail-step]')];
+    const meter = rail.parentElement.querySelector('.lm-rail__meter span');
+    const sync = () => {
+      const end = rail.scrollWidth - rail.clientWidth - 2;
+      // The green mark shows how much of the rail is in view and where.
+      if (meter) {
+        meter.style.setProperty('--span', `${Math.min(100, rail.clientWidth / rail.scrollWidth * 100)}%`);
+        meter.style.setProperty('--at', `${rail.scrollLeft / rail.scrollWidth * 100}%`);
+      }
+      for (const step of steps) step.disabled = Number(step.dataset.lmRailStep) < 0 ? rail.scrollLeft <= 2 : rail.scrollLeft >= end;
+    };
+    for (const step of steps) {
+      step.addEventListener('click', () => rail.scrollBy({ left: Number(step.dataset.lmRailStep) * rail.clientWidth * 0.8, behavior: calm ? 'auto' : 'smooth' }));
+    }
+    rail.addEventListener('scroll', sync, { passive: true });
+    new ResizeObserver(sync).observe(rail);
+    sync();
+  });
+
+  // One variant leaves nothing to choose: show its value as text, and nothing at all for the placeholder.
+  const selects = [...document.querySelectorAll('.variations select')];
+  const single = selects.filter(select => [...select.options].filter(option => option.value).length === 1);
+  for (const select of single) {
+    const only = [...select.options].find(option => option.value);
+    if (only.value === 'Стандартний') { select.closest('tr').hidden = true; continue; }
+    const value = document.createElement('span');
+    value.className = 'lm-single-value';
+    value.textContent = only.textContent;
+    select.hidden = true;
+    select.after(value);
+  }
+  if (selects.length && single.length === selects.length) document.querySelector('.reset_variations')?.remove();
+
+  // The second photograph is fetched only when a pointer first reaches the tile.
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.addEventListener('pointerover', event => {
+      const slot = event.target.closest?.('.product')?.querySelector('.lm-card-alt[data-src]');
+      if (!slot) return;
+      const image = new Image();
+      image.alt = '';
+      image.decoding = 'async';
+      if (slot.dataset.lift) { image.className = 'lm-packshot'; image.style.filter = `brightness(${slot.dataset.lift})`; }
+      image.src = slot.dataset.src;
+      slot.removeAttribute('data-src');
+      slot.append(image);
+    });
+  }
+})();
+
+</script>
+<script>
+(() => {
+  'use strict';
+  // Preview copy: shop links, forms and buttons that need the real shop only explain themselves.
+  let note;
+  const say = () => {
+    note?.remove();
+    note = document.createElement('p');
+    note.className = 'lm-off'; note.setAttribute('role', 'status');
+    note.textContent = 'Це попередній перегляд дизайну: ця дія працюватиме в справжньому магазині.';
+    document.body.append(note);
+    setTimeout(() => note?.remove(), 3200);
+  };
+  document.addEventListener('click', event => {
+    if (event.target.closest('a[data-off], .single_add_to_cart_button, .lm-wish, .lm-save-product')) { event.preventDefault(); say(); }
+  });
+  document.addEventListener('submit', event => { event.preventDefault(); say(); });
+  // Product page: a small photograph becomes the large one when chosen.
+  const shots = [...document.querySelectorAll('.woocommerce-product-gallery__image img')];
+  for (const shot of shots.slice(1)) shot.addEventListener('click', () => { [shots[0].src, shot.src] = [shot.src, shots[0].src]; });
+})();
+</script>
+</body>
+</html>
