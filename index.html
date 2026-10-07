@@ -103,6 +103,12 @@ h1,h2,h3{text-wrap:balance}
 .lm-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 30px;margin:0}
 .lm-hero__plate{position:relative;margin:0;overflow:hidden;background:var(--paper)}
 .lm-hero__plate img{display:block;width:100%;height:100%;object-fit:cover}
+/* A film lies over the photograph and fades in once it plays. */
+.lm-hero__plate video{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s var(--ease)}
+.lm-hero__plate video.is-playing{opacity:1}
+.lm-hero__plate.has-film img{visibility:hidden}
+.lm-hero__pause{position:absolute;z-index:2;right:0;bottom:0;width:44px;min-height:44px;padding:11px;border:0;background:#fff;color:var(--ink)}
+.lm-hero__pause[aria-pressed=true]{color:var(--green)}
 .lm-hero--plain{grid-template-columns:1fr;height:auto;min-height:0}
 .lm-hero--plain .lm-hero__text{padding:120px var(--gutter) 96px;max-width:900px}
 @media(prefers-reduced-motion:no-preference){
@@ -193,7 +199,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 @media(max-width:899px){
   .lm-catalog{padding-top:8px}
   .lm-hero{display:flex;flex-direction:column-reverse;height:auto;min-height:0;border-bottom:0}
-  .lm-hero__plate{height:clamp(300px,58svh,520px)}
+  .lm-hero__plate{height:auto;aspect-ratio:16/10}
   .lm-hero__text,.lm-hero--plain .lm-hero__text{padding:26px var(--gutter) 0}
   .lm-hero h1{font-size:34px;line-height:1.06;margin-bottom:0}
   .lm-hero__actions{display:none}
@@ -373,7 +379,9 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
             <h1 id="lm-hero-title">Прикраси, що стають особистим</h1>
             <p class="lm-hero__actions"><a class="button" href="#sections">Обрати прикраси</a></p>
         </div>
-        <figure class="lm-hero__plate"><img width="1706" height="2560" src="img/koltso011-60248449-l.webp" class="attachment-full size-full" alt="" loading="eager" fetchpriority="high" style="object-position:50% 50%" decoding="async" /></figure>    </section>
+                <figure class="lm-hero__plate" data-lm-films="[{&quot;src&quot;:&quot;films\/limerence-film-1.mp4&quot;,&quot;focus&quot;:&quot;50% 35%&quot;},{&quot;src&quot;:&quot;films\/limerence-film-2.mp4&quot;,&quot;focus&quot;:&quot;50% 35%&quot;},{&quot;src&quot;:&quot;films\/limerence-film-3.mp4&quot;,&quot;focus&quot;:&quot;50% 35%&quot;},{&quot;src&quot;:&quot;films\/limerence-film-4.mp4&quot;,&quot;focus&quot;:&quot;50% 35%&quot;}]">
+            <img width="1706" height="2560" src="img/koltso011-60248449-l.webp" class="attachment-full size-full" alt="" loading="eager" fetchpriority="high" style="object-position:50% 50%" decoding="async" />            <button type="button" class="lm-hero__pause" hidden aria-pressed="false" aria-label="Зупинити відео"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg></button>        </figure>
+            </section>
     <nav class="lm-choose" id="sections" aria-label="Розділи каталогу">
                     <a class="lm-choose__item" href="gold.html">
                 <span class="lm-choose__plate"><img width="1861" height="2560" src="img/kole643-60205290-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></span>
@@ -462,6 +470,39 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
       if (event.key === 'Escape' && search.open) { search.open = false; search.querySelector('summary').focus(); }
     });
     document.addEventListener('click', event => { if (search.open && !search.contains(event.target)) search.open = false; });
+  }
+
+  // Front page film: one of the owner's films per visit, the next one on the next visit.
+  // The photograph stays where motion is turned down or data is being saved.
+  const plate = document.querySelector('[data-lm-films]');
+  if (plate && !matchMedia('(prefers-reduced-motion: reduce)').matches && !navigator.connection?.saveData) {
+    const films = JSON.parse(plate.dataset.lmFilms);
+    let turn = Math.floor(Math.random() * films.length);
+    try {
+      const last = localStorage.getItem('lm-film');
+      if (last !== null) turn = (Number(last) + 1) % films.length;
+      localStorage.setItem('lm-film', String(turn));
+    } catch { /* private mode: a random film is fine */ }
+    const video = document.createElement('video');
+    for (const name of ['muted', 'loop', 'playsinline', 'autoplay']) video.setAttribute(name, '');
+    video.muted = true;
+    video.setAttribute('aria-hidden', 'true');
+    video.tabIndex = -1;
+    video.style.objectPosition = films[turn].focus;
+    video.src = films[turn].src;
+    const pause = plate.querySelector('.lm-hero__pause');
+    video.addEventListener('playing', () => { video.classList.add('is-playing'); if (pause) pause.hidden = false; }, { once: true });
+    pause?.addEventListener('click', () => {
+      const stop = !video.paused;
+      if (stop) video.pause(); else video.play();
+      pause.setAttribute('aria-pressed', String(stop));
+      pause.setAttribute('aria-label', stop ? 'Відтворити відео' : 'Зупинити відео');
+    });
+    // The film opens from the bare frame; the photograph returns only if the film cannot play.
+    plate.classList.add('has-film');
+    video.addEventListener('error', () => plate.classList.remove('has-film'), { once: true });
+    plate.prepend(video);
+    video.play().catch(() => {});
   }
 
   // One variant leaves nothing to choose: show its value as text, and nothing at all for the placeholder.
