@@ -2,14 +2,14 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
 <title>Новий сайт LIMÉRENCE</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Manrope:wght@300;400;500;600&display=swap">
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.2.0
+Version: 0.2.1
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -162,9 +162,21 @@ h1,h2,h3{text-wrap:balance}
 .lm-card-alt img{opacity:0}
 .product:hover .lm-card-alt img{opacity:1}
 .products .product:hover .lm-card-media>img:only-of-type{transform:scale(1.03)}
-.products h2{font-size:13px;letter-spacing:.01em;margin-top:14px}
-.products .price{margin-top:3px}
+/* A quiet tile: the kind of piece in the serif, one short material line, then the price. */
+.products h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:400;line-height:1.15;margin:15px 0 5px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.lm-material{line-height:1.5;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* The price in force leads; the earlier one follows it, small. */
+.price,.products .price{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:9px}
+.price ins{order:1}
+.price del{order:2;margin:0}
+.lm-from{margin-right:-5px}
+.products .price{font-weight:500;margin-top:10px}
+.products .price del{font-size:11px;font-weight:400}
 .onsale{top:0;left:0;padding:7px 10px;font-weight:600;letter-spacing:.1em}
+/* On a tile the discount sits on the photograph, at its foot, without a plate. */
+.lm-card-media .onsale{top:auto;left:13px;bottom:13px;padding:0;background:none;font-weight:400;letter-spacing:.5px}
+/* Over a photograph of a piece being worn the figures keep a soft light edge, so dark hair does not swallow them. */
+.lm-card-media:not(:has(.lm-packshot)) .onsale{font-weight:500;text-shadow:0 0 2px #fff,0 0 6px #fff,0 0 10px #fff}
 .lm-wish{top:0;right:0;width:44px;min-height:44px;padding:11px;background:#fff;transition:color .25s var(--ease)}
 .single-product div.product{position:relative}
 .lm-single-value{display:inline-block;padding:12px 0}
@@ -184,7 +196,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 .flex-control-thumbs img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
 .lm-wish:hover{color:var(--green)}
 /* On a paper band a packshot tile has no edge, so its marks sit bare on the paper instead of as detached white squares. */
-.lm-section--natural .product:has(.lm-card-media>.lm-packshot) :is(.lm-wish,.onsale),.lm-section--lab .product:has(.lm-card-media>.lm-packshot) :is(.lm-wish,.onsale){background:none}
+.lm-section--natural .product:has(.lm-card-media>.lm-packshot) .lm-wish,.lm-section--lab .product:has(.lm-card-media>.lm-packshot) .lm-wish{background:none}
 
 /* Footer */
 .lm-foot{margin-top:40px;padding:72px 0 64px;background:var(--paper)}
@@ -221,7 +233,9 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
   .lm-filters button[type=submit]{padding:14px}
   .lm-filters summary{padding:12px 6px}
   .woocommerce-pagination ul{flex-wrap:wrap;gap:4px 10px}
-  .products h2{font-size:12px;margin-top:10px}
+  .products h2{font-size:25px;margin:11px 0 4px}
+  .products .price{font-size:14px;column-gap:7px;margin-top:7px}
+  .lm-card-media .onsale{left:9px;bottom:9px}
   .lm-material,.woocommerce-result-count{font-size:11px}
   .woocommerce-ordering select{font-size:11.5px;max-width:232px;padding-left:10px}
   .onsale{font-size:10px}
@@ -416,10 +430,10 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 			<div class="woocommerce-variation single_variation" role="alert" aria-relevant="additions"></div><div class="woocommerce-variation-add-to-cart variations_button">
 	
 	<div class="quantity">
-		<label class="screen-reader-text" for="quantity_6ac3f459eadd0">Кольє 179 кількість</label>
+		<label class="screen-reader-text" for="quantity_6ac685837b890">Кольє 179 кількість</label>
 	<input
 		type="number"
-				id="quantity_6ac3f459eadd0"
+				id="quantity_6ac685837b890"
 		class="input-text qty text"
 		name="quantity"
 		value="1"
@@ -527,36 +541,36 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 				<ul class="products columns-4">
 
 			
-					<li class="product type-product post-1914 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+					<li class="product type-product post-40 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/kolje176-0.webp" class="lm-packshot" alt="Кольє 42722738" style="filter:brightness(1.004)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kolje176-1.webp" data-lift="1"></span>
+	<span class="onsale">−10%</span>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 42722738</span></h2><p class="lm-material">Срібло 925</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>4 750&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 4 750&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>4 275&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 4 275&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-product="40" aria-label="Зберегти Кольє 42722738"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-1914 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="900" src="img/kol938-50035060.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє трансформер 030" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kol938-50035061.webp"></span>
 	<span class="onsale">−25%</span>
-	<span class="lm-card-media"><img width="720" height="900" src="img/kol938-50035060.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє трансформер 030" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kol938-50035061.webp"></span></span><h2 class="woocommerce-loop-product__title">Кольє трансформер 030</h2><p class="lm-material">Біле золото 585 проба</p>
+	</span><h2 class="woocommerce-loop-product__title">Кольє трансформер<span class="screen-reader-text">, артикул 030</span></h2><p class="lm-material">Біле золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>36 065&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 36 065&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>27 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 27 050&nbsp;&#8372;.</span></span>
 </a><button type="button" class="lm-wish" data-product="1914" aria-label="Зберегти Кольє трансформер 030"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
 
 			
-					<li class="product type-product post-1630 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-	<span class="onsale">−10%</span>
-	<span class="lm-card-media"><img width="720" height="1080" src="img/1kolje11-75824348.webp" class="lm-packshot" alt="Кольє 35325893" style="filter:brightness(1.027)" decoding="async" loading="lazy" /></span><h2 class="woocommerce-loop-product__title">Кольє 35325893</h2><p class="lm-material">Срібло 925 проба</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 800&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 800&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 620&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 620&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1630" aria-label="Зберегти Кольє 35325893"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-
-			
-					<li class="product type-product post-1631 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+					<li class="product type-product post-1918 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole055-75879468.webp" class="lm-packshot" alt="Кольє 386055" style="filter:brightness(1.004)" decoding="async" loading="lazy" />
 	<span class="onsale">−20%</span>
-	<span class="lm-card-media"><img width="720" height="1080" src="img/1kolje81-75734814.webp" class="lm-packshot" alt="Кольє 36246012" style="filter:brightness(1.007)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/1kolje81-63770389.webp"></span></span><h2 class="woocommerce-loop-product__title">Кольє 36246012</h2><p class="lm-material">Червоне золото 585 проба</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>29 010&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 29 010&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>23 210&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 23 210&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1631" aria-label="Зберегти Кольє 36246012"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-
-			
-					<li class="product type-product post-1918 status-publish last instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-	<span class="onsale">−20%</span>
-	<span class="lm-card-media"><img width="720" height="1080" src="img/kole055-75879468.webp" class="lm-packshot" alt="Кольє 386055" style="filter:brightness(1.004)" decoding="async" loading="lazy" /></span><h2 class="woocommerce-loop-product__title">Кольє 386055</h2><p class="lm-material">Червоне золото 585 проба</p>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 386055</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>46 060&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 46 060&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>36 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 36 850&nbsp;&#8372;.</span></span>
 </a><button type="button" class="lm-wish" data-product="1918" aria-label="Зберегти Кольє 386055"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-1921 status-publish last instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole384-51893835.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє 700044" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kole384-74868868.webp" data-lift="1.004"></span>
+	<span class="onsale">−25%</span>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 700044</span></h2><p class="lm-material">Золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>20 285&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 20 285&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>15 215&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 15 215&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-product="1921" aria-label="Зберегти Кольє 700044"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
 
 			
 		</ul>
