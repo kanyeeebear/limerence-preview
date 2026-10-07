@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.2.1
+Version: 0.3.0
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -53,6 +53,9 @@ h1,h2,h3{text-wrap:balance}
 /* Header */
 .lm-top{position:sticky;top:0;z-index:30;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:var(--top);padding:0 var(--gutter);background:#fff;border-bottom:1px solid var(--line)}
 .lm-top .lm-wordmark{grid-column:2;text-align:center;font-size:30px}
+/* The logo is a dark drawing on a clear ground; multiply keeps it clean on paper as well as on white. */
+.lm-wordmark img{display:block;width:auto;height:40px;margin:auto;mix-blend-mode:multiply}
+.lm-drawer .lm-wordmark img,.lm-foot .lm-wordmark img{margin:0}
 .lm-top__burger,.lm-drawer__close,.lm-rail__step{background:none;border:0;color:inherit;padding:10px;min-height:44px;min-width:44px}
 .lm-top__burger{display:none;justify-self:start;margin-left:-10px}
 .lm-nav ul{display:flex;gap:30px;margin:0;padding:0;list-style:none}
@@ -97,14 +100,11 @@ h1,h2,h3{text-wrap:balance}
 .lm-hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);height:min(calc(100svh - var(--top) - 28px),900px);min-height:560px;border-bottom:1px solid var(--line)}
 .lm-hero__text{align-self:end;padding:0 56px 84px var(--gutter)}
 .lm-hero h1{font-size:clamp(3.4rem,5.9vw,5.75rem);font-weight:300;line-height:1.02;letter-spacing:-.012em;margin:0 0 30px}
-.lm-hero__lead{font-size:16px;line-height:1.6;color:var(--ink-soft);margin:0 0 36px;max-width:34ch}
 .lm-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 30px;margin:0}
 .lm-hero__plate{position:relative;margin:0;overflow:hidden;background:var(--paper)}
 .lm-hero__plate img{display:block;width:100%;height:100%;object-fit:cover}
-.lm-hero__plate figcaption{position:absolute;left:0;bottom:0;background:#fff;padding:12px 20px 12px 18px;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 .lm-hero--plain{grid-template-columns:1fr;height:auto;min-height:0}
 .lm-hero--plain .lm-hero__text{padding:120px var(--gutter) 96px;max-width:900px}
-.lm-hero-sections{display:none}
 @media(prefers-reduced-motion:no-preference){
   .lm-hero__plate img{animation:lm-plate 1.5s var(--ease) both}
   .lm-hero__text>*{animation:lm-rise 1s var(--ease) both}
@@ -114,45 +114,24 @@ h1,h2,h3{text-wrap:balance}
   @keyframes lm-rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 }
 
-/* Front page: a section's photograph with its pieces sliding beside it */
-.lm-section{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:0 56px;margin-top:112px;padding-left:var(--gutter)}
-.lm-section.is-flipped{grid-template-columns:minmax(0,8fr) minmax(0,4fr);padding-left:0;padding-right:var(--gutter)}
-.lm-section.is-flipped .lm-section__plate{order:2}
-.lm-section--plain,.lm-section--plain.is-flipped{grid-template-columns:minmax(0,1fr);padding-left:var(--gutter);padding-right:0}
-.lm-section--natural,.lm-section--lab{background:var(--paper);padding-top:80px;padding-bottom:80px}
-.lm-section--natural+.lm-section--lab{margin-top:0;padding-top:16px}
-/* The photograph takes the height of the heading and rail beside it. */
-.lm-section__plate{position:relative;display:block;overflow:hidden;min-height:440px;background:var(--paper)}
-.lm-section__plate img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;transition:transform 1.4s var(--ease)}
-.lm-section__plate:hover img{transform:scale(1.035)}
-.lm-section__body{min-width:0;display:flex;flex-direction:column;gap:44px}
-.lm-section__head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-right:var(--gutter)}
-.lm-section.is-flipped .lm-section__head{padding:0 0 0 var(--gutter)}
-.lm-section__head h2{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:0 0 14px}
-.lm-section__head h2 a:hover{text-decoration:none;color:var(--green)}
-.lm-section__head p{margin:0;max-width:44ch;color:var(--ink-soft)}
-.lm-rail__nav{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.lm-rail__nav .lm-link{margin-right:22px}
-.lm-rail__step{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);transition:border-color .25s var(--ease),opacity .25s}
-.lm-rail__step:hover:not(:disabled){border-color:var(--ink)}
-.lm-rail__step:disabled{opacity:.3}
-.lm-rail{overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain}
-.lm-rail::-webkit-scrollbar{display:none}
-.lm-rail:focus-visible{outline-offset:-2px}
-.lm-rail .lm-rail__track{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:calc((100% - 66px)/3.3);gap:22px}
-.lm-section.is-flipped .lm-rail .lm-rail__track{padding-left:var(--gutter)}
-.lm-rail__track>.product{scroll-snap-align:start}
-.lm-section.is-flipped .lm-rail{scroll-padding-left:var(--gutter)}
-.lm-rail__meter{position:relative;height:1px;margin:-12px var(--gutter) 0 0;background:var(--line)}
-.lm-section.is-flipped .lm-rail__meter{margin:-12px 0 0 var(--gutter)}
-.lm-rail__meter span{position:absolute;top:-1px;left:var(--at,0%);width:var(--span,30%);height:3px;background:var(--green)}
+/* Front page: the choice of a section — a photograph and its name. The catalogue opens from here. */
+.lm-choose{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;padding:96px var(--gutter) 0}
+.lm-choose__item{display:block;min-width:0}
+.lm-choose__item:hover{text-decoration:none}
+.lm-choose__plate{display:block;aspect-ratio:4/5;overflow:hidden;background:var(--paper)}
+.lm-choose__plate img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 25%;transition:transform 1.4s var(--ease)}
+.lm-choose__item:hover img{transform:scale(1.035)}
+.lm-choose__name{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;font-weight:300;line-height:1.1;margin-top:20px;transition:color .25s var(--ease)}
+.lm-choose__item:hover .lm-choose__name{color:var(--green)}
+.lm-choose__text{display:block;margin-top:8px;font-size:13px;color:var(--ink-soft);max-width:34ch}
 
-/* Front page: showroom and the catalogue heading */
-.lm-showroom{margin-top:112px;padding:112px var(--gutter);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
-.lm-section--lab+.lm-showroom,.lm-section--natural+.lm-showroom{margin-top:0;border-top:0}
+/* Front page: a few words about the house, then the showroom */
+.lm-about{padding:128px var(--gutter) 112px;text-align:center}
+.lm-about h2{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:0 0 26px}
+.lm-about p{margin:0 auto;max-width:62ch;font-size:16px;line-height:1.75;color:var(--ink-soft)}
+.lm-showroom{padding:112px var(--gutter);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
 .lm-showroom h2{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:0 0 18px}
 .lm-showroom p{margin:0 0 34px;font-size:16px;color:var(--ink-soft)}
-.lm-catalog__title{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:84px 0 34px}
 
 /* Product tile */
 .lm-card-media{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:var(--paper)}
@@ -195,8 +174,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 .woocommerce-product-gallery__trigger img,.woocommerce-product-gallery__trigger span{display:none}
 .flex-control-thumbs img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
 .lm-wish:hover{color:var(--green)}
-/* On a paper band a packshot tile has no edge, so its marks sit bare on the paper instead of as detached white squares. */
-.lm-section--natural .product:has(.lm-card-media>.lm-packshot) .lm-wish,.lm-section--lab .product:has(.lm-card-media>.lm-packshot) .lm-wish{background:none}
 
 /* Footer */
 .lm-foot{margin-top:40px;padding:72px 0 64px;background:var(--paper)}
@@ -211,25 +188,24 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
   .lm-wrap{padding-left:var(--gutter);padding-right:var(--gutter)}
   .lm-nav,.lm-top__search{display:none}
   .lm-top__burger{display:flex}
-  .lm-top .lm-wordmark{font-size:24px;letter-spacing:3px}
-  .lm-top .lm-wordmark small{display:none}
+  .lm-wordmark img{height:32px}
 }
 @media(max-width:899px){
   .lm-catalog{padding-top:8px}
   .lm-hero{display:flex;flex-direction:column-reverse;height:auto;min-height:0;border-bottom:0}
-  .lm-hero__plate{height:clamp(170px,27svh,260px)}
-  .lm-hero__plate figcaption{font-size:10px;padding:9px 14px}
-  .lm-hero__text,.lm-hero--plain .lm-hero__text{padding:22px var(--gutter) 6px}
-  .lm-hero h1{font-size:34px;line-height:1.06;margin-bottom:10px}
-  .lm-hero__lead{font-size:13px;margin-bottom:0}
-  .lm-hero__actions,.lm-section,.lm-showroom{display:none}
-  .lm-hero-sections{display:flex;gap:26px;overflow-x:auto;scrollbar-width:none;padding:18px var(--gutter) 16px;border-bottom:1px solid var(--line);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
-  .lm-hero-sections::-webkit-scrollbar{display:none}
-  .lm-catalog__title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0}
-  .lm-categories--home{display:none}
+  .lm-hero__plate{height:clamp(300px,58svh,520px)}
+  .lm-hero__text,.lm-hero--plain .lm-hero__text{padding:26px var(--gutter) 0}
+  .lm-hero h1{font-size:34px;line-height:1.06;margin-bottom:0}
+  .lm-hero__actions{display:none}
+  .lm-choose{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 12px;padding-top:34px}
+  .lm-choose__name{font-size:25px;margin-top:12px}
+  .lm-choose__text{display:none}
+  .lm-about{padding:72px var(--gutter) 64px}
+  .lm-about p{font-size:14px}
+  .lm-showroom{padding:64px var(--gutter)}
+  .lm-showroom p{font-size:14px;margin-bottom:26px}
   .lm-categories{margin-top:6px}
   .lm-filters{flex-wrap:nowrap}
-  .lm-filters .lm-search{flex:1;min-width:0}
   .lm-filters button[type=submit]{padding:14px}
   .lm-filters summary{padding:12px 6px}
   .woocommerce-pagination ul{flex-wrap:wrap;gap:4px 10px}
@@ -323,13 +299,13 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                                 <li class="lm-nav__item"><a class="lm-nav__link" href="#" data-off>Jewel Box</a></li>
                             </ul>
         </nav>
-        <a class="lm-wordmark" href="index.html">LIMÉRENCE<small>JEWELRY</small></a>
+        <a class="lm-wordmark" href="index.html"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></a>
         <div class="lm-top__actions">
             <details class="lm-top__search">
                 <summary aria-label="Пошук"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></summary>
                 <div class="lm-top__search-panel">    <form class="lm-search-form" role="search" method="get" action="#">
         <label class="screen-reader-text" for="lm-search-top">Пошук прикрас</label>
-        <input id="lm-search-top" type="search" name="lm_search" placeholder="Назва або артикул" autocomplete="off">
+        <input id="lm-search-top" type="search" name="lm_search" placeholder="Що шукаєте?" autocomplete="off">
         <button type="submit">Знайти</button>
     </form>
 </div>
@@ -340,12 +316,12 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
     </header>
     <div class="lm-drawer" id="lm-drawer" hidden>
         <div class="lm-drawer__bar">
-            <span class="lm-wordmark">LIMÉRENCE</span>
+            <span class="lm-wordmark"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></span>
             <button type="button" class="lm-drawer__close" aria-label="Закрити меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg></button>
         </div>
             <form class="lm-search-form" role="search" method="get" action="#">
         <label class="screen-reader-text" for="lm-search-drawer">Пошук прикрас</label>
-        <input id="lm-search-drawer" type="search" name="lm_search" placeholder="Назва або артикул" autocomplete="off">
+        <input id="lm-search-drawer" type="search" name="lm_search" placeholder="Що шукаєте?" autocomplete="off">
         <button type="submit">Знайти</button>
     </form>
         <nav aria-label="Меню">
@@ -385,486 +361,48 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                                 <li><a href="#" data-off>Jewel Box</a></li>
                             </ul>
             <ul class="lm-drawer__service">
-                <li><a href="index.html">Усі прикраси</a></li>
+                <li><a href="#" data-off>Усі прикраси</a></li>
                 <li><a href="#" data-off>Мої бажання</a></li>
                 <li><a href="#" data-off>Доставка та оплата</a></li>
                 <li><a href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Консультант у Telegram</a></li>            </ul>
         </nav>
     </div>
-    <main id="content" class="lm-page">    <section class="lm-hero" aria-labelledby="lm-hero-title">
+    <main id="content" class="lm-page lm-home">
+    <section class="lm-hero" aria-labelledby="lm-hero-title">
         <div class="lm-hero__text">
             <h1 id="lm-hero-title">Прикраси, що стають особистим</h1>
-            <p class="lm-hero__lead">Золото, срібло та діаманти. Шоурум у Києві.</p>            <p class="lm-hero__actions">
-                <a class="button" href="#catalog">Дивитися прикраси</a>
-                <a class="lm-link" href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Запитати консультанта</a>            </p>
+            <p class="lm-hero__actions"><a class="button" href="#sections">Обрати прикраси</a></p>
         </div>
-                <figure class="lm-hero__plate">
-            <img width="1706" height="2560" src="img/koltso011-60248449-l.webp" class="attachment-full size-full" alt="" loading="eager" fetchpriority="high" style="object-position:50% 50%" decoding="async" />            <figcaption><a href="#" data-off>На фото: Каблучка 1122698</a></figcaption>        </figure>
-            </section>
-    <nav class="lm-hero-sections" aria-label="Розділи каталогу">
-        <a href="gold.html">Золото</a><a href="#" data-off>Срібло</a><a href="#" data-off>Діаманти природні</a><a href="#" data-off>Lab Diamonds</a>    </nav>
-            <section class="lm-section lm-section--gold" aria-labelledby="lm-section-gold">
-            <a class="lm-section__plate" href="gold.html" tabindex="-1" aria-hidden="true"><img width="1861" height="2560" src="img/kole643-60205290-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></a>            <div class="lm-section__body">
-                <header class="lm-section__head">
-                    <div>
-                        <h2 id="lm-section-gold"><a href="gold.html">Золото</a></h2>
-                        <p>Каблучки, сережки, кольє, браслети та пусети із золота.</p>                    </div>
-                    <div class="lm-rail__nav">
-                        <a class="lm-link" href="gold.html">Усі прикраси розділу · 408</a>
-                        <button type="button" class="lm-rail__step" data-lm-rail-step="-1" aria-label="Попередні прикраси"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14.5 5 7.5 12l7 7"/></svg></button>
-                        <button type="button" class="lm-rail__step" data-lm-rail-step="1" aria-label="Наступні прикраси"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
-                    </div>
-                </header>
-                <div class="lm-rail" data-lm-rail tabindex="0" role="region" aria-label="Золото: прикраси">
-                    <ul class="products lm-rail__track">
-                        <li class="product type-product post-2423 status-publish first instock product_cat-23 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/transformery409-53160081.webp" class="lm-packshot" alt="Пусети-трансформери 700409" style="filter:brightness(1)" decoding="async" /><span class="lm-card-alt" data-src="img/transformery409-53160082.webp"></span>
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Пусети-трансформери<span class="screen-reader-text">, артикул 700409</span></h2><p class="lm-material">Червоне та біле золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>16 170&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 16 170&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>12 125&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 12 125&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2423" aria-label="Зберегти Пусети-трансформери 700409"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2414 status-publish instock product_cat-30 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi711-56304462.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Протяжки 580083" decoding="async" /><span class="lm-card-alt" data-src="img/sergi711-56304463.webp"></span>
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Протяжки<span class="screen-reader-text">, артикул 580083</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>19 795&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 19 795&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 845&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 14 845&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2414" aria-label="Зберегти Протяжки 580083"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2409 status-publish instock product_cat-22 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/sergi528-49961779.webp" class="lm-packshot" alt="Сережки 700231" style="filter:brightness(1)" decoding="async" />
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 700231</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>13 130&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 13 130&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>9 845&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 9 845&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2409" aria-label="Зберегти Сережки 700231"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2408 status-publish last instock product_cat-23 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi512-57762152.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Сережки 331512" decoding="async" />
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 331512</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>32 535&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 32 535&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>24 400&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 24 400&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2408" aria-label="Зберегти Сережки 331512"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2404 status-publish first instock product_cat-22 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/sergi384-49962196.webp" class="lm-packshot" alt="Сережки 700226" style="filter:brightness(1)" decoding="async" />
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 700226</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 800&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 14 800&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>11 100&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 11 100&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2404" aria-label="Зберегти Сережки 700226"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2403 status-publish instock product_cat-23 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi38-74975168.webp" class="lm-packshot" alt="Сережки 382830" style="filter:brightness(1.004)" decoding="async" /><span class="lm-card-alt" data-src="img/sergi38-57762122.webp"></span>
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 382830</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>28 225&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 28 225&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>21 170&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 21 170&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2403" aria-label="Зберегти Сережки 382830"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2399 status-publish instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="855" src="img/sergi217-57776192.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Сережки 212792" decoding="async" /><span class="lm-card-alt" data-src="img/sergi217-57776196.webp"></span>
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 212792</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>39 100&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 39 100&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>29 325&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 29 325&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2399" aria-label="Зберегти Сережки 212792"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2398 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/sergi213-57030231.webp" class="lm-packshot" alt="Сережки 60213" style="filter:brightness(1)" decoding="async" />
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 60213</span></h2><p class="lm-material">Червоне та біле золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>23 620&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 23 620&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>17 715&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 17 715&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2398" aria-label="Зберегти Сережки 60213"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2421 status-publish first instock product_cat-17 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/sergi993-49650821.webp" class="lm-packshot" alt="Сережки 700263" style="filter:brightness(1)" decoding="async" />
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 700263</span></h2><p class="lm-material">Біле золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>24 500&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 24 500&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>18 375&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 18 375&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2421" aria-label="Зберегти Сережки 700263"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2419 status-publish instock product_cat-17 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi948-74903484.webp" class="lm-packshot" alt="Сережки 700034" style="filter:brightness(1.004)" decoding="async" />
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 700034</span></h2><p class="lm-material">Біле золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>23 030&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 23 030&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>17 275&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 17 275&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2419" aria-label="Зберегти Сережки 700034"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-                    </ul>
-                </div>
-                <div class="lm-rail__meter" aria-hidden="true"><span></span></div>
-            </div>
+        <figure class="lm-hero__plate"><img width="1706" height="2560" src="img/koltso011-60248449-l.webp" class="attachment-full size-full" alt="" loading="eager" fetchpriority="high" style="object-position:50% 50%" decoding="async" /></figure>    </section>
+    <nav class="lm-choose" id="sections" aria-label="Розділи каталогу">
+                    <a class="lm-choose__item" href="gold.html">
+                <span class="lm-choose__plate"><img width="1861" height="2560" src="img/kole643-60205290-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></span>
+                <span class="lm-choose__name">Золото</span>
+                <span class="lm-choose__text">Каблучки, сережки, кольє, браслети та пусети із золота.</span>            </a>
+                    <a class="lm-choose__item" href="#" data-off>
+                <span class="lm-choose__plate"><img width="1706" height="2560" src="img/kafa-60767132-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></span>
+                <span class="lm-choose__name">Срібло</span>
+                <span class="lm-choose__text">Прикраси зі срібла 925 проби.</span>            </a>
+                    <a class="lm-choose__item" href="#" data-off>
+                <span class="lm-choose__plate"><img width="578" height="670" src="img/puseti7001-61694194.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></span>
+                <span class="lm-choose__name">Діаманти природні</span>
+                <span class="lm-choose__text">Каблучки, сережки та кольє з природними діамантами.</span>            </a>
+                    <a class="lm-choose__item" href="#" data-off>
+                <span class="lm-choose__plate"><img width="1334" height="1179" src="img/puseti-z-diamantami-klasichni-76138546-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></span>
+                <span class="lm-choose__name">Lab Diamonds</span>
+                <span class="lm-choose__text">Пусети й каблучки з лабораторними діамантами. Виготовляємо під замовлення.</span>            </a>
+            </nav>
+            <section class="lm-about" aria-labelledby="lm-about-title">
+            <h2 id="lm-about-title">Про бренд</h2>            <p>Золото, срібло та діаманти. Шоурум у Києві.</p>
         </section>
-                <section class="lm-section lm-section--silver is-flipped" aria-labelledby="lm-section-silver">
-            <a class="lm-section__plate" href="#" data-off tabindex="-1" aria-hidden="true"><img width="1706" height="2560" src="img/kafa-60767132-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></a>            <div class="lm-section__body">
-                <header class="lm-section__head">
-                    <div>
-                        <h2 id="lm-section-silver"><a href="#" data-off>Срібло</a></h2>
-                        <p>Прикраси зі срібла 925 проби.</p>                    </div>
-                    <div class="lm-rail__nav">
-                        <a class="lm-link" href="#" data-off>Усі прикраси розділу · 288</a>
-                        <button type="button" class="lm-rail__step" data-lm-rail-step="-1" aria-label="Попередні прикраси"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14.5 5 7.5 12l7 7"/></svg></button>
-                        <button type="button" class="lm-rail__step" data-lm-rail-step="1" aria-label="Наступні прикраси"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
-                    </div>
-                </header>
-                <div class="lm-rail" data-lm-rail tabindex="0" role="region" aria-label="Срібло: прикраси">
-                    <ul class="products lm-rail__track">
-                        <li class="product type-product post-2422 status-publish instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="881" src="img/serrzhki122-61593456.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Сережки 122" decoding="async" /><span class="lm-card-alt" data-src="img/serrzhki122-61593458.webp"></span>
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 122</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 2 850&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 565&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 2 565&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2422" aria-label="Зберегти Сережки 122"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2418 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="835" src="img/sergi851-57927549.webp" class="lm-packshot" alt="Сережки 330" style="filter:brightness(1)" decoding="async" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 330</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 550&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 550&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 395&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 395&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2418" aria-label="Зберегти Сережки 330"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2411 status-publish first instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi58-74974708.webp" class="lm-packshot" alt="Сережки 500667" style="filter:brightness(1.004)" decoding="async" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 500667</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 485&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 485&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2411" aria-label="Зберегти Сережки 500667"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2410 status-publish instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi568-75737586.webp" class="lm-packshot" alt="Сережки 20568" style="filter:brightness(1.004)" decoding="async" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 20568</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 750&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 750&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 575&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 575&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2410" aria-label="Зберегти Сережки 20568"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2406 status-publish instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi48-60189565.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Сережки 33" decoding="async" /><span class="lm-card-alt" data-src="img/sergi48-60189568.webp"></span>
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 33</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 2 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 385&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 2 385&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2406" aria-label="Зберегти Сережки 33"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2393 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="745" src="img/sergi1201-58378823.webp" class="lm-packshot" alt="Сережки 26120" style="filter:brightness(1)" decoding="async" /><span class="lm-card-alt" data-src="img/sergi1201-60302625.webp"></span>
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 26120</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 485&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 485&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2393" aria-label="Зберегти Сережки 26120"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2386 status-publish first instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="786" src="img/sergi02-57480728.webp" class="lm-packshot" alt="Сережки трансформери 32702411" style="filter:brightness(1)" decoding="async" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки трансформери<span class="screen-reader-text">, артикул 32702411</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 850&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 665&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 665&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2386" aria-label="Зберегти Сережки трансформери 32702411"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2379 status-publish instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/serezhki930-68713826.webp" class="lm-packshot" alt="Сережки 930" style="filter:brightness(1.009)" decoding="async" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 930</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 750&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 750&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 575&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 575&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2379" aria-label="Зберегти Сережки 930"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-31 status-publish instock product_cat-16 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/kabluchka746-0.webp" class="lm-packshot" alt="Каблучка 746" style="filter:brightness(1.008)" decoding="async" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 746</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 2 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 385&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 2 385&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="31" aria-label="Зберегти Каблучка 746"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2405 status-publish last instock product_cat-17 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="682" src="img/sergi41-58566585.webp" class="lm-packshot" alt="Сережки 3347" style="filter:brightness(1)" decoding="async" /><span class="lm-card-alt" data-src="img/sergi41-58566586.webp" data-lift="1"></span>
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 3347</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 2 050&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 845&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 845&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2405" aria-label="Зберегти Сережки 3347"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-                    </ul>
-                </div>
-                <div class="lm-rail__meter" aria-hidden="true"><span></span></div>
-            </div>
-        </section>
-                <section class="lm-section lm-section--natural" aria-labelledby="lm-section-natural">
-            <a class="lm-section__plate" href="#" data-off tabindex="-1" aria-hidden="true"><img width="578" height="670" src="img/puseti7001-61694194.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></a>            <div class="lm-section__body">
-                <header class="lm-section__head">
-                    <div>
-                        <h2 id="lm-section-natural"><a href="#" data-off>Діаманти природні</a></h2>
-                        <p>Каблучки, сережки та кольє з природними діамантами.</p>                    </div>
-                    <div class="lm-rail__nav">
-                        <a class="lm-link" href="#" data-off>Усі прикраси розділу · 22</a>
-                        <button type="button" class="lm-rail__step" data-lm-rail-step="-1" aria-label="Попередні прикраси"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14.5 5 7.5 12l7 7"/></svg></button>
-                        <button type="button" class="lm-rail__step" data-lm-rail-step="1" aria-label="Наступні прикраси"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
-                    </div>
-                </header>
-                <div class="lm-rail" data-lm-rail tabindex="0" role="region" aria-label="Діаманти природні: прикраси">
-                    <ul class="products lm-rail__track">
-                        <li class="product type-product post-2335 status-publish first instock product_cat-21 product_cat-17 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/pusety8484-74836038.webp" class="lm-packshot" alt="Пусети 880351" style="filter:brightness(1)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 880351</span></h2><p class="lm-material">Золото 585</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>14 200&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2335" aria-label="Зберегти Пусети 880351"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2326 status-publish instock product_cat-22 product_cat-21 product_cat-17 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="657" src="img/pusety629-74773914.webp" class="lm-packshot" alt="Пусети 880629" style="filter:brightness(1)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 880629</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>16 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2326" aria-label="Зберегти Пусети 880629"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2325 status-publish instock product_cat-22 product_cat-21 product_cat-17 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/pusety628-57994920.webp" class="lm-packshot" alt="Пусети 880628" style="filter:brightness(1)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 880628</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>17 700&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2325" aria-label="Зберегти Пусети 880628"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2319 status-publish last instock product_cat-22 product_cat-21 product_cat-17 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="872" src="img/pusety360-74785494.webp" class="lm-packshot" alt="Пусети 880360" style="filter:brightness(1)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 880360</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>13 200&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2319" aria-label="Зберегти Пусети 880360"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2318 status-publish first instock product_cat-22 product_cat-21 product_cat-17 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/pusety358-74785482.webp" class="lm-packshot" alt="Пусети 880358" style="filter:brightness(1)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 880358</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>14 250&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2318" aria-label="Зберегти Пусети 880358"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2303 status-publish instock product_cat-21 product_cat-17 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/pusety083-74836024.webp" class="lm-packshot" alt="Пусети 880083" style="filter:brightness(1)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 880083</span></h2><p class="lm-material">Червоне та біле золото 585</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>17 500&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2303" aria-label="Зберегти Пусети 880083"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2302 status-publish instock product_cat-21 product_cat-17 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="824" src="img/pusety0666-74836034.webp" class="lm-packshot" alt="Пусети 880666" style="filter:brightness(1.004)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 880666</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>14 960&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2302" aria-label="Зберегти Пусети 880666"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2301 status-publish last instock product_cat-21 product_cat-17 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/pusety0636-74836022.webp" class="lm-packshot" alt="Пусети 8800636б" style="filter:brightness(1)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 8800636б</span></h2><p class="lm-material">Біле золото 585</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>16 900&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2301" aria-label="Зберегти Пусети 8800636б"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2299 status-publish first instock product_cat-21 product_cat-17 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/pusety0626-58182903.webp" class="lm-packshot" alt="Пусети 880626" style="filter:brightness(1)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 880626</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>16 900&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2299" aria-label="Зберегти Пусети 880626"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2298 status-publish instock product_cat-22 product_cat-21 product_cat-17 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/pusety04047-74785442.webp" class="lm-packshot" alt="Пусети 880354" style="filter:brightness(1)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 880354</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>9 900&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2298" aria-label="Зберегти Пусети 880354"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-                    </ul>
-                </div>
-                <div class="lm-rail__meter" aria-hidden="true"><span></span></div>
-            </div>
-        </section>
-                <section class="lm-section lm-section--lab is-flipped" aria-labelledby="lm-section-lab">
-            <a class="lm-section__plate" href="#" data-off tabindex="-1" aria-hidden="true"><img width="1334" height="1179" src="img/puseti-z-diamantami-klasichni-76138546-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></a>            <div class="lm-section__body">
-                <header class="lm-section__head">
-                    <div>
-                        <h2 id="lm-section-lab"><a href="#" data-off>Lab Diamonds</a></h2>
-                        <p>Пусети й каблучки з лабораторними діамантами. Виготовляємо під замовлення.</p>                    </div>
-                    <div class="lm-rail__nav">
-                        <a class="lm-link" href="#" data-off>Усі прикраси розділу · 9</a>
-                        <button type="button" class="lm-rail__step" data-lm-rail-step="-1" aria-label="Попередні прикраси"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14.5 5 7.5 12l7 7"/></svg></button>
-                        <button type="button" class="lm-rail__step" data-lm-rail-step="1" aria-label="Наступні прикраси"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
-                    </div>
-                </header>
-                <div class="lm-rail" data-lm-rail tabindex="0" role="region" aria-label="Lab Diamonds: прикраси">
-                    <ul class="products lm-rail__track">
-                        <li class="product type-product post-2212 status-publish instock product_cat-lab-diamonds product_cat-23 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1279" src="img/puseti-z-diamantami-oval-76411390.webp" class="lm-packshot" alt="Пусети з діамантами Oval 42995758" style="filter:brightness(1.004)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Пусети з діамантами Oval<span class="screen-reader-text">, артикул 42995758</span></h2><p class="lm-material">Золото 750</p>
-	<span class="price"><span class="lm-from">від</span> <span class="woocommerce-Price-amount amount"><bdi>95 600&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2212" aria-label="Зберегти Пусети з діамантами Oval 42995758"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2211 status-publish last instock product_cat-lab-diamonds product_cat-23 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/puseti-z-diamantami-klasichni-76129718.webp" class="lm-packshot" alt="Пусети з діамантами класичні 121" style="filter:brightness(1)" decoding="async" /><span class="lm-card-alt" data-src="img/puseti-z-diamantami-klasichni-76129720.webp" data-lift="1.003"></span></span><h2 class="woocommerce-loop-product__title">Пусети з діамантами класичні<span class="screen-reader-text">, артикул 121</span></h2><p class="lm-material">Золото 750</p>
-	<span class="price"><span class="lm-from">від</span> <span class="woocommerce-Price-amount amount"><bdi>94 500&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2211" aria-label="Зберегти Пусети з діамантами класичні 121"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2210 status-publish first instock product_cat-lab-diamonds product_cat-23 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="642" src="img/puseti-z-diamantami-heart-1-76411384.webp" class="lm-packshot" alt="Пусети з діамантами Heart 17836195278545" style="filter:brightness(1.004)" decoding="async" /><span class="lm-card-alt" data-src="img/puseti-z-diamantami-heart-1-76411386.webp" data-lift="1.004"></span></span><h2 class="woocommerce-loop-product__title">Пусети з діамантами Heart<span class="screen-reader-text">, артикул 17836195278545</span></h2><p class="lm-material">Золото 750</p>
-	<span class="price"><span class="lm-from">від</span> <span class="woocommerce-Price-amount amount"><bdi>103 500&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2210" aria-label="Зберегти Пусети з діамантами Heart 17836195278545"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2209 status-publish instock product_cat-lab-diamonds product_cat-23 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="570" src="img/puseti-transformerilab-76481088.webp" class="lm-packshot" alt="Пусети трансформери 43022874" style="filter:brightness(1.004)" decoding="async" /><span class="lm-card-alt" data-src="img/puseti-transformerilab-76481090.webp" data-lift="1.003"></span></span><h2 class="woocommerce-loop-product__title">Пусети трансформери<span class="screen-reader-text">, артикул 43022874</span></h2><p class="lm-material">Біле золото 750</p>
-	<span class="price"><span class="woocommerce-Price-amount amount"><bdi>128 800&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2209" aria-label="Зберегти Пусети трансформери 43022874"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2205 status-publish instock product_cat-lab-diamonds product_cat-23 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/puseti-transformeri-heart-76164900.webp" class="lm-packshot" alt="Пусети трансформери Heart 42856346" style="filter:brightness(1.004)" decoding="async" /><span class="lm-card-alt" data-src="img/puseti-transformeri-heart-76164902.webp" data-lift="1.004"></span></span><h2 class="woocommerce-loop-product__title">Пусети трансформери Heart<span class="screen-reader-text">, артикул 42856346</span></h2><p class="lm-material">Золото 750</p>
-	<span class="price"><span class="lm-from">від</span> <span class="woocommerce-Price-amount amount"><bdi>116 600&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="2205" aria-label="Зберегти Пусети трансформери Heart 42856346"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1787 status-publish last instock product_cat-lab-diamonds product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1082" src="img/kabluchka-z-laboratornim-diamantom-radiant2-76242400.webp" class="lm-packshot" alt="Каблучка з лабораторним діамантом Radiant 42886824" style="filter:brightness(1.003)" decoding="async" />
-	<span class="onsale">−16%</span>
-	</span><h2 class="woocommerce-loop-product__title">Каблучка з лабораторним діамантом Radiant<span class="screen-reader-text">, артикул 42886824</span></h2><p class="lm-material">Золото 750</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>112 500&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 112 500&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>94 500&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 94 500&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1787" aria-label="Зберегти Каблучка з лабораторним діамантом Radiant 42886824"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1786 status-publish first instock product_cat-lab-diamonds product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1097" src="img/kabluchka-z-laboratornim-diamantom-radiant-76242318.webp" class="lm-packshot" alt="Каблучка з лабораторним діамантом Radiant 42886674" style="filter:brightness(1.005)" decoding="async" />
-	<span class="onsale">−16%</span>
-	</span><h2 class="woocommerce-loop-product__title">Каблучка з лабораторним діамантом Radiant<span class="screen-reader-text">, артикул 42886674</span></h2><p class="lm-material">Золото 750</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>112 500&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 112 500&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>94 500&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 94 500&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1786" aria-label="Зберегти Каблучка з лабораторним діамантом Radiant 42886674"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1785 status-publish instock product_cat-lab-diamonds product_cat-16 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1280" src="img/kabluchka-z-laboratornim-diamantom-oval-76169830.webp" class="lm-packshot" alt="Каблучка з лабораторним діамантом Oval 42858028" style="filter:brightness(1.024)" decoding="async" /></span><h2 class="woocommerce-loop-product__title">Каблучка з лабораторним діамантом Oval<span class="screen-reader-text">, артикул 42858028</span></h2><p class="lm-material">Біле золото 750</p>
-	<span class="price"><span class="lm-from">від</span> <span class="woocommerce-Price-amount amount"><bdi>74 300&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="1785" aria-label="Зберегти Каблучка з лабораторним діамантом Oval 42858028"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1784 status-publish instock product_cat-lab-diamonds product_cat-16 has-post-thumbnail shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="822" src="img/kabluchka-z-diamantom-cushion-76330736.webp" class="lm-packshot" alt="Каблучка з діамантом Cushion 42939766" style="filter:brightness(1.004)" decoding="async" /><span class="lm-card-alt" data-src="img/kabluchka-z-diamantom-cushion-76330738.webp" data-lift="1.003"></span></span><h2 class="woocommerce-loop-product__title">Каблучка з діамантом Cushion<span class="screen-reader-text">, артикул 42939766</span></h2><p class="lm-material">Біле золото 750</p>
-	<span class="price"><span class="lm-from">від</span> <span class="woocommerce-Price-amount amount"><bdi>75 300&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></span>
-</a><button type="button" class="lm-wish" data-product="1784" aria-label="Зберегти Каблучка з діамантом Cushion 42939766"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-                    </ul>
-                </div>
-                <div class="lm-rail__meter" aria-hidden="true"><span></span></div>
-            </div>
-        </section>
-                <section class="lm-showroom" aria-labelledby="lm-showroom-title">
+            <section class="lm-showroom" aria-labelledby="lm-showroom-title">
             <h2 id="lm-showroom-title">Шоурум у Києві</h2>
             <p>вул. Саксаганського, 63/28 · щодня 11:00–19:00</p>            <a class="button button--line" href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Написати консультанту</a>        </section>
-    <div class="lm-wrap lm-catalog"><h2 class="lm-catalog__title" id="catalog">Усі прикраси</h2><header class="woocommerce-products-header">
-	
-	</header>
-<nav class="lm-categories lm-categories--home" aria-label="Типи прикрас"><a href="index.html">Усі прикраси</a><a href="#" data-off>Jewel Box</a><a href="#" data-off>Браслети</a><a href="#" data-off>Джекети</a><a href="#" data-off>Дитяча колекція</a><a href="#" data-off>Заручальні каблучки</a><a href="#" data-off>Каблучки</a><a href="#" data-off>Кафи</a><a href="#" data-off>Кольє</a><a href="#" data-off>Протяжки</a><a href="#" data-off>Пусети</a><a href="#" data-off>Підвіски</a><a href="#" data-off>Сережки</a></nav><form class="lm-filters" method="get"><label class="lm-search"><span class="screen-reader-text">Пошук прикрас</span><input type="search" name="lm_search" placeholder="Назва або артикул" value=""></label><details><summary>Фільтри<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 9.5 7 7 7-7"/></svg></summary><div class="lm-filter-fields"><label>Метал<select name="lm_metal"><option value="">Усі</option><option value="silver" >Срібло</option><option value="gold" >Золото</option></select></label><label>Ціна до, ₴<input name="max_price" type="number" min="0" value=""></label><label>Розмір<input name="lm_size" value="" placeholder="Наприклад, 17"></label><label><input type="checkbox" name="lm_available" value="1" > У наявності</label></div></details><button type="submit">Знайти</button></form><div class="woocommerce-notices-wrapper"></div><p class="woocommerce-result-count" role="status" aria-relevant="all" >
-	Показано 1&ndash;24 із 699</p>
-<form class="woocommerce-ordering" method="get">
-		<select
-		name="orderby"
-		class="orderby"
-					aria-label="Замовлення магазину"
-			>
-					<option value="menu_order"  selected='selected'>Сортування за замовчуванням</option>
-					<option value="popularity" >Сортувати за популярністю</option>
-					<option value="rating" >Сортувати за оцінкою</option>
-					<option value="date" >Сортувати за останніми</option>
-					<option value="price" >Сортувати за ціною: від нижчої до вищої</option>
-					<option value="price-desc" >Сортувати за ціною: від вищої до нижчої</option>
-			</select>
-	<input type="hidden" name="paged" value="1" />
-	</form>
-<ul class="products columns-4">
-<li class="product type-product post-31 status-publish first instock product_cat-16 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/kabluchka746-0.webp" class="lm-packshot" alt="Каблучка 746" style="filter:brightness(1.008)" decoding="async" loading="lazy" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 746</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 2 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 385&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 2 385&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="31" aria-label="Зберегти Каблучка 746"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2414 status-publish instock product_cat-30 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi711-56304462.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Протяжки 580083" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/sergi711-56304463.webp"></span>
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Протяжки<span class="screen-reader-text">, артикул 580083</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>19 795&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 19 795&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 845&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 14 845&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2414" aria-label="Зберегти Протяжки 580083"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2423 status-publish instock product_cat-23 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/transformery409-53160081.webp" class="lm-packshot" alt="Пусети-трансформери 700409" style="filter:brightness(1)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/transformery409-53160082.webp"></span>
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Пусети-трансформери<span class="screen-reader-text">, артикул 700409</span></h2><p class="lm-material">Червоне та біле золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>16 170&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 16 170&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>12 125&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 12 125&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2423" aria-label="Зберегти Пусети-трансформери 700409"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2422 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="881" src="img/serrzhki122-61593456.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Сережки 122" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/serrzhki122-61593458.webp"></span>
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 122</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 2 850&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 565&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 2 565&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2422" aria-label="Зберегти Сережки 122"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2410 status-publish first instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi568-75737586.webp" class="lm-packshot" alt="Сережки 20568" style="filter:brightness(1.004)" decoding="async" loading="lazy" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 20568</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 750&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 750&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 575&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 575&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2410" aria-label="Зберегти Сережки 20568"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2399 status-publish instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="855" src="img/sergi217-57776192.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Сережки 212792" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/sergi217-57776196.webp"></span>
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 212792</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>39 100&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 39 100&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>29 325&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 29 325&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2399" aria-label="Зберегти Сережки 212792"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2393 status-publish instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="745" src="img/sergi1201-58378823.webp" class="lm-packshot" alt="Сережки 26120" style="filter:brightness(1)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/sergi1201-60302625.webp"></span>
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 26120</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 485&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 485&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2393" aria-label="Зберегти Сережки 26120"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2406 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi48-60189565.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Сережки 33" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/sergi48-60189568.webp"></span>
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 33</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 2 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 385&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 2 385&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2406" aria-label="Зберегти Сережки 33"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2418 status-publish first instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="835" src="img/sergi851-57927549.webp" class="lm-packshot" alt="Сережки 330" style="filter:brightness(1)" decoding="async" loading="lazy" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 330</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 550&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 550&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 395&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 395&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2418" aria-label="Зберегти Сережки 330"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2408 status-publish instock product_cat-23 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi512-57762152.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Сережки 331512" decoding="async" loading="lazy" />
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 331512</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>32 535&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 32 535&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>24 400&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 24 400&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2408" aria-label="Зберегти Сережки 331512"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2403 status-publish instock product_cat-23 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi38-74975168.webp" class="lm-packshot" alt="Сережки 382830" style="filter:brightness(1.004)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/sergi38-57762122.webp"></span>
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 382830</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>28 225&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 28 225&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>21 170&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 21 170&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2403" aria-label="Зберегти Сережки 382830"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2411 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi58-74974708.webp" class="lm-packshot" alt="Сережки 500667" style="filter:brightness(1.004)" decoding="async" loading="lazy" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 500667</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 485&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 485&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2411" aria-label="Зберегти Сережки 500667"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2398 status-publish first instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/sergi213-57030231.webp" class="lm-packshot" alt="Сережки 60213" style="filter:brightness(1)" decoding="async" loading="lazy" />
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 60213</span></h2><p class="lm-material">Червоне та біле золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>23 620&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 23 620&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>17 715&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 17 715&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2398" aria-label="Зберегти Сережки 60213"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2404 status-publish instock product_cat-22 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/sergi384-49962196.webp" class="lm-packshot" alt="Сережки 700226" style="filter:brightness(1)" decoding="async" loading="lazy" />
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 700226</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 800&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 14 800&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>11 100&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 11 100&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2404" aria-label="Зберегти Сережки 700226"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2409 status-publish instock product_cat-22 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/sergi528-49961779.webp" class="lm-packshot" alt="Сережки 700231" style="filter:brightness(1)" decoding="async" loading="lazy" />
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 700231</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>13 130&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 13 130&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>9 845&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 9 845&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2409" aria-label="Зберегти Сережки 700231"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2379 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/serezhki930-68713826.webp" class="lm-packshot" alt="Сережки 930" style="filter:brightness(1.009)" decoding="async" loading="lazy" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 930</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 750&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 750&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 575&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 575&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2379" aria-label="Зберегти Сережки 930"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-2386 status-publish first instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="786" src="img/sergi02-57480728.webp" class="lm-packshot" alt="Сережки трансформери 32702411" style="filter:brightness(1)" decoding="async" loading="lazy" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Сережки трансформери<span class="screen-reader-text">, артикул 32702411</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 850&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 665&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 665&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="2386" aria-label="Зберегти Сережки трансформери 32702411"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1681 status-publish instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="793" src="img/braslet0207-60389194.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Браслет 04207" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/braslet0207-60389195.webp"></span>
-	<span class="onsale">−20%</span>
-	</span><h2 class="woocommerce-loop-product__title">Браслет<span class="screen-reader-text">, артикул 04207</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>12 640&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 12 640&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>10 110&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 10 110&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1681" aria-label="Зберегти Браслет 04207"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1688 status-publish instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/braslet102-62721781.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Браслет 102" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/braslet102-62721782.webp"></span>
-	<span class="onsale">−20%</span>
-	</span><h2 class="woocommerce-loop-product__title">Браслет<span class="screen-reader-text">, артикул 102</span></h2><p class="lm-material">Біле золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>17 640&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 17 640&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 110&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 14 110&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1688" aria-label="Зберегти Браслет 102"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1690 status-publish last instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="658" src="img/braslet112-62642104.webp" class="lm-packshot" alt="Браслет 112" style="filter:brightness(1)" decoding="async" loading="lazy" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Браслет<span class="screen-reader-text">, артикул 112</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 050&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>945&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 945&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1690" aria-label="Зберегти Браслет 112"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1693 status-publish first instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/braslet120-67851612.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Браслет 120" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/braslet120-76293766.webp" data-lift="1.003"></span>
-	<span class="onsale">−20%</span>
-	</span><h2 class="woocommerce-loop-product__title">Браслет<span class="screen-reader-text">, артикул 120</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>24 600&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 24 600&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>19 680&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 19 680&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1693" aria-label="Зберегти Браслет 120"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1694 status-publish instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/braslet1200-76293736.webp" class="lm-packshot" alt="Браслет 120б" style="filter:brightness(1.003)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/braslet1200-76293740.webp" data-lift="1.008"></span>
-	<span class="onsale">−20%</span>
-	</span><h2 class="woocommerce-loop-product__title">Браслет<span class="screen-reader-text">, артикул 120б</span></h2><p class="lm-material">Біле золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>23 520&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 23 520&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>18 815&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 18 815&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1694" aria-label="Зберегти Браслет 120б"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1697 status-publish instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/braslet139-74975312.webp" class="lm-packshot" alt="Браслет 139" style="filter:brightness(1.004)" decoding="async" loading="lazy" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Браслет<span class="screen-reader-text">, артикул 139</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 250&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 250&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 125&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 125&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1697" aria-label="Зберегти Браслет 139"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-<li class="product type-product post-1705 status-publish last instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="644" src="img/braslet186-74836378.webp" class="lm-packshot" alt="Браслет 1698750277616" style="filter:brightness(1.011)" decoding="async" loading="lazy" />
-	<span class="onsale">−20%</span>
-	</span><h2 class="woocommerce-loop-product__title">Браслет<span class="screen-reader-text">, артикул 1698750277616</span></h2><p class="lm-material">Біле золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>12 150&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 12 150&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>9 720&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 9 720&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1705" aria-label="Зберегти Браслет 1698750277616"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-</ul>
-<nav class="woocommerce-pagination" aria-label="Пагінація товару">
-	<ul class='page-numbers'>
-	<li><span aria-label="Сторінка 1" aria-current="page" class="page-numbers current">1</span></li>
-	<li><a aria-label="Сторінка 2" class="page-numbers" href="#" data-off>2</a></li>
-	<li><a aria-label="Сторінка 3" class="page-numbers" href="#" data-off>3</a></li>
-	<li><a aria-label="Сторінка 4" class="page-numbers" href="#" data-off>4</a></li>
-	<li><span class="page-numbers dots">&hellip;</span></li>
-	<li><a aria-label="Сторінка 28" class="page-numbers" href="#" data-off>28</a></li>
-	<li><a aria-label="Сторінка 29" class="page-numbers" href="#" data-off>29</a></li>
-	<li><a aria-label="Сторінка 30" class="page-numbers" href="#" data-off>30</a></li>
-	<li><a class="next page-numbers" href="#" data-off>&rarr;</a></li>
-</ul>
-</nav>
-</div></main>    <footer class="lm-foot">
+    </main>
+    <footer class="lm-foot">
         <div class="lm-wrap lm-foot__grid">
             <div class="lm-foot__brand">
-                <a class="lm-wordmark" href="index.html">LIMÉRENCE</a>
+                <a class="lm-wordmark" href="index.html"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></a>
                 <p>Прикраси, що стають особистим.</p>
             </div>
             <nav aria-labelledby="lm-foot-catalog">
@@ -887,10 +425,9 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
     </footer>
 </div>
 <script>
-/* Header menu, search, section rails and the second photograph of a tile. */
+/* Header menu, search and the second photograph of a tile. */
 (() => {
   'use strict';
-  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const drawer = document.getElementById('lm-drawer');
   const burger = document.querySelector('.lm-top__burger');
@@ -924,26 +461,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
     });
     document.addEventListener('click', event => { if (search.open && !search.contains(event.target)) search.open = false; });
   }
-
-  document.querySelectorAll('[data-lm-rail]').forEach(rail => {
-    const steps = [...rail.closest('.lm-section').querySelectorAll('[data-lm-rail-step]')];
-    const meter = rail.parentElement.querySelector('.lm-rail__meter span');
-    const sync = () => {
-      const end = rail.scrollWidth - rail.clientWidth - 2;
-      // The green mark shows how much of the rail is in view and where.
-      if (meter) {
-        meter.style.setProperty('--span', `${Math.min(100, rail.clientWidth / rail.scrollWidth * 100)}%`);
-        meter.style.setProperty('--at', `${rail.scrollLeft / rail.scrollWidth * 100}%`);
-      }
-      for (const step of steps) step.disabled = Number(step.dataset.lmRailStep) < 0 ? rail.scrollLeft <= 2 : rail.scrollLeft >= end;
-    };
-    for (const step of steps) {
-      step.addEventListener('click', () => rail.scrollBy({ left: Number(step.dataset.lmRailStep) * rail.clientWidth * 0.8, behavior: calm ? 'auto' : 'smooth' }));
-    }
-    rail.addEventListener('scroll', sync, { passive: true });
-    new ResizeObserver(sync).observe(rail);
-    sync();
-  });
 
   // One variant leaves nothing to choose: show its value as text, and nothing at all for the placeholder.
   const selects = [...document.querySelectorAll('.variations select')];

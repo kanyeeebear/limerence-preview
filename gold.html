@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.2.1
+Version: 0.3.0
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -53,6 +53,9 @@ h1,h2,h3{text-wrap:balance}
 /* Header */
 .lm-top{position:sticky;top:0;z-index:30;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:var(--top);padding:0 var(--gutter);background:#fff;border-bottom:1px solid var(--line)}
 .lm-top .lm-wordmark{grid-column:2;text-align:center;font-size:30px}
+/* The logo is a dark drawing on a clear ground; multiply keeps it clean on paper as well as on white. */
+.lm-wordmark img{display:block;width:auto;height:40px;margin:auto;mix-blend-mode:multiply}
+.lm-drawer .lm-wordmark img,.lm-foot .lm-wordmark img{margin:0}
 .lm-top__burger,.lm-drawer__close,.lm-rail__step{background:none;border:0;color:inherit;padding:10px;min-height:44px;min-width:44px}
 .lm-top__burger{display:none;justify-self:start;margin-left:-10px}
 .lm-nav ul{display:flex;gap:30px;margin:0;padding:0;list-style:none}
@@ -97,14 +100,11 @@ h1,h2,h3{text-wrap:balance}
 .lm-hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);height:min(calc(100svh - var(--top) - 28px),900px);min-height:560px;border-bottom:1px solid var(--line)}
 .lm-hero__text{align-self:end;padding:0 56px 84px var(--gutter)}
 .lm-hero h1{font-size:clamp(3.4rem,5.9vw,5.75rem);font-weight:300;line-height:1.02;letter-spacing:-.012em;margin:0 0 30px}
-.lm-hero__lead{font-size:16px;line-height:1.6;color:var(--ink-soft);margin:0 0 36px;max-width:34ch}
 .lm-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 30px;margin:0}
 .lm-hero__plate{position:relative;margin:0;overflow:hidden;background:var(--paper)}
 .lm-hero__plate img{display:block;width:100%;height:100%;object-fit:cover}
-.lm-hero__plate figcaption{position:absolute;left:0;bottom:0;background:#fff;padding:12px 20px 12px 18px;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 .lm-hero--plain{grid-template-columns:1fr;height:auto;min-height:0}
 .lm-hero--plain .lm-hero__text{padding:120px var(--gutter) 96px;max-width:900px}
-.lm-hero-sections{display:none}
 @media(prefers-reduced-motion:no-preference){
   .lm-hero__plate img{animation:lm-plate 1.5s var(--ease) both}
   .lm-hero__text>*{animation:lm-rise 1s var(--ease) both}
@@ -114,45 +114,24 @@ h1,h2,h3{text-wrap:balance}
   @keyframes lm-rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 }
 
-/* Front page: a section's photograph with its pieces sliding beside it */
-.lm-section{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:0 56px;margin-top:112px;padding-left:var(--gutter)}
-.lm-section.is-flipped{grid-template-columns:minmax(0,8fr) minmax(0,4fr);padding-left:0;padding-right:var(--gutter)}
-.lm-section.is-flipped .lm-section__plate{order:2}
-.lm-section--plain,.lm-section--plain.is-flipped{grid-template-columns:minmax(0,1fr);padding-left:var(--gutter);padding-right:0}
-.lm-section--natural,.lm-section--lab{background:var(--paper);padding-top:80px;padding-bottom:80px}
-.lm-section--natural+.lm-section--lab{margin-top:0;padding-top:16px}
-/* The photograph takes the height of the heading and rail beside it. */
-.lm-section__plate{position:relative;display:block;overflow:hidden;min-height:440px;background:var(--paper)}
-.lm-section__plate img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;transition:transform 1.4s var(--ease)}
-.lm-section__plate:hover img{transform:scale(1.035)}
-.lm-section__body{min-width:0;display:flex;flex-direction:column;gap:44px}
-.lm-section__head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-right:var(--gutter)}
-.lm-section.is-flipped .lm-section__head{padding:0 0 0 var(--gutter)}
-.lm-section__head h2{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:0 0 14px}
-.lm-section__head h2 a:hover{text-decoration:none;color:var(--green)}
-.lm-section__head p{margin:0;max-width:44ch;color:var(--ink-soft)}
-.lm-rail__nav{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.lm-rail__nav .lm-link{margin-right:22px}
-.lm-rail__step{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);transition:border-color .25s var(--ease),opacity .25s}
-.lm-rail__step:hover:not(:disabled){border-color:var(--ink)}
-.lm-rail__step:disabled{opacity:.3}
-.lm-rail{overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain}
-.lm-rail::-webkit-scrollbar{display:none}
-.lm-rail:focus-visible{outline-offset:-2px}
-.lm-rail .lm-rail__track{display:grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:calc((100% - 66px)/3.3);gap:22px}
-.lm-section.is-flipped .lm-rail .lm-rail__track{padding-left:var(--gutter)}
-.lm-rail__track>.product{scroll-snap-align:start}
-.lm-section.is-flipped .lm-rail{scroll-padding-left:var(--gutter)}
-.lm-rail__meter{position:relative;height:1px;margin:-12px var(--gutter) 0 0;background:var(--line)}
-.lm-section.is-flipped .lm-rail__meter{margin:-12px 0 0 var(--gutter)}
-.lm-rail__meter span{position:absolute;top:-1px;left:var(--at,0%);width:var(--span,30%);height:3px;background:var(--green)}
+/* Front page: the choice of a section — a photograph and its name. The catalogue opens from here. */
+.lm-choose{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;padding:96px var(--gutter) 0}
+.lm-choose__item{display:block;min-width:0}
+.lm-choose__item:hover{text-decoration:none}
+.lm-choose__plate{display:block;aspect-ratio:4/5;overflow:hidden;background:var(--paper)}
+.lm-choose__plate img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 25%;transition:transform 1.4s var(--ease)}
+.lm-choose__item:hover img{transform:scale(1.035)}
+.lm-choose__name{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;font-weight:300;line-height:1.1;margin-top:20px;transition:color .25s var(--ease)}
+.lm-choose__item:hover .lm-choose__name{color:var(--green)}
+.lm-choose__text{display:block;margin-top:8px;font-size:13px;color:var(--ink-soft);max-width:34ch}
 
-/* Front page: showroom and the catalogue heading */
-.lm-showroom{margin-top:112px;padding:112px var(--gutter);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
-.lm-section--lab+.lm-showroom,.lm-section--natural+.lm-showroom{margin-top:0;border-top:0}
+/* Front page: a few words about the house, then the showroom */
+.lm-about{padding:128px var(--gutter) 112px;text-align:center}
+.lm-about h2{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:0 0 26px}
+.lm-about p{margin:0 auto;max-width:62ch;font-size:16px;line-height:1.75;color:var(--ink-soft)}
+.lm-showroom{padding:112px var(--gutter);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
 .lm-showroom h2{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:0 0 18px}
 .lm-showroom p{margin:0 0 34px;font-size:16px;color:var(--ink-soft)}
-.lm-catalog__title{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:84px 0 34px}
 
 /* Product tile */
 .lm-card-media{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:var(--paper)}
@@ -195,8 +174,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 .woocommerce-product-gallery__trigger img,.woocommerce-product-gallery__trigger span{display:none}
 .flex-control-thumbs img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
 .lm-wish:hover{color:var(--green)}
-/* On a paper band a packshot tile has no edge, so its marks sit bare on the paper instead of as detached white squares. */
-.lm-section--natural .product:has(.lm-card-media>.lm-packshot) .lm-wish,.lm-section--lab .product:has(.lm-card-media>.lm-packshot) .lm-wish{background:none}
 
 /* Footer */
 .lm-foot{margin-top:40px;padding:72px 0 64px;background:var(--paper)}
@@ -211,25 +188,24 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
   .lm-wrap{padding-left:var(--gutter);padding-right:var(--gutter)}
   .lm-nav,.lm-top__search{display:none}
   .lm-top__burger{display:flex}
-  .lm-top .lm-wordmark{font-size:24px;letter-spacing:3px}
-  .lm-top .lm-wordmark small{display:none}
+  .lm-wordmark img{height:32px}
 }
 @media(max-width:899px){
   .lm-catalog{padding-top:8px}
   .lm-hero{display:flex;flex-direction:column-reverse;height:auto;min-height:0;border-bottom:0}
-  .lm-hero__plate{height:clamp(170px,27svh,260px)}
-  .lm-hero__plate figcaption{font-size:10px;padding:9px 14px}
-  .lm-hero__text,.lm-hero--plain .lm-hero__text{padding:22px var(--gutter) 6px}
-  .lm-hero h1{font-size:34px;line-height:1.06;margin-bottom:10px}
-  .lm-hero__lead{font-size:13px;margin-bottom:0}
-  .lm-hero__actions,.lm-section,.lm-showroom{display:none}
-  .lm-hero-sections{display:flex;gap:26px;overflow-x:auto;scrollbar-width:none;padding:18px var(--gutter) 16px;border-bottom:1px solid var(--line);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
-  .lm-hero-sections::-webkit-scrollbar{display:none}
-  .lm-catalog__title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0}
-  .lm-categories--home{display:none}
+  .lm-hero__plate{height:clamp(300px,58svh,520px)}
+  .lm-hero__text,.lm-hero--plain .lm-hero__text{padding:26px var(--gutter) 0}
+  .lm-hero h1{font-size:34px;line-height:1.06;margin-bottom:0}
+  .lm-hero__actions{display:none}
+  .lm-choose{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 12px;padding-top:34px}
+  .lm-choose__name{font-size:25px;margin-top:12px}
+  .lm-choose__text{display:none}
+  .lm-about{padding:72px var(--gutter) 64px}
+  .lm-about p{font-size:14px}
+  .lm-showroom{padding:64px var(--gutter)}
+  .lm-showroom p{font-size:14px;margin-bottom:26px}
   .lm-categories{margin-top:6px}
   .lm-filters{flex-wrap:nowrap}
-  .lm-filters .lm-search{flex:1;min-width:0}
   .lm-filters button[type=submit]{padding:14px}
   .lm-filters summary{padding:12px 6px}
   .woocommerce-pagination ul{flex-wrap:wrap;gap:4px 10px}
@@ -323,13 +299,13 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                                 <li class="lm-nav__item"><a class="lm-nav__link" href="#" data-off>Jewel Box</a></li>
                             </ul>
         </nav>
-        <a class="lm-wordmark" href="index.html">LIMÉRENCE<small>JEWELRY</small></a>
+        <a class="lm-wordmark" href="index.html"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></a>
         <div class="lm-top__actions">
             <details class="lm-top__search">
                 <summary aria-label="Пошук"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></summary>
                 <div class="lm-top__search-panel">    <form class="lm-search-form" role="search" method="get" action="#">
         <label class="screen-reader-text" for="lm-search-top">Пошук прикрас</label>
-        <input id="lm-search-top" type="search" name="lm_search" placeholder="Назва або артикул" autocomplete="off">
+        <input id="lm-search-top" type="search" name="lm_search" placeholder="Що шукаєте?" autocomplete="off">
         <button type="submit">Знайти</button>
     </form>
 </div>
@@ -340,12 +316,12 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
     </header>
     <div class="lm-drawer" id="lm-drawer" hidden>
         <div class="lm-drawer__bar">
-            <span class="lm-wordmark">LIMÉRENCE</span>
+            <span class="lm-wordmark"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></span>
             <button type="button" class="lm-drawer__close" aria-label="Закрити меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg></button>
         </div>
             <form class="lm-search-form" role="search" method="get" action="#">
         <label class="screen-reader-text" for="lm-search-drawer">Пошук прикрас</label>
-        <input id="lm-search-drawer" type="search" name="lm_search" placeholder="Назва або артикул" autocomplete="off">
+        <input id="lm-search-drawer" type="search" name="lm_search" placeholder="Що шукаєте?" autocomplete="off">
         <button type="submit">Знайти</button>
     </form>
         <nav aria-label="Меню">
@@ -385,7 +361,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                                 <li><a href="#" data-off>Jewel Box</a></li>
                             </ul>
             <ul class="lm-drawer__service">
-                <li><a href="index.html">Усі прикраси</a></li>
+                <li><a href="#" data-off>Усі прикраси</a></li>
                 <li><a href="#" data-off>Мої бажання</a></li>
                 <li><a href="#" data-off>Доставка та оплата</a></li>
                 <li><a href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Консультант у Telegram</a></li>            </ul>
@@ -395,7 +371,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 			<h1 class="woocommerce-products-header__title page-title">Золото</h1>
 	
 	</header>
-<nav class="lm-categories" aria-label="Типи прикрас"><a href="gold.html" aria-current="true">Усі: Золото</a><a href="#" data-off>Каблучки</a><a href="#" data-off>Пусети</a><a href="#" data-off>Кольє</a><a href="#" data-off>Браслети</a><a href="#" data-off>Сережки</a><a href="#" data-off>Дитяча колекція</a><a href="#" data-off>Кафи</a><a href="#" data-off>Заручальні каблучки</a><a href="#" data-off>Підвіски</a><a href="#" data-off>Протяжки</a></nav><form class="lm-filters" method="get"><label class="lm-search"><span class="screen-reader-text">Пошук прикрас</span><input type="search" name="lm_search" placeholder="Назва або артикул" value=""></label><details><summary>Фільтри<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 9.5 7 7 7-7"/></svg></summary><div class="lm-filter-fields"><label>Метал<select name="lm_metal"><option value="">Усі</option><option value="silver" >Срібло</option><option value="gold"  selected='selected'>Золото</option></select></label><label>Ціна до, ₴<input name="max_price" type="number" min="0" value=""></label><label>Розмір<input name="lm_size" value="" placeholder="Наприклад, 17"></label><label><input type="checkbox" name="lm_available" value="1" > У наявності</label></div></details><button type="submit">Знайти</button><a href="index.html">Скинути</a></form><div class="woocommerce-notices-wrapper"></div><p class="woocommerce-result-count" role="status" aria-relevant="all" >
+<nav class="lm-categories" aria-label="Типи прикрас"><a href="gold.html" aria-current="true">Усі: Золото</a><a href="#" data-off>Каблучки</a><a href="#" data-off>Пусети</a><a href="#" data-off>Кольє</a><a href="#" data-off>Браслети</a><a href="#" data-off>Сережки</a><a href="#" data-off>Дитяча колекція</a><a href="#" data-off>Кафи</a><a href="#" data-off>Заручальні каблучки</a><a href="#" data-off>Підвіски</a><a href="#" data-off>Протяжки</a></nav><form class="lm-filters" method="get"><details><summary>Фільтри<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 9.5 7 7 7-7"/></svg></summary><div class="lm-filter-fields"><label>Метал<select name="lm_metal"><option value="">Усі</option><option value="silver" >Срібло</option><option value="gold"  selected='selected'>Золото</option></select></label><label>Ціна до, ₴<input name="max_price" type="number" min="0" value=""></label><label>Розмір<input name="lm_size" value="" placeholder="Наприклад, 17"></label><label><input type="checkbox" name="lm_available" value="1" > У наявності</label></div></details><button type="submit">Показати</button><a href="#" data-off>Скинути</a></form><div class="woocommerce-notices-wrapper"></div><p class="woocommerce-result-count" role="status" aria-relevant="all" >
 	Показано 1&ndash;24 із 408</p>
 <form class="woocommerce-ordering" method="get">
 		<select
@@ -574,7 +550,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 </div></main>    <footer class="lm-foot">
         <div class="lm-wrap lm-foot__grid">
             <div class="lm-foot__brand">
-                <a class="lm-wordmark" href="index.html">LIMÉRENCE</a>
+                <a class="lm-wordmark" href="index.html"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></a>
                 <p>Прикраси, що стають особистим.</p>
             </div>
             <nav aria-labelledby="lm-foot-catalog">
@@ -597,10 +573,9 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
     </footer>
 </div>
 <script>
-/* Header menu, search, section rails and the second photograph of a tile. */
+/* Header menu, search and the second photograph of a tile. */
 (() => {
   'use strict';
-  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const drawer = document.getElementById('lm-drawer');
   const burger = document.querySelector('.lm-top__burger');
@@ -634,26 +609,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
     });
     document.addEventListener('click', event => { if (search.open && !search.contains(event.target)) search.open = false; });
   }
-
-  document.querySelectorAll('[data-lm-rail]').forEach(rail => {
-    const steps = [...rail.closest('.lm-section').querySelectorAll('[data-lm-rail-step]')];
-    const meter = rail.parentElement.querySelector('.lm-rail__meter span');
-    const sync = () => {
-      const end = rail.scrollWidth - rail.clientWidth - 2;
-      // The green mark shows how much of the rail is in view and where.
-      if (meter) {
-        meter.style.setProperty('--span', `${Math.min(100, rail.clientWidth / rail.scrollWidth * 100)}%`);
-        meter.style.setProperty('--at', `${rail.scrollLeft / rail.scrollWidth * 100}%`);
-      }
-      for (const step of steps) step.disabled = Number(step.dataset.lmRailStep) < 0 ? rail.scrollLeft <= 2 : rail.scrollLeft >= end;
-    };
-    for (const step of steps) {
-      step.addEventListener('click', () => rail.scrollBy({ left: Number(step.dataset.lmRailStep) * rail.clientWidth * 0.8, behavior: calm ? 'auto' : 'smooth' }));
-    }
-    rail.addEventListener('scroll', sync, { passive: true });
-    new ResizeObserver(sync).observe(rail);
-    sync();
-  });
 
   // One variant leaves nothing to choose: show its value as text, and nothing at all for the placeholder.
   const selects = [...document.querySelectorAll('.variations select')];
