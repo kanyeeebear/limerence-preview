@@ -248,7 +248,6 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
 .woocommerce-ordering select{border:0;min-height:36px;padding:6px 26px 6px 0!important;background-position:right 2px center;color:var(--ink-soft);text-align:right}
 @media(max-width:899px){
   .lm-hero h1{white-space:nowrap;font-size:min(34px,7vw)}
-  /* Sections as low horizontal plates: all four in view at once. */
   .lm-choose{gap:20px 12px}
   .lm-choose__plate{aspect-ratio:3/2}
   .lm-choose__name{font-size:22px;margin-top:9px}
@@ -258,6 +257,12 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
   .lm-filter-fields{width:min(300px,calc(100vw - 2*var(--gutter)))}
   .woocommerce-ordering{margin-bottom:14px}
   .woocommerce-ordering select{max-width:none;font-size:11.5px}
+}
+/* On a phone the sections follow one another, each a wide plate across the screen. */
+@media(max-width:599px){
+  .lm-choose{grid-template-columns:1fr;gap:24px}
+  .lm-choose__plate{aspect-ratio:2/1}
+  .lm-choose__name{font-size:26px;margin-top:10px}
 }
 
 
@@ -414,19 +419,19 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
             </section>
     <nav class="lm-choose" id="sections" aria-label="Розділи каталогу">
                     <a class="lm-choose__item" href="gold.html">
-                <span class="lm-choose__plate"><img width="1861" height="2560" src="img/kole643-60205290-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></span>
+                <span class="lm-choose__plate"><img width="1861" height="2560" src="img/kole643-60205290-l.webp" class="attachment-full size-full" alt="" loading="lazy" style="object-position:50% 25%" decoding="async" /></span>
                 <span class="lm-choose__name">Золото</span>
                 <span class="lm-choose__text">Каблучки, сережки, кольє, браслети та пусети із золота.</span>            </a>
                     <a class="lm-choose__item" href="#" data-off>
-                <span class="lm-choose__plate"><img width="1706" height="2560" src="img/kafa-60767132-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></span>
+                <span class="lm-choose__plate"><img width="1706" height="2560" src="img/kafa-60767132-l.webp" class="attachment-full size-full" alt="" loading="lazy" style="object-position:50% 25%" decoding="async" /></span>
                 <span class="lm-choose__name">Срібло</span>
                 <span class="lm-choose__text">Прикраси зі срібла 925 проби.</span>            </a>
                     <a class="lm-choose__item" href="#" data-off>
-                <span class="lm-choose__plate"><img width="578" height="670" src="img/puseti7001-61694194.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></span>
+                <span class="lm-choose__plate"><img width="578" height="670" src="img/puseti7001-61694194.webp" class="attachment-full size-full" alt="" loading="lazy" style="object-position:50% 25%" decoding="async" /></span>
                 <span class="lm-choose__name">Діаманти природні</span>
                 <span class="lm-choose__text">Каблучки, сережки та кольє з природними діамантами.</span>            </a>
                     <a class="lm-choose__item" href="#" data-off>
-                <span class="lm-choose__plate"><img width="1334" height="1179" src="img/puseti-z-diamantami-klasichni-76138546-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></span>
+                <span class="lm-choose__plate"><img width="1334" height="1179" src="img/puseti-z-diamantami-klasichni-76138546-l.webp" class="attachment-full size-full" alt="" loading="lazy" style="object-position:50% 85%" decoding="async" /></span>
                 <span class="lm-choose__name">Lab Diamonds</span>
                 <span class="lm-choose__text">Пусети й каблучки з лабораторними діамантами. Виготовляємо під замовлення.</span>            </a>
             </nav>
