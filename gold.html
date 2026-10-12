@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.3.0
+Version: 0.3.1
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -103,6 +103,10 @@ h1,h2,h3{text-wrap:balance}
 .lm-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 30px;margin:0}
 .lm-hero__plate{position:relative;margin:0;overflow:hidden;background:var(--paper)}
 .lm-hero__plate img{display:block;width:100%;height:100%;object-fit:cover}
+/* A film lies over the photograph and fades in once it plays. */
+.lm-hero__plate video{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s var(--ease)}
+.lm-hero__plate video.is-playing{opacity:1}
+.lm-hero__plate.has-film img{visibility:hidden}
 .lm-hero--plain{grid-template-columns:1fr;height:auto;min-height:0}
 .lm-hero--plain .lm-hero__text{padding:120px var(--gutter) 96px;max-width:900px}
 @media(prefers-reduced-motion:no-preference){
@@ -128,7 +132,7 @@ h1,h2,h3{text-wrap:balance}
 /* Front page: a few words about the house, then the showroom */
 .lm-about{padding:128px var(--gutter) 112px;text-align:center}
 .lm-about h2{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:0 0 26px}
-.lm-about p{margin:0 auto;max-width:62ch;font-size:16px;line-height:1.75;color:var(--ink-soft)}
+.lm-about p{margin:0 auto 1.1em;max-width:62ch;font-size:16px;line-height:1.75;color:var(--ink-soft)}
 .lm-showroom{padding:112px var(--gutter);border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
 .lm-showroom h2{font-size:clamp(2.6rem,4.4vw,4.25rem);font-weight:300;line-height:1;margin:0 0 18px}
 .lm-showroom p{margin:0 0 34px;font-size:16px;color:var(--ink-soft)}
@@ -193,7 +197,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 @media(max-width:899px){
   .lm-catalog{padding-top:8px}
   .lm-hero{display:flex;flex-direction:column-reverse;height:auto;min-height:0;border-bottom:0}
-  .lm-hero__plate{height:clamp(300px,58svh,520px)}
+  .lm-hero__plate{height:auto;aspect-ratio:16/10}
   .lm-hero__text,.lm-hero--plain .lm-hero__text{padding:26px var(--gutter) 0}
   .lm-hero h1{font-size:34px;line-height:1.06;margin-bottom:0}
   .lm-hero__actions{display:none}
@@ -224,6 +228,38 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 .lm-wrap.lm-page{padding-top:44px}
 @media(max-width:899px){.lm-wrap.lm-page{padding-top:24px}}
 
+/* ── 0.3.1 Phone first: chocolate buttons, the section's name ahead of its filters ── */
+:root{--choc:#44281b;--choc-soft:#5e3a29}
+button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc)}
+.button:hover,button[type=submit]:hover,input[type=submit]:hover{background:var(--choc-soft);border-color:var(--choc-soft)}
+.button--line{background:transparent;color:var(--choc)}
+.lm-top__burger,.lm-drawer__close,.lm-rail__step{background:none}
+.lm-wish,.lm-wish:hover{background:#fff}
+.lm-save-product{background:#fff;color:var(--choc)}
+/* The name leads; the filters wait in the corner beside it. */
+.woocommerce-products-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;column-gap:16px}
+.woocommerce-products-header>*{flex-basis:100%}
+.woocommerce-products-header>.page-title{flex:1 1 0;min-width:0}
+.woocommerce-products-header>.lm-filters{flex:none;margin:0}
+.lm-filters summary{min-width:0;padding:10px 0 10px 12px;font-size:12px;color:var(--ink-soft)}
+.lm-filter-fields{top:42px}
+.lm-filter-fields button[type=submit]{width:100%;margin-top:10px}
+.lm-filters__reset{display:block;margin-top:14px;font-size:12px;text-align:center;text-decoration:underline}
+.woocommerce-ordering select{border:0;min-height:36px;padding:6px 26px 6px 0!important;background-position:right 2px center;color:var(--ink-soft);text-align:right}
+@media(max-width:899px){
+  .lm-hero h1{white-space:nowrap;font-size:min(34px,7vw)}
+  /* Sections as low horizontal plates: all four in view at once. */
+  .lm-choose{gap:20px 12px}
+  .lm-choose__plate{aspect-ratio:3/2}
+  .lm-choose__name{font-size:22px;margin-top:9px}
+  .lm-catalog .page-title{font-size:40px}
+  .lm-filters{flex-wrap:nowrap}
+  .lm-filters summary{padding:12px 0 12px 12px}
+  .lm-filter-fields{width:min(300px,calc(100vw - 2*var(--gutter)))}
+  .woocommerce-ordering{margin-bottom:14px}
+  .woocommerce-ordering select{max-width:none;font-size:11.5px}
+}
+
 
 /* Preview copy only: notice bar, static gallery, safe-area sticky header. */
 .lm-share{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:center;padding:10px 20px;background:var(--paper);color:var(--ink);font-size:12px;line-height:1.5;text-align:center}
@@ -253,7 +289,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                     <div class="lm-mega">
                         <div class="lm-mega__inner">
                             <div class="lm-mega__list">
-                                <a class="lm-mega__all" href="gold.html">Золото · усі прикраси <span>408</span></a>
+                                <a class="lm-mega__all" href="gold.html">Золото · усі прикраси</a>
                                                                 <ul>
                                     <li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Кольє</a></li><li><a href="#" data-off>Браслети</a></li><li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Дитяча колекція</a></li><li><a href="#" data-off>Кафи</a></li><li><a href="#" data-off>Заручальні каблучки</a></li><li><a href="#" data-off>Підвіски</a></li><li><a href="#" data-off>Протяжки</a></li>                                </ul>
                                                             </div>
@@ -265,7 +301,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                     <div class="lm-mega">
                         <div class="lm-mega__inner">
                             <div class="lm-mega__list">
-                                <a class="lm-mega__all" href="#" data-off>Срібло · усі прикраси <span>288</span></a>
+                                <a class="lm-mega__all" href="#" data-off>Срібло · усі прикраси</a>
                                                                 <ul>
                                     <li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Кольє</a></li><li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Браслети</a></li><li><a href="#" data-off>Кафи</a></li><li><a href="#" data-off>Джекети</a></li><li><a href="#" data-off>Протяжки</a></li>                                </ul>
                                                             </div>
@@ -277,7 +313,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                     <div class="lm-mega">
                         <div class="lm-mega__inner">
                             <div class="lm-mega__list">
-                                <a class="lm-mega__all" href="#" data-off>Діаманти природні · усі прикраси <span>22</span></a>
+                                <a class="lm-mega__all" href="#" data-off>Діаманти природні · усі прикраси</a>
                                                                 <ul>
                                     <li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Дитяча колекція</a></li><li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Заручальні каблучки</a></li><li><a href="#" data-off>Кольє</a></li>                                </ul>
                                                             </div>
@@ -289,7 +325,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                     <div class="lm-mega">
                         <div class="lm-mega__inner">
                             <div class="lm-mega__list">
-                                <a class="lm-mega__all" href="#" data-off>Lab Diamonds · усі прикраси <span>9</span></a>
+                                <a class="lm-mega__all" href="#" data-off>Lab Diamonds · усі прикраси</a>
                                                                 <ul>
                                     <li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Каблучки</a></li>                                </ul>
                                                             </div>
@@ -330,7 +366,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                     <details>
                         <summary>Золото</summary>
                         <ul>
-                            <li><a href="gold.html">Усі прикраси · 408</a></li>
+                            <li><a href="gold.html">Усі прикраси</a></li>
                             <li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Кольє</a></li><li><a href="#" data-off>Браслети</a></li><li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Дитяча колекція</a></li><li><a href="#" data-off>Кафи</a></li><li><a href="#" data-off>Заручальні каблучки</a></li><li><a href="#" data-off>Підвіски</a></li><li><a href="#" data-off>Протяжки</a></li>                        </ul>
                     </details>
                 </li>
@@ -338,7 +374,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                     <details>
                         <summary>Срібло</summary>
                         <ul>
-                            <li><a href="#" data-off>Усі прикраси · 288</a></li>
+                            <li><a href="#" data-off>Усі прикраси</a></li>
                             <li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Кольє</a></li><li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Браслети</a></li><li><a href="#" data-off>Кафи</a></li><li><a href="#" data-off>Джекети</a></li><li><a href="#" data-off>Протяжки</a></li>                        </ul>
                     </details>
                 </li>
@@ -346,7 +382,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                     <details>
                         <summary>Діаманти природні</summary>
                         <ul>
-                            <li><a href="#" data-off>Усі прикраси · 22</a></li>
+                            <li><a href="#" data-off>Усі прикраси</a></li>
                             <li><a href="#" data-off>Сережки</a></li><li><a href="#" data-off>Дитяча колекція</a></li><li><a href="#" data-off>Каблучки</a></li><li><a href="#" data-off>Заручальні каблучки</a></li><li><a href="#" data-off>Кольє</a></li>                        </ul>
                     </details>
                 </li>
@@ -354,7 +390,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
                     <details>
                         <summary>Lab Diamonds</summary>
                         <ul>
-                            <li><a href="#" data-off>Усі прикраси · 9</a></li>
+                            <li><a href="#" data-off>Усі прикраси</a></li>
                             <li><a href="#" data-off>Пусети</a></li><li><a href="#" data-off>Каблучки</a></li>                        </ul>
                     </details>
                 </li>
@@ -370,10 +406,8 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
     <main id="content" class="lm-page"><div class="lm-wrap lm-catalog"><header class="woocommerce-products-header">
 			<h1 class="woocommerce-products-header__title page-title">Золото</h1>
 	
-	</header>
-<nav class="lm-categories" aria-label="Типи прикрас"><a href="gold.html" aria-current="true">Усі: Золото</a><a href="#" data-off>Каблучки</a><a href="#" data-off>Пусети</a><a href="#" data-off>Кольє</a><a href="#" data-off>Браслети</a><a href="#" data-off>Сережки</a><a href="#" data-off>Дитяча колекція</a><a href="#" data-off>Кафи</a><a href="#" data-off>Заручальні каблучки</a><a href="#" data-off>Підвіски</a><a href="#" data-off>Протяжки</a></nav><form class="lm-filters" method="get"><details><summary>Фільтри<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 9.5 7 7 7-7"/></svg></summary><div class="lm-filter-fields"><label>Метал<select name="lm_metal"><option value="">Усі</option><option value="silver" >Срібло</option><option value="gold"  selected='selected'>Золото</option></select></label><label>Ціна до, ₴<input name="max_price" type="number" min="0" value=""></label><label>Розмір<input name="lm_size" value="" placeholder="Наприклад, 17"></label><label><input type="checkbox" name="lm_available" value="1" > У наявності</label></div></details><button type="submit">Показати</button><a href="#" data-off>Скинути</a></form><div class="woocommerce-notices-wrapper"></div><p class="woocommerce-result-count" role="status" aria-relevant="all" >
-	Показано 1&ndash;24 із 408</p>
-<form class="woocommerce-ordering" method="get">
+	<form class="lm-filters" method="get"><details><summary>Фільтри<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 9.5 7 7 7-7"/></svg></summary><div class="lm-filter-fields"><label>Метал<select name="lm_metal"><option value="">Усі</option><option value="silver" >Срібло</option><option value="gold"  selected='selected'>Золото</option></select></label><label>Ціна до, ₴<input name="max_price" type="number" min="0" value=""></label><label>Розмір<input name="lm_size" value="" placeholder="Наприклад, 17"></label><label><input type="checkbox" name="lm_available" value="1" > У наявності</label><button type="submit">Показати</button></div></details></form></header>
+<nav class="lm-categories" aria-label="Типи прикрас"><a href="gold.html" aria-current="true">Усі: Золото</a><a href="#" data-off>Каблучки</a><a href="#" data-off>Пусети</a><a href="#" data-off>Кольє</a><a href="#" data-off>Браслети</a><a href="#" data-off>Сережки</a><a href="#" data-off>Дитяча колекція</a><a href="#" data-off>Кафи</a><a href="#" data-off>Заручальні каблучки</a><a href="#" data-off>Підвіски</a><a href="#" data-off>Протяжки</a></nav><div class="woocommerce-notices-wrapper"></div><form class="woocommerce-ordering" method="get">
 		<select
 		name="orderby"
 		class="orderby"
@@ -608,6 +642,45 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
       if (event.key === 'Escape' && search.open) { search.open = false; search.querySelector('summary').focus(); }
     });
     document.addEventListener('click', event => { if (search.open && !search.contains(event.target)) search.open = false; });
+  }
+
+  // Front page films play one after another without controls; each visit starts from the next one.
+  // The photograph stays where motion is turned down or data is being saved.
+  const plate = document.querySelector('[data-lm-films]');
+  if (plate && !matchMedia('(prefers-reduced-motion: reduce)').matches && !navigator.connection?.saveData) {
+    const films = JSON.parse(plate.dataset.lmFilms);
+    let turn = Math.floor(Math.random() * films.length);
+    try {
+      const last = localStorage.getItem('lm-film');
+      if (last !== null) turn = (Number(last) + 1) % films.length;
+      localStorage.setItem('lm-film', String(turn));
+    } catch { /* private mode: a random film is fine */ }
+    const video = document.createElement('video');
+    for (const name of ['muted', 'playsinline', 'autoplay']) video.setAttribute(name, '');
+    video.muted = true;
+    video.setAttribute('aria-hidden', 'true');
+    video.tabIndex = -1;
+    const show = () => { video.style.objectPosition = films[turn].focus; video.src = films[turn].src; };
+    show();
+    video.loop = films.length === 1;
+    video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
+    video.addEventListener('ended', () => { turn = (turn + 1) % films.length; show(); video.play().catch(() => {}); });
+    // The film opens from the bare frame; the photograph returns only if the film cannot play.
+    plate.classList.add('has-film');
+    video.addEventListener('error', () => plate.classList.remove('has-film'), { once: true });
+    plate.prepend(video);
+    video.play().catch(() => {});
+  }
+
+  // On a phone the front page line keeps to one row: it shrinks until it fits.
+  const line = document.querySelector('.lm-hero h1');
+  if (line) {
+    const fit = () => {
+      line.style.fontSize = '';
+      if (getComputedStyle(line).whiteSpace !== 'nowrap') return;
+      for (let size = parseFloat(getComputedStyle(line).fontSize); size > 16 && line.scrollWidth > line.clientWidth; size -= .5) line.style.fontSize = size + 'px';
+    };
+    fit(); addEventListener('resize', fit); document.fonts?.ready.then(fit);
   }
 
   // One variant leaves nothing to choose: show its value as text, and nothing at all for the placeholder.
