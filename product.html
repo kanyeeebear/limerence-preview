@@ -9,14 +9,14 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.3.1
+Version: 0.4.1
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
 */
 
-:root{--ink:#30332f;--muted:#686c65;--line:#dedfd9;--green:#687361;--paper:#f5f5f2}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:#fff;font:14px/1.65 'Manrope',Arial,sans-serif}a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}button,input,select,textarea{font:inherit;color:inherit}button,.button,input[type=submit]{display:inline-flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:white;padding:12px 20px;min-height:44px;text-decoration:none;border-radius:0;font-weight:500}button:disabled{opacity:.5;cursor:not-allowed}input:not([type=checkbox]):not([type=radio]),select,textarea{border:1px solid #b9bdb4;background:white;padding:12px;width:100%;border-radius:0;min-height:46px}textarea{resize:vertical}label{display:block}input[type=checkbox],input[type=radio]{accent-color:var(--green)}:focus-visible{outline:2px solid var(--green);outline-offset:4px}h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;line-height:1.15}h1{font-size:48px;margin:16px 0 26px}h2{font-size:32px}p{margin:10px 0}img{max-width:100%;height:auto}svg{flex-shrink:0}.lm-wrap{max-width:1380px;padding:0 48px;margin:auto}.lm-page{min-height:60vh;padding-top:25px;padding-bottom:65px}.lm-local-banner{font-size:11px;text-align:center;padding:6px 16px;background:#f0f1eb;color:#525a4c}.lm-wordmark{font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;letter-spacing:4px;line-height:1;white-space:nowrap}.lm-wordmark small{display:block;font:9px 'Manrope',sans-serif;letter-spacing:5px;text-align:center;margin-top:8px}.skip-link{position:absolute;left:-9999px}.skip-link:focus{left:20px;top:20px;background:#fff;padding:12px;z-index:1000}.screen-reader-text{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.lm-categories{display:flex;gap:28px;overflow:auto;white-space:nowrap;border-bottom:1px solid var(--line);padding:0 0 20px;margin-bottom:20px}.lm-filters{display:flex;align-items:center;gap:16px;margin:18px 0}.lm-search{flex:1;max-width:420px}.lm-filters details{position:relative}.lm-filters summary{cursor:pointer;padding:12px;min-width:80px}.lm-filter-fields{position:absolute;z-index:6;top:45px;right:0;background:#fff;border:1px solid var(--line);width:300px;padding:20px}.lm-filter-fields label{margin:10px 0}.woocommerce-result-count{color:var(--muted);font-size:12px;float:left;margin:12px 0 24px}.woocommerce-ordering{float:right;margin:0 0 24px}.woocommerce-ordering select{font-size:12px;min-height:40px;padding:9px}.products{clear:both;list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:38px 22px;margin:0}.products .product{position:relative;min-width:0}.products .product img{width:100%;aspect-ratio:1;object-fit:cover;background:var(--paper);display:block}.products h2{font-family:'Manrope',sans-serif;font-size:14px;line-height:1.5;margin:13px 0 0;font-weight:500}.products .price{display:block;font-size:13px;margin-top:4px}.price del{color:var(--muted);font-size:.85em;margin-right:6px}.price ins{text-decoration:none}.lm-material{color:var(--muted);font-size:11px;margin:2px 0}.lm-wish{position:absolute;top:8px;right:8px;background:#fffffff0;border:0;color:var(--ink);padding:9px;width:40px;min-height:40px}.lm-wish[aria-pressed=true]{color:var(--green);background:#e6ecdf}.onsale{position:absolute;z-index:2;top:10px;left:10px;background:white;font-size:10px;padding:4px 9px}.woocommerce-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:24px}.single-product div.product{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px}.woocommerce-product-gallery{min-width:0;position:relative}.woocommerce-product-gallery__wrapper{margin:0}.woocommerce-product-gallery__image img{display:block;width:100%;height:auto}.woocommerce-product-gallery__trigger{position:absolute;right:15px;top:15px;z-index:3}.flex-control-thumbs{list-style:none;padding:0;display:flex;gap:10px}.flex-control-thumbs li{width:18%;cursor:pointer}.summary h1{font-size:42px;margin-top:0}.summary .price{font-size:22px}.summary .cart{margin:25px 0}.variations{width:100%;text-align:left;border-collapse:collapse}.variations th{width:85px;font-weight:400}.variations td,.variations th{padding:10px 0}.reset_variations{font-size:11px}.quantity{display:inline-block;width:75px;margin-right:10px}.quantity input{text-align:center}.single_add_to_cart_button{min-width:210px}.lm-product-facts{color:var(--muted);font-size:12px}.lm-product-facts p{white-space:pre-line}.lm-save-product{background:white;color:var(--ink);width:100%;margin-top:10px}.lm-consult{display:block;text-align:center;font-size:12px;text-decoration:underline;margin-top:20px}.stock{font-size:12px;color:var(--green)}.out-of-stock{color:#806254}.product_meta{font-size:11px;color:var(--muted)}.woocommerce-tabs,.related.products{grid-column:1/-1}.related.products{display:block}.tabs{display:flex;gap:25px;list-style:none;padding:0;border-bottom:1px solid var(--line)}.tabs li{padding:10px 0}.woocommerce-tabs p{max-width:720px}.woocommerce-message,.woocommerce-info,.woocommerce-error{padding:16px 20px;background:#f1f3ed;border:1px solid var(--line);margin:0 0 24px;list-style:none}.woocommerce-error{background:#fbf1ef;border-color:#a04336}.woocommerce-message .button{float:right;padding:6px 12px;font-size:12px}.lm-muted,.lm-intro{color:var(--muted)}.lm-inquiry{border-top:1px solid var(--line);margin-top:26px;padding-top:10px}.lm-inquiry label{margin:12px 0}.lm-consent{display:flex;gap:10px;font-size:12px}.lm-variant-media{display:flex;gap:10px;overflow:auto;margin:15px 0}.lm-variant-media img,.lm-variant-media video{width:190px;height:230px;object-fit:contain;background:var(--paper)}[hidden]{display:none!important}.lm-wishlist-items{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin:30px 0}.lm-wishlist-items article{min-width:0}.lm-wishlist-items img{width:100%;aspect-ratio:1;object-fit:cover}.lm-wishlist-items h2{font:500 14px/1.5 'Manrope',sans-serif;margin:10px 0}.lm-wishlist-items p{font-size:12px}.lm-share-result{max-width:650px;margin:20px 0}.lm-share-result button{margin-top:10px}.lm-feedback{font-size:12px}.shop_table{width:100%;border-collapse:collapse}.shop_table th,.shop_table td{padding:16px 10px;border-bottom:1px solid var(--line);text-align:left}.shop_table th{font-weight:500;font-size:12px}.product-thumbnail{width:110px}.product-thumbnail img{width:85px;height:85px;object-fit:cover}.product-remove a{font-size:24px}.coupon{display:flex;gap:8px;float:left}.coupon label{display:none}.actions>.button{float:right}.cart-collaterals{margin:35px 0}.cart_totals{max-width:520px;margin-left:auto}.wc-proceed-to-checkout{margin-top:20px}.checkout-button{width:100%}.woocommerce-checkout .col2-set{width:48%;float:left}.woocommerce-checkout #order_review_heading,.woocommerce-checkout #order_review{margin-left:54%}.form-row{margin:14px 0}.form-row label{font-size:12px;margin-bottom:5px}.form-row-first,.form-row-last{width:48%;float:left}.form-row-last{float:right}.form-row-wide,.clear{clear:both}.required{color:#8b5148}.woocommerce-billing-fields h3,#order_review_heading{font-size:28px}.wc_payment_methods{padding:0;list-style:none}.wc_payment_method{padding:16px 0;border-bottom:1px solid var(--line)}.wc_payment_method>label{display:inline;font-size:13px}.payment_box{font-size:12px;color:var(--muted);padding-left:22px}#place_order{width:100%;margin-top:12px}.woocommerce-privacy-policy-text{font-size:11px;color:var(--muted)}.woocommerce-checkout:after,.woocommerce:after{content:'';display:block;clear:both}.woocommerce-order-overview{display:flex;gap:30px;list-style:none;padding:0;flex-wrap:wrap}.woocommerce-order-overview strong{display:block}.woocommerce-customer-details{margin-top:35px}.lm-page:after{content:'';display:block;clear:both}.woocommerce-pagination ul{display:flex;gap:20px;list-style:none;padding:20px 0}.woocommerce-pagination a,.woocommerce-pagination span{padding:8px}.lm-wishlist-items button{font-size:12px;padding:8px 12px}.lm-wishlist-items .lm-edit-link{display:block;margin:10px 0;text-decoration:underline;font-size:12px}
-@media(max-width:767px){body{font-size:13px}.lm-wrap{padding-left:16px;padding-right:16px}.lm-wordmark{font-size:27px;letter-spacing:3px}.lm-local-banner{font-size:9px;line-height:1.4}h1{font-size:36px;margin:8px 0 20px}.lm-page{padding-top:20px}.lm-categories{gap:24px;font-size:12px;padding-bottom:15px}.lm-filters{gap:7px;flex-wrap:wrap}.lm-search{max-width:none;flex-basis:65%}.lm-filters button{padding:10px 14px}.lm-filters>a{font-size:11px}.lm-filter-fields{right:0;width:280px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}.products h2{font-size:12px}.products .price{font-size:12px}.lm-material{font-size:10px}.onsale{font-size:9px;left:6px;top:6px;padding:3px 6px}.lm-wish{right:4px;top:4px;width:34px;min-height:34px;padding:7px}.lm-wish svg{width:19px;height:19px}.woocommerce-ordering select{max-width:195px;font-size:10px}.woocommerce-result-count{font-size:10px}.single-product div.product{display:block}.summary{margin-top:22px}.summary h1{font-size:34px}.summary .price{font-size:21px}.single_add_to_cart_button{min-width:0;flex:1}.woocommerce-variation-add-to-cart,.cart:not(.variations_form){display:flex;gap:8px}.single-product .summary .cart{position:relative}.lm-wishlist-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}.lm-wishlist-items h2{font-size:12px}.shop_table.cart thead{display:none}.shop_table.cart tr.cart_item{display:grid;grid-template-columns:30px 80px 1fr;border-bottom:1px solid var(--line);padding:15px 0;align-items:center}.shop_table.cart td{border:0;padding:4px}.shop_table.cart .product-thumbnail{width:auto}.shop_table.cart .product-thumbnail img{width:65px;height:65px}.shop_table.cart .product-price{grid-column:3}.shop_table.cart .product-quantity{grid-column:3}.shop_table.cart .product-subtotal{grid-column:3;font-weight:600}.shop_table.cart .actions{display:block}.coupon{float:none;flex-wrap:wrap;margin:15px 0}.actions>.button{float:none}.woocommerce-checkout .col2-set{width:100%;float:none}.woocommerce-checkout #order_review_heading,.woocommerce-checkout #order_review{margin-left:0}.woocommerce-message .button{float:none;margin-bottom:10px}.woocommerce-order-overview{gap:15px}.related.products{margin-top:45px}.related h2{font-size:28px}.lm-page .woocommerce-NoticeGroup{width:100%}}
+:root{--ink:#30332f;--muted:#686c65;--line:#dedfd9;--green:#687361;--paper:#f5f5f2}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:#fff;font:14px/1.65 'Manrope',Arial,sans-serif}a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}button,input,select,textarea{font:inherit;color:inherit}button,.button,input[type=submit]{display:inline-flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:white;padding:12px 20px;min-height:44px;text-decoration:none;border-radius:0;font-weight:500}:is(button,input[type=submit]):disabled,:is(button,input[type=submit]):disabled:hover{background:var(--line);border-color:var(--line);color:var(--ink);cursor:not-allowed}input:not([type=checkbox]):not([type=radio]),select,textarea{border:1px solid #b9bdb4;background:white;padding:12px;width:100%;border-radius:0;min-height:46px}textarea{resize:vertical}label{display:block}input[type=checkbox],input[type=radio]{accent-color:var(--green)}:focus-visible{outline:2px solid var(--green);outline-offset:4px}h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;line-height:1.15}h1{font-size:48px;margin:16px 0 26px}h2{font-size:32px}p{margin:10px 0}img{max-width:100%;height:auto}svg{flex-shrink:0}.lm-wrap{padding:0 var(--gutter)}.lm-page{min-height:60vh;padding-top:25px;padding-bottom:65px}.lm-local-banner{font-size:11px;text-align:center;padding:6px 16px;background:#f0f1eb;color:#525a4c}.lm-wordmark{font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;letter-spacing:4px;line-height:1;white-space:nowrap}.lm-wordmark small{display:block;font:9px 'Manrope',sans-serif;letter-spacing:5px;text-align:center;margin-top:8px}.skip-link{position:absolute;left:-9999px}.skip-link:focus{left:20px;top:20px;background:#fff;padding:12px;z-index:1000}.screen-reader-text{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.lm-categories{display:flex;gap:28px;overflow:auto;scrollbar-width:none;white-space:nowrap;border-bottom:1px solid var(--line);padding:0 0 9px;margin:-10px 0 20px}.lm-categories::-webkit-scrollbar{display:none}.lm-meter{display:block;position:relative;height:3px;margin:-22px 0 19px;pointer-events:none}.lm-meter::before{content:'';position:absolute;top:0;bottom:0;left:calc(var(--lm-meter-at,0)*100%);width:calc(var(--lm-meter-size,1)*100%);background:var(--green)}.lm-categories a{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}.lm-filters{display:flex;align-items:center;gap:16px;margin:18px 0}.lm-search{flex:1;max-width:420px}.lm-filters details{position:relative}.lm-filters summary{cursor:pointer;padding:12px;min-width:80px}.lm-filter-fields{position:absolute;z-index:6;top:45px;right:0;background:#fff;border:1px solid var(--line);width:300px;padding:20px}.lm-filter-fields label{margin:10px 0}.woocommerce-result-count{color:var(--muted);font-size:12px;float:left;margin:12px 0 24px}.woocommerce-ordering{float:right;margin:0 0 20px}.woocommerce-ordering select{font-size:12px;min-height:40px;padding:9px}.products{clear:both;list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:38px 22px;margin:0}.products .product{position:relative;min-width:0}.products .product img{width:100%;aspect-ratio:1;object-fit:cover;background:var(--paper);display:block}.products h2{font-family:'Manrope',sans-serif;font-size:14px;line-height:1.5;margin:13px 0 0;font-weight:500}.products .price{display:block;font-size:13px;margin-top:4px}.price del{color:var(--muted);font-size:.85em;margin-right:6px}.price ins{text-decoration:none}.lm-material{color:var(--muted);font-size:11px;margin:2px 0}.lm-wish{position:absolute;top:8px;right:8px;background:#fffffff0;border:0;color:var(--ink);padding:9px;width:40px;min-height:40px}.lm-wish[aria-pressed=true]{color:var(--green);--lm-wish-ground:#e6ecdf}.onsale{position:absolute;z-index:2;top:10px;left:10px;background:white;font-size:10px;padding:4px 9px}.woocommerce-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:24px}.woocommerce-breadcrumb a{padding:15px 6px;margin:0 -6px}.single-product div.product{display:grid;grid-template-columns:minmax(0,min(53.5%,740px)) minmax(0,1fr);gap:40px}.single-product .summary{max-width:620px}.woocommerce-product-gallery{min-width:0;position:relative}.woocommerce-product-gallery__wrapper{margin:0}.woocommerce-product-gallery__image{position:relative}.woocommerce-product-gallery__image img{display:block;width:100%;height:auto}.woocommerce-product-gallery__trigger{position:absolute;right:15px;top:15px;z-index:3}.flex-control-thumbs{list-style:none;padding:0;display:flex;gap:10px}.flex-control-thumbs li{width:18%;cursor:pointer}.summary h1{font-size:42px;margin-top:0}.summary .price{font-size:22px}.summary .cart{margin:25px 0}.variations{width:100%;text-align:left;border-collapse:collapse}.variations th{width:85px;font-weight:400}.variations td,.variations th{padding:10px 0}.reset_variations{font-size:11px}.quantity{display:inline-block;width:75px;margin-right:10px}.quantity input{text-align:center}.single_add_to_cart_button{min-width:210px}.lm-product-facts{color:var(--muted);font-size:12px;line-height:1.9;margin:14px 0}.lm-product-facts p{white-space:pre-line;margin:0}.lm-save-product{background:white;color:var(--ink);width:100%;margin-top:10px}.lm-consult{display:flex;align-items:center;justify-content:center;min-height:44px;font-size:12px;text-decoration:underline;margin-top:8px}.stock{font-size:12px;color:var(--green)}.out-of-stock{color:#806254}.product_meta{font-size:11px;color:var(--muted)}.woocommerce-tabs,.related.products,.up-sells.products{grid-column:1/-1}.related.products,.up-sells.products{display:block}.tabs{display:flex;gap:25px;list-style:none;padding:0;border-bottom:1px solid var(--line)}.tabs li{margin-bottom:-1px;border-bottom:1px solid transparent}.tabs li.active{border-bottom-color:var(--ink)}.tabs a{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}.tabs a:hover{text-decoration:none}.woocommerce-tabs p{max-width:720px}.woocommerce-message,.woocommerce-info,.woocommerce-error{padding:16px 20px;background:#f1f3ed;border:1px solid var(--line);margin:0 0 24px;list-style:none}.woocommerce-error{background:#fbf1ef;border-color:#a04336}.woocommerce-message .button{float:right;padding:6px 12px;font-size:12px}.lm-to-catalog,.return-to-shop{margin:24px 0 0}.lm-muted,.lm-intro{color:var(--muted)}.lm-inquiry{border-top:1px solid var(--line);margin-top:26px;padding-top:10px}.lm-inquiry label{margin:12px 0}.lm-consent{display:flex;gap:10px;font-size:12px}.lm-variant-media{display:flex;gap:10px;overflow:auto;margin:15px 0}.lm-variant-media img,.lm-variant-media video{width:190px;height:230px;object-fit:contain;background:var(--paper)}[hidden]{display:none!important}.lm-wishlist-items{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:38px 22px;margin:30px 0}.lm-wishlist-items article{min-width:0}.lm-wishlist-items a:hover{text-decoration:none}.lm-wishlist-items a:hover h2,.lm-wishlist-items .lm-edit-link:hover{text-decoration:underline}.lm-wishlist-stock{font-size:12px;color:var(--muted);margin:8px 0 0}.lm-share-result{max-width:650px;margin:20px 0}.lm-share-result button{margin-top:10px}.lm-feedback{font-size:12px}.shop_table{width:100%;border-collapse:collapse}.shop_table th,.shop_table td{padding:16px 10px;border-bottom:1px solid var(--line);text-align:left}.shop_table th{font-weight:500;font-size:12px}.product-thumbnail{width:110px}.product-thumbnail img{width:85px;height:85px;object-fit:cover}.product-remove a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;font-size:24px;text-decoration:none}.coupon{display:flex;gap:8px;float:left}.coupon label{display:none}.actions>.button{float:right}.cart-collaterals{margin:35px 0}.cart_totals{max-width:520px;margin-left:auto}.wc-proceed-to-checkout{margin-top:20px}.checkout-button{width:100%}.woocommerce-checkout .col2-set{width:48%;float:left}.woocommerce-checkout #order_review_heading,.woocommerce-checkout #order_review{margin-left:54%}.form-row{margin:14px 0}.form-row label{font-size:12px;margin-bottom:5px}.form-row-first,.form-row-last{width:48%;float:left}.form-row-last{float:right}.form-row-wide,.clear{clear:both}.required{color:#8b5148}.woocommerce-billing-fields h3,.woocommerce-additional-fields h3,#order_review_heading{font-size:28px}.wc_payment_methods{padding:0;list-style:none}.wc_payment_method{display:flex;flex-wrap:wrap;align-items:center;column-gap:8px;padding:5px 0;border-bottom:1px solid var(--line)}.wc_payment_method>input{flex:none;margin:0 0 0 3px}.wc_payment_method>label{flex:1;min-width:0;display:flex;align-items:center;min-height:44px;font-size:13px}.payment_box{flex-basis:100%;font-size:12px;color:var(--muted);padding:0 0 11px 22px}#place_order{width:100%;margin-top:12px}.woocommerce-privacy-policy-text{font-size:11px;color:var(--muted)}.woocommerce-checkout:after,.woocommerce:after{content:'';display:block;clear:both}.woocommerce-order-overview{display:flex;gap:30px;list-style:none;padding:0;flex-wrap:wrap}.woocommerce-order-overview strong{display:block}.woocommerce-customer-details{margin-top:35px}.lm-page:after{content:'';display:block;clear:both}.woocommerce-pagination ul{display:flex;gap:0;list-style:none;padding:15px 0;margin-left:-14px}.woocommerce-pagination a,.woocommerce-pagination span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:8px}.woocommerce-pagination .current{color:var(--green);text-decoration:underline;text-underline-offset:9px}.lm-wishlist-items .lm-edit-link{display:block;margin:10px 0 14px;text-decoration:underline;font-size:12px}
+@media(max-width:767px){body{font-size:13px}.lm-wordmark{font-size:27px;letter-spacing:3px}.lm-local-banner{font-size:9px;line-height:1.4}h1{font-size:36px;margin:8px 0 20px}.lm-page{padding-top:20px}.lm-categories{gap:24px;font-size:12px;padding-bottom:3px}.lm-filters{gap:7px;flex-wrap:wrap}.lm-search{max-width:none;flex-basis:65%}.lm-filters button{padding:10px 14px}.lm-filters>a{font-size:11px}.lm-filter-fields{right:0;width:280px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}.products h2{font-size:12px}.products .price{font-size:12px}.lm-material{font-size:10px}.onsale{font-size:9px;left:6px;top:6px;padding:3px 6px}.lm-wish{--lm-wish-plate:32px;--lm-wish-pad:7px 7px 19px 19px}.lm-wish svg{width:18px;height:18px}.woocommerce-ordering select{max-width:195px;font-size:10px}.woocommerce-result-count{font-size:10px}.single-product div.product{display:block}.woocommerce-product-gallery__image img{max-height:max(240px,calc(100svh - var(--top) - 300px));object-fit:contain}.summary{margin-top:22px}.summary h1{font-size:34px}.summary .price{font-size:21px}.single_add_to_cart_button{min-width:0;flex:1}.woocommerce-variation-add-to-cart,form.cart:not(.variations_form){display:flex;gap:8px}.single-product .summary .cart{position:relative}.lm-wishlist-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}.shop_table.cart thead{display:none}.shop_table.cart tr.cart_item{display:grid;grid-template-columns:44px 80px 1fr;border-bottom:1px solid var(--line);padding:15px 0;align-items:center}.shop_table.cart td{border:0;padding:4px}.shop_table.cart td.product-remove{padding:0}.shop_table.cart .product-thumbnail{width:auto}.shop_table.cart .product-thumbnail img{width:65px;height:65px}.shop_table.cart .product-price{grid-column:3}.shop_table.cart :is(.product-price,.product-subtotal)::before{margin-right:8px;color:var(--muted);font-size:11px;font-weight:400}.shop_table.cart .product-price::before{content:'Ціна'}.shop_table.cart .product-subtotal::before{content:'Разом'}.shop_table.cart .product-quantity{grid-column:3}.shop_table.cart .product-subtotal{grid-column:3;font-weight:600}.shop_table.cart .actions{display:block}.coupon{float:none;flex-wrap:wrap;margin:15px 0}.actions>.button{float:none}.woocommerce-checkout .col2-set{width:100%;float:none}.woocommerce-checkout #order_review_heading,.woocommerce-checkout #order_review{margin-left:0}.woocommerce-message .button{float:none;margin-bottom:10px}.woocommerce-order-overview{gap:15px}.related.products,.up-sells.products{margin-top:45px}.lm-page .woocommerce-NoticeGroup{width:100%}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
 ::selection{background:#dae2d4;color:#30332f}input,textarea{caret-color:var(--green)}a{text-underline-offset:4px}.price,.amount{font-variant-numeric:tabular-nums}
@@ -35,14 +35,12 @@ Text Domain: limerence
 @media(prefers-reduced-motion:reduce){.lm-background-video__film{visibility:hidden}}
 
 /* ── 0.2 House format: header with sections, front page, tiles, footer ── */
-:root{--top:76px;--gutter:48px;--ink-soft:#555a52;--ease:cubic-bezier(.16,1,.3,1)}
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--top) + 16px)}
+:root{--top:76px;--gutter:max(48px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));--ink-soft:#555a52;--ease:cubic-bezier(.16,1,.3,1)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--top) + var(--wp-admin--admin-bar--height,0px) + 16px)}
 html.lm-locked{overflow:hidden}
 h1,h2,h3{text-wrap:balance}
 .lm-page{padding-top:0}
-.lm-catalog{padding-top:28px;max-width:none}
-.single-product .lm-catalog{max-width:1380px}
-.lm-foot .lm-wrap{max-width:none}
+.lm-catalog{padding-top:28px}
 .button,button[type=submit],input[type=submit]{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:16px 28px;transition:background-color .25s var(--ease),color .25s var(--ease)}
 .button:hover,button[type=submit]:hover{background:var(--green);border-color:var(--green);text-decoration:none}
 .button--line{background:transparent;color:var(--ink)}
@@ -51,7 +49,11 @@ h1,h2,h3{text-wrap:balance}
 .lm-link:hover{color:var(--green);text-decoration:none}
 
 /* Header */
-.lm-top{position:sticky;top:0;z-index:30;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:var(--top);padding:0 var(--gutter);background:#fff;border-bottom:1px solid var(--line)}
+/* A signed-in owner's WordPress bar stays fixed above 600px: the header and the menu sit under it, not behind it. */
+.admin-bar{--lm-bar:32px}
+@media(max-width:782px){.admin-bar{--lm-bar:46px}}
+@media(max-width:600px){.admin-bar{--lm-bar:0px}.admin-bar .lm-drawer{z-index:100000}}
+.lm-top{position:sticky;top:var(--lm-bar,0px);z-index:30;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:calc(var(--top) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--gutter) 0;background:#fff;border-bottom:1px solid var(--line)}
 .lm-top .lm-wordmark{grid-column:2;text-align:center;font-size:30px}
 /* The logo is a dark drawing on a clear ground; multiply keeps it clean on paper as well as on white. */
 .lm-wordmark img{display:block;width:auto;height:40px;margin:auto;mix-blend-mode:multiply}
@@ -66,14 +68,16 @@ h1,h2,h3{text-wrap:balance}
 .lm-nav__link[aria-current]{color:var(--green)}
 .lm-mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);visibility:hidden;opacity:0;transition:opacity .2s var(--ease),visibility 0s .2s}
 .lm-nav__item:hover>.lm-mega,.lm-nav__item:focus-within>.lm-mega{visibility:visible;opacity:1;transition-delay:.08s,0s}
+/* Shut by Esc, or while the search panel is open: one panel under the header at a time. */
+.lm-nav__item.is-shut>.lm-mega,.lm-top:has(.lm-top__search[open]) .lm-mega{visibility:hidden;opacity:0;transition-delay:0s}
 .lm-mega__inner{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:64px;align-items:start;padding:44px var(--gutter) 52px}
 .lm-mega__all{display:inline-flex;align-items:baseline;gap:14px;font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;font-weight:300;line-height:1.1}
 .lm-mega__all span{font:500 11px 'Manrope',sans-serif;letter-spacing:.1em;color:var(--muted)}
 .lm-mega__list ul{display:block;columns:3;column-gap:40px;margin-top:26px}
 .lm-mega__list li{break-inside:avoid;padding:7px 0;font-size:14px}
 .lm-mega__plate img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%}
-.lm-top__actions{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin-right:-10px}
-.lm-top__actions>a,.lm-top__search summary{display:flex;padding:10px;cursor:pointer;list-style:none}
+.lm-top__actions{display:flex;justify-content:flex-end;align-items:center;gap:4px;margin-right:-11px}
+.lm-top__actions>a,.lm-top__search summary{display:flex;padding:11px;cursor:pointer;list-style:none}
 .lm-top__search summary::-webkit-details-marker{display:none}
 .lm-top__search-panel{position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);padding:28px var(--gutter)}
 .lm-search-form{display:flex;gap:12px;max-width:720px;margin:auto}
@@ -81,7 +85,7 @@ h1,h2,h3{text-wrap:balance}
 .lm-search-form input:focus-visible{outline:0;border-bottom-color:var(--green);box-shadow:0 1px 0 var(--green)}
 
 /* Phone menu */
-.lm-drawer{position:fixed;inset:0;z-index:40;background:#fff;overflow-y:auto;overscroll-behavior:contain;padding:0 20px 40px}
+.lm-drawer{position:fixed;inset:var(--lm-bar,0px) 0 0;z-index:40;background:#fff;overflow-y:auto;overscroll-behavior:contain;padding:env(safe-area-inset-top,0px) var(--gutter) calc(40px + env(safe-area-inset-bottom,0px))}
 .lm-drawer__bar{display:flex;align-items:center;justify-content:space-between;min-height:64px;margin-right:-10px}
 .lm-drawer .lm-wordmark{font-size:24px}
 .lm-drawer .lm-search-form{margin:8px 0 24px}
@@ -103,10 +107,9 @@ h1,h2,h3{text-wrap:balance}
 .lm-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 30px;margin:0}
 .lm-hero__plate{position:relative;margin:0;overflow:hidden;background:var(--paper)}
 .lm-hero__plate img{display:block;width:100%;height:100%;object-fit:cover}
-/* A film lies over the photograph and fades in once it plays. */
+/* A film lies over the photograph and fades in once it plays; until then the photograph stays. */
 .lm-hero__plate video{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s var(--ease)}
 .lm-hero__plate video.is-playing{opacity:1}
-.lm-hero__plate.has-film img{visibility:hidden}
 .lm-hero--plain{grid-template-columns:1fr;height:auto;min-height:0}
 .lm-hero--plain .lm-hero__text{padding:120px var(--gutter) 96px;max-width:900px}
 @media(prefers-reduced-motion:no-preference){
@@ -125,9 +128,19 @@ h1,h2,h3{text-wrap:balance}
 .lm-choose__plate{display:block;aspect-ratio:4/5;overflow:hidden;background:var(--paper)}
 .lm-choose__plate img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 25%;transition:transform 1.4s var(--ease)}
 .lm-choose__item:hover img{transform:scale(1.035)}
-.lm-choose__name{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;font-weight:300;line-height:1.1;margin-top:20px;transition:color .25s var(--ease)}
+/* A section's name keeps to one line, so the row of names stays level. */
+.lm-choose__name{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(24px,2.4vw,34px);font-weight:300;line-height:1.1;white-space:nowrap;margin-top:20px;transition:color .25s var(--ease)}
 .lm-choose__item:hover .lm-choose__name{color:var(--green)}
 .lm-choose__text{display:block;margin-top:8px;font-size:13px;color:var(--ink-soft);max-width:34ch}
+
+/* Front page: a strip of photographs under its own line — to look at, not to choose from. It moves sideways only. */
+.lm-gallery{padding-top:128px}
+.lm-gallery h2{font-size:clamp(2rem,3.4vw,3.25rem);font-weight:300;line-height:1.1;text-align:center;margin:0 var(--gutter) 48px}
+.lm-gallery__strip{display:flex;gap:22px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding-inline:var(--gutter);padding:0 var(--gutter);scrollbar-width:none}
+.lm-gallery__strip::-webkit-scrollbar{display:none}
+.lm-gallery__strip:focus-visible{outline:1px solid var(--ink);outline-offset:6px}
+.lm-gallery__item{flex:0 0 28%;margin:0;aspect-ratio:3/4;overflow:hidden;background:var(--paper);scroll-snap-align:start}
+.lm-gallery__item img{display:block;width:100%;height:100%;object-fit:cover}
 
 /* Front page: a few words about the house, then the showroom */
 .lm-about{padding:128px var(--gutter) 112px;text-align:center}
@@ -139,31 +152,40 @@ h1,h2,h3{text-wrap:balance}
 
 /* Product tile */
 .lm-card-media{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:var(--paper)}
-.products .product .lm-card-media img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;background:none;transition:opacity .6s var(--ease),transform 1.2s var(--ease)}
+.products .product .lm-card-media img,.lm-wishlist-items .lm-card-media img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;background:none;transition:opacity .6s var(--ease),transform 1.2s var(--ease)}
 /* A packshot shows the whole piece; its backdrop, lifted to white, multiplies into the paper frame. */
-.products .product .lm-card-media img.lm-packshot{object-fit:contain;padding:9%;mix-blend-mode:multiply}
+.products .product .lm-card-media img.lm-packshot,.lm-wishlist-items .lm-card-media img.lm-packshot{object-fit:contain;padding:9%;mix-blend-mode:multiply}
+/* Only the tile under the pointer: a product page is itself a «.product» around its related tiles. */
 .lm-card-alt img{opacity:0}
-.product:hover .lm-card-alt img{opacity:1}
+.products li.product:hover .lm-card-alt img{opacity:1}
 .products .product:hover .lm-card-media>img:only-of-type{transform:scale(1.03)}
 /* A quiet tile: the kind of piece in the serif, one short material line, then the price. */
-.products h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:400;line-height:1.15;margin:15px 0 5px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.products h2,.lm-wishlist-items h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:400;line-height:1.15;margin:15px 0 5px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+/* The heading over a row of tiles is a heading, not a tile name. */
+section.products>h2{display:block;overflow:visible;font-size:32px;margin:0 0 28px}
+/* Under the pointer the name is underlined; the prices are not. */
+.products li a:hover{text-decoration:none}
+.products li a:hover h2{text-decoration:underline}
 .lm-material{line-height:1.5;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* The price in force leads; the earlier one follows it, small. */
 .price,.products .price{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:9px}
 .price ins{order:1}
 .price del{order:2;margin:0}
 .lm-from{margin-right:-5px}
-.products .price{font-weight:500;margin-top:10px}
+.products .price,.lm-wishlist-items .price{font-size:13px;font-weight:500;margin-top:10px}
 .products .price del{font-size:11px;font-weight:400}
 .onsale{top:0;left:0;padding:7px 10px;font-weight:600;letter-spacing:.1em}
-/* On a tile the discount sits on the photograph, at its foot, without a plate. */
-.lm-card-media .onsale{top:auto;left:13px;bottom:13px;padding:0;background:none;font-weight:400;letter-spacing:.5px}
+/* On a tile and on a piece's own page the discount sits on the photograph, at its foot, without a plate. */
+.lm-card-media .onsale,.woocommerce-product-gallery__image .onsale{top:auto;left:13px;bottom:13px;padding:0;background:none;font-weight:400;letter-spacing:.5px}
 /* Over a photograph of a piece being worn the figures keep a soft light edge, so dark hair does not swallow them. */
-.lm-card-media:not(:has(.lm-packshot)) .onsale{font-weight:500;text-shadow:0 0 2px #fff,0 0 6px #fff,0 0 10px #fff}
-.lm-wish{top:0;right:0;width:44px;min-height:44px;padding:11px;background:#fff;transition:color .25s var(--ease)}
+.lm-card-media:not(:has(.lm-packshot)) .onsale,.woocommerce-product-gallery__image .onsale{font-weight:500;text-shadow:0 0 2px #fff,0 0 6px #fff,0 0 10px #fff}
+/* The heart is pressed over 44px; its plate is drawn apart, so a phone can show it smaller. */
+.lm-wish{top:0;right:0;width:44px;min-height:44px;padding:var(--lm-wish-pad,11px);transition:color .25s var(--ease)}
+.lm-wish::before{content:'';position:absolute;top:0;right:0;width:var(--lm-wish-plate,44px);height:var(--lm-wish-plate,44px);background:var(--lm-wish-ground,#fff)}
+.lm-wish svg{position:relative}
 .single-product div.product{position:relative}
 .lm-single-value{display:inline-block;padding:12px 0}
-.woocommerce-variation-add-to-cart,.cart:not(.variations_form){display:flex;gap:10px}
+.woocommerce-variation-add-to-cart,form.cart:not(.variations_form){display:flex;gap:10px}
 .single_add_to_cart_button{flex:1;min-width:0}
 .lm-consult svg{width:15px;height:15px;margin-left:6px;vertical-align:-3px}
 /* Catalogue controls drawn in the house's own line weight */
@@ -180,7 +202,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 .lm-wish:hover{color:var(--green)}
 
 /* Footer */
-.lm-foot{margin-top:40px;padding:72px 0 64px;background:var(--paper)}
+.lm-foot{margin-top:40px;padding:72px 0 calc(64px + env(safe-area-inset-bottom,0px));background:var(--paper)}
 .lm-foot__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:40px}
 .lm-foot h2{font:600 11px 'Manrope',sans-serif;letter-spacing:.14em;text-transform:uppercase;margin:6px 0 18px}
 .lm-foot ul{list-style:none;margin:0;padding:0}
@@ -188,8 +210,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 .lm-foot__brand p{color:var(--ink-soft);margin-top:14px}
 
 @media(max-width:1023px){
-  :root{--top:64px;--gutter:20px}
-  .lm-wrap{padding-left:var(--gutter);padding-right:var(--gutter)}
+  :root{--top:64px;--gutter:max(20px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))}
   .lm-nav,.lm-top__search{display:none}
   .lm-top__burger{display:flex}
   .lm-wordmark img{height:32px}
@@ -204,28 +225,42 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
   .lm-choose{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 12px;padding-top:34px}
   .lm-choose__name{font-size:25px;margin-top:12px}
   .lm-choose__text{display:none}
+  /* On a phone one photograph fills most of the screen and the edge of the next shows there is more. */
+  .lm-gallery{padding-top:64px}
+  .lm-gallery h2{font-size:27px;margin-bottom:26px}
+  .lm-gallery__strip{gap:12px}
+  .lm-gallery__item{flex-basis:76%}
   .lm-about{padding:72px var(--gutter) 64px}
   .lm-about p{font-size:14px}
   .lm-showroom{padding:64px var(--gutter)}
   .lm-showroom p{font-size:14px;margin-bottom:26px}
-  .lm-categories{margin-top:6px}
+  /* The row of types runs off the right edge, so a cut name says there is more. */
+  .lm-categories{margin-top:-5px;margin-right:calc(-1*var(--gutter));padding-right:var(--gutter)}
+  .lm-meter{margin-right:calc(-1*var(--gutter))}
   .lm-filters{flex-wrap:nowrap}
   .lm-filters button[type=submit]{padding:14px}
   .lm-filters summary{padding:12px 6px}
-  .woocommerce-pagination ul{flex-wrap:wrap;gap:4px 10px}
-  .products h2{font-size:25px;margin:11px 0 4px}
-  .products .price{font-size:14px;column-gap:7px;margin-top:7px}
-  .lm-card-media .onsale{left:9px;bottom:9px}
+  .woocommerce-pagination ul{flex-wrap:wrap}
+  .products h2,.lm-wishlist-items h2{font-size:25px;margin:11px 0 4px}
+  section.products>h2{font-size:28px;margin:0 0 24px}
+  .products .price,.lm-wishlist-items .price{font-size:14px;column-gap:7px;margin-top:7px}
+  .lm-card-media .onsale,.woocommerce-product-gallery__image .onsale{left:9px;bottom:9px}
   .lm-material,.woocommerce-result-count{font-size:11px}
   .woocommerce-ordering select{font-size:11.5px;max-width:232px;padding-left:10px}
   .onsale{font-size:10px}
-  .lm-foot{padding:44px 0 36px}
+  .lm-foot{padding:44px 0 calc(36px + env(safe-area-inset-bottom,0px))}
+  /* Under a finger every footer link is a 44px row of its own; the type stays as it was. */
+  .lm-foot li{margin:0}
+  .lm-foot li a,.lm-foot p a,.lm-foot .lm-wordmark{display:inline-flex;align-items:center;min-width:44px;min-height:44px}
   .lm-foot__grid{grid-template-columns:1fr 1fr;gap:32px 20px}
   .lm-foot__brand{grid-column:1/-1}
 }
 
 /* Plain pages (cart, checkout, wishlist, delivery) keep a gap under the header. */
 .lm-wrap.lm-page{padding-top:44px}
+/* A page of words keeps a readable measure; the cart and checkout keep a wider one; all start at the header's left edge. */
+.lm-wrap.lm-page>:is(h1,h2,h3,h4,p,ul,ol,blockquote,figure){max-width:720px}
+.lm-wrap.lm-page>.woocommerce{max-width:1284px}
 @media(max-width:899px){.lm-wrap.lm-page{padding-top:24px}}
 
 /* ── 0.3.1 Phone first: chocolate buttons, the section's name ahead of its filters ── */
@@ -234,7 +269,7 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
 .button:hover,button[type=submit]:hover,input[type=submit]:hover{background:var(--choc-soft);border-color:var(--choc-soft)}
 .button--line{background:transparent;color:var(--choc)}
 .lm-top__burger,.lm-drawer__close,.lm-rail__step{background:none}
-.lm-wish,.lm-wish:hover{background:#fff}
+.lm-wish,.lm-wish:hover{background:none}
 .lm-save-product{background:#fff;color:var(--choc)}
 /* The name leads; the filters wait in the corner beside it. */
 .woocommerce-products-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;column-gap:16px}
@@ -245,20 +280,74 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
 .lm-filter-fields{top:42px}
 .lm-filter-fields button[type=submit]{width:100%;margin-top:10px}
 .lm-filters__reset{display:block;margin-top:14px;font-size:12px;text-align:center;text-decoration:underline}
-.woocommerce-ordering select{border:0;min-height:36px;padding:6px 26px 6px 0!important;background-position:right 2px center;color:var(--ink-soft);text-align:right}
+.woocommerce-ordering select{border:0;min-height:44px;padding:6px 26px 6px 0!important;background-position:right 2px center;color:var(--ink-soft);text-align:right}
 @media(max-width:899px){
   .lm-hero h1{white-space:nowrap;font-size:min(34px,7vw)}
   /* Sections as low horizontal plates: all four in view at once. */
   .lm-choose{gap:20px 12px}
   .lm-choose__plate{aspect-ratio:3/2}
-  .lm-choose__name{font-size:22px;margin-top:9px}
-  .lm-catalog .page-title{font-size:40px}
+  .lm-choose__name{font-size:min(22px,5.3vw);margin-top:9px}
+  /* Inside a section the type is the heading and the section stands over it as a label; every catalogue heading keeps that line free, so all sit at one height. */
+  .lm-catalog .page-title{position:relative;padding-top:16px;font-size:40px}
+  .lm-title__section{position:absolute;top:0;left:0;font:600 11px/1 'Manrope',Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;color:var(--muted)}
+  .lm-title__dot{display:none}
+  .woocommerce-products-header>.lm-filters{margin-top:8px}
   .lm-filters{flex-wrap:nowrap}
   .lm-filters summary{padding:12px 0 12px 12px}
   .lm-filter-fields{width:min(300px,calc(100vw - 2*var(--gutter)))}
-  .woocommerce-ordering{margin-bottom:14px}
+  .woocommerce-ordering{margin-bottom:10px}
   .woocommerce-ordering select{max-width:none;font-size:11.5px}
 }
+
+/* ── Fixes of 12.10: fields, header, cart, tablet, footer ── */
+/* A phone does not zoom into a field whose text is 16px or larger. */
+@media(max-width:899px){
+  :root :is(input,select,textarea),:root .woocommerce-ordering select{font-size:16px}
+  .woocommerce-ordering{max-width:100%}
+  .woocommerce-ordering select{max-width:100%;text-overflow:ellipsis}
+  /* The front page line starts where the section plates start. */
+  .lm-hero__text,.lm-hero--plain .lm-hero__text{align-self:stretch;min-width:0}
+}
+/* «Зберегти бажання» stays a light button with dark words in every state. */
+.lm-save-product:hover,.lm-save-product:focus,.lm-save-product:active,.lm-save-product[aria-pressed=true]{background:#fff;border-color:var(--choc);color:var(--choc)}
+.lm-save-product:hover,.lm-save-product:active{background:var(--paper)}
+/* A price never breaks between the figure and the currency. */
+.amount{white-space:nowrap}
+/* Header: equal sides keep the logo in the middle; the sections give way to the menu button when they do not fit. */
+@media(min-width:1024px){
+  .lm-top{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+  .lm-nav{justify-self:start}
+  .lm-nav ul{gap:var(--lm-nav-gap,clamp(12px,calc((100vw - 1190px)/8),30px))}
+  .lm-top[data-lm-nav=burger] .lm-nav{position:absolute;left:0;top:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none}
+  .lm-top[data-lm-nav=burger] .lm-top__burger{display:flex}
+}
+/* Before the script has measured the sections, a narrow desktop shows the menu button. */
+@media(min-width:1024px) and (max-width:1279px){
+  .lm-top:not([data-lm-nav]) .lm-nav{position:absolute;left:0;top:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none}
+  .lm-top:not([data-lm-nav]) .lm-top__burger{display:flex}
+}
+/* Tablet: three tiles to a row, so a tile is never narrower than 220px. */
+@media(min-width:768px) and (max-width:899px){.products{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* WooCommerce's own unlabelled buttons are drawn marks, not filled plates. */
+.password-input{position:relative;display:block}
+.password-input input{padding-right:48px}
+.show-password-input{position:absolute;right:0;top:0;width:44px;min-width:44px;height:100%;min-height:44px;padding:0;border:0;color:var(--ink);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2330332f' stroke-width='1.4'%3E%3Cpath d='M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") center/22px no-repeat}
+.show-password-input.display-password{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2330332f' stroke-width='1.4'%3E%3Cpath d='M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='m4 4 16 16'/%3E%3C/svg%3E")}
+/* Front page: the showroom's own line is the only divider before the footer. */
+.lm-home{padding-bottom:0}
+.lm-home+.lm-foot{margin-top:0}
+/* The logo file carries clear margins; in the footer its drawing starts on the text's left edge. */
+.lm-foot .lm-wordmark img{margin-left:-6px}
+@media(max-width:1023px){.lm-foot .lm-wordmark img{margin-left:-5px}}
+/* A saved piece keeps a filled heart; the number beside the header icons is this visitor's own. */
+.lm-wish[aria-pressed=true] svg,.lm-save-product[aria-pressed=true] svg{fill:currentColor}
+.lm-top__actions>a{position:relative}
+.lm-count{position:absolute;top:3px;right:0;min-width:16px;height:16px;padding:0 4px;background:var(--choc);color:#fff;font-size:10px;font-weight:500;line-height:16px;text-align:center;font-variant-numeric:tabular-nums;pointer-events:none}
+.lm-count[hidden]{display:none}
+/* What happened to a tile's heart is said over the page, so the row of tiles keeps its line. */
+.lm-toast{position:fixed;left:50%;bottom:24px;z-index:90;margin:0;max-width:calc(100vw - 32px);padding:11px 18px;background:#fff;border:1px solid var(--line);font-size:12px;letter-spacing:.3px;text-align:center;opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,8px);transition:opacity .25s,transform .25s,visibility .25s}
+.lm-toast.is-on{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){.lm-toast{transition:none}}
 
 
 /* Preview copy only: notice bar, static gallery, safe-area sticky header. */
@@ -282,7 +371,7 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
 <a class="skip-link" href="#content">До вмісту</a>
     <header class="lm-top" data-lm-top>
         <button type="button" class="lm-top__burger" aria-controls="lm-drawer" aria-expanded="false" aria-label="Меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 7.5h18M3 12h18M3 16.5h18"/></svg></button>
-        <nav class="lm-nav" aria-label="Розділи каталогу">
+                <nav class="lm-nav" aria-label="Розділи каталогу">
             <ul>
                                 <li class="lm-nav__item">
                     <a class="lm-nav__link" href="gold.html">Золото</a>
@@ -335,7 +424,7 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
                                 <li class="lm-nav__item"><a class="lm-nav__link" href="#" data-off>Jewel Box</a></li>
                             </ul>
         </nav>
-        <a class="lm-wordmark" href="index.html"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></a>
+                <a class="lm-wordmark" href="index.html"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></a>
         <div class="lm-top__actions">
             <details class="lm-top__search">
                 <summary aria-label="Пошук"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></summary>
@@ -346,11 +435,11 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
     </form>
 </div>
             </details>
-            <a href="#" data-off aria-label="Мої бажання"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></a>
-            <a href="#" data-off aria-label="Кошик"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></a>
+            <a href="#" data-off aria-label="Мої бажання"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span class="lm-count" data-lm-count="wishlist" hidden></span></a>
+            <a href="#" data-off aria-label="Кошик"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg><span class="lm-count" data-lm-count="cart" hidden></span></a>
         </div>
     </header>
-    <div class="lm-drawer" id="lm-drawer" hidden>
+    <div class="lm-drawer" id="lm-drawer" role="dialog" aria-modal="true" aria-label="Меню" hidden>
         <div class="lm-drawer__bar">
             <span class="lm-wordmark"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></span>
             <button type="button" class="lm-drawer__close" aria-label="Закрити меню"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg></button>
@@ -408,18 +497,18 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
 					
 			<div class="woocommerce-notices-wrapper"></div><div id="product-1970" class="product type-product post-1970 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 
-	
-	<span class="onsale">−25%</span>
 	<div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" >
 	<div class="woocommerce-product-gallery__wrapper">
-		<div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519691-l.webp" class="wp-post-image" alt="Кольє 179" decoding="async" fetchpriority="high" /></a></div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519693.webp" class="" alt="Кольє 179 - Зображення 2" decoding="async" /></a></div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519694.webp" class="" alt="Кольє 179 - Зображення 3" decoding="async" /></a></div>	</div>
+		<div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519691-l.webp" class="wp-post-image" alt="Кольє 179" decoding="async" fetchpriority="high" /></a>
+	<span class="onsale">−25%</span>
+	</div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519693.webp" class="" alt="Кольє 179 - Зображення 2" decoding="async" /></a></div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519694.webp" class="" alt="Кольє 179 - Зображення 3" decoding="async" /></a></div>	</div>
 </div>
 
 	<div class="summary entry-summary">
 		<h1 class="product_title entry-title">Кольє 179</h1><p class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>39 300&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 39 300&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>29 475&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 29 475&nbsp;&#8372;.</span></p>
-<div class="lm-product-facts"><p>Артикул: <span data-lm-article>179</span></p><p data-lm-weight></p><p data-lm-details>Червоне золото 585 проба<br />
-Довжина 38-45см<br />
-Вага 3.99-4,01 грам<br />
+<div class="lm-product-facts"><p>Артикул: <span data-lm-article>179</span></p><p data-lm-weight></p><p data-lm-details>Червоне золото 585 проба
+Довжина 38-45см
+Вага 3.99-4,01 грам
 Вставки фіаніти</p></div>
 <form class="variations_form cart" action="#" method="post" enctype='multipart/form-data' data-product_id="1970">
 	
@@ -435,17 +524,19 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
 		<div class="reset_variations_alert screen-reader-text" role="alert" aria-live="polite" aria-relevant="all"></div>
 				<template class="wc-product-gallery-default-template"><div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" >
 	<div class="woocommerce-product-gallery__wrapper">
-		<div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519691-l.webp" class="wp-post-image" alt="Кольє 179" decoding="async" loading="lazy" /></a></div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519693.webp" class="" alt="Кольє 179 - Зображення 2" decoding="async" loading="lazy" /></a></div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519694.webp" class="" alt="Кольє 179 - Зображення 3" decoding="async" loading="lazy" /></a></div>	</div>
+		<div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519691-l.webp" class="wp-post-image" alt="Кольє 179" decoding="async" loading="lazy" /></a>
+	<span class="onsale">−25%</span>
+	</div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519693.webp" class="" alt="Кольє 179 - Зображення 2" decoding="async" loading="lazy" /></a></div><div  class="woocommerce-product-gallery__image"><a href="#" data-off><img width="600" height="900" src="img/kolje179-63519694.webp" class="" alt="Кольє 179 - Зображення 3" decoding="async" loading="lazy" /></a></div>	</div>
 </div></template>
 		
 		<div class="single_variation_wrap">
 			<div class="woocommerce-variation single_variation" role="alert" aria-relevant="additions"></div><div class="woocommerce-variation-add-to-cart variations_button">
 	
 	<div class="quantity">
-		<label class="screen-reader-text" for="quantity_6acd4560edcb0">Кольє 179 кількість</label>
+		<label class="screen-reader-text" for="quantity_6ace70b7cfc38">Кольє 179 кількість</label>
 	<input
 		type="number"
-				id="quantity_6acd4560edcb0"
+				id="quantity_6ace70b7cfc38"
 		class="input-text qty text"
 		name="quantity"
 		value="1"
@@ -469,120 +560,48 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
 	
 	</form>
 
-<button type="button" class="button lm-save-product" data-product="1970"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg> Зберегти бажання</button><p class="lm-feedback" role="status"></p><div class="lm-variant-media" data-default="[]"></div>    <section class="lm-inquiry" hidden data-product="1970">
+<button type="button" class="button lm-save-product" data-lm-wish="1970" aria-pressed="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg> Зберегти бажання</button><p class="lm-feedback" role="status"></p><div class="lm-variant-media" data-default="[]"></div>        <section class="lm-inquiry" hidden data-product="1970">
     <h2>Під замовлення</h2><p>Залиште заявку — узгодимо деталі та терміни. Зараз оплачувати не потрібно.</p>
-    <form data-lm-inquiry><label>Ваше ім’я<input name="name" required minlength="2" maxlength="100" autocomplete="given-name"></label><label>Телефон<input name="phone" type="tel" required placeholder="+380" autocomplete="tel"></label><label>Побажання<textarea name="comment" maxlength="1500"></textarea></label><label class="lm-consent"><input type="checkbox" name="consent" required> Погоджуюся на зв’язок щодо цієї заявки.</label><button type="submit">Залишити заявку</button><p role="status"></p></form>
-    </section><p><a class="lm-consult" href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Уточнити деталі у консультанта<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 16 16.5 7.5M9.5 7.5h7v7"/></svg></a></p>
-    	</div>
+    <form data-lm-inquiry method="post"><input type="hidden" name="lm_inquiry_product" value="1970"><p aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></p><label>Ваше ім’я<input name="name" required minlength="2" maxlength="100" autocomplete="given-name"></label><label>Телефон<input name="phone" type="tel" required placeholder="+380" autocomplete="tel"></label><label>Побажання<textarea name="comment" maxlength="1500"></textarea></label><label class="lm-consent"><input type="checkbox" name="consent" required> Погоджуюся на зв’язок щодо цієї заявки.</label><button type="submit">Залишити заявку</button><p role="status"></p></form>
+    </section><p><a class="lm-consult" href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Уточнити деталі у консультанта<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 16 16.5 7.5M9.5 7.5h7v7"/></svg></a></p>    	</div>
 
 	
-	<div class="woocommerce-tabs wc-tabs-wrapper">
-		<ul class="tabs wc-tabs" role="tablist">
-							<li role="presentation" class="description_tab" id="tab-title-description">
-					<a href="#tab-description" role="tab" aria-controls="tab-description">
-						Опис					</a>
-				</li>
-							<li role="presentation" class="additional_information_tab" id="tab-title-additional_information">
-					<a href="#tab-additional_information" role="tab" aria-controls="tab-additional_information">
-						Додаткова інформація					</a>
-				</li>
-							<li role="presentation" class="reviews_tab" id="tab-title-reviews">
-					<a href="#tab-reviews" role="tab" aria-controls="tab-reviews">
-						Відгуки (0)					</a>
-				</li>
-					</ul>
-					<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab" id="tab-description" role="tabpanel" aria-labelledby="tab-title-description">
-				
-	<h2>Опис</h2>
-
-<p>Червоне золото 585 проба<br />
-Довжина 38-45см<br />
-Вага 3.99-4,01 грам<br />
-Вставки фіаніти</p>
-			</div>
-					<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--additional_information panel entry-content wc-tab" id="tab-additional_information" role="tabpanel" aria-labelledby="tab-title-additional_information">
-				
-	<h2>Додаткова інформація</h2>
-
-<table class="woocommerce-product-attributes shop_attributes" aria-label="Деталі товару">
-			<tr class="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_%d0%b2%d0%b0%d1%80%d1%96%d0%b0%d0%bd%d1%82">
-			<th class="woocommerce-product-attributes-item__label" scope="row">Варіант</th>
-			<td class="woocommerce-product-attributes-item__value"><p>Стандартний</p>
-</td>
-		</tr>
-	</table>
-			</div>
-					<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--reviews panel entry-content wc-tab" id="tab-reviews" role="tabpanel" aria-labelledby="tab-title-reviews">
-				<div id="reviews" class="woocommerce-Reviews">
-	<div id="comments">
-		<h2 class="woocommerce-Reviews-title">
-			Відгуки		</h2>
-
-					<p class="woocommerce-noreviews">Відгуків немає, поки що.</p>
-			</div>
-
-			<div id="review_form_wrapper">
-			<div id="review_form">
-					<div id="respond" class="comment-respond">
-		<span id="reply-title" class="comment-reply-title" role="heading" aria-level="3">Будьте першим, хто залишив відгук на &ldquo;Кольє 179&rdquo; <small><a rel="nofollow" id="cancel-comment-reply-link" href="/product/kolje179/#respond" style="display:none;">Скасувати коментар</a></small></span><form action="#" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Ваша e-mail адреса не оприлюднюватиметься.</span> <span class="required-field-message">Обов’язкові поля позначені <span class="required">*</span></span></p><div class="comment-form-rating"><label for="rating" id="comment-form-rating-label">Ваша оцінка&nbsp;<span class="required">*</span></label><select name="rating" id="rating" required>
-						<option value="">Оцінка&hellip;</option>
-						<option value="5">Ідеально</option>
-						<option value="4">Добре</option>
-						<option value="3">Середнє</option>
-						<option value="2">Задовільно</option>
-						<option value="1">Дуже погано</option>
-					</select></div><p class="comment-form-comment"><label for="comment">Ваш відгук&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required></textarea></p><p class="comment-form-author"><label for="author">Назва&nbsp;<span class="required">*</span></label><input id="author" name="author" type="text" autocomplete="name" value="" size="30" required /></p>
-<p class="comment-form-email"><label for="email">Email&nbsp;<span class="required">*</span></label><input id="email" name="email" type="email" autocomplete="email" value="" size="30" required /></p>
-<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Зберегти моє ім'я, e-mail, та адресу сайту в цьому браузері для моїх подальших коментарів.</label></p>
-<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Відправити" /> <input type='hidden' name='comment_post_ID' value='1970' id='comment_post_ID' />
-<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
-</p></form>	</div><!-- #respond -->
-				</div>
-		</div>
-	
-	<div class="clear"></div>
-</div>
-			</div>
-		
-			</div>
-
-
 	<section class="related products">
 
 					<h2>Супутні товари</h2>
 				<ul class="products columns-4">
 
 			
-					<li class="product type-product post-38 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="792" src="img/kolje120-0.webp" class="lm-packshot" alt="Кольє 120" style="filter:brightness(1.028)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kolje120-1.webp"></span>
+					<li class="product type-product post-1918 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole055-75879468.webp" class="lm-packshot" alt="Кольє 386055" style="filter:brightness(1.004)" decoding="async" loading="lazy" />
 	<span class="onsale">−20%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 120</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>33 810&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 33 810&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>27 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 27 050&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="38" aria-label="Зберегти Кольє 120"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 386055</span></h2><p class="lm-material">Червоне золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>46 060&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 46 060&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>36 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 36 850&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1918" aria-pressed="false" aria-label="Зберегти Кольє 386055"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
 
 			
-					<li class="product type-product post-1621 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/0kole989-54705191.webp" class="lm-packshot" alt="Кольє 86049" style="filter:brightness(1)" decoding="async" loading="lazy" />
+					<li class="product type-product post-1630 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/1kolje11-75824348.webp" class="lm-packshot" alt="Кольє 35325893" style="filter:brightness(1.027)" decoding="async" loading="lazy" />
 	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 86049</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 2 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 385&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 2 385&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1621" aria-label="Зберегти Кольє 86049"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 35325893</span></h2><p class="lm-material">Срібло 925</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 800&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 800&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 620&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 620&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1630" aria-pressed="false" aria-label="Зберегти Кольє 35325893"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
 
 			
-					<li class="product type-product post-1906 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="699" src="img/ko7le6667-56467322.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє 860252" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/ko7le6667-56467323.webp"></span>
-	<span class="onsale">−20%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 860252</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>22 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 22 050&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>17 640&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 17 640&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1906" aria-label="Зберегти Кольє 860252"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-
-			
-					<li class="product type-product post-1922 status-publish last instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole390-75743880.webp" class="lm-packshot" alt="Кольє 700390/7" style="filter:brightness(1.004)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kole390-57030102.webp"></span>
+					<li class="product type-product post-1914 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="900" src="img/kol938-50035060.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє трансформер 030" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kol938-50035061.webp"></span>
 	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 700390/7</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>46 160&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 46 160&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>34 620&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 34 620&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-product="1922" aria-label="Зберегти Кольє 700390/7"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+	</span><h2 class="woocommerce-loop-product__title">Кольє трансформер<span class="screen-reader-text">, артикул 030</span></h2><p class="lm-material">Біле золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>36 065&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 36 065&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>27 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 27 050&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1914" aria-pressed="false" aria-label="Зберегти Кольє трансформер 030"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-1921 status-publish last instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole384-51893835.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє 700044" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kole384-74868868.webp" data-lift="1.004"></span>
+	<span class="onsale">−25%</span>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 700044</span></h2><p class="lm-material">Золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>20 285&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 20 285&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>15 215&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 15 215&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1921" aria-pressed="false" aria-label="Зберегти Кольє 700044"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
 
 			
 		</ul>
@@ -600,12 +619,13 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
                 <a class="lm-wordmark" href="index.html"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></a>
                 <p>Прикраси, що стають особистим.</p>
             </div>
-            <nav aria-labelledby="lm-foot-catalog">
+                        <nav aria-labelledby="lm-foot-catalog">
                 <h2 id="lm-foot-catalog">Каталог</h2>
                 <ul>
+                    <li><a href="#" data-off>Усі прикраси</a></li>
                     <li><a href="gold.html">Золото</a></li><li><a href="#" data-off>Срібло</a></li><li><a href="#" data-off>Діаманти природні</a></li><li><a href="#" data-off>Lab Diamonds</a></li>                    <li><a href="#" data-off>Jewel Box</a></li>                </ul>
             </nav>
-            <nav aria-labelledby="lm-foot-buyers">
+                        <nav aria-labelledby="lm-foot-buyers">
                 <h2 id="lm-foot-buyers">Покупцям</h2>
                 <ul>
                     <li><a href="#" data-off>Доставка та оплата</a></li>
@@ -681,7 +701,27 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     });
-    matchMedia('(min-width: 1024px)').addEventListener('change', event => { if (event.matches && !drawer.hidden) set(false); });
+    // The sections stay in the header only while they clear the centred logo; otherwise the menu button takes over.
+    const top = document.querySelector('.lm-top');
+    const items = top ? [...top.querySelectorAll('.lm-nav > ul > li')] : [];
+    const mark = top?.querySelector('.lm-wordmark');
+    const wide = matchMedia('(min-width: 1024px)');
+    const fitNav = () => {
+      if (!items.length || !mark) return;
+      let fits = false;
+      if (wide.matches) {
+        const style = getComputedStyle(top);
+        const side = (top.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - mark.getBoundingClientRect().width) / 2;
+        // The gaps between the sections give first, from 30px down to 12px; the logo keeps 24px of air.
+        const names = items.reduce((sum, item) => sum + item.getBoundingClientRect().width, 0);
+        const gap = Math.min(30, Math.floor((side - 24 - names) / Math.max(1, items.length - 1) * 10) / 10);
+        fits = items.length > 1 ? gap >= 12 : names + 24 <= side;
+        if (fits) top.style.setProperty('--lm-nav-gap', gap + 'px');
+      }
+      top.dataset.lmNav = fits ? 'fits' : 'burger';
+      if (fits && !drawer.hidden) set(false);
+    };
+    fitNav(); addEventListener('resize', fitNav); document.fonts?.ready.then(fitNav);
   }
 
   const search = document.querySelector('.lm-top__search');
@@ -691,6 +731,27 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
       if (event.key === 'Escape' && search.open) { search.open = false; search.querySelector('summary').focus(); }
     });
     document.addEventListener('click', event => { if (search.open && !search.contains(event.target)) search.open = false; });
+  }
+
+  // A section's panel opens on hover or focus. Esc shuts it until both the pointer and the focus have left,
+  // and it never shares the header with the search panel: reaching a section closes the search.
+  const panels = [...document.querySelectorAll('.lm-nav__item')].filter(item => item.querySelector('.lm-mega'));
+  for (const item of panels) {
+    const yieldSearch = () => { if (search?.open) search.open = false; };
+    item.addEventListener('pointerenter', yieldSearch);
+    item.addEventListener('focusin', yieldSearch);
+    item.addEventListener('pointerleave', () => { if (!item.contains(document.activeElement)) item.classList.remove('is-shut'); });
+    item.addEventListener('focusout', event => { if (!item.contains(event.relatedTarget) && !item.matches(':hover')) item.classList.remove('is-shut'); });
+  }
+  if (panels.length) {
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape') return;
+      for (const item of panels) {
+        if (!item.matches(':hover, :focus-within')) continue;
+        item.classList.add('is-shut');
+        if (item.contains(document.activeElement)) item.querySelector('.lm-nav__link').focus();
+      }
+    });
   }
 
   // Front page films play one after another without controls; each visit starts from the next one.
@@ -704,21 +765,56 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
       if (last !== null) turn = (Number(last) + 1) % films.length;
       localStorage.setItem('lm-film', String(turn));
     } catch { /* private mode: a random film is fine */ }
-    const video = document.createElement('video');
-    for (const name of ['muted', 'playsinline', 'autoplay']) video.setAttribute(name, '');
-    video.muted = true;
-    video.setAttribute('aria-hidden', 'true');
-    video.tabIndex = -1;
-    const show = () => { video.style.objectPosition = films[turn].focus; video.src = films[turn].src; };
-    show();
-    video.loop = films.length === 1;
-    video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
-    video.addEventListener('ended', () => { turn = (turn + 1) % films.length; show(); video.play().catch(() => {}); });
-    // The film opens from the bare frame; the photograph returns only if the film cannot play.
-    plate.classList.add('has-film');
-    video.addEventListener('error', () => plate.classList.remove('has-film'), { once: true });
-    plate.prepend(video);
-    video.play().catch(() => {});
+    // The photograph is the resting state: a film covers it only once it is really playing,
+    // and the film before it holds its last frame until the next one has started.
+    let current = null, failed = 0;
+    const start = () => {
+      const film = films[turn];
+      const video = document.createElement('video');
+      for (const name of ['muted', 'playsinline', 'autoplay']) video.setAttribute(name, '');
+      video.muted = true;
+      video.setAttribute('aria-hidden', 'true');
+      video.tabIndex = -1;
+      video.loop = films.length === 1;
+      video.style.objectPosition = film.focus;
+      video.addEventListener('playing', () => {
+        failed = 0;
+        video.classList.add('is-playing');
+        const before = current;
+        current = video;
+        if (before && before !== video) setTimeout(() => before.remove(), 1200);
+      }, { once: true });
+      video.addEventListener('ended', () => { turn = (turn + 1) % films.length; start(); });
+      video.addEventListener('error', () => {
+        video.remove();
+        failed += 1;
+        if (failed < films.length) { turn = (turn + 1) % films.length; start(); return; }
+        // No film can be shown: the photograph returns.
+        current?.classList.remove('is-playing');
+      }, { once: true });
+      video.src = film.src;
+      plate.append(video);
+      // A refused autoplay (power saving) leaves the photograph; the first touch may start the film.
+      video.play().catch(() => addEventListener('pointerdown', () => { if (video.isConnected) video.play().catch(() => {}); }, { once: true }));
+    };
+    start();
+  }
+
+  // The strip of photographs moves on by one every few seconds, and starts again from the first.
+  // It waits while out of view or under the pointer, and stops for good once the visitor moves it.
+  const strip = document.querySelector('[data-lm-pace]');
+  if (strip && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let seen = false;
+    let taken = false;
+    new IntersectionObserver(([entry]) => { seen = entry.isIntersecting; }, { threshold: .4 }).observe(strip);
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(name => strip.addEventListener(name, () => { taken = true; }, { passive: true }));
+    const turn = setInterval(() => {
+      if (taken) { clearInterval(turn); return; }
+      if (!seen || document.hidden || strip.matches(':hover')) return;
+      const step = strip.children[1].offsetLeft - strip.children[0].offsetLeft;
+      const ended = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 4;
+      strip.scrollTo({ left: ended ? 0 : strip.scrollLeft + step, behavior: 'smooth' });
+    }, Number(strip.dataset.lmPace) * 1000);
   }
 
   // On a phone the front page line keeps to one row: it shrinks until it fits.
@@ -726,10 +822,36 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
   if (line) {
     const fit = () => {
       line.style.fontSize = '';
+      line.style.whiteSpace = '';
       if (getComputedStyle(line).whiteSpace !== 'nowrap') return;
-      for (let size = parseFloat(getComputedStyle(line).fontSize); size > 16 && line.scrollWidth > line.clientWidth; size -= .5) line.style.fontSize = size + 'px';
+      let size = parseFloat(getComputedStyle(line).fontSize);
+      while (size > 18 && line.scrollWidth > line.clientWidth) { size = Math.max(18, size - .5); line.style.fontSize = size + 'px'; }
+      // At 18px a longer line goes onto a second row rather than off the screen.
+      if (line.scrollWidth > line.clientWidth) line.style.whiteSpace = 'normal';
     };
     fit(); addEventListener('resize', fit); document.fonts?.ready.then(fit);
+  }
+
+  // The row of jewellery types scrolls sideways: a mark on its line shows how much of it is in view, and the open type starts in view.
+  const row = document.querySelector('.lm-categories');
+  if (row) {
+    const meter = document.createElement('span');
+    meter.className = 'lm-meter';
+    meter.setAttribute('aria-hidden', 'true');
+    row.after(meter);
+    const draw = () => {
+      const more = row.scrollWidth - row.clientWidth > 1;
+      meter.hidden = !more;
+      if (!more) return;
+      meter.style.setProperty('--lm-meter-size', String(row.clientWidth / row.scrollWidth));
+      meter.style.setProperty('--lm-meter-at', String(row.scrollLeft / row.scrollWidth));
+    };
+    const current = row.querySelector('[aria-current]');
+    if (current) row.scrollLeft = Math.max(0, current.getBoundingClientRect().left - row.getBoundingClientRect().left + row.scrollLeft - (row.clientWidth - current.offsetWidth) / 2);
+    row.addEventListener('scroll', draw, { passive: true });
+    addEventListener('resize', draw);
+    document.fonts?.ready.then(draw);
+    draw();
   }
 
   // One variant leaves nothing to choose: show its value as text, and nothing at all for the placeholder.
@@ -749,7 +871,8 @@ button,.button,input[type=submit]{border-color:var(--choc);background:var(--choc
   // The second photograph is fetched only when a pointer first reaches the tile.
   if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
     document.addEventListener('pointerover', event => {
-      const slot = event.target.closest?.('.product')?.querySelector('.lm-card-alt[data-src]');
+      // The tile itself: on a product page the whole page is a «.product» too.
+      const slot = event.target.closest?.('li.product')?.querySelector('.lm-card-alt[data-src]');
       if (!slot) return;
       const image = new Image();
       image.alt = '';
