@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.6.0
+Version: 0.6.1
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -438,13 +438,58 @@ section.products>h2{font-size:24px}
   .lm-foot__grid>div:last-child{grid-column:1/-1}
 }
 
+/* ── 0.6.1 Quieter type, white plates (15.10.2026): the owner found the type too large and the paper ground tinting the pieces ── */
+/* A piece lies on white, so its metal and stones keep their own colour; the paper stays for the footer, the house's words and notices. */
+:root{--plate:#fff}
+.lm-card-media,.lm-choose__plate,.lm-variant-media img,.lm-variant-media video{background:var(--plate)}
+/* Type a step quieter everywhere; the first screen's line and the section names most of all. */
+h1,.lm-catalog .page-title{font-size:32px}
+.lm-hero h1{font-size:clamp(2.1rem,3.3vw,3.2rem)}
+.lm-choose__name{font-size:clamp(15px,1.15vw,18px)}
+.lm-gallery h2{font-size:clamp(1.2rem,1.6vw,1.6rem)}
+.lm-about h2,.lm-showroom h2{font-size:clamp(1.6rem,2.3vw,2.25rem)}
+.lm-about__text>p:first-of-type{font-size:clamp(18px,1.5vw,22px)}
+.products h2,.lm-wishlist-items h2{font-size:15px;line-height:1.35}
+section.products>h2{font-size:21px}
+.summary h1{font-size:26px}
+/* Any other heading stays under the piece's name: the tabs of a piece, «Під замовлення», the cart's totals. */
+h2{font-size:22px}
+.woocommerce-tabs h2,.summary h2{font-size:20px}
+/* A piece's page starts with the way back to the catalogue: an arrow and its words on a 44px row. */
+.lm-back{display:inline-flex;align-items:center;gap:2px;min-height:44px;margin:-12px 0 8px -7px;padding-right:10px;font-size:13px;color:var(--ink-soft)}
+.lm-back svg{width:20px;height:20px}
+.lm-back:hover{color:var(--choc);text-decoration:none}
+@media(max-width:899px){
+  h1{font-size:26px}
+  .lm-hero h1{font-size:min(19px,4.9vw)}
+  .lm-choose__name{font-size:13px;margin-top:8px}
+  .lm-gallery h2{font-size:17px}
+  .lm-catalog .page-title{font-size:24px}
+  .lm-section-note{font-size:12px;margin-bottom:14px}
+  .products h2,.lm-wishlist-items h2{font-size:14px;margin:9px 0 3px}
+  section.products>h2{font-size:19px;margin-bottom:20px}
+  .products .price,.lm-wishlist-items .price{font-size:13px}
+  .lm-material{font-size:11px}
+  .summary h1{font-size:21px}
+  .summary .price{font-size:18px}
+  .lm-about h2,.lm-showroom h2{font-size:22px}
+  .lm-about p,.lm-showroom .lm-showroom__lede{font-size:14px}
+  .lm-about__text>p:first-of-type{font-size:17px}
+  .lm-service--house{font-size:14px}
+  h2{font-size:19px}
+  .woocommerce-tabs h2,.summary h2{font-size:17px}
+  /* The whole 44px row stays below the sticky header. */
+  .lm-back{margin-top:-8px}
+}
+
 
 /* Preview copy only: notice bar, static gallery, safe-area sticky header. */
 .lm-share{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:center;padding:10px 20px;background:var(--paper);color:var(--ink);font-size:12px;line-height:1.5;text-align:center}
 .lm-share strong{font-weight:600}
 .lm-share nav{display:flex;gap:18px}
 .lm-share a{border-bottom:1px solid currentColor}
-.lm-share a[aria-current]{color:var(--green)}
+.lm-share a[aria-current]{color:var(--choc);font-weight:600;border-bottom-width:2px}
+.lm-share__ground{display:flex;gap:10px}
 .lm-top{top:env(safe-area-inset-top,0px)}
 .lm-off{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;max-width:calc(100% - 32px);padding:14px 20px;background:var(--ink);color:#fff;font-size:13px;text-align:center}
 .woocommerce-product-gallery__wrapper{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
@@ -455,7 +500,7 @@ section.products>h2{font-size:24px}
 <style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність — знімок вітрини від 05.10.2026.</span><nav aria-label="Сторінки перегляду"><a href="index.html">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html" aria-current="page">Сторінка товару</a></nav></div>
+<div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність — знімок вітрини від 05.10.2026.</span><nav aria-label="Сторінки перегляду"><a href="index.html">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html" aria-current="page">Сторінка товару</a></nav><nav class="lm-share__ground" aria-label="Фон під прикрасами">Фон: <a href="product.html" aria-current="page">білий</a><a href="beige/product.html">бежевий</a></nav></div>
 <div class="wp-singular product-template-default single single-product postid-1970 wp-theme-limerence theme-limerence woocommerce woocommerce-page woocommerce-no-js">
 <a class="skip-link" href="#content">До вмісту</a>
     <header class="lm-top" data-lm-top>
@@ -582,7 +627,7 @@ section.products>h2{font-size:24px}
         </nav>
     </div>
     
-	<main id="content" class="lm-page"><div class="lm-wrap lm-catalog"><nav class="woocommerce-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Головна</a>&nbsp;&#47;&nbsp;<a href="#" data-off>Кольє</a>&nbsp;&#47;&nbsp;Кольє 179</nav>
+	<main id="content" class="lm-page"><div class="lm-wrap lm-catalog"><a class="lm-back" href="gold.html" data-lm-back data-lm-lists="/product-category/"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14.5 5 7.5 12l7 7"/></svg>Назад до каталогу</a>
 					
 			<div class="woocommerce-notices-wrapper"></div><div id="product-1970" class="product type-product post-1970 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 
@@ -622,10 +667,10 @@ section.products>h2{font-size:24px}
 			<div class="woocommerce-variation single_variation" role="alert" aria-relevant="additions"></div><div class="woocommerce-variation-add-to-cart variations_button">
 	
 	<div class="quantity">
-		<label class="screen-reader-text" for="quantity_6acff42b82208">Кольє 179 кількість</label>
+		<label class="screen-reader-text" for="quantity_6ad10f44bfe50">Кольє 179 кількість</label>
 	<input
 		type="number"
-				id="quantity_6acff42b82208"
+				id="quantity_6ad10f44bfe50"
 		class="input-text qty text"
 		name="quantity"
 		value="1"
@@ -661,36 +706,36 @@ section.products>h2{font-size:24px}
 				<ul class="products columns-4">
 
 			
-					<li class="product type-product post-1914 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="900" src="img/kol938-50035060.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє трансформер 030" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kol938-50035061.webp"></span>
-	<span class="onsale">−25%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє трансформер<span class="screen-reader-text">, артикул 030</span></h2><p class="lm-material">Біле золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>36 065&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 36 065&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>27 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 27 050&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1914" aria-pressed="false" aria-label="Зберегти Кольє трансформер 030"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-
-			
-					<li class="product type-product post-39 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/kolje481-0.webp" class="lm-packshot" alt="Кольє 42722742" style="filter:brightness(1.004)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kolje481-1.webp" data-lift="1"></span>
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 42722742</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>4 350&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 4 350&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>3 915&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 3 915&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="39" aria-pressed="false" aria-label="Зберегти Кольє 42722742"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-
-			
-					<li class="product type-product post-1926 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="709" src="img/kole442-58306278.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє 860442" decoding="async" loading="lazy" />
+					<li class="product type-product post-1923 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole4-74868836.webp" class="lm-packshot" alt="Кольє 860449b" style="filter:brightness(1.01)" decoding="async" loading="lazy" />
 	<span class="onsale">−20%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 860442</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>36 065&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 36 065&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>28 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 28 850&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1926" aria-pressed="false" aria-label="Зберегти Кольє 860442"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 860449b</span></h2><p class="lm-material">Біле золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>22 150&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 22 150&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>17 720&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 17 720&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1923" aria-pressed="false" aria-label="Зберегти Кольє 860449b"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
 
 			
-					<li class="product type-product post-1928 status-publish last instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+					<li class="product type-product post-1928 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole643-75743910.webp" class="lm-packshot" alt="Кольє 880643" style="filter:brightness(1.004)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kole643-60205290.webp"></span>
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 880643</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>35 280&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 35 280&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>26 460&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 26 460&nbsp;&#8372;.</span></span>
 </a><button type="button" class="lm-wish" data-lm-wish="1928" aria-pressed="false" aria-label="Зберегти Кольє 880643"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-1925 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole417b-74868856.webp" class="lm-packshot" alt="Кольє 860417b" style="filter:brightness(1.004)" decoding="async" loading="lazy" />
+	<span class="onsale">−25%</span>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 860417b</span></h2><p class="lm-material">Біле золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>26 265&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 26 265&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>19 700&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 19 700&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1925" aria-pressed="false" aria-label="Зберегти Кольє 860417b"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-1914 status-publish last instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="900" src="img/kol938-50035060.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє трансформер 030" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kol938-50035061.webp"></span>
+	<span class="onsale">−25%</span>
+	</span><h2 class="woocommerce-loop-product__title">Кольє трансформер<span class="screen-reader-text">, артикул 030</span></h2><p class="lm-material">Біле золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>36 065&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 36 065&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>27 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 27 050&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1914" aria-pressed="false" aria-label="Зберегти Кольє трансформер 030"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
 
 			
 		</ul>
@@ -869,6 +914,27 @@ section.products>h2{font-size:24px}
     }, Number(strip.dataset.lmPace) * 1000);
   }
 
+  // «Назад до каталогу» returns to the very list the visitor came from, at the same place: a section, a type, a search.
+  // From anywhere else — the cart, the front page, another piece or site, no referrer — the link leads to the piece's section,
+  // and so it does once the page has moved to an anchor of its own (going back would only leave the anchor).
+  const back = document.querySelector('[data-lm-back]');
+  if (back) {
+    let moved = false;
+    addEventListener('hashchange', () => { moved = true; }, { once: true });
+    const lists = (back.dataset.lmLists || '').split(' ').filter(Boolean);
+    back.addEventListener('click', event => {
+      // A click asking for a new tab or window keeps the browser's own way.
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || moved || history.length < 2) return;
+      let from;
+      try { from = new URL(document.referrer); } catch { return; }
+      const list = ['lm_metal', 'lm_section', 'lm_search', 'product_cat'].some(key => from.searchParams.has(key)) || lists.some(path => from.pathname.startsWith(path));
+      // The admin's own product lists (filtered by a category, say) are not the shop's catalogue.
+      if (from.origin !== location.origin || from.href === location.href || from.pathname.includes('/wp-admin/') || !list) return;
+      event.preventDefault();
+      history.back();
+    });
+  }
+
   // On a phone the front page line keeps to one row: it shrinks until it fits.
   const line = document.querySelector('.lm-hero h1');
   if (line) {
@@ -877,8 +943,8 @@ section.products>h2{font-size:24px}
       line.style.whiteSpace = '';
       if (getComputedStyle(line).whiteSpace !== 'nowrap') return;
       let size = parseFloat(getComputedStyle(line).fontSize);
-      while (size > 18 && line.scrollWidth > line.clientWidth) { size = Math.max(18, size - .5); line.style.fontSize = size + 'px'; }
-      // At 18px a longer line goes onto a second row rather than off the screen.
+      while (size > 15 && line.scrollWidth > line.clientWidth) { size = Math.max(15, size - .5); line.style.fontSize = size + 'px'; }
+      // At 15px a longer line goes onto a second row rather than off the screen.
       if (line.scrollWidth > line.clientWidth) line.style.whiteSpace = 'normal';
     };
     fit(); addEventListener('resize', fit); document.fonts?.ready.then(fit);
@@ -958,6 +1024,16 @@ section.products>h2{font-size:24px}
   // Product page: a small photograph becomes the large one when chosen.
   const shots = [...document.querySelectorAll('.woocommerce-product-gallery__image img')];
   for (const shot of shots.slice(1)) shot.addEventListener('click', () => { [shots[0].src, shot.src] = [shot.src, shots[0].src]; });
+  // «Назад до каталогу»: here the catalogue is gold.html, which the theme cannot recognise by its address,
+  // so the copy decides before the theme: back to the list it came from, else the link (the section).
+  document.addEventListener('click', event => {
+    if (!event.target.closest('[data-lm-back]')) return;
+    event.stopImmediatePropagation();
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    let from;
+    try { from = new URL(document.referrer); } catch { return; }
+    if (from.origin === location.origin && from.pathname.endsWith('/gold.html') && !location.hash && history.length > 1) { event.preventDefault(); history.back(); }
+  }, true);
 })();
 </script>
 </body>
