@@ -483,6 +483,13 @@ h2{font-size:22px}
   .lm-back{margin-top:-8px}
 }
 
+/* ── 0.6.2 The heart straight on the photograph (15.10.2026): no white plate under it, as in the first concept ── */
+.lm-wish::before{content:none}
+/* Centred in its 44px tap area, about 13px in from the photograph's corner. */
+@media(max-width:767px){.lm-wish{--lm-wish-pad:13px}}
+/* Over a photograph of a piece being worn the heart keeps the soft light edge the discount figures have. */
+.products .product:not(:has(.lm-packshot)) .lm-wish svg{filter:drop-shadow(0 0 1px #fff) drop-shadow(0 0 4px #fff)}
+
 
 /* Preview copy only: notice bar, static gallery, safe-area sticky header. */
 .lm-share{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:center;padding:10px 20px;background:var(--paper);color:var(--ink);font-size:12px;line-height:1.5;text-align:center}
