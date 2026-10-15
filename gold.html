@@ -382,8 +382,6 @@ section.products>h2{font-size:24px}
 .lm-service dd{margin:0;color:var(--ink-soft)}
 .lm-service--house{margin-top:48px;font-size:15px;line-height:1.6}
 .lm-service--product{margin-top:26px;font-size:13px;line-height:1.55}
-/* Front page: section packshots sit on the paper plate, as tiles do. */
-.lm-choose__plate img.lm-packshot{mix-blend-mode:multiply}
 /* The strip's line is a caption set at the left edge, close above its photographs. */
 .lm-gallery{padding-top:96px}
 .lm-gallery h2{text-align:left;font-size:clamp(1.45rem,2.1vw,2rem);font-weight:400;line-height:1.2;max-width:24ch;margin:0 var(--gutter) 28px}
@@ -442,7 +440,9 @@ section.products>h2{font-size:24px}
 /* A piece lies on the light grey plate it had before 0.6.0 (owner's choice, 15.10.2026): the tile reads as a photograph, a square,
    and the grey stays neutral under metal and stones. The warm paper stays for the footer, the house's words and notices. */
 :root{--plate:#f5f5f2}
-.lm-card-media,.lm-choose__plate,.lm-variant-media img,.lm-variant-media video{background:var(--plate)}
+.lm-card-media,.lm-variant-media img,.lm-variant-media video{background:var(--plate)}
+/* The front page's section windows stay white, their photographs shown as they are. */
+.lm-choose__plate{background:#fff}
 /* Type a step quieter everywhere; the first screen's line and the section names most of all. */
 h1,.lm-catalog .page-title{font-size:32px}
 .lm-hero h1{font-size:clamp(2.1rem,3.3vw,3.2rem)}
