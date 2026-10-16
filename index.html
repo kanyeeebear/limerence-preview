@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.6.2
+Version: 0.7.0
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -490,13 +490,49 @@ h2{font-size:22px}
 /* Over a photograph of a piece being worn the heart keeps the soft light edge the discount figures have. */
 .products .product:not(:has(.lm-packshot)) .lm-wish svg{filter:drop-shadow(0 0 1px #fff) drop-shadow(0 0 4px #fff)}
 
+/* Owner-selected new pieces, between the film and the existing photo strip. */
+.lm-arrivals{margin:64px 0 0}
+.lm-arrivals>h2{margin:0 var(--gutter) 24px;font-size:24px;font-weight:400}
+.lm-arrivals .lm-arrivals__track{display:flex;gap:24px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);scrollbar-width:none;padding:4px var(--gutter) 8px;margin:0;clear:none}
+.lm-arrivals__track::-webkit-scrollbar{display:none}
+.lm-arrivals .products>.product{flex:0 0 calc((100% - 72px)/4);display:flex;flex-direction:column;scroll-snap-align:start;margin:0}
+.lm-arrivals .woocommerce-LoopProduct-link{display:block;flex:1;text-align:center}
+.lm-arrivals .lm-card-media{aspect-ratio:1}
+.lm-arrivals .products h2{font-size:15px;margin-top:16px;line-height:1.4}
+.lm-arrivals .lm-material{margin:5px 0 0}
+.lm-arrivals .products .price{font-size:14px;margin-top:8px}
+.lm-arrivals__badge{position:absolute;top:12px;left:12px;background:var(--white,#fff);color:var(--ink);padding:3px 6px;font-size:11px;line-height:1.4;letter-spacing:.04em}
+.lm-arrivals .lm-arrivals__choose{width:100%;margin-top:18px;padding:12px 8px;min-height:44px}
+.lm-arrivals__controls{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px var(--gutter) 0}
+.lm-arrivals__controls[hidden]{display:none}
+.lm-arrivals__dots{display:flex}
+.lm-arrivals__controls button{display:flex;align-items:center;justify-content:center;min-width:44px;width:44px;min-height:44px;padding:0;border:0;background:transparent;color:var(--ink)}
+.lm-arrivals__controls button:hover{color:var(--green);background:transparent}
+.lm-arrivals__controls button:disabled{background:transparent;color:var(--line)}
+.lm-arrivals__dots button::before{content:'';width:6px;height:6px;border:1px solid currentColor;border-radius:50%;background:transparent}
+.lm-arrivals__dots button[aria-current=true]::before{background:currentColor}
+.lm-arrivals__track:focus-visible{outline-offset:-3px}
+.lm-arrivals .product a:focus-visible{outline-offset:-2px}
+@media(max-width:899px){
+  .lm-arrivals{margin-top:32px}
+  .lm-arrivals>h2{font-size:19px;margin-bottom:18px}
+  .lm-arrivals .lm-arrivals__track{gap:12px}
+  .lm-arrivals .products>.product{flex-basis:calc((100% - 24px)/2.2)}
+  .lm-arrivals .products h2{font-size:14px;margin-top:12px}
+  .lm-arrivals .products .price{font-size:13px}
+  .lm-arrivals__badge{top:8px;left:8px;padding:2px 4px;font-size:10px}
+  .lm-arrivals .lm-arrivals__choose{margin-top:14px;font-size:10px;letter-spacing:.1em}
+  .lm-arrivals__controls{margin-top:12px}
+  .lm-arrivals__prev,.lm-arrivals__next{display:none!important}
+}
+
 
 /* Preview copy only: notice bar, static gallery, safe-area sticky header. */
 .lm-share{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:center;padding:10px 20px;background:var(--paper);color:var(--ink);font-size:12px;line-height:1.5;text-align:center}
 .lm-share strong{font-weight:600}
 .lm-share nav{display:flex;gap:18px}
 .lm-share a{border-bottom:1px solid currentColor}
-.lm-share a[aria-current]{color:var(--choc);font-weight:600;border-bottom-width:2px}
+.lm-share a[aria-current]{color:var(--ink);font-weight:600;border-bottom-width:2px}
 .lm-share__ground{display:flex;gap:10px}
 .lm-top{top:env(safe-area-inset-top,0px)}
 .lm-off{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;max-width:calc(100% - 32px);padding:14px 20px;background:var(--ink);color:#fff;font-size:13px;text-align:center}
@@ -508,7 +544,7 @@ h2{font-size:22px}
 <style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність — знімок вітрини від 05.10.2026.</span><nav aria-label="Сторінки перегляду"><a href="index.html" aria-current="page">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html">Сторінка товару</a></nav></div>
+<div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність — знімок вітрини від 05.10.2026. Добірка «Новинки» — приклад для перегляду дизайну.</span><nav aria-label="Сторінки перегляду"><a href="index.html" aria-current="page">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html">Сторінка товару</a></nav></div>
 <div class="home archive post-type-archive post-type-archive-product wp-theme-limerence theme-limerence woocommerce-shop woocommerce woocommerce-page woocommerce-no-js">
 <a class="skip-link" href="#content">До вмісту</a>
     <header class="lm-top" data-lm-top>
@@ -638,28 +674,68 @@ h2{font-size:22px}
     <section class="lm-hero" aria-labelledby="lm-hero-title">
         <div class="lm-hero__text">
             <h1 id="lm-hero-title">Прикраси, що стають особистим</h1>
-            <p class="lm-hero__actions"><a class="button" href="#sections">Обрати прикраси</a></p>        </div>
+            <p class="lm-hero__actions"><a class="button" href="#new-in">Обрати прикраси</a></p>        </div>
                 <figure class="lm-hero__plate" data-lm-films="[{&quot;src&quot;:&quot;films\/limerence-film-1.mp4&quot;,&quot;focus&quot;:&quot;50% 35%&quot;},{&quot;src&quot;:&quot;films\/limerence-film-2.mp4&quot;,&quot;focus&quot;:&quot;50% 35%&quot;},{&quot;src&quot;:&quot;films\/limerence-film-3.mp4&quot;,&quot;focus&quot;:&quot;50% 35%&quot;},{&quot;src&quot;:&quot;films\/limerence-film-4.mp4&quot;,&quot;focus&quot;:&quot;50% 35%&quot;}]">
             <img width="1706" height="2560" src="img/koltso011-60248449-l.webp" class="attachment-full size-full" alt="" loading="eager" fetchpriority="high" style="object-position:50% 50%" decoding="async" />        </figure>
             </section>
-        <nav class="lm-choose" id="sections" aria-label="Розділи каталогу">
-                    <a class="lm-choose__item" href="gold.html">
-                <span class="lm-choose__plate"><img width="1320" height="2346" src="img/section-gold-l.webp" class="attachment-full size-full" alt="" loading="lazy" style="object-position:50% 50%" decoding="async" /></span>
-                <span class="lm-choose__name">Золото</span>
-                <span class="lm-choose__text">Каблучки, сережки, кольє, браслети та пусети із золота.</span>            </a>
-                    <a class="lm-choose__item" href="#" data-off>
-                <span class="lm-choose__plate"><img width="1448" height="1086" src="img/section-silver-l.webp" class="attachment-full size-full" alt="" loading="lazy" style="object-position:50% 50%" decoding="async" /></span>
-                <span class="lm-choose__name">Срібло</span>
-                <span class="lm-choose__text">Прикраси зі срібла 925 проби.</span>            </a>
-                    <a class="lm-choose__item" href="#" data-off>
-                <span class="lm-choose__plate"><img width="1024" height="1024" src="img/section-natural-diamonds.webp" class="attachment-full size-full" alt="" loading="lazy" style="object-position:50% 50%" decoding="async" /></span>
-                <span class="lm-choose__name">Діаманти природні</span>
-                <span class="lm-choose__text">Каблучки, сережки та кольє з природними діамантами.</span>            </a>
-                    <a class="lm-choose__item" href="#" data-off>
-                <span class="lm-choose__plate"><img width="1122" height="1402" src="img/section-lab-diamonds.webp" class="attachment-full size-full" alt="" loading="lazy" style="object-position:50% 50%" decoding="async" /></span>
-                <span class="lm-choose__name">Lab Diamonds</span>
-                <span class="lm-choose__text">Пусети й каблучки з лабораторними діамантами. Виготовляємо під замовлення.</span>            </a>
-            </nav>
+        <section class="lm-arrivals" id="new-in" aria-labelledby="lm-arrivals-title">
+        <h2 id="lm-arrivals-title">Новинки</h2>
+        <ul class="products lm-arrivals__track" id="lm-arrivals-track" tabindex="0" aria-label="Новинки: гортайте, щоб побачити більше прикрас">
+            <li class="product type-product post-1970 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="product.html" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kolje179-63519691.webp" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="Кольє 179" decoding="async" /><span class="lm-card-alt" data-src="img/kolje179-63519693.webp"></span>
+	<span class="onsale">−25%</span>
+	</span><span class="lm-arrivals__badge" aria-label="Новинка">NEW</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 179</span></h2><p class="lm-material">Червоне золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>39 300&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 39 300&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>29 475&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 29 475&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1970" aria-pressed="false" aria-label="Зберегти Кольє 179"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><a class="button lm-arrivals__choose" href="product.html" aria-label="Обрати Кольє 179">Обрати</a></li>
+<li class="product type-product post-1710 status-publish instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="product-braslet246.html" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/braslet246-75875964.webp" class="lm-packshot" alt="Браслет 375246" style="filter:brightness(1.004)" decoding="async" />
+	<span class="onsale">−25%</span>
+	</span><span class="lm-arrivals__badge" aria-label="Новинка">NEW</span><h2 class="woocommerce-loop-product__title">Браслет<span class="screen-reader-text">, артикул 375246</span></h2><p class="lm-material">Червоне золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>36 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 36 850&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>27 635&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 27 635&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1710" aria-pressed="false" aria-label="Зберегти Браслет 375246"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><a class="button lm-arrivals__choose" href="product-braslet246.html" aria-label="Обрати Браслет 375246">Обрати</a></li>
+<li class="product type-product post-2033 status-publish instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="product-koltso011.html" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="590" height="587" src="img/koltso011-56560749.webp" class="lm-packshot" alt="Каблучка 1122698" style="filter:brightness(1)" decoding="async" /><span class="lm-card-alt" data-src="img/koltso011-60248449.webp"></span>
+	<span class="onsale">−20%</span>
+	</span><span class="lm-arrivals__badge" aria-label="Новинка">NEW</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 1122698</span></h2><p class="lm-material">Червоне золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>11 660&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 11 660&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>9 330&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 9 330&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="2033" aria-pressed="false" aria-label="Зберегти Каблучка 1122698"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><a class="button lm-arrivals__choose" href="product-koltso011.html" aria-label="Обрати Каблучка 1122698">Обрати</a></li>
+<li class="product type-product post-2275 status-publish last instock product_cat-21 product_cat-17 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="product-puseti7001.html" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="865" src="img/puseti7001-61694193.webp" class="lm-packshot" alt="Пусети 7001" style="filter:brightness(1)" decoding="async" /><span class="lm-card-alt" data-src="img/puseti7001-61694194.webp"></span>
+	<span class="onsale">−10%</span>
+	</span><span class="lm-arrivals__badge" aria-label="Новинка">NEW</span><h2 class="woocommerce-loop-product__title">Пусети<span class="screen-reader-text">, артикул 7001</span></h2><p class="lm-material">Біле золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>27 500&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 27 500&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>24 750&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 24 750&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="2275" aria-pressed="false" aria-label="Зберегти Пусети 7001"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><a class="button lm-arrivals__choose" href="product-puseti7001.html" aria-label="Обрати Пусети 7001">Обрати</a></li>
+<li class="product type-product post-1928 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="product-kole643.html" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole643-75743910.webp" class="lm-packshot" alt="Кольє 880643" style="filter:brightness(1.004)" decoding="async" /><span class="lm-card-alt" data-src="img/kole643-60205290.webp"></span>
+	<span class="onsale">−25%</span>
+	</span><span class="lm-arrivals__badge" aria-label="Новинка">NEW</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 880643</span></h2><p class="lm-material">Червоне золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>35 280&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 35 280&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>26 460&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 26 460&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1928" aria-pressed="false" aria-label="Зберегти Кольє 880643"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><a class="button lm-arrivals__choose" href="product-kole643.html" aria-label="Обрати Кольє 880643">Обрати</a></li>
+<li class="product type-product post-1704 status-publish instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="product-braslet184b.html" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/braslet184b-64181968.webp" class="lm-packshot" alt="Браслет 820184б" style="filter:brightness(1)" decoding="async" />
+	<span class="onsale">−20%</span>
+	</span><span class="lm-arrivals__badge" aria-label="Новинка">NEW</span><h2 class="woocommerce-loop-product__title">Браслет<span class="screen-reader-text">, артикул 820184б</span></h2><p class="lm-material">Біле золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>13 425&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 13 425&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>10 740&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 10 740&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1704" aria-pressed="false" aria-label="Зберегти Браслет 820184б"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><a class="button lm-arrivals__choose" href="product-braslet184b.html" aria-label="Обрати Браслет 820184б">Обрати</a></li>
+<li class="product type-product post-36 status-publish instock product_cat-22 product_cat-17 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="product-36.html" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/serezhki188-0.webp" class="lm-packshot" alt="Сережки 189" style="filter:brightness(1)" decoding="async" />
+	<span class="onsale">−25%</span>
+	</span><span class="lm-arrivals__badge" aria-label="Новинка">NEW</span><h2 class="woocommerce-loop-product__title">Сережки<span class="screen-reader-text">, артикул 189</span></h2><p class="lm-material">Біле золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>11 565&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 11 565&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>8 675&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 8 675&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="36" aria-pressed="false" aria-label="Зберегти Сережки 189"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><a class="button lm-arrivals__choose" href="product-36.html" aria-label="Обрати Сережки 189">Обрати</a></li>
+<li class="product type-product post-31 status-publish last instock product_cat-16 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
+	<a href="product-31.html" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/kabluchka746-0.webp" class="lm-packshot" alt="Каблучка 746" style="filter:brightness(1.008)" decoding="async" />
+	<span class="onsale">−10%</span>
+	</span><span class="lm-arrivals__badge" aria-label="Новинка">NEW</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 746</span></h2><p class="lm-material">Срібло 925</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 2 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 385&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 2 385&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="31" aria-pressed="false" aria-label="Зберегти Каблучка 746"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><a class="button lm-arrivals__choose" href="product-31.html" aria-label="Обрати Каблучка 746">Обрати</a></li>
+        </ul>
+        <div class="lm-arrivals__controls" hidden>
+            <button type="button" class="lm-arrivals__prev" aria-label="Попередні новинки" aria-controls="lm-arrivals-track"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14.5 5 7.5 12l7 7"/></svg></button>
+            <div class="lm-arrivals__dots" role="group" aria-label="Сторінки новинок"></div>
+            <button type="button" class="lm-arrivals__next" aria-label="Наступні новинки" aria-controls="lm-arrivals-track"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
+        </div>
+    </section>
             <section class="lm-gallery" aria-labelledby="lm-gallery-title">
             <h2 id="lm-gallery-title">Обирати подарунки легше разом із Limerence</h2>            <div class="lm-gallery__strip" role="group" aria-label="Фото прикрас" tabindex="0" data-lm-pace="5">
                 <figure class="lm-gallery__item"><img width="441" height="655" src="img/limerence-carousel-01.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1600" height="2400" src="img/limerence-carousel-02-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1200" height="1600" src="img/limerence-carousel-03.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1600" height="2400" src="img/limerence-carousel-04-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1600" height="2400" src="img/limerence-carousel-05-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="853" height="1280" src="img/limerence-carousel-06.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1320" height="1788" src="img/limerence-carousel-07-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1320" height="1789" src="img/limerence-carousel-08-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1320" height="1794" src="img/limerence-carousel-09-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1600" height="2400" src="img/limerence-carousel-10-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1600" height="2400" src="img/limerence-carousel-11-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1320" height="2327" src="img/limerence-carousel-12-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1600" height="2400" src="img/limerence-carousel-13-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure><figure class="lm-gallery__item"><img width="1600" height="2400" src="img/limerence-carousel-14-l.webp" class="attachment-full size-full" alt="" loading="lazy" decoding="async" /></figure>            </div>
@@ -827,6 +903,59 @@ h2{font-size:22px}
     start();
   }
 
+  // New pieces stay still until the visitor turns them. The existing photo strip is independent.
+  const arrivals = document.querySelector('.lm-arrivals');
+  if (arrivals) {
+    const track = arrivals.querySelector('.lm-arrivals__track');
+    const controls = arrivals.querySelector('.lm-arrivals__controls');
+    const dots = arrivals.querySelector('.lm-arrivals__dots');
+    const prev = arrivals.querySelector('.lm-arrivals__prev');
+    const next = arrivals.querySelector('.lm-arrivals__next');
+    let pages = [0], current = 0, scheduled = false;
+    const sync = () => {
+      current = pages.reduce((best, left, i) => Math.abs(left - track.scrollLeft) < Math.abs(pages[best] - track.scrollLeft) ? i : best, 0);
+      [...dots.children].forEach((button, i) => button.setAttribute('aria-current', String(i === current)));
+      prev.disabled = current === 0;
+      next.disabled = current === pages.length - 1;
+    };
+    const go = index => track.scrollTo({ left: pages[Math.max(0, Math.min(index, pages.length - 1))], behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    const measure = () => {
+      const cards = [...track.children];
+      const style = getComputedStyle(track);
+      const gap = parseFloat(style.columnGap) || 0;
+      const step = (cards[0]?.getBoundingClientRect().width || 1) + gap;
+      const visible = Math.max(1, Math.floor((track.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) + gap + 1) / step));
+      const end = Math.max(0, track.scrollWidth - track.clientWidth);
+      pages = [0];
+      for (let left = step * visible; left < end - 2; left += step * visible) pages.push(left);
+      if (end > 2) pages.push(end);
+      controls.hidden = end <= 2;
+      if (dots.childElementCount !== pages.length) {
+        dots.replaceChildren(...pages.map((_, i) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.setAttribute('aria-label', `Новинки: сторінка ${i + 1} з ${pages.length}`);
+          dot.setAttribute('aria-controls', track.id);
+          dot.addEventListener('click', () => go(i));
+          return dot;
+        }));
+      }
+      sync();
+    };
+    prev.addEventListener('click', () => go(current - 1));
+    next.addEventListener('click', () => go(current + 1));
+    track.addEventListener('keydown', event => {
+      if (event.target !== track) return;
+      const destination = { ArrowLeft: current - 1, ArrowRight: current + 1, Home: 0, End: pages.length - 1 }[event.key];
+      if (destination !== undefined) { event.preventDefault(); go(destination); }
+    });
+    track.addEventListener('scroll', () => {
+      if (!scheduled) { scheduled = true; requestAnimationFrame(() => { sync(); scheduled = false; }); }
+    }, { passive: true });
+    new ResizeObserver(measure).observe(track);
+    measure();
+  }
+
   // The strip of photographs moves on by one every few seconds, and starts again from the first.
   // It waits while out of view or under the pointer, and stops for good once the visitor moves it.
   const strip = document.querySelector('[data-lm-pace]');
@@ -962,7 +1091,7 @@ h2{font-size:22px}
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     let from;
     try { from = new URL(document.referrer); } catch { return; }
-    if (from.origin === location.origin && from.pathname.endsWith('/gold.html') && !location.hash && history.length > 1) { event.preventDefault(); history.back(); }
+    if (from.origin === location.origin && (from.pathname.endsWith('/gold.html') || from.pathname.endsWith('/index.html') || from.pathname.endsWith('/')) && !location.hash && history.length > 1) { event.preventDefault(); history.back(); }
   }, true);
 })();
 </script>

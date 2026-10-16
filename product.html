@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.6.2
+Version: 0.7.0
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -490,13 +490,49 @@ h2{font-size:22px}
 /* Over a photograph of a piece being worn the heart keeps the soft light edge the discount figures have. */
 .products .product:not(:has(.lm-packshot)) .lm-wish svg{filter:drop-shadow(0 0 1px #fff) drop-shadow(0 0 4px #fff)}
 
+/* Owner-selected new pieces, between the film and the existing photo strip. */
+.lm-arrivals{margin:64px 0 0}
+.lm-arrivals>h2{margin:0 var(--gutter) 24px;font-size:24px;font-weight:400}
+.lm-arrivals .lm-arrivals__track{display:flex;gap:24px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);scrollbar-width:none;padding:4px var(--gutter) 8px;margin:0;clear:none}
+.lm-arrivals__track::-webkit-scrollbar{display:none}
+.lm-arrivals .products>.product{flex:0 0 calc((100% - 72px)/4);display:flex;flex-direction:column;scroll-snap-align:start;margin:0}
+.lm-arrivals .woocommerce-LoopProduct-link{display:block;flex:1;text-align:center}
+.lm-arrivals .lm-card-media{aspect-ratio:1}
+.lm-arrivals .products h2{font-size:15px;margin-top:16px;line-height:1.4}
+.lm-arrivals .lm-material{margin:5px 0 0}
+.lm-arrivals .products .price{font-size:14px;margin-top:8px}
+.lm-arrivals__badge{position:absolute;top:12px;left:12px;background:var(--white,#fff);color:var(--ink);padding:3px 6px;font-size:11px;line-height:1.4;letter-spacing:.04em}
+.lm-arrivals .lm-arrivals__choose{width:100%;margin-top:18px;padding:12px 8px;min-height:44px}
+.lm-arrivals__controls{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px var(--gutter) 0}
+.lm-arrivals__controls[hidden]{display:none}
+.lm-arrivals__dots{display:flex}
+.lm-arrivals__controls button{display:flex;align-items:center;justify-content:center;min-width:44px;width:44px;min-height:44px;padding:0;border:0;background:transparent;color:var(--ink)}
+.lm-arrivals__controls button:hover{color:var(--green);background:transparent}
+.lm-arrivals__controls button:disabled{background:transparent;color:var(--line)}
+.lm-arrivals__dots button::before{content:'';width:6px;height:6px;border:1px solid currentColor;border-radius:50%;background:transparent}
+.lm-arrivals__dots button[aria-current=true]::before{background:currentColor}
+.lm-arrivals__track:focus-visible{outline-offset:-3px}
+.lm-arrivals .product a:focus-visible{outline-offset:-2px}
+@media(max-width:899px){
+  .lm-arrivals{margin-top:32px}
+  .lm-arrivals>h2{font-size:19px;margin-bottom:18px}
+  .lm-arrivals .lm-arrivals__track{gap:12px}
+  .lm-arrivals .products>.product{flex-basis:calc((100% - 24px)/2.2)}
+  .lm-arrivals .products h2{font-size:14px;margin-top:12px}
+  .lm-arrivals .products .price{font-size:13px}
+  .lm-arrivals__badge{top:8px;left:8px;padding:2px 4px;font-size:10px}
+  .lm-arrivals .lm-arrivals__choose{margin-top:14px;font-size:10px;letter-spacing:.1em}
+  .lm-arrivals__controls{margin-top:12px}
+  .lm-arrivals__prev,.lm-arrivals__next{display:none!important}
+}
+
 
 /* Preview copy only: notice bar, static gallery, safe-area sticky header. */
 .lm-share{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:center;padding:10px 20px;background:var(--paper);color:var(--ink);font-size:12px;line-height:1.5;text-align:center}
 .lm-share strong{font-weight:600}
 .lm-share nav{display:flex;gap:18px}
 .lm-share a{border-bottom:1px solid currentColor}
-.lm-share a[aria-current]{color:var(--choc);font-weight:600;border-bottom-width:2px}
+.lm-share a[aria-current]{color:var(--ink);font-weight:600;border-bottom-width:2px}
 .lm-share__ground{display:flex;gap:10px}
 .lm-top{top:env(safe-area-inset-top,0px)}
 .lm-off{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;max-width:calc(100% - 32px);padding:14px 20px;background:var(--ink);color:#fff;font-size:13px;text-align:center}
@@ -508,7 +544,7 @@ h2{font-size:22px}
 <style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність — знімок вітрини від 05.10.2026.</span><nav aria-label="Сторінки перегляду"><a href="index.html">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html" aria-current="page">Сторінка товару</a></nav></div>
+<div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність — знімок вітрини від 05.10.2026. Добірка «Новинки» — приклад для перегляду дизайну.</span><nav aria-label="Сторінки перегляду"><a href="index.html">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html" aria-current="page">Сторінка товару</a></nav></div>
 <div class="wp-singular product-template-default single single-product postid-1970 wp-theme-limerence theme-limerence woocommerce woocommerce-page woocommerce-no-js">
 <a class="skip-link" href="#content">До вмісту</a>
     <header class="lm-top" data-lm-top>
@@ -675,10 +711,10 @@ h2{font-size:22px}
 			<div class="woocommerce-variation single_variation" role="alert" aria-relevant="additions"></div><div class="woocommerce-variation-add-to-cart variations_button">
 	
 	<div class="quantity">
-		<label class="screen-reader-text" for="quantity_6ad12f7589738">Кольє 179 кількість</label>
+		<label class="screen-reader-text" for="quantity_6ad29ab8537f0">Кольє 179 кількість</label>
 	<input
 		type="number"
-				id="quantity_6ad12f7589738"
+				id="quantity_6ad29ab8537f0"
 		class="input-text qty text"
 		name="quantity"
 		value="1"
@@ -714,36 +750,36 @@ h2{font-size:22px}
 				<ul class="products columns-4">
 
 			
-					<li class="product type-product post-1630 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/1kolje11-75824348.webp" class="lm-packshot" alt="Кольє 35325893" style="filter:brightness(1.027)" decoding="async" loading="lazy" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 35325893</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 800&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 1 800&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 620&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 1 620&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1630" aria-pressed="false" aria-label="Зберегти Кольє 35325893"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-
-			
-					<li class="product type-product post-40 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/kolje176-0.webp" class="lm-packshot" alt="Кольє 42722738" style="filter:brightness(1.004)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kolje176-1.webp" data-lift="1"></span>
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 42722738</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>4 750&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 4 750&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>4 275&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 4 275&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="40" aria-pressed="false" aria-label="Зберегти Кольє 42722738"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-
-			
-					<li class="product type-product post-1621 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/0kole989-54705191.webp" class="lm-packshot" alt="Кольє 86049" style="filter:brightness(1)" decoding="async" loading="lazy" />
-	<span class="onsale">−10%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 86049</span></h2><p class="lm-material">Срібло 925</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 2 650&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 385&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 2 385&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1621" aria-pressed="false" aria-label="Зберегти Кольє 86049"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-
-			
-					<li class="product type-product post-1920 status-publish last instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
-	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole178-74868846.webp" class="lm-packshot" alt="Кольє 860178" style="filter:brightness(1.004)" decoding="async" loading="lazy" />
+					<li class="product type-product post-1631 status-publish first instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/1kolje81-75734814.webp" class="lm-packshot" alt="Кольє 36246012" style="filter:brightness(1.007)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/1kolje81-63770389.webp"></span>
 	<span class="onsale">−20%</span>
-	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 860178</span></h2><p class="lm-material">Червоне золото 585</p>
-	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>28 715&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 28 715&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>22 970&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 22 970&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1920" aria-pressed="false" aria-label="Зберегти Кольє 860178"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 36246012</span></h2><p class="lm-material">Червоне золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>29 010&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 29 010&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>23 210&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 23 210&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1631" aria-pressed="false" aria-label="Зберегти Кольє 36246012"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-1923 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole4-74868836.webp" class="lm-packshot" alt="Кольє 860449b" style="filter:brightness(1.01)" decoding="async" loading="lazy" />
+	<span class="onsale">−20%</span>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 860449b</span></h2><p class="lm-material">Біле золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>22 150&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 22 150&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>17 720&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 17 720&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1923" aria-pressed="false" aria-label="Зберегти Кольє 860449b"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-1919 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/kole085-75871780.webp" class="lm-packshot" alt="Кольє 1065" style="filter:brightness(1.004)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kole085-75871782.webp"></span>
+	<span class="onsale">−10%</span>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 1065</span></h2><p class="lm-material">Срібло 925</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>3 580&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 3 580&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>3 220&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 3 220&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="1919" aria-pressed="false" aria-label="Зберегти Кольє 1065"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+
+			
+					<li class="product type-product post-38 status-publish last instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
+	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="792" src="img/kolje120-0.webp" class="lm-packshot" alt="Кольє 120" style="filter:brightness(1.028)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/kolje120-1.webp"></span>
+	<span class="onsale">−20%</span>
+	</span><h2 class="woocommerce-loop-product__title">Кольє<span class="screen-reader-text">, артикул 120</span></h2><p class="lm-material">Червоне золото 585</p>
+	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>33 810&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 33 810&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>27 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 27 050&nbsp;&#8372;.</span></span>
+</a><button type="button" class="lm-wish" data-lm-wish="38" aria-pressed="false" aria-label="Зберегти Кольє 120"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
 
 			
 		</ul>
@@ -905,6 +941,59 @@ h2{font-size:22px}
     start();
   }
 
+  // New pieces stay still until the visitor turns them. The existing photo strip is independent.
+  const arrivals = document.querySelector('.lm-arrivals');
+  if (arrivals) {
+    const track = arrivals.querySelector('.lm-arrivals__track');
+    const controls = arrivals.querySelector('.lm-arrivals__controls');
+    const dots = arrivals.querySelector('.lm-arrivals__dots');
+    const prev = arrivals.querySelector('.lm-arrivals__prev');
+    const next = arrivals.querySelector('.lm-arrivals__next');
+    let pages = [0], current = 0, scheduled = false;
+    const sync = () => {
+      current = pages.reduce((best, left, i) => Math.abs(left - track.scrollLeft) < Math.abs(pages[best] - track.scrollLeft) ? i : best, 0);
+      [...dots.children].forEach((button, i) => button.setAttribute('aria-current', String(i === current)));
+      prev.disabled = current === 0;
+      next.disabled = current === pages.length - 1;
+    };
+    const go = index => track.scrollTo({ left: pages[Math.max(0, Math.min(index, pages.length - 1))], behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    const measure = () => {
+      const cards = [...track.children];
+      const style = getComputedStyle(track);
+      const gap = parseFloat(style.columnGap) || 0;
+      const step = (cards[0]?.getBoundingClientRect().width || 1) + gap;
+      const visible = Math.max(1, Math.floor((track.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) + gap + 1) / step));
+      const end = Math.max(0, track.scrollWidth - track.clientWidth);
+      pages = [0];
+      for (let left = step * visible; left < end - 2; left += step * visible) pages.push(left);
+      if (end > 2) pages.push(end);
+      controls.hidden = end <= 2;
+      if (dots.childElementCount !== pages.length) {
+        dots.replaceChildren(...pages.map((_, i) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.setAttribute('aria-label', `Новинки: сторінка ${i + 1} з ${pages.length}`);
+          dot.setAttribute('aria-controls', track.id);
+          dot.addEventListener('click', () => go(i));
+          return dot;
+        }));
+      }
+      sync();
+    };
+    prev.addEventListener('click', () => go(current - 1));
+    next.addEventListener('click', () => go(current + 1));
+    track.addEventListener('keydown', event => {
+      if (event.target !== track) return;
+      const destination = { ArrowLeft: current - 1, ArrowRight: current + 1, Home: 0, End: pages.length - 1 }[event.key];
+      if (destination !== undefined) { event.preventDefault(); go(destination); }
+    });
+    track.addEventListener('scroll', () => {
+      if (!scheduled) { scheduled = true; requestAnimationFrame(() => { sync(); scheduled = false; }); }
+    }, { passive: true });
+    new ResizeObserver(measure).observe(track);
+    measure();
+  }
+
   // The strip of photographs moves on by one every few seconds, and starts again from the first.
   // It waits while out of view or under the pointer, and stops for good once the visitor moves it.
   const strip = document.querySelector('[data-lm-pace]');
@@ -1040,7 +1129,7 @@ h2{font-size:22px}
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     let from;
     try { from = new URL(document.referrer); } catch { return; }
-    if (from.origin === location.origin && from.pathname.endsWith('/gold.html') && !location.hash && history.length > 1) { event.preventDefault(); history.back(); }
+    if (from.origin === location.origin && (from.pathname.endsWith('/gold.html') || from.pathname.endsWith('/index.html') || from.pathname.endsWith('/')) && !location.hash && history.length > 1) { event.preventDefault(); history.back(); }
   }, true);
 })();
 </script>
