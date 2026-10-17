@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.8.3
+Version: 0.8.4
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -180,7 +180,7 @@ section.products>h2{display:block;overflow:visible;font-size:26px;margin:0 0 28p
 /* On a tile and on a piece's own page the discount sits on the photograph, at its foot, without a plate. */
 .lm-card-media .onsale,.woocommerce-product-gallery__image .onsale{top:auto;left:13px;bottom:13px;padding:0;background:none;font-weight:400;letter-spacing:.5px}
 /* Over a photograph of a piece being worn the figures keep a soft light edge, so dark hair does not swallow them. */
-.lm-card-media:not(:has(.lm-packshot)) .onsale,.woocommerce-product-gallery__image .onsale{font-weight:500;text-shadow:0 0 2px #fff,0 0 6px #fff,0 0 10px #fff}
+.lm-card-media:not(:has(.lm-packshot)) .onsale,.woocommerce-product-gallery__image .onsale{font-weight:500;text-shadow:none}
 /* The heart is pressed over 44px; its plate is drawn apart, so a phone can show it smaller. */
 .lm-wish{top:0;right:0;width:44px;min-height:44px;padding:var(--lm-wish-pad,11px);transition:color .25s var(--ease)}
 .lm-wish::before{content:'';position:absolute;top:0;right:0;width:var(--lm-wish-plate,44px);height:var(--lm-wish-plate,44px);background:var(--lm-wish-ground,#fff)}
@@ -271,7 +271,7 @@ button,.button,input[type=submit]{border-color:var(--button);background:var(--bu
 .button:hover,button[type=submit]:hover,input[type=submit]:hover{background:var(--button-hover);border-color:var(--button-hover)}
 .button--line{background:transparent;color:var(--button)}
 .lm-top__burger,.lm-drawer__close,.lm-rail__step{background:none}
-.lm-wish,.lm-wish:hover{background:none}
+.lm-wish,.lm-wish:hover,.lm-wish[aria-pressed=true]{background:none;color:#000}
 .lm-save-product{background:#fff;color:var(--button)}
 /* The name leads; the filters wait in the corner beside it. */
 .woocommerce-products-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;column-gap:16px}
@@ -487,8 +487,9 @@ h2{font-size:22px}
 .lm-wish::before{content:none}
 /* Centred in its 44px tap area, about 13px in from the photograph's corner. */
 @media(max-width:767px){.lm-wish{--lm-wish-pad:13px}}
-/* Over a photograph of a piece being worn the heart keeps the soft light edge the discount figures have. */
-.products .product:not(:has(.lm-packshot)) .lm-wish svg{filter:drop-shadow(0 0 1px #fff) drop-shadow(0 0 4px #fff)}
+/* Plain black marks, without the light halo, requested 17.10.2026. */
+.onsale{color:#000}
+.lm-wish svg{filter:none}
 
 /* Owner-selected new pieces, between the film and the existing photo strip. */
 .lm-arrivals{margin:64px 0 0}
@@ -567,6 +568,18 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
 @media(min-width:900px){ul.products:has(>.lm-catalog-film)>li.product:nth-child(8),ul.products:has(>.lm-catalog-film)>li.product:nth-child(9){order:0}}
 @media(prefers-reduced-motion:reduce){.lm-catalog-film>video{transition:none}}
 @media(min-width:900px){ul.products:has(>.lm-catalog-film):not(:has(>li.product:nth-child(9)))>.lm-catalog-film{display:none}}
+
+/* Real gold-colour options, progressively enhancing the WooCommerce select. */
+.lm-metal-swatches{display:flex;align-items:center;flex-wrap:wrap;gap:4px;min-height:46px}
+.lm-metal-swatch,.lm-metal-swatch:hover,.lm-metal-swatch:active{position:relative;flex:none;width:44px;height:44px;min-height:44px;padding:0;border:0;background:transparent;color:var(--ink)}
+.lm-metal-swatch::before{content:'';width:22px;height:22px;border-radius:50%;background:var(--lm-metal-fill);border:1px solid #00000012}
+.lm-metal-swatch[data-metal=white]{--lm-metal-fill:linear-gradient(105deg,#a8aaa9 0%,#f4f4f1 38%,#c6c8c6 65%,#e5e6e3 100%)}
+.lm-metal-swatch[data-metal=yellow]{--lm-metal-fill:linear-gradient(105deg,#ac8b55 0%,#eee1b8 38%,#c9ad72 65%,#e5d1a3 100%)}
+.lm-metal-swatch[data-metal=rose]{--lm-metal-fill:linear-gradient(105deg,#b88d76 0%,#f1d4bd 38%,#ceaa91 65%,#e9c7ae 100%)}
+.lm-metal-swatch[aria-pressed=true]::after{content:'';position:absolute;inset:7px;border:1px solid var(--ink);border-radius:50%}
+.lm-metal-swatch:disabled,.lm-metal-swatch:disabled:hover{background:transparent;border:0;opacity:.35;cursor:not-allowed}
+.lm-metal-swatch:disabled::after{content:'';position:absolute;width:26px;height:1px;background:var(--ink);transform:rotate(-45deg)}
+.lm-metal-swatches__name{font-size:12px;margin-left:9px;line-height:1.4}
 
 
 /* Preview copy only: notice bar, static gallery, safe-area sticky header. */
@@ -1287,6 +1300,69 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
     addEventListener('pagehide', () => stop(true));
     addEventListener('pageshow', reconcile);
     state();
+  });
+})();
+
+(() => {
+  const metalOf = text => {
+    const name = text.trim().toLocaleLowerCase('uk').replace(/\s+/g, ' ');
+    if (/^(біле|белое|white)( золото| gold)?$/.test(name)) return 'white';
+    if (/^(жовте|желтое|жёлтое|yellow)( золото| gold)?$/.test(name)) return 'yellow';
+    if (/^(червоне|рожеве|красное|розовое|rose|red|pink)( золото| gold)?$/.test(name)) return 'rose';
+    return null;
+  };
+  document.querySelectorAll('.variations_form select').forEach(select => {
+    const label = select.labels?.[0];
+    if (!label || !/^(колір золота|цвет золота|gold colou?r)$/i.test(label.textContent.trim())) return;
+    const original = select.cloneNode(true);
+    const savedOptions = window.jQuery?.(select).data('attribute_html');
+    if (typeof savedOptions === 'string') original.innerHTML = savedOptions;
+    const choices = [...original.options].filter(option => option.value);
+    if (!choices.length || choices.some(option => !metalOf(option.textContent))) return;
+    const group = document.createElement('div');
+    group.className = 'lm-metal-swatches';
+    group.setAttribute('role', 'group');
+    group.setAttribute('aria-label', label.textContent.trim());
+    const selectedName = document.createElement('span');
+    selectedName.className = 'lm-metal-swatches__name';
+    selectedName.setAttribute('aria-live', 'polite');
+    const buttons = choices.map(option => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'lm-metal-swatch';
+      button.dataset.metal = metalOf(option.textContent);
+      button.dataset.value = option.value;
+      button.setAttribute('aria-label', option.textContent.trim());
+      button.title = option.textContent.trim();
+      button.addEventListener('click', () => {
+        if (button.disabled) return;
+        select.value = option.value;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        sync();
+      });
+      group.append(button);
+      return button;
+    });
+    const sync = () => {
+      buttons.forEach(button => {
+        const option = [...select.options].find(item => item.value === button.dataset.value);
+        button.disabled = select.disabled || !option || option.disabled;
+        button.setAttribute('aria-pressed', String(select.value === button.dataset.value));
+      });
+      selectedName.textContent = choices.find(option => option.value === select.value)?.textContent.trim() || 'Оберіть колір';
+    };
+    group.append(selectedName);
+    select.after(group);
+    select.hidden = true;
+    // Keep WooCommerce's select as the source of values, availability and pricing.
+    select.addEventListener('change', sync);
+    select.form?.addEventListener('reset', () => setTimeout(sync, 0));
+    if (window.jQuery) window.jQuery(select.closest('.variations_form')).on('woocommerce_update_variation_values found_variation reset_data', sync);
+    label.addEventListener('click', event => {
+      event.preventDefault();
+      (buttons.find(button => !button.disabled && button.getAttribute('aria-pressed') === 'true') || buttons.find(button => !button.disabled))?.focus();
+    });
+    sync();
   });
 })();
 
