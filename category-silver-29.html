@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.8.2
+Version: 0.8.3
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -1284,7 +1284,13 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
       video.dataset.src = clip.src;
       const position = `50% ${clip.focus || '50'}%`;
       video.style.objectPosition = position;
-      if (poster) { poster.src = clip.poster; poster.style.objectPosition = position; }
+      if (poster) {
+        // WordPress supplies responsive candidates for the initial cover only.
+        poster.removeAttribute('srcset');
+        poster.removeAttribute('sizes');
+        poster.src = clip.poster;
+        poster.style.objectPosition = position;
+      }
       reconcile();
     });
     button.addEventListener('click', () => {
