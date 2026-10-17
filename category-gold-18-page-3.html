@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.8.5
+Version: 0.8.6
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -563,9 +563,11 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
 .lm-catalog-film>img,.lm-catalog-film>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;margin:0}
 .lm-catalog-film>video{opacity:0;transition:opacity .3s}
 .lm-catalog-film.is-playing>video{opacity:1}
-.lm-catalog-film>button{position:absolute;right:12px;bottom:12px;min-height:44px;font-size:11px;padding:10px 14px;background:var(--button);color:#fff;border:0}
+.lm-catalog-film>button,.lm-catalog-film>button:hover,.lm-catalog-film>button:active{position:absolute;inset:0;width:100%;height:100%;min-height:44px;font-size:0;line-height:0;padding:0;background:transparent;color:transparent;border:0}
+.lm-catalog-film>button:focus-visible{outline:2px solid #fff;outline-offset:-4px}
 .lm-catalog-film>button[hidden]{display:none}
 @media(min-width:900px){ul.products:has(>.lm-catalog-film)>li.product:nth-child(8),ul.products:has(>.lm-catalog-film)>li.product:nth-child(9){order:0}}
+@media(max-width:899px){ul.products>.lm-catalog-film{margin-inline:calc(-1 * var(--gutter));aspect-ratio:4/3}}
 @media(prefers-reduced-motion:reduce){.lm-catalog-film>video{transition:none}}
 @media(min-width:900px){ul.products:has(>.lm-catalog-film):not(:has(>li.product:nth-child(9)))>.lm-catalog-film{display:none}}
 
@@ -1039,17 +1041,12 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
     });
   }
 
-  // Front page films play one after another without controls; each visit starts from the next one.
+  // Front page films follow the owner's order, starting from the first film on every visit.
   // The photograph stays where motion is turned down or data is being saved.
   const plate = document.querySelector('[data-lm-films]');
   if (plate && !matchMedia('(prefers-reduced-motion: reduce)').matches && !navigator.connection?.saveData) {
     const films = JSON.parse(plate.dataset.lmFilms);
-    let turn = Math.floor(Math.random() * films.length);
-    try {
-      const last = localStorage.getItem('lm-film');
-      if (last !== null) turn = (Number(last) + 1) % films.length;
-      localStorage.setItem('lm-film', String(turn));
-    } catch { /* private mode: a random film is fine */ }
+    let turn = 0;
     // The photograph is the resting state: a film covers it only once it is really playing,
     // and the film before it holds its last frame until the next one has started.
     let current = null, failed = 0;
@@ -1058,6 +1055,7 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
       const video = document.createElement('video');
       for (const name of ['muted', 'playsinline', 'autoplay']) video.setAttribute(name, '');
       video.muted = true;
+      video.preload = 'auto';
       video.setAttribute('aria-hidden', 'true');
       video.tabIndex = -1;
       video.loop = films.length === 1;
