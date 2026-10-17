@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.8.1
+Version: 0.8.2
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -849,8 +849,8 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
 	</span><h2 class="woocommerce-loop-product__title">Кольє трансформер<span class="screen-reader-text">, артикул 720</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>29 105&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 29 105&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>21 830&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 21 830&nbsp;&#8372;.</span></span>
 </a><button type="button" class="lm-wish" data-lm-wish="2000" aria-pressed="false" aria-label="Зберегти Кольє трансформер 720"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
-    <li class="lm-catalog-film" data-lm-catalog-film aria-label="Відео прикрас LIMÉRENCE">
-        <img width="810" height="1440" src="img/limerence-gold-necklaces-03-l.webp" class="lm-catalog-film__poster" alt="" loading="lazy" style="object-position:50% 85%" decoding="async" />        <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" style="object-position:50% 85%" data-src="films/limerence-gold-necklaces-03.mp4"></video>
+    <li class="lm-catalog-film" data-lm-catalog-film data-lm-clips="[{&quot;src&quot;:&quot;films\/limerence-gold-necklaces-01.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-necklaces-01.jpg&quot;,&quot;focus&quot;:&quot;50&quot;},{&quot;src&quot;:&quot;films\/limerence-gold-necklaces-02.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-necklaces-02.jpg&quot;,&quot;focus&quot;:&quot;85&quot;},{&quot;src&quot;:&quot;films\/limerence-gold-necklaces-03.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-necklaces-03.jpg&quot;,&quot;focus&quot;:&quot;85&quot;},{&quot;src&quot;:&quot;films\/limerence-gold-necklaces-04.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-necklaces-04.jpg&quot;,&quot;focus&quot;:&quot;50&quot;},{&quot;src&quot;:&quot;films\/limerence-gold-necklaces-05.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-necklaces-05.jpg&quot;,&quot;focus&quot;:&quot;50&quot;},{&quot;src&quot;:&quot;films\/limerence-gold-necklaces-06.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-necklaces-06.jpg&quot;,&quot;focus&quot;:&quot;65&quot;},{&quot;src&quot;:&quot;films\/limerence-gold-necklaces-07.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-necklaces-07.jpg&quot;,&quot;focus&quot;:&quot;65&quot;}]" data-lm-start="2" aria-label="Відео прикрас LIMÉRENCE">
+        <img width="810" height="1440" src="img/limerence-gold-necklaces-03-l.webp" class="lm-catalog-film__poster" alt="" loading="lazy" style="object-position:50% 85%" decoding="async" />        <video muted playsinline preload="none" aria-hidden="true" tabindex="-1" style="object-position:50% 85%" data-src="films/limerence-gold-necklaces-03.mp4"></video>
         <button type="button" aria-label="Відтворення відео прикрас" aria-pressed="false" hidden>Відтворити відео</button>
     </li>
     <li class="product type-product post-1945 status-publish instock product_cat-18 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
@@ -1233,6 +1233,11 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
   document.querySelectorAll('[data-lm-catalog-film]').forEach(strip => {
     const video = strip.querySelector('video');
     const button = strip.querySelector('button');
+    const poster = strip.querySelector('img');
+    let clips = [];
+    try { const parsed = JSON.parse(strip.dataset?.lmClips || '[]'); if (Array.isArray(parsed)) clips = parsed.filter(clip => clip?.src); } catch { /* Keep the single HTML-selected clip. */ }
+    let turn = clips.length ? Math.max(0, Number(strip.dataset.lmStart) || 0) % clips.length : 0;
+    video.loop = clips.length < 2;
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
     let visible = false, paused = false, blocked = false, failed = false, pending = false, attempt = 0;
     const eligible = () => !reduced.matches && !navigator.connection?.saveData && !failed;
@@ -1265,6 +1270,17 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
     video.addEventListener('playing', () => { if (!mayPlay()) stop(); else { pending = false; state(); } });
     video.addEventListener('pause', state);
     video.addEventListener('error', () => { failed = true; stop(true); });
+    video.addEventListener('ended', () => {
+      if (clips.length < 2 || !mayPlay()) return;
+      stop(true);
+      turn = (turn + 1) % clips.length;
+      const clip = clips[turn];
+      video.dataset.src = clip.src;
+      const position = `50% ${clip.focus || '50'}%`;
+      video.style.objectPosition = position;
+      if (poster) { poster.src = clip.poster; poster.style.objectPosition = position; }
+      reconcile();
+    });
     button.addEventListener('click', () => {
       if (!eligible()) return;
       if (pending || !video.paused) { paused = true; stop(); }

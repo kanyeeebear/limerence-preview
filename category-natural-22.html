@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.8.1
+Version: 0.8.2
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -1179,6 +1179,11 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
   document.querySelectorAll('[data-lm-catalog-film]').forEach(strip => {
     const video = strip.querySelector('video');
     const button = strip.querySelector('button');
+    const poster = strip.querySelector('img');
+    let clips = [];
+    try { const parsed = JSON.parse(strip.dataset?.lmClips || '[]'); if (Array.isArray(parsed)) clips = parsed.filter(clip => clip?.src); } catch { /* Keep the single HTML-selected clip. */ }
+    let turn = clips.length ? Math.max(0, Number(strip.dataset.lmStart) || 0) % clips.length : 0;
+    video.loop = clips.length < 2;
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
     let visible = false, paused = false, blocked = false, failed = false, pending = false, attempt = 0;
     const eligible = () => !reduced.matches && !navigator.connection?.saveData && !failed;
@@ -1211,6 +1216,17 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
     video.addEventListener('playing', () => { if (!mayPlay()) stop(); else { pending = false; state(); } });
     video.addEventListener('pause', state);
     video.addEventListener('error', () => { failed = true; stop(true); });
+    video.addEventListener('ended', () => {
+      if (clips.length < 2 || !mayPlay()) return;
+      stop(true);
+      turn = (turn + 1) % clips.length;
+      const clip = clips[turn];
+      video.dataset.src = clip.src;
+      const position = `50% ${clip.focus || '50'}%`;
+      video.style.objectPosition = position;
+      if (poster) { poster.src = clip.poster; poster.style.objectPosition = position; }
+      reconcile();
+    });
     button.addEventListener('click', () => {
       if (!eligible()) return;
       if (pending || !video.paused) { paused = true; stop(); }
