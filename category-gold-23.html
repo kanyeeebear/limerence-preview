@@ -113,7 +113,7 @@ h1,h2,h3{text-wrap:balance}
 .lm-hero--plain{grid-template-columns:1fr;height:auto;min-height:0}
 .lm-hero--plain .lm-hero__text{padding:120px var(--gutter) 96px;max-width:900px}
 @media(prefers-reduced-motion:no-preference){
-  .lm-hero__plate img{animation:lm-plate 1.5s var(--ease) both}
+  .lm-hero__plate:not([data-lm-films]) img{animation:lm-plate 1.5s var(--ease) both}
   .lm-hero__text>*{animation:lm-rise 1s var(--ease) both}
   .lm-hero__text>:nth-child(2){animation-delay:.12s}
   .lm-hero__text>:nth-child(3){animation-delay:.2s}
