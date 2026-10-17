@@ -9,7 +9,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.8.4
+Version: 0.8.5
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -580,6 +580,9 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
 .lm-metal-swatch:disabled,.lm-metal-swatch:disabled:hover{background:transparent;border:0;opacity:.35;cursor:not-allowed}
 .lm-metal-swatch:disabled::after{content:'';position:absolute;width:26px;height:1px;background:var(--ink);transform:rotate(-45deg)}
 .lm-metal-swatches__name{font-size:12px;margin-left:9px;line-height:1.4}
+
+.lm-metal-photo-frame{display:block;position:relative;overflow:hidden;width:100%}
+.lm-metal-photo-note{font-size:12px;line-height:1.5;color:var(--muted);margin:14px 0 0}
 
 
 /* Preview copy only: notice bar, static gallery, safe-area sticky header. */
@@ -1381,6 +1384,79 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
       (buttons.find(button => !button.disabled && button.getAttribute('aria-pressed') === 'true') || buttons.find(button => !button.disabled))?.focus();
     });
     sync();
+  });
+})();
+
+(() => {
+  document.querySelectorAll('.variations_form').forEach(form => {
+    const data = form.querySelector('[data-lm-metal-photos]');
+    if (!data) return;
+    let config;
+    try { config = JSON.parse(data.dataset.lmMetalPhotos); } catch { return; }
+    const select = [...form.querySelectorAll('select')].find(field => field.name === config.attribute);
+    const product = form.closest('.product');
+    const gallery = product?.querySelector('.woocommerce-product-gallery');
+    const image = gallery?.querySelector('.wp-post-image');
+    if (!select || !image || !config.photos) return;
+    const original = Object.fromEntries(['src', 'srcset', 'sizes', 'alt', 'width', 'height', 'style'].map(key => [key, image.getAttribute(key)]));
+    let frame, note, timer;
+    const uncrop = () => {
+      if (frame) { frame.replaceWith(image); frame = null; }
+      if (note) { note.remove(); note = null; }
+      if (original.style === null) image.removeAttribute('style'); else image.setAttribute('style', original.style);
+    };
+    const restore = () => {
+      uncrop();
+      for (const [key, value] of Object.entries(original)) {
+        if (value === null) image.removeAttribute(key); else image.setAttribute(key, value);
+      }
+    };
+    const update = () => {
+      const photo = config.photos[select.value];
+      if (!photo) { if (!window.jQuery) restore(); return; }
+      // A complete WooCommerce choice owns its exact photo, price and availability.
+      if (window.jQuery && form.querySelector('[name=variation_id]')?.value > 0) return;
+      uncrop();
+      if (window.jQuery?.fn?.wc_variations_image_update) {
+        window.jQuery(form).wc_variations_image_update({ image: photo.image });
+      } else {
+        image.src = photo.image.src;
+        for (const key of ['srcset', 'sizes']) {
+          if (photo.image[key]) image.setAttribute(key, photo.image[key]); else image.removeAttribute(key);
+        }
+        image.alt = photo.image.alt || '';
+        if (photo.image.src_w) image.setAttribute('width', photo.image.src_w);
+        if (photo.image.src_h) image.setAttribute('height', photo.image.src_h);
+      }
+      // Only the approved static example supplies a crop; the source picture is never recoloured.
+      if (photo.crop?.length === 6 && photo.crop.every(Number.isFinite)) {
+        const [x, y, width, height, sheetWidth, sheetHeight] = photo.crop;
+        if (width > 0 && height > 0 && x >= 0 && y >= 0 && x + width <= sheetWidth && y + height <= sheetHeight) {
+          frame = document.createElement('span'); frame.className = 'lm-metal-photo-frame';
+          image.replaceWith(frame); frame.append(image); frame.style.aspectRatio = `${width}/${height}`;
+          Object.assign(image.style, { position:'absolute', width:`${sheetWidth / width * 100}%`, height:'auto', maxWidth:'none', maxHeight:'none', left:`${-x / width * 100}%`, top:`${-y / height * 100}%` });
+        }
+      }
+      if (photo.caption) {
+        note = document.createElement('p'); note.className = 'lm-metal-photo-note'; note.textContent = photo.caption;
+        gallery.append(note);
+      }
+    };
+    const schedule = () => { clearTimeout(timer); timer = setTimeout(update, 0); };
+    select.addEventListener('change', schedule);
+    gallery.addEventListener('click', event => {
+      if (event.target.tagName === 'IMG' && event.target !== image) uncrop();
+    }, true);
+    if (window.jQuery) {
+      window.jQuery(form).on('reset_data woocommerce_update_variation_values', schedule)
+        .on('found_variation', () => { clearTimeout(timer); uncrop(); });
+    } else {
+      form.querySelector('.reset_variations')?.addEventListener('click', event => {
+        event.preventDefault();
+        form.querySelectorAll('select').forEach(field => { field.value = ''; field.dispatchEvent(new Event('change', {bubbles:true})); });
+      });
+    }
+    schedule();
   });
 })();
 
