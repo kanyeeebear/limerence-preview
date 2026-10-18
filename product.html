@@ -121,7 +121,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.8.17
+Version: 0.8.18
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -708,6 +708,39 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
 .lm-metal-photo-frame{display:block;position:relative;overflow:hidden;width:100%}
 .lm-metal-photo-note{font-size:12px;line-height:1.5;color:var(--muted);margin:14px 0 0}
 
+/* Quiet catalogue drawer: fixed header, bounded width and directional navigation. */
+.lm-drawer-shade{position:fixed;inset:0;z-index:39;background:rgb(0 0 0 / 32%)}
+.lm-drawer-shade[hidden],.lm-drawer[hidden]{display:none}
+.lm-drawer{inset:0 auto 0 0;width:min(100%,460px);padding:env(safe-area-inset-top,0px) 24px calc(32px + env(safe-area-inset-bottom,0px));overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--field-line) #fff}
+.lm-drawer:focus,.lm-drawer [data-lm-nav-root]:focus,.lm-drawer__panel:focus{outline:none}
+.lm-drawer__bar{position:sticky;top:0;z-index:2;min-height:82px;margin:0 -24px;padding:0 16px 0 24px;background:#fff}
+.lm-drawer .lm-wordmark img{width:176px;max-width:100%;height:auto}
+.lm-drawer .lm-drawer__close{width:44px;height:44px;padding:12px;border:0;background:transparent;color:var(--ink)}
+.lm-drawer .lm-search-form{gap:12px;align-items:center;margin:8px 0 28px;border-bottom:1px solid var(--field-line)}
+.lm-drawer .lm-search-form input{width:0;min-width:0;min-height:48px;padding:12px 0;border:0;background:transparent;font-size:16px}
+.lm-drawer .lm-search-form input::placeholder{color:var(--muted);opacity:1}
+.lm-drawer .lm-search-form button{flex:none;padding:10px 8px;min-height:44px;border:0;background:transparent;color:var(--ink);font-size:12px;letter-spacing:.04em}
+.lm-drawer .lm-search-form input:focus-visible{outline-offset:0}
+.lm-drawer__sections>li,.lm-drawer__sections>li:last-child{border:0}
+.lm-drawer__sections>li>a{min-height:60px;padding:12px 10px;font-size:18px;font-weight:400;line-height:1.4;text-decoration:none;transition:background-color .2s var(--ease)}
+.lm-drawer__section-link svg{width:16px;height:16px;transition:transform .2s var(--ease)}
+.lm-drawer__service{margin-top:24px!important;padding-top:20px!important;border-top:1px solid var(--line)}
+.lm-drawer__service a{min-height:44px;padding:11px 10px;font-size:14px;text-decoration:none;transition:background-color .2s var(--ease)}
+.lm-drawer .lm-drawer__back{min-height:48px;margin:0 0 20px;padding:10px 8px;background:transparent;color:var(--ink);border:0;font-size:17px}
+.lm-drawer__types{gap:20px 12px}
+.lm-drawer__type{text-decoration:none!important}
+.lm-drawer__type span{font-size:13px;line-height:1.4;text-underline-offset:4px}
+.lm-drawer__all{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:20px 0 0;margin-top:24px;text-underline-offset:4px}
+.lm-drawer a:focus:not(:focus-visible),.lm-drawer button:focus:not(:focus-visible){outline:none}
+.lm-drawer a:focus-visible,.lm-drawer button:focus-visible{outline:1px solid var(--ink);outline-offset:-2px;background:var(--paper);color:var(--ink)}
+@media(hover:hover){
+ .lm-drawer__sections>li>a:hover,.lm-drawer__service a:hover,.lm-drawer .lm-drawer__back:hover,.lm-drawer .lm-drawer__close:hover,.lm-drawer .lm-search-form button:hover{background:var(--paper);color:var(--ink);text-decoration:none}
+ .lm-drawer__section-link:hover svg{transform:translateX(3px)}
+ .lm-drawer__type:hover span{text-decoration:underline}
+}
+@media(max-width:479px){.lm-drawer{padding-inline:20px}.lm-drawer__bar{min-height:76px;margin-inline:-20px;padding-left:20px;padding-right:12px}}
+@media(prefers-reduced-motion:reduce){.lm-drawer a,.lm-drawer button,.lm-drawer__section-link svg{transition:none}.lm-drawer__section-link:hover svg{transform:none}}
+
 /* Preview copy only: notice bar, static gallery, safe-area sticky header. */
 .lm-share{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:center;padding:10px 20px;background:var(--paper);color:var(--ink);font-size:12px;line-height:1.5;text-align:center}
 .lm-share strong{font-weight:600}
@@ -1084,45 +1117,106 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
     const close = drawer.querySelector('.lm-drawer__close');
     const root = drawer.querySelector('[data-lm-nav-root]');
     const sections = [...drawer.querySelectorAll('[data-lm-nav-panel]')];
-    let sectionLink = null;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const shade = document.createElement('div');
+    shade.className = 'lm-drawer-shade';
+    shade.hidden = true;
+    shade.setAttribute('aria-hidden', 'true');
+    drawer.before(shade);
+    drawer.tabIndex = -1;
+    let sectionLink = null, opened = false, closing = false, revision = 0;
+    let motion = [], pageState = [];
+    const stopMotion = () => { motion.forEach(animation => animation.cancel()); motion = []; };
+    const animate = (node, frames, duration) => {
+      if (reduced.matches || !node.animate) return null;
+      const animation = node.animate(frames, { duration, easing: 'cubic-bezier(.22,1,.36,1)' });
+      motion.push(animation);
+      return animation;
+    };
+    const focusView = view => { view.tabIndex = -1; view.focus({ preventScroll: true }); };
     const back = (focus = true) => {
+      const previous = sectionLink;
       sections.forEach(panel => { panel.hidden = true; });
       if (root) root.hidden = false;
-      if (sectionLink) {
-        sectionLink.setAttribute('aria-expanded', 'false');
-        if (focus) sectionLink.focus();
-      }
+      previous?.setAttribute('aria-expanded', 'false');
       sectionLink = null;
+      drawer.scrollTop = 0;
+      if (focus && root) {
+        stopMotion();
+        animate(root, [{ opacity: 0, transform: 'translateX(-18px)' }, { opacity: 1, transform: 'translateX(0)' }], 240);
+        previous?.focus({ preventScroll: true });
+      }
     };
     drawer.querySelectorAll('[data-lm-open-section]').forEach(link => link.addEventListener('click', event => {
       const panel = sections.find(item => item.dataset.lmNavPanel === link.dataset.lmOpenSection);
-      if (!panel || !root) return;
+      if (!panel || !root || closing) return;
       event.preventDefault();
+      stopMotion();
       back(false);
       sectionLink = link;
       link.setAttribute('aria-expanded', 'true');
       root.hidden = true;
       panel.hidden = false;
       drawer.scrollTop = 0;
-      panel.querySelector('[data-lm-nav-back]').focus();
+      animate(panel, [{ opacity: 0, transform: 'translateX(24px)' }, { opacity: 1, transform: 'translateX(0)' }], 280);
+      focusView(panel);
     }));
-    drawer.querySelectorAll('[data-lm-nav-back]').forEach(button => button.addEventListener('click', () => back()));
-    const set = open => {
-      if (!open) back(false);
-      drawer.hidden = !open;
-      burger.setAttribute('aria-expanded', String(open));
-      document.documentElement.classList.toggle('lm-locked', open);
-      (open ? close : burger).focus();
+    drawer.querySelectorAll('[data-lm-nav-back]').forEach(button => button.addEventListener('click', () => { if (!closing) back(); }));
+    const isolate = () => {
+      // Follow the ancestor chain too: static previews wrap the storefront in a div.
+      let active = drawer;
+      while (active.parentElement && active !== document.body) {
+        for (const sibling of active.parentElement.children) {
+          if (sibling === active || sibling === shade || /^(SCRIPT|STYLE|LINK)$/.test(sibling.tagName)) continue;
+          pageState.push([sibling, sibling.inert]);
+          sibling.inert = true;
+        }
+        active = active.parentElement;
+      }
     };
-    burger.addEventListener('click', () => set(drawer.hidden));
+    const set = async open => {
+      if (open === opened && !closing) return;
+      const turn = ++revision;
+      stopMotion();
+      opened = open;
+      closing = !open;
+      burger.setAttribute('aria-expanded', String(open));
+      if (open) {
+        if (!pageState.length) isolate();
+        drawer.hidden = shade.hidden = false;
+        document.documentElement.classList.add('lm-locked');
+        animate(shade, [{ opacity: 0 }, { opacity: 1 }], 320);
+        animate(drawer, [{ transform: 'translateX(-100%)' }, { transform: 'translateX(0)' }], 380);
+        focusView(drawer);
+      } else {
+        animate(shade, [{ opacity: 1 }, { opacity: 0 }], 220);
+        const exit = animate(drawer, [{ transform: 'translateX(0)' }, { transform: 'translateX(-100%)' }], 260);
+        if (exit) await exit.finished.catch(() => {});
+        if (turn !== revision) return;
+        drawer.hidden = shade.hidden = true;
+        stopMotion();
+        back(false);
+        pageState.forEach(([node, inert]) => { node.inert = inert; });
+        pageState = [];
+        document.documentElement.classList.remove('lm-locked');
+        closing = false;
+        burger.focus({ preventScroll: true });
+      }
+    };
+    burger.addEventListener('click', () => set(!opened));
     close.addEventListener('click', () => set(false));
+    shade.addEventListener('click', () => set(false));
     drawer.addEventListener('keydown', event => {
-      if (event.key === 'Escape') { if (sectionLink) back(); else set(false); return; }
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        if (!closing) { if (sectionLink) back(); else set(false); }
+        return;
+      }
       if (event.key !== 'Tab') return;
-      // The page behind is covered, so focus stays inside the open menu.
-      const stops = [...drawer.querySelectorAll('a[href], button, input, summary')].filter(node => node.offsetParent);
+      const stops = [...drawer.querySelectorAll('a[href], button, input, summary')].filter(node => node.offsetParent && !node.disabled);
       const first = stops[0], last = stops[stops.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      if (!first) return;
+      if (event.shiftKey && (document.activeElement === first || !stops.includes(document.activeElement))) { event.preventDefault(); last.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     });
     // The sections stay in the header only while they clear the centred logo; otherwise the menu button takes over.
