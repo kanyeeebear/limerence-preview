@@ -121,7 +121,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.8.21
+Version: 0.8.22
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -270,9 +270,8 @@ h1,h2,h3{text-wrap:balance}
 /* A packshot shows the whole piece; its backdrop, lifted to white, multiplies into the paper frame. */
 .products .product .lm-card-media img.lm-packshot,.lm-wishlist-items .lm-card-media img.lm-packshot{object-fit:contain;padding:9%;mix-blend-mode:multiply}
 /* Only the tile under the pointer: a product page is itself a «.product» around its related tiles. */
-.lm-card-alt img{opacity:0}
-.products li.product:hover .lm-card-alt img{opacity:1}
-.products .product:hover .lm-card-media>img:only-of-type{transform:scale(1.03)}
+.lm-card-alt{display:none}
+.products .product:hover .lm-card-media:not(:has(.lm-card-alt))>img:only-of-type{transform:scale(1.03)}
 /* A quiet tile: the kind of piece in the serif, one short material line, then the price. */
 .products h2,.lm-wishlist-items h2{font-family:'Raleway',Arial,sans-serif;font-size:21px;font-weight:300;line-height:1.15;margin:15px 0 5px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 /* The heading over a row of tiles is a heading, not a tile name. */
@@ -1409,19 +1408,66 @@ html{scrollbar-gutter:stable}
   }
   if (selects.length && single.length === selects.length) document.querySelector('.reset_variations')?.remove();
 
-  // The second photograph is fetched only when a pointer first reaches the tile.
+  // One image node per tile: fade out, swap a decoded source, fade back in.
+  // A transparent or multiply-blended alternate must never expose a second angle underneath.
   if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.addEventListener('pointerover', event => {
-      // The tile itself: on a product page the whole page is a «.product» too.
-      const slot = event.target.closest?.('li.product')?.querySelector('.lm-card-alt[data-src]');
-      if (!slot) return;
-      const image = new Image();
-      image.alt = '';
-      image.decoding = 'async';
-      if (slot.dataset.lift) { image.className = 'lm-packshot'; image.style.filter = `brightness(${slot.dataset.lift})`; }
-      image.src = slot.dataset.src;
-      slot.removeAttribute('data-src');
-      slot.append(image);
+    document.querySelectorAll('li.product .lm-card-alt[data-src]').forEach(slot => {
+      const card = slot.closest('li.product');
+      const image = slot.parentElement.querySelector(':scope > img');
+      if (!image) return;
+      const original = Object.fromEntries(['src', 'srcset', 'sizes', 'class', 'style'].map(key => [key, image.getAttribute(key)]));
+      const alternate = { src: slot.dataset.src, srcset: null, sizes: null,
+        class: slot.dataset.lift ? 'lm-packshot' : null,
+        style: slot.dataset.lift ? `filter:brightness(${slot.dataset.lift})` : null };
+      let ready = false, requested = false, inside = false, showingAlt = false;
+      let revision = 0, animation = null;
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+      const fade = async (from, to, duration) => {
+        if (reduced.matches || !image.animate) return;
+        const effect = image.animate([{ opacity: from }, { opacity: to }], {
+          duration, easing: 'ease-out', fill: 'both',
+        });
+        animation = effect;
+        await effect.finished.catch(() => {});
+      };
+      const sync = async () => {
+        const wanted = inside && ready;
+        const turn = ++revision;
+        const opacity = getComputedStyle(image).opacity;
+        animation?.cancel();
+        if (showingAlt !== wanted) {
+          await fade(opacity, 0, 90);
+          if (turn !== revision) return;
+          const source = wanted ? alternate : original;
+          // Remove stale responsive candidates before assigning the replacement src.
+          for (const key of ['srcset', 'sizes', 'class', 'style', 'src']) {
+            if (source[key] === null) image.removeAttribute(key);
+            else image.setAttribute(key, source[key]);
+          }
+          showingAlt = wanted;
+          animation?.cancel();
+          await fade(0, 1, 150);
+        } else {
+          await fade(opacity, 1, 100);
+        }
+        if (turn === revision) { animation?.cancel(); animation = null; }
+      };
+      card.addEventListener('pointerenter', () => {
+        inside = true;
+        if (ready) { sync(); return; }
+        if (requested) return;
+        requested = true;
+        const preload = new Image();
+        preload.decoding = 'async';
+        preload.onload = async () => {
+          try { if (preload.decode) await preload.decode(); } catch { requested = false; return; }
+          ready = true;
+          if (inside) sync();
+        };
+        preload.onerror = () => { requested = false; };
+        preload.src = alternate.src;
+      });
+      card.addEventListener('pointerleave', () => { inside = false; sync(); });
     });
   }
 })();
