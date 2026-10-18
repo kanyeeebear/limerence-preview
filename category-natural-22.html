@@ -803,6 +803,16 @@ html{scrollbar-gutter:stable}
  .lm-drawer__types{gap:18px 12px}
 }
 @media(prefers-reduced-motion:reduce){.lm-drawer,.lm-drawer__label::after{transition:none}}
+</style><style id="lm-compact-filters">/* Compact catalogue filters: keep related numeric fields on one row. */
+.lm-filters:not(.lm-filters--gift) .lm-filter-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:end;gap:12px;width:min(280px,calc(100vw - 2*var(--gutter)));top:calc(100% + 6px);padding:16px}
+.lm-filters:not(.lm-filters--gift) .lm-filter-fields>label{display:flex;flex-direction:column;gap:4px;grid-column:1/-1;min-width:0;margin:0;font-size:12px;line-height:16px}
+.lm-filters:not(.lm-filters--gift) .lm-filter-fields>label:has([name=max_price]),.lm-filters:not(.lm-filters--gift) .lm-filter-fields>label:has([name=lm_size]){grid-column:span 1}
+.lm-filters:not(.lm-filters--gift) .lm-filter-fields :is(input:not([type=checkbox]),select){height:44px;min-height:44px;padding:8px 10px;font-size:14px;line-height:20px}
+.lm-filters:not(.lm-filters--gift) .lm-filter-fields>label.lm-filter-stock{flex-direction:row;align-items:center;gap:8px;min-height:44px;font-size:13px}
+.lm-filters:not(.lm-filters--gift) .lm-filter-stock input{width:16px;height:16px;margin:0}
+.lm-filters:not(.lm-filters--gift) .lm-filter-fields button[type=submit]{grid-column:1/-1;min-height:44px;margin:0;padding:10px 12px;font-size:11px;line-height:18px;letter-spacing:.06em}
+.lm-filters:not(.lm-filters--gift) .lm-filters__reset{grid-column:1/-1;margin:0}
+@media(max-width:899px){.lm-filters:not(.lm-filters--gift) .lm-filter-fields :is(input:not([type=checkbox]),select){font-size:16px}}
 </style></head>
 <body>
 <div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність наведені зі знімка вітрини від 05.10.2026. Добірка «Новинки» та відео каталогу показані як приклад для перегляду дизайну.</span><nav aria-label="Сторінки перегляду"><a href="index.html">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html">Сторінка товару</a></nav></div>
@@ -1011,7 +1021,7 @@ html{scrollbar-gutter:stable}
         <input type="hidden" name="lm_section" value="natural">        <details><summary>Фільтри<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 9.5 7 7 7-7"/></svg></summary>        <div class="lm-filter-fields">
             <label>Метал<select name="lm_metal"><option value="">Усі</option><option value="silver" >Срібло</option><option value="gold" >Золото</option></select></label>
                         <label>Ціна до, ₴<input name="max_price" type="number" inputmode="numeric" min="0" step="1" value=""></label>
-            <label>Розмір у наявності<input name="lm_size" inputmode="decimal" value="" placeholder="Наприклад, 17,5"></label>            <label class="lm-filter-stock"><input type="checkbox" name="lm_available" value="1" > У наявності</label>
+            <label>Розмір у наявності<input name="lm_size" inputmode="decimal" value="" placeholder="Напр., 17,5"></label>            <label class="lm-filter-stock"><input type="checkbox" name="lm_available" value="1" > У наявності</label>
             <button type="submit">Показати</button>
                     </div>
         </details>    </form>
