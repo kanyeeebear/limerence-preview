@@ -121,7 +121,7 @@
 <style>
 /*
 Theme Name: LIMÉRENCE
-Version: 0.8.18
+Version: 0.8.19
 Requires at least: 6.8
 Requires PHP: 8.1
 Text Domain: limerence
@@ -741,6 +741,10 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
 @media(max-width:479px){.lm-drawer{padding-inline:20px}.lm-drawer__bar{min-height:76px;margin-inline:-20px;padding-left:20px;padding-right:12px}}
 @media(prefers-reduced-motion:reduce){.lm-drawer a,.lm-drawer button,.lm-drawer__section-link svg{transition:none}.lm-drawer__section-link:hover svg{transform:none}}
 
+/* Reserve scrollbar space through menu lock and root/category changes. */
+html{scrollbar-gutter:stable}
+.lm-drawer{scrollbar-gutter:stable}
+
 /* Preview copy only: notice bar, static gallery, safe-area sticky header. */
 .lm-share{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:center;padding:10px 20px;background:var(--paper);color:var(--ink);font-size:12px;line-height:1.5;text-align:center}
 .lm-share strong{font-weight:600}
@@ -1191,24 +1195,34 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
     drawer.before(shade);
     drawer.tabIndex = -1;
     let sectionLink = null, opened = false, closing = false, revision = 0;
-    let motion = [], pageState = [];
-    const stopMotion = () => { motion.forEach(animation => animation.cancel()); motion = []; };
-    const animate = (node, frames, duration) => {
+    const motion = new Map();
+    let pageState = [];
+    const stopMotion = node => {
+      if (node) { motion.get(node)?.cancel(); motion.delete(node); }
+      else { motion.forEach(animation => animation.cancel()); motion.clear(); }
+    };
+    const animate = (node, frames, duration, hold = false) => {
+      stopMotion(node);
       if (reduced.matches || !node.animate) return null;
-      const animation = node.animate(frames, { duration, easing: 'cubic-bezier(.22,1,.36,1)' });
-      motion.push(animation);
+      // Hold the last exit frame until the entire drawer is hidden: the backdrop
+      // finishes first and must not flash back to its underlying opacity of 1.
+      const animation = node.animate(frames, { duration, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both' });
+      motion.set(node, animation);
+      if (!hold) animation.finished.then(() => {
+        if (motion.get(node) === animation) stopMotion(node);
+      }, () => {});
+      else animation.finished.catch(() => {});
       return animation;
     };
     const focusView = view => { view.tabIndex = -1; view.focus({ preventScroll: true }); };
     const back = (focus = true) => {
       const previous = sectionLink;
-      sections.forEach(panel => { panel.hidden = true; });
+      sections.forEach(panel => { stopMotion(panel); panel.hidden = true; });
       if (root) root.hidden = false;
       previous?.setAttribute('aria-expanded', 'false');
       sectionLink = null;
       drawer.scrollTop = 0;
       if (focus && root) {
-        stopMotion();
         animate(root, [{ opacity: 0, transform: 'translateX(-18px)' }, { opacity: 1, transform: 'translateX(0)' }], 240);
         previous?.focus({ preventScroll: true });
       }
@@ -1217,7 +1231,7 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
       const panel = sections.find(item => item.dataset.lmNavPanel === link.dataset.lmOpenSection);
       if (!panel || !root || closing) return;
       event.preventDefault();
-      stopMotion();
+      stopMotion(root);
       back(false);
       sectionLink = link;
       link.setAttribute('aria-expanded', 'true');
@@ -1241,9 +1255,12 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
       }
     };
     const set = async open => {
-      if (open === opened && !closing) return;
+      if (open === opened) return;
       const turn = ++revision;
-      stopMotion();
+      // Capture the rendered position before cancelling an interrupted entrance.
+      // Content transitions never cancel the independent drawer/backdrop motion.
+      const fromTransform = drawer.hidden ? 'translateX(-100%)' : getComputedStyle(drawer).transform;
+      const fromOpacity = shade.hidden ? 0 : getComputedStyle(shade).opacity;
       opened = open;
       closing = !open;
       burger.setAttribute('aria-expanded', String(open));
@@ -1251,12 +1268,12 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
         if (!pageState.length) isolate();
         drawer.hidden = shade.hidden = false;
         document.documentElement.classList.add('lm-locked');
-        animate(shade, [{ opacity: 0 }, { opacity: 1 }], 320);
-        animate(drawer, [{ transform: 'translateX(-100%)' }, { transform: 'translateX(0)' }], 380);
+        animate(shade, [{ opacity: fromOpacity }, { opacity: 1 }], 320);
+        animate(drawer, [{ transform: fromTransform }, { transform: 'translateX(0)' }], 380);
         focusView(drawer);
       } else {
-        animate(shade, [{ opacity: 1 }, { opacity: 0 }], 220);
-        const exit = animate(drawer, [{ transform: 'translateX(0)' }, { transform: 'translateX(-100%)' }], 260);
+        animate(shade, [{ opacity: fromOpacity }, { opacity: 0 }], 220, true);
+        const exit = animate(drawer, [{ transform: fromTransform }, { transform: 'translateX(-100%)' }], 260, true);
         if (exit) await exit.finished.catch(() => {});
         if (turn !== revision) return;
         drawer.hidden = shade.hidden = true;
