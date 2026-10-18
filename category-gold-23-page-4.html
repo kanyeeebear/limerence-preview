@@ -759,7 +759,51 @@ html{scrollbar-gutter:stable}
 .woocommerce-product-gallery__trigger{display:none}
 </style>
 <style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-</head>
+<style id="lm-lv-menu-style">/* Louis Vuitton reference: a quiet left rail, opening into names and photographs. */
+.lm-drawer-shade{background:rgb(0 0 0 / 60%)}
+.lm-drawer{width:min(var(--lm-menu-viewport-width,100vw),400px);padding-inline:32px}
+.lm-drawer__bar{min-height:88px;margin-inline:-32px;padding:0 24px 0 32px;flex-direction:row-reverse}
+.lm-drawer .lm-wordmark img{width:136px}
+.lm-drawer .lm-drawer__close{display:flex;align-items:center;gap:12px;width:auto;min-width:88px;padding:12px 0;font-size:12px;letter-spacing:0;text-transform:none}
+.lm-drawer__close svg{width:16px;height:16px}
+.lm-drawer [data-lm-nav-root]{display:flex;flex-direction:column}
+.lm-drawer [data-lm-nav-root]>nav{order:-1}
+.lm-drawer__sections>li>a{min-height:58px;padding:12px 0;font-size:20px}
+.lm-drawer__section-link svg{width:14px;height:14px}
+.lm-drawer__service{margin-top:28px!important;padding-top:20px!important;border:0}
+.lm-drawer__service a{padding-inline:0}
+.lm-drawer .lm-search-form{margin:24px 0 8px}
+.lm-drawer__category-links{display:none}
+.lm-drawer .lm-drawer__back{padding-inline:0;font-size:20px;margin-bottom:24px}
+.lm-drawer__label{position:relative;display:inline-block;padding-block:3px}
+.lm-drawer__label::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .32s cubic-bezier(.22,1,.36,1)}
+.lm-drawer__sections>li>a:hover,.lm-drawer__service a:hover,.lm-drawer__category-links a:hover,.lm-drawer .lm-drawer__back:hover,.lm-drawer .lm-drawer__close:hover{background:transparent;text-decoration:none}
+.lm-drawer a:focus-visible .lm-drawer__label::after{transform:scaleX(1);transform-origin:left}
+@media(hover:hover){.lm-drawer a:hover .lm-drawer__label::after{transform:scaleX(1);transform-origin:left}}
+@media(min-width:1024px){
+ .lm-top .lm-nav{display:none}
+ .lm-top .lm-top__burger{display:flex}
+ /* Reveal a fixed second column without resizing or squeezing its contents. */
+ .lm-drawer{width:880px;padding-inline:48px;clip-path:inset(0 480px 0 0);transition:clip-path .38s cubic-bezier(.22,1,.36,1)}
+ .lm-drawer:has(.lm-drawer__panel:not([hidden])){clip-path:inset(0)}
+ .lm-drawer__bar{width:400px;margin-inline:-48px;padding:0 32px 0 48px}
+ .lm-drawer [data-lm-nav-root]{width:289px}
+ .lm-drawer__panel{display:grid;grid-template-columns:289px 424px;grid-template-rows:auto auto 1fr;column-gap:56px;max-width:none;margin:0;min-height:calc(100dvh - 140px)}
+ .lm-drawer__back{grid-column:1;grid-row:1;align-self:start}
+ .lm-drawer__category-links{display:flex;flex-direction:column;grid-column:1;grid-row:2}
+ .lm-drawer__category-links a{display:flex;align-items:center;min-height:48px;font-size:17px;line-height:1.4;text-underline-offset:5px}
+ .lm-drawer__types{grid-column:2;grid-row:1/4;align-content:start;gap:16px 12px}
+ .lm-drawer__all{grid-column:1;grid-row:3;align-self:start;margin-top:32px;padding-top:20px;font-size:13px}
+ .lm-drawer__type span{justify-content:flex-start;text-align:left;padding-inline:0;font-size:14px}
+}
+@media(max-width:479px){
+ .lm-drawer{padding-inline:24px}
+ .lm-drawer__bar{min-height:80px;margin-inline:-24px;padding-inline:24px}
+ .lm-drawer__sections>li>a{min-height:56px}
+ .lm-drawer__types{gap:18px 12px}
+}
+@media(prefers-reduced-motion:reduce){.lm-drawer,.lm-drawer__label::after{transition:none}}
+</style></head>
 <body>
 <div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність наведені зі знімка вітрини від 05.10.2026. Добірка «Новинки» та відео каталогу показані як приклад для перегляду дизайну.</span><nav aria-label="Сторінки перегляду"><a href="index.html">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html">Сторінка товару</a></nav></div>
 <div class="archive paged tax-product_cat term-23 paged-4 wp-theme-limerence theme-limerence woocommerce woocommerce-page woocommerce-no-js">
@@ -1106,6 +1150,33 @@ html{scrollbar-gutter:stable}
     const root = drawer.querySelector('[data-lm-nav-root]');
     const sections = [...drawer.querySelectorAll('[data-lm-nav-panel]')];
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    // Keep the category names beside their photographs on a wide screen.
+    // Both views use the same links; mobile keeps the existing photo navigation.
+    sections.forEach(panel => {
+      const types = panel.querySelector('.lm-drawer__types');
+      if (!types) return;
+      const list = document.createElement('nav');
+      list.className = 'lm-drawer__category-links';
+      list.setAttribute('aria-label', panel.getAttribute('aria-label'));
+      types.querySelectorAll('a').forEach(item => {
+        const link = document.createElement('a');
+        link.href = item.href;
+        link.textContent = item.querySelector('span').textContent;
+        list.append(link);
+      });
+      types.before(list);
+    });
+    const closeLabel = document.createElement('span');
+    closeLabel.textContent = 'Закрити';
+    close.append(closeLabel);
+    drawer.querySelectorAll('.lm-drawer__sections a, .lm-drawer__service a, .lm-drawer__category-links a').forEach(link => {
+      const text = [...link.childNodes].find(node => node.nodeType === 3 && node.textContent.trim());
+      if (!text) return;
+      const label = document.createElement('span');
+      label.className = 'lm-drawer__label';
+      label.textContent = text.textContent;
+      text.replaceWith(label);
+    });
     const shade = document.createElement('div');
     shade.className = 'lm-drawer-shade';
     shade.hidden = true;
@@ -1147,13 +1218,13 @@ html{scrollbar-gutter:stable}
       sectionLink = null;
       drawer.scrollTop = 0;
       if (focus && root) {
-        animate(root, [{ opacity: 0, transform: 'translateX(-18px)' }, { opacity: 1, transform: 'translateX(0)' }], 240);
+        animate(root, [{ opacity: 0, transform: 'translateX(-32px)' }, { opacity: 1, transform: 'translateX(0)' }], 280);
         previous?.focus({ preventScroll: true });
       }
     };
     drawer.querySelectorAll('[data-lm-open-section]').forEach(link => link.addEventListener('click', event => {
       const panel = sections.find(item => item.dataset.lmNavPanel === link.dataset.lmOpenSection);
-      if (!panel || !root || closing) return;
+      if (!panel || !root || closing || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button > 0) return;
       event.preventDefault();
       stopMotion(root);
       back(false);
@@ -1162,7 +1233,7 @@ html{scrollbar-gutter:stable}
       root.hidden = true;
       panel.hidden = false;
       drawer.scrollTop = 0;
-      animate(panel, [{ opacity: 0, transform: 'translateX(24px)' }, { opacity: 1, transform: 'translateX(0)' }], 280);
+      animate(panel, [{ opacity: 0, transform: 'translateX(48px)' }, { opacity: 1, transform: 'translateX(0)' }], 360);
       focusView(panel);
     }));
     drawer.querySelectorAll('[data-lm-nav-back]').forEach(button => button.addEventListener('click', () => { if (!closing) back(); }));
@@ -1183,7 +1254,7 @@ html{scrollbar-gutter:stable}
       const turn = ++revision;
       // Capture the rendered position before cancelling an interrupted entrance.
       // Content transitions never cancel the independent drawer/backdrop motion.
-      const fromTransform = drawer.hidden ? 'translateX(-100%)' : getComputedStyle(drawer).transform;
+      const fromTransform = drawer.hidden ? (innerWidth >= 1024 ? 'translateX(-400px)' : 'translateX(-100%)') : getComputedStyle(drawer).transform;
       const fromOpacity = shade.hidden ? 0 : getComputedStyle(shade).opacity;
       opened = open;
       closing = !open;
@@ -1193,12 +1264,12 @@ html{scrollbar-gutter:stable}
         if (!pageState.length) isolate();
         drawer.hidden = shade.hidden = false;
         document.documentElement.classList.add('lm-locked');
-        animate(shade, [{ opacity: fromOpacity }, { opacity: 1 }], 320);
-        animate(drawer, [{ transform: fromTransform }, { transform: 'translateX(0)' }], 380);
+        animate(shade, [{ opacity: fromOpacity }, { opacity: 1 }], 360);
+        animate(drawer, [{ transform: fromTransform }, { transform: 'translateX(0)' }], 460);
         focusView(drawer);
       } else {
         animate(shade, [{ opacity: fromOpacity }, { opacity: 0 }], 220, true);
-        const exit = animate(drawer, [{ transform: fromTransform }, { transform: 'translateX(-100%)' }], 260, true);
+        const exit = animate(drawer, [{ transform: fromTransform }, { transform: innerWidth >= 1024 && !sectionLink ? 'translateX(-400px)' : 'translateX(-100%)' }], 260, true);
         if (exit) await exit.finished.catch(() => {});
         if (turn !== revision) return;
         drawer.hidden = shade.hidden = true;
@@ -1227,26 +1298,11 @@ html{scrollbar-gutter:stable}
       if (event.shiftKey && (document.activeElement === first || !stops.includes(document.activeElement))) { event.preventDefault(); last.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     });
-    // The sections stay in the header only while they clear the centred logo; otherwise the menu button takes over.
+    // The sections stay in the drawer at every width, as in the chosen reference.
     const top = document.querySelector('.lm-top');
-    const items = top ? [...top.querySelectorAll('.lm-nav > ul > li')] : [];
-    const mark = top?.querySelector('.lm-wordmark');
-    const wide = matchMedia('(min-width: 1024px)');
     const fitNav = () => {
       if (!drawer.hidden) fitDrawer();
-      if (!items.length || !mark) return;
-      let fits = false;
-      if (wide.matches) {
-        const style = getComputedStyle(top);
-        const side = (top.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - mark.getBoundingClientRect().width) / 2;
-        // The gaps between the sections give first, from 30px down to 12px; the logo keeps 24px of air.
-        const names = items.reduce((sum, item) => sum + item.getBoundingClientRect().width, 0);
-        const gap = Math.min(30, Math.floor((side - 24 - names) / Math.max(1, items.length - 1) * 10) / 10);
-        fits = items.length > 1 ? gap >= 12 : names + 24 <= side;
-        if (fits) top.style.setProperty('--lm-nav-gap', gap + 'px');
-      }
-      top.dataset.lmNav = fits ? 'fits' : 'burger';
-      if (fits && !drawer.hidden) set(false);
+      if (top) top.dataset.lmNav = 'burger';
     };
     fitNav(); addEventListener('resize', fitNav); document.fonts?.ready.then(fitNav);
   }
