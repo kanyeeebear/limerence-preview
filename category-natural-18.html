@@ -813,7 +813,22 @@ html{scrollbar-gutter:stable}
 .lm-filters:not(.lm-filters--gift) .lm-filter-fields button[type=submit]{grid-column:1/-1;min-height:44px;margin:0;padding:10px 12px;font-size:11px;line-height:18px;letter-spacing:.06em}
 .lm-filters:not(.lm-filters--gift) .lm-filters__reset{grid-column:1/-1;margin:0}
 @media(max-width:899px){.lm-filters:not(.lm-filters--gift) .lm-filter-fields :is(input:not([type=checkbox]),select){font-size:16px}}
-</style></head>
+</style><style id="lm-lang-css">/* UA · EN:quiet letters beside the search on wide screens; in the drawer on narrow ones. */
+.lm-lang{display:flex;align-items:center;list-style:none;margin:0;padding:0}
+.lm-lang li+li::before{content:"·";color:var(--muted)}
+.lm-lang a{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;font-size:11px;letter-spacing:.12em;color:var(--muted);text-decoration:none;transition:color .2s var(--ease)}
+.lm-lang a:hover,.lm-lang a[aria-current]{color:var(--ink)}
+.lm-lang--top{margin-right:6px}
+.lm-lang--drawer{margin-top:20px}
+.lm-lang--drawer a{font-size:13px}
+.lm-lang--drawer li:first-child a{padding-left:0}
+@media(max-width:1023px){.lm-lang--top{display:none}}
+@media(min-width:1024px){.lm-lang--drawer{display:none}}
+
+/* «Інший отримувач»: one box under the contacts; the recipient's name and phone open only when it is ticked. */
+.lm-recipient-toggle label.checkbox{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:13px;margin:0;cursor:pointer}
+.lm-recipient-toggle .optional{display:none}
+.woocommerce-checkout form.checkout:not(:has(#lm_other_recipient:checked)) .lm-recipient{display:none}</style></head>
 <body>
 <div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність наведені зі знімка вітрини від 05.10.2026. Добірка «Новинки» та відео каталогу показані як приклад для перегляду дизайну.</span><nav aria-label="Сторінки перегляду"><a href="index.html">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html">Сторінка товару</a></nav></div>
 <div class="archive tax-product_cat term-18 wp-theme-limerence theme-limerence woocommerce woocommerce-page woocommerce-no-js">
@@ -875,7 +890,7 @@ html{scrollbar-gutter:stable}
             </ul>
         </nav>
                 <a class="lm-wordmark" href="index.html"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></a>
-        <div class="lm-top__actions">
+        <div class="lm-top__actions"><ul class="lm-lang lm-lang--top"><li><a href="category-natural-18.html" hreflang="uk" lang="uk" aria-label="Українська" aria-current="true">UA</a></li><li><a href="en/category-natural-18.html" hreflang="en" lang="en" aria-label="English">EN</a></li></ul>
             <details class="lm-top__search">
                 <summary aria-label="Пошук"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></summary>
                 <div class="lm-top__search-panel">    <form class="lm-search-form" role="search" method="get" action="#">
@@ -913,7 +928,7 @@ html{scrollbar-gutter:stable}
                 <li><a href="catalog.html">Усі прикраси</a></li>
                 <li><a href="#" data-off>Мої бажання</a></li>
                 <li><a href="#" data-off>Доставка та оплата</a></li>
-                <li><a href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Консультант у Telegram</a></li>            </ul>
+                <li><a href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Консультант у Telegram</a></li>            </ul><ul class="lm-lang lm-lang--drawer"><li><a href="category-natural-18.html" hreflang="uk" lang="uk" aria-label="Українська" aria-current="true">UA</a></li><li><a href="en/category-natural-18.html" hreflang="en" lang="en" aria-label="English">EN</a></li></ul>
         </nav>
         </div>
                 <section id="lm-nav-gold" class="lm-drawer__panel" data-lm-nav-panel="gold" aria-label="Золото" hidden>
