@@ -377,8 +377,10 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 @media(max-width:899px){.lm-wrap.lm-page{padding-top:24px}}
 
 /* ── 0.3.1 Phone first: the buttons' own colour, the section's name ahead of its filters ── */
-:root{--button:var(--ink);--button-hover:#202020;--button-active:#151515}
+/* 0.8.28: a dark warm chocolate instead of graphite, with barely softened corners. */
+:root{--button:#3b2a22;--button-hover:#31221b;--button-active:#271b15}
 button,.button,input[type=submit]{border-color:var(--button);background:#fff;box-shadow:none;text-shadow:none}
+:is(.button,button[type=submit],input[type=submit]){border-radius:3px}
 /* One interaction palette for outlined actions, including keyboard and touch. */
 @media(hover:hover){
  :is(.button,button[type=submit],input[type=submit],.lm-share-result button):not(:disabled):not(.disabled):not([aria-disabled=true]):hover{background:var(--button);border-color:var(--button);color:#fff;text-decoration:none}
