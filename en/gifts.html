@@ -828,7 +828,52 @@ html{scrollbar-gutter:stable}
 /* «Інший отримувач»: one box under the contacts; the recipient's name and phone open only when it is ticked. */
 .lm-recipient-toggle label.checkbox{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:13px;margin:0;cursor:pointer}
 .lm-recipient-toggle .optional{display:none}
-.woocommerce-checkout form.checkout:not(:has(#lm_other_recipient:checked)) .lm-recipient{display:none}</style></head>
+.woocommerce-checkout form.checkout:not(:has(#lm_other_recipient:checked)) .lm-recipient{display:none}
+/* Cart panel: what the cart holds slides in beside the page, from the side of the header's bag. */
+.lm-cart{position:fixed;inset:var(--lm-bar,0px) 0 0 auto;z-index:40;display:flex;flex-direction:column;width:min(100vw,440px);background:#fff;overscroll-behavior:contain;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+.lm-cart[hidden]{display:none}
+.lm-cart:focus{outline:none}
+.lm-cart__bar{display:flex;align-items:center;justify-content:space-between;flex:none;min-height:82px;padding:0 16px 0 24px;border-bottom:1px solid var(--line)}
+.lm-cart__bar h2{margin:0;font-size:26px}
+.lm-cart .lm-cart__close{width:44px;height:44px;padding:11px;border:0;background:none;color:var(--ink)}
+.lm-cart__status{flex:none;margin:0;padding:0 24px;font-size:12px;letter-spacing:.3px;color:var(--ink-soft)}
+.lm-cart__status:not(:empty){padding-top:14px}
+.lm-cart__body{flex:1;display:flex;flex-direction:column;min-height:0}
+.lm-cart__items{flex:1;min-height:0;overflow-y:auto;list-style:none;margin:0;padding:4px 24px}
+.lm-cart__item{display:grid;grid-template-columns:80px minmax(0,1fr) auto;column-gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.lm-cart__item:last-child{border-bottom:0}
+.lm-cart__photo{display:block;aspect-ratio:4/5;background:var(--paper)}
+.lm-cart__photo img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.lm-cart__name{margin:0;font-size:14px;line-height:1.4}
+.lm-cart__name a:hover{text-decoration:underline}
+.lm-cart dl.variation{display:flex;flex-wrap:wrap;gap:0 5px;margin:4px 0 0;font-size:12px;color:var(--muted)}
+.lm-cart dl.variation dd{margin:0 8px 0 0}
+.lm-cart dl.variation p{margin:0}
+.lm-cart__qty{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.lm-cart .lm-cart__remove{min-height:44px;padding:0;border:0;background:none;color:var(--muted);font-size:12px;font-weight:400;text-decoration:underline;text-underline-offset:3px}
+.lm-cart .lm-cart__remove[aria-busy=true]{opacity:.5;cursor:progress}
+.lm-cart__price{margin:0;font-size:13px;font-weight:500;white-space:nowrap}
+.lm-cart__foot{flex:none;padding:20px 24px 24px;border-top:1px solid var(--line)}
+.lm-cart__sum{display:flex;justify-content:space-between;margin:0;font-size:15px;font-weight:500}
+.lm-cart__note{margin:2px 0 16px;font-size:12px;color:var(--muted)}
+.lm-cart__view{display:flex;align-items:center;justify-content:center;min-height:44px;margin-top:6px;font-size:12px;text-decoration:underline;text-underline-offset:3px}
+.lm-cart__empty,.lm-cart__wait{margin:0;padding:24px 24px 8px;color:var(--ink-soft)}
+.lm-cart__empty-way{margin:0;padding:8px 24px}
+@media(hover:hover){.lm-cart .lm-cart__close:hover{background:var(--paper)}.lm-cart .lm-cart__remove:hover{color:var(--ink)}}
+@media(max-width:479px){.lm-cart__bar{min-height:76px;padding-left:20px;padding-right:12px}.lm-cart__items{padding-inline:20px}.lm-cart__foot{padding-inline:20px}.lm-cart__status{padding-inline:20px}.lm-cart__item{grid-template-columns:68px minmax(0,1fr) auto;column-gap:12px}}
+@media(max-width:600px){.admin-bar .lm-cart{z-index:100000}.admin-bar .lm-cart-shade{z-index:99999}}
+/* A piece with nothing to choose goes to the cart from its tile: the bag sits on the price's line, at the tile's edge. */
+/* The tile ends at its price, not at the row's tallest neighbour, so the bag stays on its own price's line. */
+.products .product:has(.lm-add){align-self:start}
+.products .product .lm-add{position:absolute;right:-11px;bottom:-11px;z-index:1;width:44px;min-height:44px;padding:11px;border:0;background:none;color:var(--ink)}
+.lm-add svg{width:22px;height:22px}
+.lm-add[aria-busy=true]{opacity:.45;cursor:progress}
+@media(hover:hover){.lm-add:hover svg{fill:var(--paper)}}
+/* The cart's number answers an added piece with one short beat. */
+@keyframes lm-count-beat{0%{transform:scale(1)}35%{transform:scale(1.35)}100%{transform:scale(1)}}
+.lm-count.is-beat{animation:lm-count-beat .45s var(--ease)}
+@media(prefers-reduced-motion:reduce){.lm-count.is-beat{animation:none}}
+</style></head>
 <body>
 <div class="lm-share"><span><strong>LIMÉRENCE design preview.</strong> This is not a shop: ordering and payment do not work. Prices and availability come from a snapshot of the shop on 05.10.2026. The New arrivals selection and catalogue videos are shown as examples for the design review.</span><nav aria-label="Preview pages"><a href="en/index.html">Home</a><a href="en/gold.html">«Gold» section</a><a href="en/product.html">Product page</a></nav></div>
 <div class="home archive post-type-archive post-type-archive-product wp-theme-limerence theme-limerence woocommerce-shop woocommerce woocommerce-page woocommerce-no-js">
@@ -901,7 +946,7 @@ html{scrollbar-gutter:stable}
 </div>
             </details>
             <a href="en/gifts.html#" data-off aria-label="Wishlist"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span class="lm-count" data-lm-count="wishlist" hidden></span></a>
-            <a href="en/gifts.html#" data-off aria-label="Bag"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg><span class="lm-count" data-lm-count="cart" hidden></span></a>
+            <a href="en/gifts.html#" data-off aria-label="Bag" data-lm-cart><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg><span class="lm-count" data-lm-count="cart" hidden></span></a>
         </div>
     </header>
     <div class="lm-drawer" id="lm-drawer" role="dialog" aria-modal="true" aria-label="Menu" hidden>
@@ -1066,139 +1111,139 @@ html{scrollbar-gutter:stable}
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Threader earrings<span class="screen-reader-text">, ref. 580083</span></h2><p class="lm-material">585 rose gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>19 795&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 19 795 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 845&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 14 845 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2414" aria-pressed="false" aria-label="Save Threader earrings 580083"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2414" aria-pressed="false" aria-label="Save Threader earrings 580083"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3499" aria-label="Add to bag: Threader earrings 580083" data-lm-names="{&quot;uk&quot;: &quot;Протяжки 580083&quot;, &quot;en&quot;: &quot;Threader earrings 580083&quot;}" data-lm-price="14845"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2423 status-publish instock product_cat-23 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/transformery409-53160081.webp" class="lm-packshot" alt="Convertible studs 700409" style="filter:brightness(1)" decoding="async" /><span class="lm-card-alt" data-src="img/transformery409-53160082.webp"></span>
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Convertible studs<span class="screen-reader-text">, ref. 700409</span></h2><p class="lm-material">585 rose and white gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>16 170&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 16 170 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>12 125&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 12 125 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2423" aria-pressed="false" aria-label="Save Convertible studs 700409"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2423" aria-pressed="false" aria-label="Save Convertible studs 700409"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3508" aria-label="Add to bag: Convertible studs 700409" data-lm-names="{&quot;uk&quot;: &quot;Пусети-трансформери 700409&quot;, &quot;en&quot;: &quot;Convertible studs 700409&quot;}" data-lm-price="12125"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2422 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img src="img/serrzhki122-clean-v1-first.webp" width="1280" height="1229" class="lm-packshot" style="filter:brightness(1.0);padding:10%" alt="Earrings 122" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/serrzhki122-61593458-first.webp"></span>
 	<span class="onsale">−10%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 122</span></h2><p class="lm-material">Sterling silver 925</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 2 850 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 565&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 2 565 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2422" aria-pressed="false" aria-label="Save Earrings 122"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2422" aria-pressed="false" aria-label="Save Earrings 122"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3507" aria-label="Add to bag: Earrings 122" data-lm-names="{&quot;uk&quot;: &quot;Сережки 122&quot;, &quot;en&quot;: &quot;Earrings 122&quot;}" data-lm-price="2565"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2410 status-publish first instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi568-75737586.webp" class="lm-packshot" alt="Earrings 20568" style="filter:brightness(1.004)" decoding="async" loading="lazy" />
 	<span class="onsale">−10%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 20568</span></h2><p class="lm-material">Sterling silver 925</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 750&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 1 750 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 575&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 1 575 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2410" aria-pressed="false" aria-label="Save Earrings 20568"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2410" aria-pressed="false" aria-label="Save Earrings 20568"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3495" aria-label="Add to bag: Earrings 20568" data-lm-names="{&quot;uk&quot;: &quot;Сережки 20568&quot;, &quot;en&quot;: &quot;Earrings 20568&quot;}" data-lm-price="1575"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2399 status-publish instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img src="img/sergi217-ai-v1-first.webp" width="1254" height="1254" class="lm-packshot" style="filter:brightness(1.0);padding:14%" alt="Earrings 212792" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/sergi217-57776192.webp"></span>
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 212792</span></h2><p class="lm-material">585 rose gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>39 100&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 39 100 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>29 325&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 29 325 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2399" aria-pressed="false" aria-label="Save Earrings 212792"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2399" aria-pressed="false" aria-label="Save Earrings 212792"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3484" aria-label="Add to bag: Earrings 212792" data-lm-names="{&quot;uk&quot;: &quot;Сережки 212792&quot;, &quot;en&quot;: &quot;Earrings 212792&quot;}" data-lm-price="29325"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2393 status-publish instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="745" src="img/sergi1201-58378823.webp" class="lm-packshot" alt="Earrings 26120" style="filter:brightness(1)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/sergi1201-60302625.webp"></span>
 	<span class="onsale">−10%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 26120</span></h2><p class="lm-material">Sterling silver 925</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 1 650 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 485&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 1 485 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2393" aria-pressed="false" aria-label="Save Earrings 26120"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2393" aria-pressed="false" aria-label="Save Earrings 26120"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3478" aria-label="Add to bag: Earrings 26120" data-lm-names="{&quot;uk&quot;: &quot;Сережки 26120&quot;, &quot;en&quot;: &quot;Earrings 26120&quot;}" data-lm-price="1485"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2406 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img src="img/sergi48-67482390-first.webp" width="1024" height="1024" class="lm-packshot" style="filter:brightness(1.001)" alt="Earrings 33" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/sergi48-60189565.webp"></span>
 	<span class="onsale">−10%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 33</span></h2><p class="lm-material">Sterling silver 925</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 2 650 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>2 385&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 2 385 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2406" aria-pressed="false" aria-label="Save Earrings 33"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2406" aria-pressed="false" aria-label="Save Earrings 33"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3491" aria-label="Add to bag: Earrings 33" data-lm-names="{&quot;uk&quot;: &quot;Сережки 33&quot;, &quot;en&quot;: &quot;Earrings 33&quot;}" data-lm-price="2385"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2418 status-publish first instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="835" src="img/sergi851-57927549.webp" class="lm-packshot" alt="Earrings 330" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−10%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 330</span></h2><p class="lm-material">Sterling silver 925</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 550&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 1 550 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 395&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 1 395 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2418" aria-pressed="false" aria-label="Save Earrings 330"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2418" aria-pressed="false" aria-label="Save Earrings 330"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3503" aria-label="Add to bag: Earrings 330" data-lm-names="{&quot;uk&quot;: &quot;Сережки 330&quot;, &quot;en&quot;: &quot;Earrings 330&quot;}" data-lm-price="1395"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2408 status-publish instock product_cat-23 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img src="img/sergi512-fidelity-v1-first.webp" width="1254" height="1254" class="lm-packshot" style="filter:brightness(1.0);padding:9%" alt="Earrings 331512" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/sergi512-57762152.webp"></span>
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 331512</span></h2><p class="lm-material">585 rose gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>32 535&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 32 535 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>24 400&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 24 400 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2408" aria-pressed="false" aria-label="Save Earrings 331512"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2408" aria-pressed="false" aria-label="Save Earrings 331512"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3493" aria-label="Add to bag: Earrings 331512" data-lm-names="{&quot;uk&quot;: &quot;Сережки 331512&quot;, &quot;en&quot;: &quot;Earrings 331512&quot;}" data-lm-price="24400"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2403 status-publish instock product_cat-23 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi38-74975168.webp" class="lm-packshot" alt="Earrings 382830" style="filter:brightness(1.004)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/sergi38-57762122.webp"></span>
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 382830</span></h2><p class="lm-material">585 rose gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>28 225&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 28 225 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>21 170&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 21 170 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2403" aria-pressed="false" aria-label="Save Earrings 382830"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2403" aria-pressed="false" aria-label="Save Earrings 382830"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3488" aria-label="Add to bag: Earrings 382830" data-lm-names="{&quot;uk&quot;: &quot;Сережки 382830&quot;, &quot;en&quot;: &quot;Earrings 382830&quot;}" data-lm-price="21170"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2411 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="1080" src="img/sergi58-74974708.webp" class="lm-packshot" alt="Earrings 500667" style="filter:brightness(1.004)" decoding="async" loading="lazy" />
 	<span class="onsale">−10%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 500667</span></h2><p class="lm-material">Sterling silver 925</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 650&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 1 650 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 485&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 1 485 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2411" aria-pressed="false" aria-label="Save Earrings 500667"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2411" aria-pressed="false" aria-label="Save Earrings 500667"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3496" aria-label="Add to bag: Earrings 500667" data-lm-names="{&quot;uk&quot;: &quot;Сережки 500667&quot;, &quot;en&quot;: &quot;Earrings 500667&quot;}" data-lm-price="1485"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2398 status-publish first instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/sergi213-57030231.webp" class="lm-packshot" alt="Earrings 60213" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 60213</span></h2><p class="lm-material">585 rose and white gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>23 620&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 23 620 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>17 715&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 17 715 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2398" aria-pressed="false" aria-label="Save Earrings 60213"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2398" aria-pressed="false" aria-label="Save Earrings 60213"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3483" aria-label="Add to bag: Earrings 60213" data-lm-names="{&quot;uk&quot;: &quot;Сережки 60213&quot;, &quot;en&quot;: &quot;Earrings 60213&quot;}" data-lm-price="17715"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2404 status-publish instock product_cat-22 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/sergi384-49962196.webp" class="lm-packshot" alt="Earrings 700226" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 700226</span></h2><p class="lm-material">585 rose gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 800&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 14 800 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>11 100&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 11 100 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2404" aria-pressed="false" aria-label="Save Earrings 700226"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2404" aria-pressed="false" aria-label="Save Earrings 700226"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3489" aria-label="Add to bag: Earrings 700226" data-lm-names="{&quot;uk&quot;: &quot;Сережки 700226&quot;, &quot;en&quot;: &quot;Earrings 700226&quot;}" data-lm-price="11100"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2409 status-publish instock product_cat-22 product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/sergi528-49961779.webp" class="lm-packshot" alt="Earrings 700231" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 700231</span></h2><p class="lm-material">585 rose gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>13 130&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 13 130 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>9 845&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 9 845 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2409" aria-pressed="false" aria-label="Save Earrings 700231"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2409" aria-pressed="false" aria-label="Save Earrings 700231"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3494" aria-label="Add to bag: Earrings 700231" data-lm-names="{&quot;uk&quot;: &quot;Сережки 700231&quot;, &quot;en&quot;: &quot;Earrings 700231&quot;}" data-lm-price="9845"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2379 status-publish last instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/serezhki930-68713826.webp" class="lm-packshot" alt="Earrings 930" style="filter:brightness(1.009)" decoding="async" loading="lazy" />
 	<span class="onsale">−10%</span>
 	</span><h2 class="woocommerce-loop-product__title">Earrings<span class="screen-reader-text">, ref. 930</span></h2><p class="lm-material">Sterling silver 925</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 750&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 1 750 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 575&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 1 575 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2379" aria-pressed="false" aria-label="Save Earrings 930"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2379" aria-pressed="false" aria-label="Save Earrings 930"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3462" aria-label="Add to bag: Earrings 930" data-lm-names="{&quot;uk&quot;: &quot;Сережки 930&quot;, &quot;en&quot;: &quot;Earrings 930&quot;}" data-lm-price="1575"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2386 status-publish first instock product_cat-17 has-post-thumbnail sale featured shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="786" src="img/sergi02-57480728.webp" class="lm-packshot" alt="Convertible earrings 32702411" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−10%</span>
 	</span><h2 class="woocommerce-loop-product__title">Convertible earrings<span class="screen-reader-text">, ref. 32702411</span></h2><p class="lm-material">Sterling silver 925</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 850&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 1 850 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 665&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 1 665 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2386" aria-pressed="false" aria-label="Save Convertible earrings 32702411"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2386" aria-pressed="false" aria-label="Save Convertible earrings 32702411"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3471" aria-label="Add to bag: Convertible earrings 32702411" data-lm-names="{&quot;uk&quot;: &quot;Сережки трансформери 32702411&quot;, &quot;en&quot;: &quot;Convertible earrings 32702411&quot;}" data-lm-price="1665"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-1681 status-publish instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img src="img/braslet0207-clean-v1-first.webp" width="1254" height="1254" class="lm-packshot" style="filter:brightness(1.0);padding:10%" alt="Bracelet 04207" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/braslet0207-68729400-first.webp"></span>
 	<span class="onsale">−20%</span>
 	</span><h2 class="woocommerce-loop-product__title">Bracelet<span class="screen-reader-text">, ref. 04207</span></h2><p class="lm-material">585 rose gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>12 640&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 12 640 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>10 110&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 10 110 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1681" aria-pressed="false" aria-label="Save Bracelet 04207"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="1681" aria-pressed="false" aria-label="Save Bracelet 04207"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="2504" aria-label="Add to bag: Bracelet 04207" data-lm-names="{&quot;uk&quot;: &quot;Браслет 04207&quot;, &quot;en&quot;: &quot;Bracelet 04207&quot;}" data-lm-price="10110"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-1688 status-publish instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img src="img/braslet102-74901302-first.webp" width="1536" height="1024" class="lm-packshot" style="filter:brightness(1.0);padding:10%" alt="Bracelet 102" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/braslet102-62721781.webp"></span>
 	<span class="onsale">−20%</span>
 	</span><h2 class="woocommerce-loop-product__title">Bracelet<span class="screen-reader-text">, ref. 102</span></h2><p class="lm-material">585 white gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>17 640&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 17 640 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 110&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 14 110 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1688" aria-pressed="false" aria-label="Save Bracelet 102"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="1688" aria-pressed="false" aria-label="Save Bracelet 102"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="2511" aria-label="Add to bag: Bracelet 102" data-lm-names="{&quot;uk&quot;: &quot;Браслет 102&quot;, &quot;en&quot;: &quot;Bracelet 102&quot;}" data-lm-price="14110"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-1690 status-publish last instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="658" src="img/braslet112-62642104.webp" class="lm-packshot" alt="Bracelet 112" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−10%</span>
 	</span><h2 class="woocommerce-loop-product__title">Bracelet<span class="screen-reader-text">, ref. 112</span></h2><p class="lm-material">Sterling silver 925</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 050&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 1 050 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>945&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 945 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1690" aria-pressed="false" aria-label="Save Bracelet 112"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="1690" aria-pressed="false" aria-label="Save Bracelet 112"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="2513" aria-label="Add to bag: Bracelet 112" data-lm-names="{&quot;uk&quot;: &quot;Браслет 112&quot;, &quot;en&quot;: &quot;Bracelet 112&quot;}" data-lm-price="945"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-1693 status-publish first instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img src="img/braslet120-76293766-first.webp" width="1536" height="1024" class="lm-packshot" style="filter:brightness(1.004)" alt="Bracelet 120" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/braslet120-67851612.webp"></span>
 	<span class="onsale">−20%</span>
 	</span><h2 class="woocommerce-loop-product__title">Bracelet<span class="screen-reader-text">, ref. 120</span></h2><p class="lm-material">585 rose gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>24 600&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 24 600 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>19 680&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 19 680 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1693" aria-pressed="false" aria-label="Save Bracelet 120"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="1693" aria-pressed="false" aria-label="Save Bracelet 120"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="2516" aria-label="Add to bag: Bracelet 120" data-lm-names="{&quot;uk&quot;: &quot;Браслет 120&quot;, &quot;en&quot;: &quot;Bracelet 120&quot;}" data-lm-price="19680"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-1694 status-publish instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/braslet1200-76293736.webp" class="lm-packshot" alt="Bracelet 120б" style="filter:brightness(1.003)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/braslet1200-76293740.webp" data-lift="1.008"></span>
 	<span class="onsale">−20%</span>
 	</span><h2 class="woocommerce-loop-product__title">Bracelet<span class="screen-reader-text">, ref. 120б</span></h2><p class="lm-material">585 white gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>23 520&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 23 520 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>18 815&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 18 815 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1694" aria-pressed="false" aria-label="Save Bracelet 120б"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="1694" aria-pressed="false" aria-label="Save Bracelet 120б"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="2517" aria-label="Add to bag: Bracelet 120б" data-lm-names="{&quot;uk&quot;: &quot;Браслет 120б&quot;, &quot;en&quot;: &quot;Bracelet 120б&quot;}" data-lm-price="18815"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-1697 status-publish instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="480" src="img/braslet139-74975312.webp" class="lm-packshot" alt="Bracelet 139" style="filter:brightness(1.004)" decoding="async" loading="lazy" />
 	<span class="onsale">−10%</span>
 	</span><h2 class="woocommerce-loop-product__title">Bracelet<span class="screen-reader-text">, ref. 139</span></h2><p class="lm-material">Sterling silver 925</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 250&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 1 250 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>1 125&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 1 125 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1697" aria-pressed="false" aria-label="Save Bracelet 139"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="1697" aria-pressed="false" aria-label="Save Bracelet 139"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="2520" aria-label="Add to bag: Bracelet 139" data-lm-names="{&quot;uk&quot;: &quot;Браслет 139&quot;, &quot;en&quot;: &quot;Bracelet 139&quot;}" data-lm-price="1125"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-1705 status-publish last instock product_cat-19 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="en/gifts.html#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="644" src="img/braslet186-74836378.webp" class="lm-packshot" alt="Bracelet 1698750277616" style="filter:brightness(1.011)" decoding="async" loading="lazy" />
 	<span class="onsale">−20%</span>
 	</span><h2 class="woocommerce-loop-product__title">Bracelet<span class="screen-reader-text">, ref. 1698750277616</span></h2><p class="lm-material">585 white gold</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>12 150&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Original price was: 12 150 ₴.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>9 720&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Current price is: 9 720 ₴.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1705" aria-pressed="false" aria-label="Save Bracelet 1698750277616"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="1705" aria-pressed="false" aria-label="Save Bracelet 1698750277616"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="2528" aria-label="Add to bag: Bracelet 1698750277616" data-lm-names="{&quot;uk&quot;: &quot;Браслет 1698750277616 - 16&quot;, &quot;en&quot;: &quot;Bracelet 1698750277616 - 16&quot;}" data-lm-price="9720"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 </ul>
 <nav class="woocommerce-pagination" aria-label="Product pagination">
 	<ul class='page-numbers'>
@@ -1911,9 +1956,9 @@ html{scrollbar-gutter:stable}
     setTimeout(() => note?.remove(), 3200);
   };
   document.addEventListener('click', event => {
-    if (event.target.closest('a[data-off], .single_add_to_cart_button, .lm-wish, .lm-save-product')) { event.preventDefault(); say(); }
+    if (!event.defaultPrevented && event.target.closest('a[data-off], .lm-wish, .lm-save-product')) { event.preventDefault(); say(); }
   });
-  document.addEventListener('submit', event => { event.preventDefault(); say(); });
+  document.addEventListener('submit', event => { if (event.target.matches?.('form.cart')) return; event.preventDefault(); say(); });
   // Product page: a small photograph becomes the large one when chosen.
   const shots = [...document.querySelectorAll('.woocommerce-product-gallery__image img')];
   for (const shot of shots.slice(1)) shot.addEventListener('click', () => { [shots[0].src, shot.src] = [shot.src, shots[0].src]; });
@@ -1927,6 +1972,264 @@ html{scrollbar-gutter:stable}
     try { from = new URL(document.referrer); } catch { return; }
     if (from.origin === location.origin && (from.pathname.endsWith('/gold.html') || from.pathname.endsWith('/index.html') || from.pathname.endsWith('/')) && !location.hash && history.length > 1) { event.preventDefault(); history.back(); }
   }, true);
+})();
+</script>
+<div class="lm-cart" id="lm-cart" role="dialog" aria-modal="true" aria-labelledby="lm-cart-title" data-endpoint="lm-preview-cart" data-added="Added to your bag" data-failed="Could not update the bag. Please try again." data-lm-preview-text="{&quot;empty&quot;: &quot;Your bag is empty.&quot;, &quot;toCatalog&quot;: &quot;Go to the catalogue&quot;, &quot;catalog&quot;: &quot;en/catalog.html&quot;, &quot;qty&quot;: &quot;Quantity:&quot;, &quot;remove&quot;: &quot;Remove&quot;, &quot;removeFrom&quot;: &quot;Remove from bag: &quot;, &quot;sum&quot;: &quot;Subtotal&quot;, &quot;note&quot;: &quot;Delivery is calculated at checkout.&quot;, &quot;checkout&quot;: &quot;Checkout&quot;, &quot;view&quot;: &quot;View bag&quot;, &quot;failed&quot;: &quot;Could not update the bag. Please try again.&quot;, &quot;choose&quot;: &quot;Choose an option to add the piece to your bag.&quot;, &quot;gone&quot;: &quot;This option is not in stock right now.&quot;}" hidden><div class="lm-cart__bar"><h2 id="lm-cart-title">Bag</h2><button type="button" class="lm-cart__close" aria-label="Close bag"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg></button></div><p class="lm-cart__status" role="status"></p><div class="lm-cart__body" data-lm-cart-body></div></div>
+<script>
+(() => {
+  'use strict';
+  const panel = document.getElementById('lm-cart');
+  if (!panel) return;
+  const T = JSON.parse(panel.dataset.lmPreviewText);
+  const KEY = 'lm-preview-cart';
+  // One cart for both languages: a line keeps its name in each language and its page without the en/ prefix.
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'uk';
+  const root = new URL('./', document.baseURI).href;
+  const pathOf = url => { try { const at = new URL(url, document.baseURI).href.split('#')[0]; return at.startsWith(root) ? at.slice(root.length).replace(/^en\//, '') : ''; } catch { return ''; } };
+  const urlOf = line => line.path ? root + (lang === 'en' ? 'en/' : '') + line.path : '';
+  const nameOf = line => (line.names && (line.names[lang] || line.names.uk)) || '';
+  let kept = [];
+  const load = () => { try { const lines = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(lines) ? lines : []; } catch { return kept; } };
+  const save = lines => { kept = lines; try { localStorage.setItem(KEY, JSON.stringify(lines)); } catch {} };
+  const esc = text => String(text ?? '').replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';');
+  const money = amount => String(Math.round(amount)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₴';
+  const count = lines => lines.reduce((sum, line) => sum + line.qty, 0);
+  const body = lines => {
+    if (!lines.length) return `<p class="lm-cart__empty">${esc(T.empty)}</p><p class="lm-cart__empty-way"><a class="button" href="${esc(T.catalog)}">${esc(T.toCatalog)}</a></p>`;
+    const items = lines.map(line => {
+      const photo = `<img src="${esc(line.img)}" alt="">`, url = urlOf(line), name = nameOf(line);
+      return '<li class="lm-cart__item">'
+        + (url ? `<a class="lm-cart__photo" href="${esc(url)}" tabindex="-1" aria-hidden="true">${photo}</a>` : `<span class="lm-cart__photo">${photo}</span>`)
+        + `<div class="lm-cart__info"><p class="lm-cart__name">${url ? `<a href="${esc(url)}">${esc(name)}</a>` : esc(name)}</p>`
+        + (line.qty > 1 ? `<p class="lm-cart__qty">${esc(T.qty)} ${line.qty}</p>` : '')
+        + `<button type="button" class="lm-cart__remove" data-lm-remove="${esc(line.key)}" aria-label="${esc(T.removeFrom + name)}">${esc(T.remove)}</button></div>`
+        + `<p class="lm-cart__price">${money(line.price * line.qty)}</p></li>`;
+    }).join('');
+    const total = lines.reduce((sum, line) => sum + line.price * line.qty, 0);
+    return `<ul class="lm-cart__items">${items}</ul><div class="lm-cart__foot"><p class="lm-cart__sum"><span>${esc(T.sum)}</span><span>${money(total)}</span></p>`
+      + `<p class="lm-cart__note">${esc(T.note)}</p><a class="button checkout-button lm-cart__checkout" href="#" data-off>${esc(T.checkout)}</a>`
+      + `<a class="lm-cart__view" href="#" data-off>${esc(T.view)}</a></div>`;
+  };
+  const absolute = url => { try { return url ? new URL(url, document.baseURI).href : ''; } catch { return ''; } };
+  const names = json => { try { return JSON.parse(json || '{}'); } catch { return {}; } };
+  // A line is keyed by what the cart holds, the variant (or the piece without variants), whichever way it was added.
+  // A tile's bag: its name, price and photograph as the tile shows them.
+  const fromTile = button => {
+    const tile = button.closest('li');
+    const link = tile?.querySelector('a[href]:not([data-off])');
+    return { key: 'i' + button.dataset.lmAdd, names: names(button.dataset.lmNames), price: Number(button.dataset.lmPrice), img: absolute(tile?.querySelector('.lm-card-media img')?.getAttribute('src')), path: link ? pathOf(link.getAttribute('href')) : '' };
+  };
+  // A piece's form: the chosen variant, at the price the page shows.
+  const fromForm = (form, fields) => {
+    let variants = [];
+    try { variants = JSON.parse(form.dataset.lmVariants || '[]'); } catch {}
+    const base = { names: names(form.dataset.lmNames), price: Number(form.dataset.lmPrice), img: absolute(form.dataset.lmImg), path: pathOf(location.href) };
+    if (!variants.length) return form.dataset.lmBuyable === '1' ? { ...base, key: 'i' + form.dataset.lmProduct } : { error: T.gone };
+    const keys = Object.keys(variants[0].attributes);
+    if (keys.some(key => !fields.get(key))) return { error: T.choose };
+    const chosen = variants.find(variant => keys.every(key => variant.attributes[key] === '' || variant.attributes[key] === fields.get(key)));
+    if (!chosen || !chosen.buyable) return { error: T.gone };
+    return { ...base, key: 'i' + chosen.id, names: chosen.names, price: chosen.price || base.price };
+  };
+  const real = window.fetch.bind(window);
+  window.fetch = async (url, options = {}) => {
+    if (url !== panel.dataset.endpoint) return real(url, options);
+    const fields = options.body instanceof FormData ? options.body : new FormData();
+    let lines = load();
+    const answer = { added: false, error: '' };
+    if (fields.has('lm_add')) {
+      const id = String(fields.get('lm_add'));
+      // A tile sends its id alone; a piece's form sends its quantity too.
+      const tile = !fields.has('quantity') && document.querySelector(`[data-lm-add="${CSS.escape(id)}"]`);
+      const form = !tile && [...document.querySelectorAll('form.cart[data-lm-product]')].find(item => item.dataset.lmProduct === id);
+      const line = form ? fromForm(form, fields) : tile ? fromTile(tile) : { error: T.failed };
+      if (line.error || !(line.price > 0)) answer.error = line.error || T.failed;
+      else {
+        const qty = Math.max(1, parseInt(fields.get('quantity'), 10) || 1);
+        const same = lines.find(item => item.key === line.key);
+        if (same) same.qty += qty; else lines.push({ ...line, qty });
+        save(lines); answer.added = true;
+      }
+    } else if (fields.has('lm_remove')) {
+      lines = lines.filter(item => item.key !== fields.get('lm_remove'));
+      save(lines);
+    }
+    await new Promise(resolve => setTimeout(resolve, 180));
+    return new Response(JSON.stringify({ ...answer, count: count(lines), html: body(lines), nonce: 'preview' }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+  };
+  // In the shop shop.js paints the header's number; the copy has no shop.js, so it is painted here the same way.
+  const paint = value => document.querySelectorAll('[data-lm-count="cart"]').forEach(node => {
+    const number = Math.max(0, Math.floor(Number(value)) || 0);
+    node.textContent = number ? (number > 99 ? '99+' : String(number)) : ''; node.hidden = !number;
+    const link = node.closest('a'); if (!link) return;
+    if (link.dataset.lmLabel === undefined) link.dataset.lmLabel = link.getAttribute('aria-label') || '';
+    link.setAttribute('aria-label', number ? `${link.dataset.lmLabel}: ${number}` : link.dataset.lmLabel);
+  });
+  document.addEventListener('lm:cart', event => paint(event.detail?.count));
+  paint(count(load()));
+  // A page brought back from the browser's history shows the cart as it is now, as shop.js does in the shop.
+  addEventListener('pageshow', event => { if (event.persisted) paint(count(load())); });
+})();
+</script>
+<script>
+/* The cart panel: a piece added from its page or a tile, and the header's bag, open what the cart holds beside the page. */
+(() => {
+  'use strict';
+  const panel = document.getElementById('lm-cart');
+  if (!panel || !window.fetch || !window.FormData) return;
+  const body = panel.querySelector('[data-lm-cart-body]');
+  const status = panel.querySelector('.lm-cart__status');
+  const closer = panel.querySelector('.lm-cart__close');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const shade = document.createElement('div');
+  shade.className = 'lm-drawer-shade lm-cart-shade';
+  shade.hidden = true;
+  shade.setAttribute('aria-hidden', 'true');
+  panel.before(shade);
+  panel.tabIndex = -1;
+  let nonce = '', opened = false, revision = 0, opener = null, pageState = [];
+  const motion = new Map();
+  const animate = (node, frames, duration) => {
+    motion.get(node)?.cancel();
+    if (reduced.matches || !node.animate) return null;
+    const animation = node.animate(frames, { duration, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both' });
+    motion.set(node, animation);
+    animation.finished.catch(() => {});
+    return animation;
+  };
+  const send = async fields => {
+    if (nonce && fields.has('lm_remove')) fields.set('nonce', nonce);
+    const response = await fetch(panel.dataset.endpoint, { method: 'POST', credentials: 'same-origin', cache: 'no-store', body: fields });
+    const result = await response.json();
+    if (!response.ok || typeof result.html !== 'string') throw new Error(result.error || panel.dataset.failed);
+    return result;
+  };
+  // The header's number follows the cart (shop.js paints it); after an added piece it gives one short beat.
+  const show = (result, beat = false) => {
+    body.innerHTML = result.html;
+    nonce = result.nonce || '';
+    document.dispatchEvent(new CustomEvent('lm:cart', { detail: { count: result.count } }));
+    if (!beat || reduced.matches) return;
+    document.querySelectorAll('[data-lm-count="cart"]').forEach(node => {
+      node.classList.remove('is-beat');
+      void node.offsetWidth;
+      node.classList.add('is-beat');
+    });
+  };
+  const isolate = () => {
+    let active = panel;
+    while (active.parentElement && active !== document.body) {
+      for (const sibling of active.parentElement.children) {
+        if (sibling === active || sibling === shade || /^(SCRIPT|STYLE|LINK)$/.test(sibling.tagName)) continue;
+        pageState.push([sibling, sibling.inert]);
+        sibling.inert = true;
+      }
+      active = active.parentElement;
+    }
+  };
+  const set = async (open, from = null) => {
+    if (open === opened) return;
+    const turn = ++revision;
+    const fromTransform = panel.hidden ? 'translateX(100%)' : getComputedStyle(panel).transform;
+    const fromOpacity = shade.hidden ? 0 : getComputedStyle(shade).opacity;
+    opened = open;
+    if (open) {
+      opener = from || document.activeElement;
+      if (!pageState.length) isolate();
+      panel.hidden = shade.hidden = false;
+      document.documentElement.classList.add('lm-locked');
+      animate(shade, [{ opacity: fromOpacity }, { opacity: 1 }], 360);
+      animate(panel, [{ transform: fromTransform }, { transform: 'translateX(0)' }], 460);
+      panel.focus({ preventScroll: true });
+      return;
+    }
+    animate(shade, [{ opacity: fromOpacity }, { opacity: 0 }], 220);
+    const exit = animate(panel, [{ transform: fromTransform }, { transform: 'translateX(100%)' }], 260);
+    if (exit) await exit.finished.catch(() => {});
+    if (turn !== revision) return;
+    panel.hidden = shade.hidden = true;
+    motion.forEach(animation => animation.cancel()); motion.clear();
+    pageState.forEach(([node, inert]) => { node.inert = inert; });
+    pageState = [];
+    document.documentElement.classList.remove('lm-locked');
+    status.textContent = '';
+    if (opener?.isConnected) opener.focus({ preventScroll: true });
+  };
+  closer.addEventListener('click', () => set(false));
+  shade.addEventListener('click', () => set(false));
+  panel.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); set(false); return; }
+    if (event.key !== 'Tab') return;
+    const stops = [...panel.querySelectorAll('a[href]:not([tabindex="-1"]), button')].filter(node => node.offsetParent && !node.disabled);
+    const first = stops[0], last = stops[stops.length - 1];
+    if (!first) return;
+    if (event.shiftKey && (document.activeElement === first || !stops.includes(document.activeElement))) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
+  // The header's bag opens the panel at once and fills it with the cart as it is now; a failed request leads to the cart page.
+  document.querySelectorAll('a[data-lm-cart]').forEach(link => link.addEventListener('click', async event => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button > 0) return;
+    event.preventDefault();
+    if (!body.childElementCount) body.innerHTML = '<p class="lm-cart__wait">Loading…</p>';
+    set(true, link);
+    try { show(await send(new FormData())); } catch { location.href = link.href; }
+  }));
+  panel.addEventListener('click', async event => {
+    const remove = event.target.closest('[data-lm-remove]');
+    // Marked busy, not disabled: a disabled button would drop the focus out of the panel.
+    if (!remove || remove.getAttribute('aria-busy') === 'true') return;
+    remove.setAttribute('aria-busy', 'true');
+    const fields = new FormData(); fields.set('lm_remove', remove.dataset.lmRemove);
+    try { const result = await send(fields); show(result); status.textContent = result.error; panel.focus({ preventScroll: true }); }
+    catch (error) { status.textContent = error.message; remove.removeAttribute('aria-busy'); }
+  });
+  let busy = false;
+  const add = async (fields, from) => {
+    busy = true; from.setAttribute('aria-busy', 'true');
+    try { return await send(fields); }
+    finally { busy = false; from.removeAttribute('aria-busy'); }
+  };
+  // A tile's bag: an error is said in the panel beside what the cart already holds.
+  document.addEventListener('click', async event => {
+    const button = event.target.closest('[data-lm-add]');
+    if (!button || busy) return;
+    const fields = new FormData(); fields.set('lm_add', button.dataset.lmAdd);
+    let result;
+    try { result = await add(fields, button); }
+    catch { location.href = button.closest('.product')?.querySelector('a[href]')?.href || location.href; return; }
+    show(result, result.added);
+    set(true, button);
+    status.textContent = result.added ? panel.dataset.added : result.error;
+  });
+  // A piece's own form: the choice goes as the page would send it; an error stays under the form, where the choice is made.
+  document.addEventListener('submit', async event => {
+    const form = event.target;
+    if (event.defaultPrevented || !(form instanceof HTMLFormElement) || !form.matches('form.cart')) return;
+    event.preventDefault();
+    if (busy) return;
+    const submitter = event.submitter;
+    const fields = new FormData(form);
+    const id = submitter?.name === 'add-to-cart' ? submitter.value : fields.get('add-to-cart') || form.querySelector('button[name="add-to-cart"]')?.value;
+    fields.delete('add-to-cart'); fields.set('lm_add', id);
+    let note = form.nextElementSibling?.classList.contains('lm-cart-note') ? form.nextElementSibling : null;
+    let result;
+    try { result = await add(fields, submitter || form); }
+    catch {
+      // Without an answer the page sends the form itself, as it would without script.
+      if (!form.querySelector('[name="add-to-cart"]')) { const field = document.createElement('input'); field.type = 'hidden'; field.name = 'add-to-cart'; field.value = id; form.append(field); }
+      form.submit();
+      return;
+    }
+    if (!result.added) {
+      if (!note) { note = document.createElement('p'); note.className = 'lm-feedback lm-cart-note'; note.setAttribute('role', 'status'); form.after(note); }
+      note.textContent = result.error;
+      return;
+    }
+    if (note) note.textContent = '';
+    show(result, true);
+    set(true, submitter);
+    status.textContent = panel.dataset.added;
+  });
 })();
 </script>
 </body>

@@ -828,7 +828,52 @@ html{scrollbar-gutter:stable}
 /* «Інший отримувач»: one box under the contacts; the recipient's name and phone open only when it is ticked. */
 .lm-recipient-toggle label.checkbox{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:13px;margin:0;cursor:pointer}
 .lm-recipient-toggle .optional{display:none}
-.woocommerce-checkout form.checkout:not(:has(#lm_other_recipient:checked)) .lm-recipient{display:none}</style></head>
+.woocommerce-checkout form.checkout:not(:has(#lm_other_recipient:checked)) .lm-recipient{display:none}
+/* Cart panel: what the cart holds slides in beside the page, from the side of the header's bag. */
+.lm-cart{position:fixed;inset:var(--lm-bar,0px) 0 0 auto;z-index:40;display:flex;flex-direction:column;width:min(100vw,440px);background:#fff;overscroll-behavior:contain;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+.lm-cart[hidden]{display:none}
+.lm-cart:focus{outline:none}
+.lm-cart__bar{display:flex;align-items:center;justify-content:space-between;flex:none;min-height:82px;padding:0 16px 0 24px;border-bottom:1px solid var(--line)}
+.lm-cart__bar h2{margin:0;font-size:26px}
+.lm-cart .lm-cart__close{width:44px;height:44px;padding:11px;border:0;background:none;color:var(--ink)}
+.lm-cart__status{flex:none;margin:0;padding:0 24px;font-size:12px;letter-spacing:.3px;color:var(--ink-soft)}
+.lm-cart__status:not(:empty){padding-top:14px}
+.lm-cart__body{flex:1;display:flex;flex-direction:column;min-height:0}
+.lm-cart__items{flex:1;min-height:0;overflow-y:auto;list-style:none;margin:0;padding:4px 24px}
+.lm-cart__item{display:grid;grid-template-columns:80px minmax(0,1fr) auto;column-gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.lm-cart__item:last-child{border-bottom:0}
+.lm-cart__photo{display:block;aspect-ratio:4/5;background:var(--paper)}
+.lm-cart__photo img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.lm-cart__name{margin:0;font-size:14px;line-height:1.4}
+.lm-cart__name a:hover{text-decoration:underline}
+.lm-cart dl.variation{display:flex;flex-wrap:wrap;gap:0 5px;margin:4px 0 0;font-size:12px;color:var(--muted)}
+.lm-cart dl.variation dd{margin:0 8px 0 0}
+.lm-cart dl.variation p{margin:0}
+.lm-cart__qty{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.lm-cart .lm-cart__remove{min-height:44px;padding:0;border:0;background:none;color:var(--muted);font-size:12px;font-weight:400;text-decoration:underline;text-underline-offset:3px}
+.lm-cart .lm-cart__remove[aria-busy=true]{opacity:.5;cursor:progress}
+.lm-cart__price{margin:0;font-size:13px;font-weight:500;white-space:nowrap}
+.lm-cart__foot{flex:none;padding:20px 24px 24px;border-top:1px solid var(--line)}
+.lm-cart__sum{display:flex;justify-content:space-between;margin:0;font-size:15px;font-weight:500}
+.lm-cart__note{margin:2px 0 16px;font-size:12px;color:var(--muted)}
+.lm-cart__view{display:flex;align-items:center;justify-content:center;min-height:44px;margin-top:6px;font-size:12px;text-decoration:underline;text-underline-offset:3px}
+.lm-cart__empty,.lm-cart__wait{margin:0;padding:24px 24px 8px;color:var(--ink-soft)}
+.lm-cart__empty-way{margin:0;padding:8px 24px}
+@media(hover:hover){.lm-cart .lm-cart__close:hover{background:var(--paper)}.lm-cart .lm-cart__remove:hover{color:var(--ink)}}
+@media(max-width:479px){.lm-cart__bar{min-height:76px;padding-left:20px;padding-right:12px}.lm-cart__items{padding-inline:20px}.lm-cart__foot{padding-inline:20px}.lm-cart__status{padding-inline:20px}.lm-cart__item{grid-template-columns:68px minmax(0,1fr) auto;column-gap:12px}}
+@media(max-width:600px){.admin-bar .lm-cart{z-index:100000}.admin-bar .lm-cart-shade{z-index:99999}}
+/* A piece with nothing to choose goes to the cart from its tile: the bag sits on the price's line, at the tile's edge. */
+/* The tile ends at its price, not at the row's tallest neighbour, so the bag stays on its own price's line. */
+.products .product:has(.lm-add){align-self:start}
+.products .product .lm-add{position:absolute;right:-11px;bottom:-11px;z-index:1;width:44px;min-height:44px;padding:11px;border:0;background:none;color:var(--ink)}
+.lm-add svg{width:22px;height:22px}
+.lm-add[aria-busy=true]{opacity:.45;cursor:progress}
+@media(hover:hover){.lm-add:hover svg{fill:var(--paper)}}
+/* The cart's number answers an added piece with one short beat. */
+@keyframes lm-count-beat{0%{transform:scale(1)}35%{transform:scale(1.35)}100%{transform:scale(1)}}
+.lm-count.is-beat{animation:lm-count-beat .45s var(--ease)}
+@media(prefers-reduced-motion:reduce){.lm-count.is-beat{animation:none}}
+</style></head>
 <body>
 <div class="lm-share"><span><strong>Попередній перегляд дизайну LIMÉRENCE.</strong> Це не магазин: замовлення й оплата не працюють. Ціни та наявність наведені зі знімка вітрини від 05.10.2026. Добірка «Новинки» та відео каталогу показані як приклад для перегляду дизайну.</span><nav aria-label="Сторінки перегляду"><a href="index.html">Головна</a><a href="gold.html">Розділ «Золото»</a><a href="product.html">Сторінка товару</a></nav></div>
 <div class="archive paged tax-product_cat term-16 paged-4 wp-theme-limerence theme-limerence woocommerce woocommerce-page woocommerce-no-js">
@@ -901,7 +946,7 @@ html{scrollbar-gutter:stable}
 </div>
             </details>
             <a href="#" data-off aria-label="Мої бажання"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span class="lm-count" data-lm-count="wishlist" hidden></span></a>
-            <a href="#" data-off aria-label="Кошик"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg><span class="lm-count" data-lm-count="cart" hidden></span></a>
+            <a href="#" data-off aria-label="Кошик" data-lm-cart><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg><span class="lm-count" data-lm-count="cart" hidden></span></a>
         </div>
     </header>
     <div class="lm-drawer" id="lm-drawer" role="dialog" aria-modal="true" aria-label="Меню" hidden>
@@ -1060,19 +1105,19 @@ html{scrollbar-gutter:stable}
 	<span class="onsale">−20%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700086бел</span></h2><p class="lm-material">Біле золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>12 545&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 12 545&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>10 035&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 10 035&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2038" aria-pressed="false" aria-label="Зберегти Каблучка 700086бел"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2038" aria-pressed="false" aria-label="Зберегти Каблучка 700086бел"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3016" aria-label="Додати до кошика: Каблучка 700086бел" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700086бел - 17,5&quot;, &quot;en&quot;: &quot;Ring 700086бел - 17,5&quot;}" data-lm-price="10035"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2025 status-publish instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/koltsa74-49132896.webp" class="lm-packshot" alt="Каблучка 700087" style="filter:brightness(1)" decoding="async" />
 	<span class="onsale">−20%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700087</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 800&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 14 800&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>11 840&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 11 840&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2025" aria-pressed="false" aria-label="Зберегти Каблучка 700087"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2025" aria-pressed="false" aria-label="Зберегти Каблучка 700087"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3002" aria-label="Додати до кошика: Каблучка 700087" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700087 - 16&quot;, &quot;en&quot;: &quot;Ring 700087 - 16&quot;}" data-lm-price="11840"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2042 status-publish instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/koltso090-50727339.webp" class="lm-packshot" alt="Каблучка 700090" style="filter:brightness(1)" decoding="async" /><span class="lm-card-alt" data-src="img/koltso090-56359800.webp"></span>
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700090</span></h2><p class="lm-material">Біле золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>32 930&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 32 930&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>24 700&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 24 700&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2042" aria-pressed="false" aria-label="Зберегти Каблучка 700090"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2042" aria-pressed="false" aria-label="Зберегти Каблучка 700090"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3020" aria-label="Додати до кошика: Каблучка 700090" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700090 - 18&quot;, &quot;en&quot;: &quot;Ring 700090 - 18&quot;}" data-lm-price="24700"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2085 status-publish last instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/koltso9558-49677560.webp" class="lm-packshot" alt="Каблучка 700097" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−25%</span>
@@ -1084,13 +1129,13 @@ html{scrollbar-gutter:stable}
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700101</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>18 130&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 18 130&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>13 600&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 13 600&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2044" aria-pressed="false" aria-label="Зберегти Каблучка 700101"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2044" aria-pressed="false" aria-label="Зберегти Каблучка 700101"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3023" aria-label="Додати до кошика: Каблучка 700101" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700101 - 17&quot;, &quot;en&quot;: &quot;Ring 700101 - 17&quot;}" data-lm-price="13600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2084 status-publish instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/koltso92-49897824.webp" class="lm-packshot" alt="Каблучка 700104" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700104</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>27 340&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 27 340&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>20 505&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 20 505&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2084" aria-pressed="false" aria-label="Зберегти Каблучка 700104"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2084" aria-pressed="false" aria-label="Зберегти Каблучка 700104"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3100" aria-label="Додати до кошика: Каблучка 700104" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700104 - 17,5&quot;, &quot;en&quot;: &quot;Ring 700104 - 17,5&quot;}" data-lm-price="20505"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
     <li class="lm-catalog-film" data-lm-catalog-film data-lm-clips="[{&quot;src&quot;:&quot;films\/limerence-gold-rings-01.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-rings-01.jpg&quot;,&quot;focus&quot;:&quot;50&quot;},{&quot;src&quot;:&quot;films\/limerence-gold-rings-02.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-rings-02.jpg&quot;,&quot;focus&quot;:&quot;50&quot;},{&quot;src&quot;:&quot;films\/limerence-gold-rings-03.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-rings-03.jpg&quot;,&quot;focus&quot;:&quot;50&quot;},{&quot;src&quot;:&quot;films\/limerence-gold-rings-04.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-rings-04.jpg&quot;,&quot;focus&quot;:&quot;50&quot;},{&quot;src&quot;:&quot;films\/limerence-gold-rings-05.mp4&quot;,&quot;poster&quot;:&quot;films\/limerence-gold-rings-05.jpg&quot;,&quot;focus&quot;:&quot;50&quot;}]" data-lm-start="3" aria-label="Відео прикрас LIMÉRENCE">
         <img width="810" height="1440" src="img/limerence-gold-rings-04-l.webp" class="lm-catalog-film__poster" alt="" loading="lazy" style="object-position:50% 50%" decoding="async" />        <video muted playsinline preload="none" aria-hidden="true" tabindex="-1" style="object-position:50% 50%" data-src="films/limerence-gold-rings-04.mp4"></video>
         <button type="button" aria-label="Відтворення відео прикрас" aria-pressed="false" hidden>Відтворити відео</button>
@@ -1112,7 +1157,7 @@ html{scrollbar-gutter:stable}
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700115</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>9 115&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 9 115&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>6 835&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 6 835&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1934" aria-pressed="false" aria-label="Зберегти Каблучка 700115"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="1934" aria-pressed="false" aria-label="Зберегти Каблучка 700115"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="2895" aria-label="Додати до кошика: Каблучка 700115" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700115 - 16&quot;, &quot;en&quot;: &quot;Ring 700115 - 16&quot;}" data-lm-price="6835"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2049 status-publish instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/koltso115b-57032565.webp" class="lm-packshot" alt="Каблучка 700115б" style="filter:brightness(1)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/koltso115b-57032664.webp"></span>
 	<span class="onsale">−25%</span>
@@ -1136,13 +1181,13 @@ html{scrollbar-gutter:stable}
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700141</span></h2><p class="lm-material">Біле та червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>26 655&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 26 655&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>19 990&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 19 990&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2052" aria-pressed="false" aria-label="Зберегти Каблучка 700141"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2052" aria-pressed="false" aria-label="Зберегти Каблучка 700141"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3046" aria-label="Додати до кошика: Каблучка 700141" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700141 - 18&quot;, &quot;en&quot;: &quot;Ring 700141 - 18&quot;}" data-lm-price="19990"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2053 status-publish instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/koltso145-57038146.webp" class="lm-packshot" alt="Каблучка 700145" style="filter:brightness(1)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/koltso145-57184412.webp"></span>
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700145</span></h2><p class="lm-material">Біле золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>19 305&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 19 305&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 480&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 14 480&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2053" aria-pressed="false" aria-label="Зберегти Каблучка 700145"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2053" aria-pressed="false" aria-label="Зберегти Каблучка 700145"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3047" aria-label="Додати до кошика: Каблучка 700145" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700145 - 18.5&quot;, &quot;en&quot;: &quot;Ring 700145 - 18.5&quot;}" data-lm-price="14480"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2076 status-publish instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/koltso8494-49677541.webp" class="lm-packshot" alt="Каблучка 700148" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−20%</span>
@@ -1160,7 +1205,7 @@ html{scrollbar-gutter:stable}
 	<span class="onsale">−20%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700247</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>10 975&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 10 975&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>8 780&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 8 780&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2039" aria-pressed="false" aria-label="Зберегти Каблучка 700247"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2039" aria-pressed="false" aria-label="Зберегти Каблучка 700247"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3017" aria-label="Додати до кошика: Каблучка 700247" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700247 - 16&quot;, &quot;en&quot;: &quot;Ring 700247 - 16&quot;}" data-lm-price="8780"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2064 status-publish instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/koltso4939-49897802.webp" class="lm-packshot" alt="Каблучка 700247б" style="filter:brightness(1)" decoding="async" loading="lazy" /><span class="lm-card-alt" data-src="img/koltso4939-60248382.webp"></span>
 	<span class="onsale">−20%</span>
@@ -1172,13 +1217,13 @@ html{scrollbar-gutter:stable}
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700269</span></h2><p class="lm-material">Червоне та біле золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>14 600&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 14 600&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>10 950&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 10 950&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2060" aria-pressed="false" aria-label="Зберегти Каблучка 700269"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2060" aria-pressed="false" aria-label="Зберегти Каблучка 700269"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3059" aria-label="Додати до кошика: Каблучка 700269" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700269 - 16,5&quot;, &quot;en&quot;: &quot;Ring 700269 - 16,5&quot;}" data-lm-price="10950"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2078 status-publish last instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/koltso87-49130364.webp" class="lm-packshot" alt="Каблучка 700273кр" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−25%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700273кр</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>11 370&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 11 370&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>8 530&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 8 530&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2078" aria-pressed="false" aria-label="Зберегти Каблучка 700273кр"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2078" aria-pressed="false" aria-label="Зберегти Каблучка 700273кр"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3093" aria-label="Додати до кошика: Каблучка 700273кр" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700273кр - 16&quot;, &quot;en&quot;: &quot;Ring 700273кр - 16&quot;}" data-lm-price="8530"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2070 status-publish first instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="600" height="600" src="img/koltso738-49147972.webp" class="lm-packshot" alt="Каблучка 700300-бел" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−20%</span>
@@ -1190,13 +1235,13 @@ html{scrollbar-gutter:stable}
 	<span class="onsale">−20%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700334</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>11 370&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 11 370&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>9 095&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 9 095&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="1650" aria-pressed="false" aria-label="Зберегти Каблучка 700334"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="1650" aria-pressed="false" aria-label="Зберегти Каблучка 700334"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="2464" aria-label="Додати до кошика: Каблучка 700334" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700334 - 16&quot;, &quot;en&quot;: &quot;Ring 700334 - 16&quot;}" data-lm-price="9095"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2071 status-publish instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/koltso752-49963743.webp" class="lm-packshot" alt="Каблучка 700394" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−20%</span>
 	</span><h2 class="woocommerce-loop-product__title">Каблучка<span class="screen-reader-text">, артикул 700394</span></h2><p class="lm-material">Червоне золото 585</p>
 	<span class="price"><del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>20 775&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></del> <span class="screen-reader-text">Оригінальна ціна: 20 775&nbsp;&#8372;.</span><ins aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>16 620&nbsp;<span class="woocommerce-Price-currencySymbol" translate="no">&#8372;</span></bdi></span></ins><span class="screen-reader-text">Поточна ціна: 16 620&nbsp;&#8372;.</span></span>
-</a><button type="button" class="lm-wish" data-lm-wish="2071" aria-pressed="false" aria-label="Зберегти Каблучка 700394"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button></li>
+</a><button type="button" class="lm-wish" data-lm-wish="2071" aria-pressed="false" aria-label="Зберегти Каблучка 700394"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button><button type="button" class="lm-add" data-lm-add="3081" aria-label="Додати до кошика: Каблучка 700394" data-lm-names="{&quot;uk&quot;: &quot;Каблучка 700394 - 16&quot;, &quot;en&quot;: &quot;Ring 700394 - 16&quot;}" data-lm-price="16620"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></button></li>
 <li class="product type-product post-2065 status-publish last instock product_cat-16 has-post-thumbnail sale shipping-taxable purchasable product-type-variable">
 	<a href="#" data-off class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><span class="lm-card-media"><img width="720" height="720" src="img/koltso542-49147929.webp" class="lm-packshot" alt="Каблучка 700411" style="filter:brightness(1)" decoding="async" loading="lazy" />
 	<span class="onsale">−25%</span>
@@ -1914,9 +1959,9 @@ html{scrollbar-gutter:stable}
     setTimeout(() => note?.remove(), 3200);
   };
   document.addEventListener('click', event => {
-    if (event.target.closest('a[data-off], .single_add_to_cart_button, .lm-wish, .lm-save-product')) { event.preventDefault(); say(); }
+    if (!event.defaultPrevented && event.target.closest('a[data-off], .lm-wish, .lm-save-product')) { event.preventDefault(); say(); }
   });
-  document.addEventListener('submit', event => { event.preventDefault(); say(); });
+  document.addEventListener('submit', event => { if (event.target.matches?.('form.cart')) return; event.preventDefault(); say(); });
   // Product page: a small photograph becomes the large one when chosen.
   const shots = [...document.querySelectorAll('.woocommerce-product-gallery__image img')];
   for (const shot of shots.slice(1)) shot.addEventListener('click', () => { [shots[0].src, shot.src] = [shot.src, shots[0].src]; });
@@ -1930,6 +1975,264 @@ html{scrollbar-gutter:stable}
     try { from = new URL(document.referrer); } catch { return; }
     if (from.origin === location.origin && (from.pathname.endsWith('/gold.html') || from.pathname.endsWith('/index.html') || from.pathname.endsWith('/')) && !location.hash && history.length > 1) { event.preventDefault(); history.back(); }
   }, true);
+})();
+</script>
+<div class="lm-cart" id="lm-cart" role="dialog" aria-modal="true" aria-labelledby="lm-cart-title" data-endpoint="lm-preview-cart" data-added="Додано до кошика" data-failed="Не вдалося оновити кошик. Спробуйте ще раз." data-lm-preview-text="{&quot;empty&quot;: &quot;Кошик порожній.&quot;, &quot;toCatalog&quot;: &quot;Перейти до каталогу&quot;, &quot;catalog&quot;: &quot;catalog.html&quot;, &quot;qty&quot;: &quot;Кількість:&quot;, &quot;remove&quot;: &quot;Прибрати&quot;, &quot;removeFrom&quot;: &quot;Прибрати з кошика: &quot;, &quot;sum&quot;: &quot;Сума&quot;, &quot;note&quot;: &quot;Доставку розрахуємо під час оформлення.&quot;, &quot;checkout&quot;: &quot;Оформити замовлення&quot;, &quot;view&quot;: &quot;Переглянути кошик&quot;, &quot;failed&quot;: &quot;Не вдалося оновити кошик. Спробуйте ще раз.&quot;, &quot;choose&quot;: &quot;Оберіть варіант, щоб додати прикрасу до кошика.&quot;, &quot;gone&quot;: &quot;Цього варіанта зараз немає в наявності.&quot;}" hidden><div class="lm-cart__bar"><h2 id="lm-cart-title">Кошик</h2><button type="button" class="lm-cart__close" aria-label="Закрити кошик"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg></button></div><p class="lm-cart__status" role="status"></p><div class="lm-cart__body" data-lm-cart-body></div></div>
+<script>
+(() => {
+  'use strict';
+  const panel = document.getElementById('lm-cart');
+  if (!panel) return;
+  const T = JSON.parse(panel.dataset.lmPreviewText);
+  const KEY = 'lm-preview-cart';
+  // One cart for both languages: a line keeps its name in each language and its page without the en/ prefix.
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'uk';
+  const root = new URL('./', document.baseURI).href;
+  const pathOf = url => { try { const at = new URL(url, document.baseURI).href.split('#')[0]; return at.startsWith(root) ? at.slice(root.length).replace(/^en\//, '') : ''; } catch { return ''; } };
+  const urlOf = line => line.path ? root + (lang === 'en' ? 'en/' : '') + line.path : '';
+  const nameOf = line => (line.names && (line.names[lang] || line.names.uk)) || '';
+  let kept = [];
+  const load = () => { try { const lines = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(lines) ? lines : []; } catch { return kept; } };
+  const save = lines => { kept = lines; try { localStorage.setItem(KEY, JSON.stringify(lines)); } catch {} };
+  const esc = text => String(text ?? '').replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';');
+  const money = amount => String(Math.round(amount)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₴';
+  const count = lines => lines.reduce((sum, line) => sum + line.qty, 0);
+  const body = lines => {
+    if (!lines.length) return `<p class="lm-cart__empty">${esc(T.empty)}</p><p class="lm-cart__empty-way"><a class="button" href="${esc(T.catalog)}">${esc(T.toCatalog)}</a></p>`;
+    const items = lines.map(line => {
+      const photo = `<img src="${esc(line.img)}" alt="">`, url = urlOf(line), name = nameOf(line);
+      return '<li class="lm-cart__item">'
+        + (url ? `<a class="lm-cart__photo" href="${esc(url)}" tabindex="-1" aria-hidden="true">${photo}</a>` : `<span class="lm-cart__photo">${photo}</span>`)
+        + `<div class="lm-cart__info"><p class="lm-cart__name">${url ? `<a href="${esc(url)}">${esc(name)}</a>` : esc(name)}</p>`
+        + (line.qty > 1 ? `<p class="lm-cart__qty">${esc(T.qty)} ${line.qty}</p>` : '')
+        + `<button type="button" class="lm-cart__remove" data-lm-remove="${esc(line.key)}" aria-label="${esc(T.removeFrom + name)}">${esc(T.remove)}</button></div>`
+        + `<p class="lm-cart__price">${money(line.price * line.qty)}</p></li>`;
+    }).join('');
+    const total = lines.reduce((sum, line) => sum + line.price * line.qty, 0);
+    return `<ul class="lm-cart__items">${items}</ul><div class="lm-cart__foot"><p class="lm-cart__sum"><span>${esc(T.sum)}</span><span>${money(total)}</span></p>`
+      + `<p class="lm-cart__note">${esc(T.note)}</p><a class="button checkout-button lm-cart__checkout" href="#" data-off>${esc(T.checkout)}</a>`
+      + `<a class="lm-cart__view" href="#" data-off>${esc(T.view)}</a></div>`;
+  };
+  const absolute = url => { try { return url ? new URL(url, document.baseURI).href : ''; } catch { return ''; } };
+  const names = json => { try { return JSON.parse(json || '{}'); } catch { return {}; } };
+  // A line is keyed by what the cart holds, the variant (or the piece without variants), whichever way it was added.
+  // A tile's bag: its name, price and photograph as the tile shows them.
+  const fromTile = button => {
+    const tile = button.closest('li');
+    const link = tile?.querySelector('a[href]:not([data-off])');
+    return { key: 'i' + button.dataset.lmAdd, names: names(button.dataset.lmNames), price: Number(button.dataset.lmPrice), img: absolute(tile?.querySelector('.lm-card-media img')?.getAttribute('src')), path: link ? pathOf(link.getAttribute('href')) : '' };
+  };
+  // A piece's form: the chosen variant, at the price the page shows.
+  const fromForm = (form, fields) => {
+    let variants = [];
+    try { variants = JSON.parse(form.dataset.lmVariants || '[]'); } catch {}
+    const base = { names: names(form.dataset.lmNames), price: Number(form.dataset.lmPrice), img: absolute(form.dataset.lmImg), path: pathOf(location.href) };
+    if (!variants.length) return form.dataset.lmBuyable === '1' ? { ...base, key: 'i' + form.dataset.lmProduct } : { error: T.gone };
+    const keys = Object.keys(variants[0].attributes);
+    if (keys.some(key => !fields.get(key))) return { error: T.choose };
+    const chosen = variants.find(variant => keys.every(key => variant.attributes[key] === '' || variant.attributes[key] === fields.get(key)));
+    if (!chosen || !chosen.buyable) return { error: T.gone };
+    return { ...base, key: 'i' + chosen.id, names: chosen.names, price: chosen.price || base.price };
+  };
+  const real = window.fetch.bind(window);
+  window.fetch = async (url, options = {}) => {
+    if (url !== panel.dataset.endpoint) return real(url, options);
+    const fields = options.body instanceof FormData ? options.body : new FormData();
+    let lines = load();
+    const answer = { added: false, error: '' };
+    if (fields.has('lm_add')) {
+      const id = String(fields.get('lm_add'));
+      // A tile sends its id alone; a piece's form sends its quantity too.
+      const tile = !fields.has('quantity') && document.querySelector(`[data-lm-add="${CSS.escape(id)}"]`);
+      const form = !tile && [...document.querySelectorAll('form.cart[data-lm-product]')].find(item => item.dataset.lmProduct === id);
+      const line = form ? fromForm(form, fields) : tile ? fromTile(tile) : { error: T.failed };
+      if (line.error || !(line.price > 0)) answer.error = line.error || T.failed;
+      else {
+        const qty = Math.max(1, parseInt(fields.get('quantity'), 10) || 1);
+        const same = lines.find(item => item.key === line.key);
+        if (same) same.qty += qty; else lines.push({ ...line, qty });
+        save(lines); answer.added = true;
+      }
+    } else if (fields.has('lm_remove')) {
+      lines = lines.filter(item => item.key !== fields.get('lm_remove'));
+      save(lines);
+    }
+    await new Promise(resolve => setTimeout(resolve, 180));
+    return new Response(JSON.stringify({ ...answer, count: count(lines), html: body(lines), nonce: 'preview' }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+  };
+  // In the shop shop.js paints the header's number; the copy has no shop.js, so it is painted here the same way.
+  const paint = value => document.querySelectorAll('[data-lm-count="cart"]').forEach(node => {
+    const number = Math.max(0, Math.floor(Number(value)) || 0);
+    node.textContent = number ? (number > 99 ? '99+' : String(number)) : ''; node.hidden = !number;
+    const link = node.closest('a'); if (!link) return;
+    if (link.dataset.lmLabel === undefined) link.dataset.lmLabel = link.getAttribute('aria-label') || '';
+    link.setAttribute('aria-label', number ? `${link.dataset.lmLabel}: ${number}` : link.dataset.lmLabel);
+  });
+  document.addEventListener('lm:cart', event => paint(event.detail?.count));
+  paint(count(load()));
+  // A page brought back from the browser's history shows the cart as it is now, as shop.js does in the shop.
+  addEventListener('pageshow', event => { if (event.persisted) paint(count(load())); });
+})();
+</script>
+<script>
+/* The cart panel: a piece added from its page or a tile, and the header's bag, open what the cart holds beside the page. */
+(() => {
+  'use strict';
+  const panel = document.getElementById('lm-cart');
+  if (!panel || !window.fetch || !window.FormData) return;
+  const body = panel.querySelector('[data-lm-cart-body]');
+  const status = panel.querySelector('.lm-cart__status');
+  const closer = panel.querySelector('.lm-cart__close');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const shade = document.createElement('div');
+  shade.className = 'lm-drawer-shade lm-cart-shade';
+  shade.hidden = true;
+  shade.setAttribute('aria-hidden', 'true');
+  panel.before(shade);
+  panel.tabIndex = -1;
+  let nonce = '', opened = false, revision = 0, opener = null, pageState = [];
+  const motion = new Map();
+  const animate = (node, frames, duration) => {
+    motion.get(node)?.cancel();
+    if (reduced.matches || !node.animate) return null;
+    const animation = node.animate(frames, { duration, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'both' });
+    motion.set(node, animation);
+    animation.finished.catch(() => {});
+    return animation;
+  };
+  const send = async fields => {
+    if (nonce && fields.has('lm_remove')) fields.set('nonce', nonce);
+    const response = await fetch(panel.dataset.endpoint, { method: 'POST', credentials: 'same-origin', cache: 'no-store', body: fields });
+    const result = await response.json();
+    if (!response.ok || typeof result.html !== 'string') throw new Error(result.error || panel.dataset.failed);
+    return result;
+  };
+  // The header's number follows the cart (shop.js paints it); after an added piece it gives one short beat.
+  const show = (result, beat = false) => {
+    body.innerHTML = result.html;
+    nonce = result.nonce || '';
+    document.dispatchEvent(new CustomEvent('lm:cart', { detail: { count: result.count } }));
+    if (!beat || reduced.matches) return;
+    document.querySelectorAll('[data-lm-count="cart"]').forEach(node => {
+      node.classList.remove('is-beat');
+      void node.offsetWidth;
+      node.classList.add('is-beat');
+    });
+  };
+  const isolate = () => {
+    let active = panel;
+    while (active.parentElement && active !== document.body) {
+      for (const sibling of active.parentElement.children) {
+        if (sibling === active || sibling === shade || /^(SCRIPT|STYLE|LINK)$/.test(sibling.tagName)) continue;
+        pageState.push([sibling, sibling.inert]);
+        sibling.inert = true;
+      }
+      active = active.parentElement;
+    }
+  };
+  const set = async (open, from = null) => {
+    if (open === opened) return;
+    const turn = ++revision;
+    const fromTransform = panel.hidden ? 'translateX(100%)' : getComputedStyle(panel).transform;
+    const fromOpacity = shade.hidden ? 0 : getComputedStyle(shade).opacity;
+    opened = open;
+    if (open) {
+      opener = from || document.activeElement;
+      if (!pageState.length) isolate();
+      panel.hidden = shade.hidden = false;
+      document.documentElement.classList.add('lm-locked');
+      animate(shade, [{ opacity: fromOpacity }, { opacity: 1 }], 360);
+      animate(panel, [{ transform: fromTransform }, { transform: 'translateX(0)' }], 460);
+      panel.focus({ preventScroll: true });
+      return;
+    }
+    animate(shade, [{ opacity: fromOpacity }, { opacity: 0 }], 220);
+    const exit = animate(panel, [{ transform: fromTransform }, { transform: 'translateX(100%)' }], 260);
+    if (exit) await exit.finished.catch(() => {});
+    if (turn !== revision) return;
+    panel.hidden = shade.hidden = true;
+    motion.forEach(animation => animation.cancel()); motion.clear();
+    pageState.forEach(([node, inert]) => { node.inert = inert; });
+    pageState = [];
+    document.documentElement.classList.remove('lm-locked');
+    status.textContent = '';
+    if (opener?.isConnected) opener.focus({ preventScroll: true });
+  };
+  closer.addEventListener('click', () => set(false));
+  shade.addEventListener('click', () => set(false));
+  panel.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); set(false); return; }
+    if (event.key !== 'Tab') return;
+    const stops = [...panel.querySelectorAll('a[href]:not([tabindex="-1"]), button')].filter(node => node.offsetParent && !node.disabled);
+    const first = stops[0], last = stops[stops.length - 1];
+    if (!first) return;
+    if (event.shiftKey && (document.activeElement === first || !stops.includes(document.activeElement))) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
+  // The header's bag opens the panel at once and fills it with the cart as it is now; a failed request leads to the cart page.
+  document.querySelectorAll('a[data-lm-cart]').forEach(link => link.addEventListener('click', async event => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button > 0) return;
+    event.preventDefault();
+    if (!body.childElementCount) body.innerHTML = '<p class="lm-cart__wait">Завантаження…</p>';
+    set(true, link);
+    try { show(await send(new FormData())); } catch { location.href = link.href; }
+  }));
+  panel.addEventListener('click', async event => {
+    const remove = event.target.closest('[data-lm-remove]');
+    // Marked busy, not disabled: a disabled button would drop the focus out of the panel.
+    if (!remove || remove.getAttribute('aria-busy') === 'true') return;
+    remove.setAttribute('aria-busy', 'true');
+    const fields = new FormData(); fields.set('lm_remove', remove.dataset.lmRemove);
+    try { const result = await send(fields); show(result); status.textContent = result.error; panel.focus({ preventScroll: true }); }
+    catch (error) { status.textContent = error.message; remove.removeAttribute('aria-busy'); }
+  });
+  let busy = false;
+  const add = async (fields, from) => {
+    busy = true; from.setAttribute('aria-busy', 'true');
+    try { return await send(fields); }
+    finally { busy = false; from.removeAttribute('aria-busy'); }
+  };
+  // A tile's bag: an error is said in the panel beside what the cart already holds.
+  document.addEventListener('click', async event => {
+    const button = event.target.closest('[data-lm-add]');
+    if (!button || busy) return;
+    const fields = new FormData(); fields.set('lm_add', button.dataset.lmAdd);
+    let result;
+    try { result = await add(fields, button); }
+    catch { location.href = button.closest('.product')?.querySelector('a[href]')?.href || location.href; return; }
+    show(result, result.added);
+    set(true, button);
+    status.textContent = result.added ? panel.dataset.added : result.error;
+  });
+  // A piece's own form: the choice goes as the page would send it; an error stays under the form, where the choice is made.
+  document.addEventListener('submit', async event => {
+    const form = event.target;
+    if (event.defaultPrevented || !(form instanceof HTMLFormElement) || !form.matches('form.cart')) return;
+    event.preventDefault();
+    if (busy) return;
+    const submitter = event.submitter;
+    const fields = new FormData(form);
+    const id = submitter?.name === 'add-to-cart' ? submitter.value : fields.get('add-to-cart') || form.querySelector('button[name="add-to-cart"]')?.value;
+    fields.delete('add-to-cart'); fields.set('lm_add', id);
+    let note = form.nextElementSibling?.classList.contains('lm-cart-note') ? form.nextElementSibling : null;
+    let result;
+    try { result = await add(fields, submitter || form); }
+    catch {
+      // Without an answer the page sends the form itself, as it would without script.
+      if (!form.querySelector('[name="add-to-cart"]')) { const field = document.createElement('input'); field.type = 'hidden'; field.name = 'add-to-cart'; field.value = id; form.append(field); }
+      form.submit();
+      return;
+    }
+    if (!result.added) {
+      if (!note) { note = document.createElement('p'); note.className = 'lm-feedback lm-cart-note'; note.setAttribute('role', 'status'); form.after(note); }
+      note.textContent = result.error;
+      return;
+    }
+    if (note) note.textContent = '';
+    show(result, true);
+    set(true, submitter);
+    status.textContent = panel.dataset.added;
+  });
 })();
 </script>
 </body>
