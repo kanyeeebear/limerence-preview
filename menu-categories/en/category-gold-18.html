@@ -894,6 +894,21 @@ html{scrollbar-gutter:stable}
   .lm-newsletter__fields{grid-template-columns:1fr}
   .lm-newsletter .button{width:100%}
 }
+</style><style id="lm-footer-accordion-css">/* Phone footer disclosures (0.8.32); desktop headings stay plain. */
+.lm-foot__toggle[aria-expanded=true] .lm-foot__plus{display:none}
+@media(max-width:899px){
+  .lm-foot[data-lm-footer-ready] .lm-foot__brand{margin-bottom:24px}
+  .lm-foot[data-lm-footer-ready] .lm-foot__grid{display:block}
+  .lm-foot[data-lm-footer-ready] .lm-foot__grid>nav{border-bottom:1px solid var(--line)}
+  .lm-foot[data-lm-footer-ready] .lm-foot__grid>nav:first-child{border-top:1px solid var(--line)}
+  .lm-foot[data-lm-footer-ready] .lm-foot__grid>nav h2{margin:0}
+  .lm-foot .lm-foot__toggle{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;min-height:48px;padding:0;border:0;border-radius:0;background:transparent;color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit;text-align:left;cursor:pointer}
+  .lm-foot .lm-foot__toggle:hover{background:transparent;color:var(--ink)}
+  .lm-foot .lm-foot__toggle:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .lm-foot__toggle svg{flex:none;width:16px;height:16px}
+  .lm-foot[data-lm-footer-ready] .lm-foot__grid>nav>ul{display:block;padding-bottom:12px}
+  .lm-foot[data-lm-footer-ready] .lm-foot__contact{margin-top:24px}
+}
 </style></head>
 <body>
 <div class="lm-share"><span><strong>LIMÉRENCE design preview.</strong> This is not a shop: ordering and payment do not work. Prices and availability come from a snapshot of the shop on 05.10.2026. The New arrivals selection and catalogue videos are shown as examples for the design review.</span><nav aria-label="Preview pages"><a href="en/index.html">Home</a><a href="en/gold.html">«Gold» section</a><a href="en/product.html">Product page</a><a class="lm-previous-preview" href="https://kanyeeebear.github.io/limerence-preview/en/">Previous version</a></nav></div>
@@ -2114,6 +2129,51 @@ html{scrollbar-gutter:stable}
     };
     form.addEventListener('submit', event => { event.preventDefault(); event.stopPropagation(); showDemo(); });
     form.querySelector('button').addEventListener('click', showDemo);
+  });
+})();
+</script><script id="lm-footer-accordion-js">/* Progressive phone footer: links stay available without JavaScript. */
+(() => {
+  const phone = window.matchMedia('(max-width: 899px)');
+  document.querySelectorAll('.lm-foot:not([data-lm-footer-ready])').forEach(footer => {
+    const groups = [...footer.querySelectorAll('.lm-foot__grid > nav')].map(nav => {
+      const heading = nav.querySelector('h2');
+      const list = nav.querySelector('ul');
+      if (!heading || !list) return null;
+      const title = heading.textContent.trim();
+      const plain = document.createElement('span');
+      plain.textContent = title;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'lm-foot__toggle';
+      button.innerHTML = '<span></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 12h16"/><path class="lm-foot__plus" d="M12 4v16"/></svg>';
+      button.querySelector('span').textContent = title;
+      list.id = list.id || heading.id + '-links';
+      button.setAttribute('aria-controls', list.id);
+      heading.replaceChildren(plain, button);
+      const group = { button, plain, list, open: false };
+      button.addEventListener('click', () => {
+        group.open = !group.open;
+        sync(group);
+      });
+      return group;
+    }).filter(Boolean);
+
+    function sync(group, preserveFocus = false) {
+      const { button, plain, list } = group;
+      const buttonFocused = document.activeElement === button;
+      // A resize must not hide the link the keyboard user is currently on.
+      if (preserveFocus && phone.matches && list.contains(document.activeElement)) group.open = true;
+      if (phone.matches && !group.open && list.contains(document.activeElement)) button.focus();
+      button.hidden = !phone.matches;
+      plain.hidden = phone.matches;
+      list.hidden = phone.matches && !group.open;
+      button.setAttribute('aria-expanded', String(!list.hidden));
+      if (!phone.matches && buttonFocused) list.querySelector('a')?.focus();
+    }
+
+    groups.forEach(group => sync(group));
+    footer.setAttribute('data-lm-footer-ready', '');
+    phone.addEventListener('change', () => groups.forEach(group => sync(group, true)));
   });
 })();
 </script></body>
