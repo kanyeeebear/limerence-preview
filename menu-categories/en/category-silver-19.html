@@ -873,6 +873,27 @@ html{scrollbar-gutter:stable}
   .lm-foot__grid>nav:last-of-type ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px}
   .lm-foot__base{font-size:11px}
 }
+</style><style id="lm-newsletter-css">
+.lm-newsletter{padding:64px 20px 52px;background:var(--wash);text-align:center}
+.lm-newsletter__inner{max-width:640px;margin:0 auto}
+.lm-newsletter h2{margin:0 0 16px;font:400 28px/1.25 'Raleway',Arial,sans-serif;letter-spacing:0;text-transform:none;color:var(--ink)}
+.lm-newsletter__intro{margin:0;font-size:14px;line-height:1.6;color:var(--ink-soft)}
+.lm-newsletter form{max-width:520px;margin:26px auto 0}
+.lm-newsletter__fields{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}
+.lm-newsletter input{display:block;width:100%;min-width:0;height:48px;padding:12px 16px;border:1px solid var(--field-line);border-radius:3px;background:#fff;color:var(--ink);font:400 16px/1.4 'Raleway',Arial,sans-serif}
+.lm-newsletter input::placeholder{color:var(--muted);opacity:1}
+.lm-newsletter .button{min-height:48px;padding:12px 24px;background:var(--button);border:1px solid var(--button);color:#fff;white-space:nowrap}
+.lm-newsletter .button:hover{background:var(--button-hover);border-color:var(--button-hover);color:#fff}
+.lm-newsletter input:focus-visible,.lm-newsletter button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.lm-newsletter__note{min-height:20px;margin:14px 0 0;color:var(--muted);font-size:12px;line-height:1.6}
+.lm-newsletter+.lm-foot{margin-top:0}
+@media(max-width:599px){
+  .lm-newsletter{padding:44px 20px 36px}
+  .lm-newsletter h2{font-size:24px}
+  .lm-newsletter__intro{max-width:32ch;margin:0 auto}
+  .lm-newsletter__fields{grid-template-columns:1fr}
+  .lm-newsletter .button{width:100%}
+}
 </style></head>
 <body>
 <div class="lm-share"><span><strong>LIMÉRENCE design preview.</strong> This is not a shop: ordering and payment do not work. Prices and availability come from a snapshot of the shop on 05.10.2026. The New arrivals selection and catalogue videos are shown as examples for the design review.</span><nav aria-label="Preview pages"><a href="en/index.html">Home</a><a href="en/gold.html">«Gold» section</a><a href="en/product.html">Product page</a><a class="lm-previous-preview" href="https://kanyeeebear.github.io/limerence-preview/en/">Previous version</a></nav></div>
@@ -1123,7 +1144,21 @@ html{scrollbar-gutter:stable}
 	<li><a class="next page-numbers" href="en/category-silver-19.html#" data-off>&rarr;</a></li>
 </ul>
 </nav>
-</div></main>    <footer class="lm-foot">
+</div></main>    <section class="lm-newsletter" aria-labelledby="lm-newsletter-title">
+    <div class="lm-newsletter__inner">
+        <h2 id="lm-newsletter-title">LIMÉRENCE news</h2>
+        <p class="lm-newsletter__intro">Discover new collections and news from the brand.</p>
+        <form data-lm-newsletter data-complete="This is a subscription demo. Your email has not been saved." onsubmit="return false;">
+            <label class="screen-reader-text" for="lm-newsletter-email">Your email</label>
+            <div class="lm-newsletter__fields">
+                <input id="lm-newsletter-email" type="email" placeholder="Your email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" maxlength="254" required aria-describedby="lm-newsletter-note">
+                <button class="button" type="button">Subscribe</button>
+            </div>
+            <p class="lm-newsletter__note" id="lm-newsletter-note" role="status" aria-live="polite">Demo: your email is not saved.</p>
+        </form>
+    </div>
+</section>
+<footer class="lm-foot">
         <div class="lm-wrap">
             <div class="lm-foot__brand">
                 <a class="lm-wordmark" href="en/index.html"><img src="img/logo.png" width="320" height="70" alt="LIMÉRENCE Jewelry"></a>
@@ -2062,5 +2097,19 @@ html{scrollbar-gutter:stable}
   });
 })();
 </script>
-</body>
+<script id="lm-newsletter-js">
+(() => {
+  document.querySelectorAll('[data-lm-newsletter]').forEach(form => {
+    const input = form.querySelector('input');
+    const note = form.querySelector('[role="status"]');
+    const showDemo = () => {
+      if (!input.reportValidity()) return;
+      input.value = '';
+      note.textContent = form.dataset.complete;
+    };
+    form.addEventListener('submit', event => { event.preventDefault(); event.stopPropagation(); showDemo(); });
+    form.querySelector('button').addEventListener('click', showDemo);
+  });
+})();
+</script></body>
 </html>
