@@ -667,7 +667,22 @@ ul.products:has(>.lm-catalog-film)>li.product:nth-child(n+8){order:2}
 .lm-metal-photo-frame{display:block;position:relative;overflow:hidden;width:100%}
 .lm-metal-photo-note{font-size:12px;line-height:1.5;color:var(--muted);margin:14px 0 0}
 
-/* Compact catalogue filters: keep related numeric fields on one row. */
+/* Preview copy only: notice bar, static gallery, safe-area sticky header. */
+.lm-share{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:center;padding:10px 20px;background:var(--paper);color:var(--ink);font-size:12px;line-height:1.5;text-align:center}
+.lm-share strong{font-weight:600}
+.lm-share nav{display:flex;gap:18px}
+.lm-share a{border-bottom:1px solid currentColor}
+.lm-share a[aria-current]{color:var(--ink);font-weight:600;border-bottom-width:2px}
+.lm-share__ground{display:flex;gap:10px}
+.lm-top{top:env(safe-area-inset-top,0px)}
+.lm-off{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;max-width:calc(100% - 32px);padding:14px 20px;background:var(--ink);color:#fff;font-size:13px;text-align:center}
+.woocommerce-product-gallery__wrapper{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.woocommerce-product-gallery__image:first-child{grid-column:1/-1}
+.woocommerce-product-gallery__image:not(:first-child) img{aspect-ratio:1;object-fit:cover;cursor:pointer}
+.woocommerce-product-gallery__trigger{display:none}
+</style>
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style id="lm-compact-filters">/* Compact catalogue filters: keep related numeric fields on one row. */
 .lm-filters:not(.lm-filters--gift) .lm-filter-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:end;gap:12px;width:min(280px,calc(100vw - 2*var(--gutter)));top:calc(100% + 6px);padding:16px}
 .lm-filters:not(.lm-filters--gift) .lm-filter-fields>label{display:flex;flex-direction:column;gap:4px;grid-column:1/-1;min-width:0;margin:0;font-size:12px;line-height:16px}
 .lm-filters:not(.lm-filters--gift) .lm-filter-fields>label:has([name=max_price]),.lm-filters:not(.lm-filters--gift) .lm-filter-fields>label:has([name=lm_size]){grid-column:span 1}
@@ -851,11 +866,7 @@ html{scrollbar-gutter:stable}
             <button type="button" class="lm-drawer__close" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m5 5 14 14M19 5 5 19"/></svg><span>Close</span></button>
         </div>
         <div data-lm-nav-root>
-            <form class="lm-search-form" role="search" method="get" action="#">
-        <label class="screen-reader-text" for="lm-search-drawer">Search jewellery</label>
-        <input id="lm-search-drawer" type="search" name="lm_search" placeholder="What are you looking for?" autocomplete="off">
-        <button type="submit">Search</button>
-    </form>
+            
         <nav aria-label="Menu">
             <ul class="lm-drawer__sections">
                                 <li class="lm-drawer__group"><button type="button" id="lm-nav-toggle-gold" class="lm-drawer__section-link" data-lm-open-section="gold" aria-controls="lm-nav-gold" aria-expanded="false"><span class="lm-drawer__label">Gold</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button><ul id="lm-nav-gold" class="lm-drawer__panel" data-lm-nav-panel="gold" aria-labelledby="lm-nav-toggle-gold" hidden><li><a class="lm-drawer__all" href="en/gold.html">All gold jewellery</a></li><li><a href="en/category-gold-16.html">Rings</a></li><li><a href="en/category-gold-23.html">Stud earrings</a></li><li><a href="en/category-gold-18.html">Necklace</a></li><li><a href="en/category-gold-19.html">Bracelets</a></li><li><a href="en/category-gold-17.html">Earrings</a></li><li><a href="en/category-gold-22.html">Children's collection</a></li><li><a href="en/category-gold-29.html">Ear cuffs</a></li><li><a href="en/category-gold-24.html">Pendants</a></li><li><a href="en/category-gold-30.html">Threader earrings</a></li></ul></li>
@@ -871,7 +882,11 @@ html{scrollbar-gutter:stable}
                 <li><a href="en/category-gold-29.html#" data-off>Delivery and payment</a></li>
                 <li><a href="https://t.me/Limerencejewelry" target="_blank" rel="noopener">Ask us on Telegram</a></li>            </ul><ul class="lm-lang lm-lang--drawer"><li><a href="category-gold-29.html" hreflang="uk" lang="uk" aria-label="Українська">UA</a></li><li><a href="en/category-gold-29.html" hreflang="en" lang="en" aria-label="English" aria-current="true">EN</a></li></ul>
         </nav>
-        </div>
+        <form class="lm-search-form" role="search" method="get" action="#">
+        <label class="screen-reader-text" for="lm-search-drawer">Search jewellery</label>
+        <input id="lm-search-drawer" type="search" name="lm_search" placeholder="What are you looking for?" autocomplete="off">
+        <button type="submit">Search</button>
+    </form></div>
                 </div>
     <main id="content" class="lm-page"><div class="lm-wrap lm-catalog"><header class="woocommerce-products-header">
 			<h1 class="woocommerce-products-header__title page-title"><span class="lm-title__section">Gold</span><span class="lm-title__dot"> · </span>Ear cuffs</h1>
