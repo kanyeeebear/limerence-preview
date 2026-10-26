@@ -351,8 +351,8 @@ select{appearance:none;-webkit-appearance:none;padding-right:38px!important;back
 @media(max-width:899px){.lm-wrap.lm-page{padding-top:24px}}
 
 /* ── 0.3.1 Phone first: the buttons' own colour, the section's name ahead of its filters ── */
-/* 0.8.28: a dark warm chocolate instead of graphite, with barely softened corners. */
-:root{--button:#3b2a22;--button-hover:#31221b;--button-active:#271b15}
+/* 0.8.35: graphite buttons; retain the existing 3px corners. */
+:root{--button:var(--ink);--button-hover:#202020;--button-active:#151515}
 button,.button,input[type=submit]{border-color:var(--button);background:#fff;box-shadow:none;text-shadow:none}
 :is(.button,button[type=submit],input[type=submit]){border-radius:3px}
 /* One interaction palette for outlined actions, including keyboard and touch. */
@@ -924,7 +924,7 @@ html{scrollbar-gutter:stable}
 @keyframes lm-count-beat{0%{transform:scale(1)}35%{transform:scale(1.35)}100%{transform:scale(1)}}
 .lm-count.is-beat{animation:lm-count-beat .45s var(--ease)}
 @media(prefers-reduced-motion:reduce){.lm-count.is-beat{animation:none}}
-</style><style id="lm-preview-current-buttons">:root{--button:#3b2a22;--button-hover:#31221b;--button-active:#271b15}
+</style><style id="lm-preview-current-buttons">:root{--button:var(--ink);--button-hover:#202020;--button-active:#151515}
 button,.button,input[type=submit]{border-color:var(--button);background:#fff;box-shadow:none;text-shadow:none}
 :is(.button,button[type=submit],input[type=submit]){border-radius:3px}
 /* One interaction palette for outlined actions, including keyboard and touch. */
