@@ -1,0 +1,105 @@
+/* UA · EN:quiet letters beside the search on wide screens; in the drawer on narrow ones. */
+.lm-lang{display:flex;align-items:center;list-style:none;margin:0;padding:0}
+.lm-lang li+li::before{content:"·";color:var(--muted)}
+.lm-lang a{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;font-size:11px;letter-spacing:.12em;color:var(--muted);text-decoration:none;transition:color .2s var(--ease)}
+.lm-lang a:hover,.lm-lang a[aria-current]{color:var(--ink)}
+.lm-lang--top{margin-right:6px}
+.lm-lang--drawer{margin-top:20px}
+.lm-lang--drawer a{font-size:13px}
+.lm-lang--drawer li:first-child a{padding-left:0}
+@media(max-width:1023px){.lm-lang--top{display:none}}
+@media(min-width:1024px){.lm-lang--drawer{display:none}}
+
+/* «Інший отримувач»: one box under the contacts; the recipient's name and phone open only when it is ticked. */
+.lm-recipient-toggle label.checkbox{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:13px;margin:0;cursor:pointer}
+.lm-recipient-toggle .optional{display:none}
+.woocommerce-checkout form.checkout:not(:has(#lm_other_recipient:checked)) .lm-recipient{display:none}
+
+/* Cart panel: what the cart holds slides in beside the page, from the side of the header's bag. */
+.lm-cart{position:fixed;inset:var(--lm-bar,0px) 0 0 auto;z-index:40;display:flex;flex-direction:column;width:min(100vw,440px);background:#fff;overscroll-behavior:contain;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+.lm-cart[hidden]{display:none}
+.lm-cart:focus{outline:none}
+.lm-cart__bar{display:flex;align-items:center;justify-content:space-between;flex:none;min-height:82px;padding:0 16px 0 24px;border-bottom:1px solid var(--line)}
+.lm-cart__bar h2{margin:0;font-size:26px}
+.lm-cart .lm-cart__close{width:44px;height:44px;padding:11px;border:0;background:none;color:var(--ink)}
+.lm-cart__status{flex:none;margin:0;padding:0 24px;font-size:12px;letter-spacing:.3px;color:var(--ink-soft)}
+.lm-cart__status:not(:empty){padding-top:14px}
+.lm-cart__body{flex:1;display:flex;flex-direction:column;min-height:0}
+.lm-cart__items{flex:1;min-height:0;overflow-y:auto;list-style:none;margin:0;padding:4px 24px}
+.lm-cart__item{display:grid;grid-template-columns:80px minmax(0,1fr) auto;column-gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.lm-cart__item:last-child{border-bottom:0}
+.lm-cart__photo{display:block;aspect-ratio:4/5;background:var(--paper)}
+.lm-cart__photo img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.lm-cart__name{margin:0;font-size:14px;line-height:1.4}
+.lm-cart__name a:hover{text-decoration:underline}
+.lm-cart dl.variation{display:flex;flex-wrap:wrap;gap:0 5px;margin:4px 0 0;font-size:12px;color:var(--muted)}
+.lm-cart dl.variation dd{margin:0 8px 0 0}
+.lm-cart dl.variation p{margin:0}
+.lm-cart__qty{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.lm-cart .lm-cart__remove{min-height:44px;padding:0;border:0;background:none;color:var(--muted);font-size:12px;font-weight:400;text-decoration:underline;text-underline-offset:3px}
+.lm-cart .lm-cart__remove[aria-busy=true]{opacity:.5;cursor:progress}
+.lm-cart__price{margin:0;font-size:13px;font-weight:500;white-space:nowrap}
+.lm-cart__foot{flex:none;padding:20px 24px 24px;border-top:1px solid var(--line)}
+.lm-cart__sum{display:flex;justify-content:space-between;margin:0;font-size:15px;font-weight:500}
+.lm-cart__note{margin:2px 0 16px;font-size:12px;color:var(--muted)}
+.lm-cart__view{display:flex;align-items:center;justify-content:center;min-height:44px;margin-top:6px;font-size:12px;text-decoration:underline;text-underline-offset:3px}
+.lm-cart__empty,.lm-cart__wait{margin:0;padding:24px 24px 8px;color:var(--ink-soft)}
+.lm-cart__empty-way{margin:0;padding:8px 24px}
+@media(hover:hover){.lm-cart .lm-cart__close:hover{background:var(--paper)}.lm-cart .lm-cart__remove:hover{color:var(--ink)}}
+@media(max-width:479px){.lm-cart__bar{min-height:76px;padding-left:20px;padding-right:12px}.lm-cart__items{padding-inline:20px}.lm-cart__foot{padding-inline:20px}.lm-cart__status{padding-inline:20px}.lm-cart__item{grid-template-columns:68px minmax(0,1fr) auto;column-gap:12px}}
+@media(max-width:600px){.admin-bar .lm-cart{z-index:100000}.admin-bar .lm-cart-shade{z-index:99999}}
+/* A piece with nothing to choose goes to the cart from its tile: the bag sits on the price's line, at the tile's edge. */
+/* The tile ends at its price, not at the row's tallest neighbour, so the bag stays on its own price's line. */
+.products .product:has(.lm-add){align-self:start}
+.products .product .lm-add{position:absolute;right:-11px;bottom:-11px;z-index:1;width:44px;min-height:44px;padding:11px;border:0;background:none;color:var(--ink)}
+.lm-add svg{width:22px;height:22px}
+.lm-add[aria-busy=true]{opacity:.45;cursor:progress}
+@media(hover:hover){.lm-add:hover svg{fill:var(--paper)}}
+/* The cart's number answers an added piece with one short beat. */
+@keyframes lm-count-beat{0%{transform:scale(1)}35%{transform:scale(1.35)}100%{transform:scale(1)}}
+.lm-count.is-beat{animation:lm-count-beat .45s var(--ease)}
+@media(prefers-reduced-motion:reduce){.lm-count.is-beat{animation:none}}
+/* Cart panel: what the cart holds slides in beside the page, from the side of the header's bag. */
+.lm-cart{position:fixed;inset:var(--lm-bar,0px) 0 0 auto;z-index:40;display:flex;flex-direction:column;width:min(100vw,440px);background:#fff;overscroll-behavior:contain;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+.lm-cart[hidden]{display:none}
+.lm-cart:focus{outline:none}
+.lm-cart__bar{display:flex;align-items:center;justify-content:space-between;flex:none;min-height:82px;padding:0 16px 0 24px;border-bottom:1px solid var(--line)}
+.lm-cart__bar h2{margin:0;font-size:26px}
+.lm-cart .lm-cart__close{width:44px;height:44px;padding:11px;border:0;background:none;color:var(--ink)}
+.lm-cart__status{flex:none;margin:0;padding:0 24px;font-size:12px;letter-spacing:.3px;color:var(--ink-soft)}
+.lm-cart__status:not(:empty){padding-top:14px}
+.lm-cart__body{flex:1;display:flex;flex-direction:column;min-height:0}
+.lm-cart__items{flex:1;min-height:0;overflow-y:auto;list-style:none;margin:0;padding:4px 24px}
+.lm-cart__item{display:grid;grid-template-columns:80px minmax(0,1fr) auto;column-gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.lm-cart__item:last-child{border-bottom:0}
+.lm-cart__photo{display:block;aspect-ratio:4/5;background:var(--paper)}
+.lm-cart__photo img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.lm-cart__name{margin:0;font-size:14px;line-height:1.4}
+.lm-cart__name a:hover{text-decoration:underline}
+.lm-cart dl.variation{display:flex;flex-wrap:wrap;gap:0 5px;margin:4px 0 0;font-size:12px;color:var(--muted)}
+.lm-cart dl.variation dd{margin:0 8px 0 0}
+.lm-cart dl.variation p{margin:0}
+.lm-cart__qty{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.lm-cart .lm-cart__remove{min-height:44px;padding:0;border:0;background:none;color:var(--muted);font-size:12px;font-weight:400;text-decoration:underline;text-underline-offset:3px}
+.lm-cart .lm-cart__remove[aria-busy=true]{opacity:.5;cursor:progress}
+.lm-cart__price{margin:0;font-size:13px;font-weight:500;white-space:nowrap}
+.lm-cart__foot{flex:none;padding:20px 24px 24px;border-top:1px solid var(--line)}
+.lm-cart__sum{display:flex;justify-content:space-between;margin:0;font-size:15px;font-weight:500}
+.lm-cart__note{margin:2px 0 16px;font-size:12px;color:var(--muted)}
+.lm-cart__view{display:flex;align-items:center;justify-content:center;min-height:44px;margin-top:6px;font-size:12px;text-decoration:underline;text-underline-offset:3px}
+.lm-cart__empty,.lm-cart__wait{margin:0;padding:24px 24px 8px;color:var(--ink-soft)}
+.lm-cart__empty-way{margin:0;padding:8px 24px}
+@media(hover:hover){.lm-cart .lm-cart__close:hover{background:var(--paper)}.lm-cart .lm-cart__remove:hover{color:var(--ink)}}
+@media(max-width:479px){.lm-cart__bar{min-height:76px;padding-left:20px;padding-right:12px}.lm-cart__items{padding-inline:20px}.lm-cart__foot{padding-inline:20px}.lm-cart__status{padding-inline:20px}.lm-cart__item{grid-template-columns:68px minmax(0,1fr) auto;column-gap:12px}}
+@media(max-width:600px){.admin-bar .lm-cart{z-index:100000}.admin-bar .lm-cart-shade{z-index:99999}}
+/* A piece with nothing to choose goes to the cart from its tile: the bag sits on the price's line, at the tile's edge. */
+/* The tile ends at its price, not at the row's tallest neighbour, so the bag stays on its own price's line. */
+.products .product:has(.lm-add){align-self:start}
+.products .product .lm-add{position:absolute;right:-11px;bottom:-11px;z-index:1;width:44px;min-height:44px;padding:11px;border:0;background:none;color:var(--ink)}
+.lm-add svg{width:22px;height:22px}
+.lm-add[aria-busy=true]{opacity:.45;cursor:progress}
+@media(hover:hover){.lm-add:hover svg{fill:var(--paper)}}
+/* The cart's number answers an added piece with one short beat. */
+@keyframes lm-count-beat{0%{transform:scale(1)}35%{transform:scale(1.35)}100%{transform:scale(1)}}
+.lm-count.is-beat{animation:lm-count-beat .45s var(--ease)}
+@media(prefers-reduced-motion:reduce){.lm-count.is-beat{animation:none}}

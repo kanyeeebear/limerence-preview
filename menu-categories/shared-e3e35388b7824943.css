@@ -1,0 +1,66 @@
+/* One text menu on every screen; groups expand in the same vertical flow. */
+html{scrollbar-gutter:stable}
+.lm-drawer-shade{position:fixed;inset:var(--lm-bar,0px) 0 0;width:100vw;z-index:39;background:rgb(0 0 0 / 60%)}
+.lm-drawer{position:fixed;inset:var(--lm-bar,0px) auto 0 0;z-index:40;width:min(var(--lm-menu-viewport-width,100vw),400px);padding:env(safe-area-inset-top,0px) 32px calc(32px + env(safe-area-inset-bottom,0px));background:#fff;overflow-y:auto;overflow-x:hidden;overscroll-behavior:none;scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:var(--field-line) #fff}
+.lm-drawer-shade[hidden],.lm-drawer[hidden],.lm-drawer__panel[hidden]{display:none}
+.lm-drawer:focus{outline:none}
+.lm-drawer__bar{position:sticky;top:0;z-index:2;display:flex;flex-direction:row-reverse;align-items:center;justify-content:space-between;min-height:88px;margin-inline:-32px;padding:0 24px 0 32px;background:#fff}
+.lm-drawer .lm-wordmark img{width:136px;max-width:100%;height:auto}
+.lm-drawer .lm-drawer__close{display:flex;align-items:center;gap:12px;width:auto;min-width:88px;min-height:44px;padding:12px 0;border:0;background:transparent;color:var(--ink);font-size:12px;letter-spacing:0;text-transform:none}
+.lm-drawer__close svg{width:16px;height:16px}
+.lm-drawer ul{list-style:none;margin:0;padding:0}
+.lm-drawer [data-lm-nav-root]{display:flex;flex-direction:column}
+.lm-drawer [data-lm-nav-root]>nav{order:-1}
+.lm-drawer .lm-drawer__section-link,.lm-drawer__sections>li>a{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:56px;padding:10px 0;border:0;background:transparent;color:var(--ink);font-size:20px;font-weight:400;line-height:1.4;letter-spacing:0;text-align:left;text-transform:none;text-decoration:none}
+.lm-drawer__section-link svg{flex:none;width:14px;height:14px;transform:rotate(90deg);transition:transform .22s var(--ease)}
+.lm-drawer__section-link[aria-expanded=true] svg{transform:rotate(-90deg)}
+.lm-drawer .lm-drawer__section-link,.lm-drawer__panel a{scroll-margin-block:96px 12px}
+.lm-drawer .lm-drawer__panel{padding:2px 0 16px 16px}
+.lm-drawer__panel a{display:flex;align-items:center;min-height:44px;padding:8px 0;font-size:15px;line-height:1.5;text-decoration:none}
+.lm-drawer__panel .lm-drawer__all{font-size:13px;color:var(--muted)}
+.lm-drawer .lm-drawer__service{margin-top:28px;padding-top:16px}
+.lm-drawer__service a{display:flex;align-items:center;min-height:44px;padding:10px 0;font-size:14px;line-height:1.5;text-decoration:none}
+.lm-drawer .lm-search-form{gap:12px;align-items:center;margin:24px 0 8px;border-bottom:1px solid var(--field-line)}
+.lm-drawer .lm-search-form input{width:0;min-width:0;min-height:48px;padding:12px 0;border:0;background:transparent;font-size:16px}
+.lm-drawer .lm-search-form input::placeholder{color:var(--muted);opacity:1}
+.lm-drawer .lm-search-form button{flex:none;padding:10px 8px;min-height:44px;border:0;background:transparent;color:var(--ink);font-size:12px;letter-spacing:.04em}
+.lm-drawer .lm-search-form input:focus-visible{outline-offset:0}
+.lm-drawer__label{position:relative;display:inline-block;padding-block:3px}
+.lm-drawer__label::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .32s cubic-bezier(.22,1,.36,1)}
+.lm-drawer a:focus:not(:focus-visible),.lm-drawer button:focus:not(:focus-visible){outline:none}
+.lm-drawer a:focus-visible,.lm-drawer button:focus-visible{outline:1px solid var(--ink);outline-offset:-2px;background:var(--paper);color:var(--ink)}
+.lm-drawer :is(a,button):focus-visible .lm-drawer__label::after{transform:scaleX(1);transform-origin:left}
+@media(hover:hover){
+ .lm-drawer :is(a,button):hover .lm-drawer__label::after{transform:scaleX(1);transform-origin:left}
+ .lm-drawer .lm-drawer__section-link:hover,.lm-drawer .lm-drawer__close:hover,.lm-drawer .lm-search-form button:hover{background:transparent;color:var(--ink)}
+}
+@media(min-width:1024px){.lm-top .lm-nav{display:none}.lm-top .lm-top__burger{display:flex}}
+@media(max-width:479px){.lm-drawer{padding-inline:24px}.lm-drawer__bar{min-height:80px;margin-inline:-24px;padding-inline:24px}}
+@media(prefers-reduced-motion:reduce){.lm-drawer__section-link svg,.lm-drawer__label::after{transition:none}}
+
+/* Pictures belong to the homepage: a still grid of direct category links. */
+.lm-home-categories{margin:72px var(--gutter) 0}
+.lm-home-categories__heading{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;margin-bottom:24px}
+.lm-home-categories__heading h2{margin:0;font-size:24px;font-weight:400;line-height:1.3}
+.lm-home-categories__all{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:13px;white-space:nowrap}
+.lm-home-categories__all svg{width:16px;height:16px}
+.lm-home-categories__grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px;list-style:none;margin:0;padding:0}
+.lm-home-categories__grid>li{min-width:0}
+.lm-home-categories__grid a{display:block;text-align:center;text-decoration:none}
+.lm-home-categories__image{display:block;aspect-ratio:4/3;background:#fff}
+.lm-home-categories__image img{display:block;width:100%;height:100%;object-fit:contain}
+.lm-home-categories__name{display:flex;justify-content:center;align-items:center;min-height:44px;padding:8px 4px;font-size:15px;line-height:1.4;text-underline-offset:5px}
+.lm-home-categories__grid a:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+@media(hover:hover){.lm-home-categories__grid a:hover .lm-home-categories__name{text-decoration:underline}}
+@media(min-width:600px) and (max-width:1099px){.lm-home-categories__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:599px){
+ .lm-home-categories{margin-top:40px}
+ .lm-home-categories__heading{align-items:flex-start;flex-wrap:wrap;gap:0 16px;margin-bottom:18px}
+ .lm-home-categories__heading h2{font-size:19px;min-height:44px;display:flex;align-items:center}
+ .lm-home-categories__all{font-size:12px}
+ .lm-home-categories__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px}
+ .lm-home-categories__name{font-size:14px}
+}
+
+
+.lm-share nav{flex-wrap:wrap;justify-content:center}
