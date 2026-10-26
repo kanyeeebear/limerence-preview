@@ -895,7 +895,8 @@ html{scrollbar-gutter:stable}
 .lm-lab-options__choices { display: flex; flex-wrap: wrap; gap: 8px; }
 .lm-lab-options__choices label { position: relative; margin: 0; cursor: pointer; }
 .lm-lab-options__choices input { position: absolute; width: 100%; height: 100%; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
-.lm-lab-options__gold-face { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 4px 9px 4px 4px; font-size: 13px; border: 1px solid transparent; border-radius: 3px; }
+.lm-lab-options__gold-face { display: flex; align-items: center; justify-content: center; width: 44px; min-height: 44px; padding: 0; border: 1px solid transparent; border-radius: 50%; }
+.lm-lab-options__gold-face > span:last-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .lm-lab-options__disc { display: block; width: 22px; height: 22px; flex: 0 0 22px; border: 1px solid #b9b9b9; border-radius: 50%; }
 .lm-lab-options__disc--white { background: linear-gradient(135deg, #aeaeac, #f9f9f7 48%, #c6c6c3); }
 .lm-lab-options__disc--yellow { background: linear-gradient(135deg, #b78c38, #f2df9f 48%, #cba94f); border-color: #b78c38; }
