@@ -213,7 +213,8 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 .bal b { color: var(--ink); font-weight: 600; }
 @media (max-width: 560px) {
   .orow { grid-template-columns: 56px minmax(0, 1fr); }
-  .oside { grid-column: 2; justify-items: start; text-align: left; grid-auto-flow: column; justify-content: start; align-items: center; gap: 10px; }
+  .oside { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 6px 12px; text-align: left; padding-left: 70px; }
+  .menu { right: auto; left: 0; }
 }
 .empty { padding: 36px 0; color: var(--muted); }
 
@@ -371,7 +372,7 @@ td .lock svg.i { width: 13px; height: 13px; }
 @media (prefers-reduced-motion: no-preference) {
   .drawer { animation: slidein .22s ease-out; }
   .sheet { animation: fadeup .2s ease-out; }
-  @keyframes slidein { from { transform: translateX(24px); opacity: .6; } to { transform: none; opacity: 1; } }
+  @keyframes slidein { from { transform: translateX(24px); } to { transform: none; } }
   @keyframes fadeup { from { opacity: 0; } to { opacity: 1; } }
 }
 /* colour layer: one sapphire accent for navigation and choices; status, staff and gold colour carry meaning */
@@ -421,6 +422,15 @@ td .lock svg.i { width: 13px; height: 13px; }
 .themebtn:hover { color: var(--ink); border-color: var(--field); }
 .themebtn svg.i { width: 18px; height: 18px; }
 .mtop .actions { flex-wrap: nowrap; }
+@media (max-width: 899px) {
+  .hide-m { display: none; }
+  .tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  main { gap: 22px; }
+}
+.filebtn { position: relative; overflow: hidden; cursor: pointer; justify-self: start; }
+.filebtn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.filename { font-size: 13px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -709,7 +719,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     var board = S.layout === 'board' && window.matchMedia('(min-width: 900px)').matches;
     return '<div class="phead"><div class="t"><h1>Заказы</h1><div class="sub">Индивидуальные заказы, ближайшая выдача сверху</div></div>' +
       '<div class="actions"><div class="roleseg layoutseg" role="group" aria-label="Вид"><button type="button" data-act="layout" data-l="list" aria-pressed="' + !board + '">Список</button><button type="button" data-act="layout" data-l="board" aria-pressed="' + board + '">Доска</button></div>' +
-      '<button type="button" class="btn" data-act="new">' + ic('plus') + 'Новый заказ</button></div></div>' +
+      '<button type="button" class="btn hide-m" data-act="new">' + ic('plus') + 'Новый заказ</button></div></div>' +
       '<div class="attn">' +
       (late ? '<button type="button" class="late" data-act="filter" data-f="late" aria-pressed="' + (S.filter === 'late') + '"><b>' + late + '</b> просрочено</button>' : '') +
       (today ? '<button type="button" class="today" data-act="filter" data-f="today" aria-pressed="' + (S.filter === 'today') + '"><span class="dot ready"></span><b>' + today + '</b> выдача сегодня</button>' : '') +
@@ -761,7 +771,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     var sv = shopVal(m), ov = ordersVal(m), pr = ov - ordersCost(m), fop = fopMonth(m);
     var attn = ORDERS.filter(function (o) { return o.st !== 'done'; }).sort(function (a, b) { return a.due.localeCompare(b.due); }).slice(0, 5);
     return '<div class="phead"><div class="t"><h1>Октябрь 2026</h1><div class="sub">На 29 октября. Касса закрыта по 28 число.</div></div>' +
-      '<div class="actions"><button type="button" class="btn ghost" data-act="go" data-v="money">ФОП и расходы</button><button type="button" class="btn" data-act="new">' + ic('plus') + 'Новый заказ</button></div></div>' +
+      '<div class="actions"><button type="button" class="btn ghost" data-act="go" data-v="money">ФОП и расходы</button><button type="button" class="btn hide-m" data-act="new">' + ic('plus') + 'Новый заказ</button></div></div>' +
       '<div class="figs">' +
       fig('Вал магазина', uah(sv), 'сентябрь: ' + uah(prev.shop)) +
       fig('Вал индивидуальных заказов', usd(ov), issued(m).length + ' ' + plural(issued(m).length, 'заказ выдан', 'заказа выдано', 'заказов выдано') + ' · сентябрь: ' + usd(prev.orders)) +
@@ -973,10 +983,10 @@ td .lock svg.i { width: 13px; height: 13px; }
       '<div class="fld"><span class="lb">Кто оформляет</span>' + radios('by', ['Саша', 'Ангелина', 'Аня'], me()) + '</div>' +
       '<div class="fgroup"><div class="gt">Изделие</div>' +
       '<div class="fld"><label for="n-t">Название</label><input type="text" id="n-t" name="t" required placeholder="Например, кольцо багет"></div>' +
-      '<div class="frow"><div class="fld"><span class="lb">Проба</span>' + radios('pr', ['585', '750'], '750') + '</div><div class="fld"><span class="lb">Цвет золота</span>' + radios('col', ['белое', 'жёлтое', 'розовое'], 'белое') + '</div></div>' +
+      '<div class="fld"><span class="lb">Проба</span>' + radios('pr', ['585', '750'], '750') + '</div><div class="fld"><span class="lb">Цвет золота</span>' + radios('col', ['белое', 'жёлтое', 'розовое'], 'белое') + '</div>' +
       '<div class="frow"><div class="fld"><label for="n-sz">Размер</label><input type="text" id="n-sz" name="sz" placeholder="р. 16 или 45 см"></div><div class="fld"><label for="n-ct">Каратность</label><input type="text" id="n-ct" name="ct" placeholder="1 ct"></div></div>' +
       '<div class="fld"><label for="n-det">Детали</label><textarea id="n-det" name="det" placeholder="Застёжка, закрепка, гравировка"></textarea></div>' +
-      '<div class="fld"><label for="n-photo">Фото модели</label><input type="file" id="n-photo" name="photo" accept="image/*"></div></div>' +
+      '<div class="fld"><span class="lb">Фото модели</span><label class="btn ghost filebtn">' + ic('plus') + 'Добавить фото<input type="file" id="n-photo" name="photo" accept="image/*" aria-label="Фото модели"></label><span class="filename" id="n-photo-name"></span></div></div>' +
       '<div class="fgroup"><div class="gt">Деньги</div>' +
       '<div class="frow"><div class="fld"><label for="n-price">Цена, $</label><input type="number" id="n-price" name="price" required min="1" inputmode="decimal" placeholder="0"></div>' +
       (isOwner() ? '<div class="fld"><label for="n-cost">Себестоимость, $</label><input type="number" id="n-cost" name="cost" min="0" inputmode="decimal" placeholder="видишь только ты"></div>' : '') + '</div>' +
@@ -1108,6 +1118,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     var t = e.target;
     if (t.name === 'pcur') { $('p-usd-wrap').hidden = t.value !== 'UAH'; return; }
     if (t.name === 'cby') { draft.by = t.value; return; }
+    if (t.id === 'n-photo') { $('n-photo-name').textContent = t.files[0] ? t.files[0].name : ''; return; }
     if (t.hasAttribute('data-photo')) { readPhoto(t.files[0], function (url) { var o = ORDERS.find(function (x) { return x.id === +t.getAttribute('data-photo'); }); o.photo = url; render(); toast('Фото добавлено'); }); }
   });
   function readPhoto(f, cb) { if (!f) return; var r = new FileReader(); r.onload = function () { cb(r.result); }; r.readAsDataURL(f); }
