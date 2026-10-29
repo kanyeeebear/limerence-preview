@@ -1,0 +1,7 @@
+/* On a phone a packshot is drawn up to the piece itself (the box functions.php measured), not to its white margins:
+   the piece fills the frame less a little air (more above and below, for the heart and the discount), at most 2.2 times the size of the whole photograph, centred. */
+.lm-card-media{--lm-frame:1.25}
+@media(max-width:767px){
+.products .product .lm-card-media img.lm-packshot[style*="--lm-bw"],.lm-wishlist-items .lm-card-media img.lm-packshot[style*="--lm-bw"]{--lm-iw:min(.88/var(--lm-bw),var(--lm-frame)*.74/(var(--lm-bh)*var(--lm-r)),2.2,2.2*var(--lm-frame)/var(--lm-r));inset:auto;left:calc((.5 - var(--lm-iw)*var(--lm-cx))*100%);top:calc((.5 - var(--lm-iw)*var(--lm-r)*var(--lm-cy)/var(--lm-frame))*100%);width:calc(var(--lm-iw)*100%);height:calc(var(--lm-iw)*var(--lm-r)/var(--lm-frame)*100%);max-width:none;padding:0!important;object-fit:fill}
+}
+.lm-arrivals .lm-card-media{--lm-frame:1}
