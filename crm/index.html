@@ -156,6 +156,8 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 .btn:hover { background: var(--btn-hover); }
 .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--field); }
 .btn.ghost:hover { background: var(--wash); }
+.btn.xl { padding: 7px 12px; font-size: 13px; gap: 6px; text-decoration: none; color: var(--ink); }
+.btn.xl svg.i { width: 16px; height: 16px; }
 .btn.wide { width: 100%; justify-content: center; }
 .btn svg.i { width: 18px; height: 18px; }
 .tabs { display: flex; gap: 4px 18px; flex-wrap: wrap; border-bottom: 1px solid var(--line); }
@@ -424,7 +426,9 @@ td .lock svg.i { width: 13px; height: 13px; }
 .mtop .actions { flex-wrap: nowrap; }
 @media (max-width: 899px) {
   .hide-m { display: none; }
-  .tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  /* all five status tabs fit a 390 px phone; narrower phones fall back to sideways scroll */
+  .tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 4px 10px; justify-content: space-between; }
+  .tabs .c { margin-left: 3px; }
   .tabs::-webkit-scrollbar { display: none; }
   main { gap: 22px; }
 }
@@ -541,6 +545,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     x: '<path d="M6 6l12 12M18 6 6 18"/>',
     down: '<path d="m7 10 5 5 5-5"/>',
     search: '<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>',
+    dl: '<path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/>',
     lock: '<rect x="5" y="11" width="14" height="9.5" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
     list: '<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
     board: '<rect x="3.5" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="11" rx="1"/><rect x="16.5" y="4" width="4" height="7" rx="1"/>',
@@ -876,7 +881,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     }).join('') + '<div><span class="k">Средний чек</span><span class="v num">' + usd(cnt ? ordersVal(S.arch) / cnt : 0) + '</span></div>' +
       (own ? '<div><span class="k">Прибыль</span><span class="v num">' + usd(ordersVal(S.arch) - ordersCost(S.arch)) + '</span></div>' : '') + '</div>' +
       (cl ? '<p class="lockline">' + ic('lock') + 'Месяц закрыт ' + fds(cl.d) + ', курс для 2% — ' + rf(cl.rate) + ' ₴ за $</p>' : '');
-    return chips + '<div class="blockh archh"><h2>' + MFULL[S.arch] + ' 2026</h2>' + (own ? '<button type="button" class="btn ghost" data-act="csv-orders" data-m="' + S.arch + '">Скачать в Excel</button>' : '') + '</div>' + summary +
+    return chips + '<div class="blockh archh"><h2>' + MFULL[S.arch] + ' 2026</h2>' + (own ? xlBtn('orders', S.arch) : '') + '</div>' + summary +
       (rows.length ? '<div class="scroll"><table class="arch"><thead>' + head + '</thead><tbody>' + body + '</tbody>' + foot + '</table></div>' : '<p class="empty">В этом месяце ничего не найдено по поиску.</p>') +
       '<p class="muted small">Таблица месяца собирается сама: 1-го числа все заказы, выданные в прошлом месяце, переезжают сюда. Нажми на строку, чтобы открыть заказ.</p>';
   }
@@ -1030,7 +1035,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     var pills = '<span class="pill">внесено ' + st.entered + ' из ' + st.upto + ' ' + plural(st.upto, 'дня', 'дней', 'дней') + '</span>' +
       (st.missing.length ? '<span class="pill bad">не внесено: ' + st.missing.map(fd).join(', ') + '</span>' : '') +
       (st.mism.length ? '<span class="pill bad">расхождение с программой: ' + st.mism.map(fd).join(', ') + '</span>' : '');
-    return '<div class="block"><div class="cashhead"><h2>' + MFULL[m] + ' по дням</h2>' + (isOwner() ? '<button type="button" class="btn ghost" data-act="csv-cash" data-m="' + m + '">Скачать в Excel</button>' : '') + '</div>' +
+    return '<div class="block"><div class="cashhead"><h2>' + MFULL[m] + ' по дням</h2>' + (isOwner() ? xlBtn('cash', m) : '') + '</div>' +
       '<div class="legend">' + pills + '</div>' +
       (isClosed(m) ? '<p class="lockline">' + ic('lock') + 'Месяц закрыт ' + fds(CLOSED[m].d) + '. Менять кассу может только Аня.</p>' : '') +
       '<div class="scroll"><table class="cashgrid"><thead><tr><th>День</th><th class="r">Наличные</th><th class="r">Терминал</th><th class="r">Наложка</th><th class="r">Счёт ФОП</th><th class="r">Итого</th><th class="r">Программа</th><th>Кто</th></tr></thead><tbody>' + rows + '</tbody>' +
@@ -1064,7 +1069,7 @@ td .lock svg.i { width: 13px; height: 13px; }
       return '<tr class="click" data-act="client" data-ph="' + digits(c.ph) + '" aria-expanded="' + open + '"><td><b>' + esc(c.name) + '</b></td><td class="num">' + esc(c.ph) + '</td><td class="r num">' + c.orders.length + '</td><td class="r num">' + usd(c.sum) + '</td><td class="num">' + fd(c.last) + '</td></tr>' +
         (open ? '<tr><td colspan="5"><div class="olist">' + c.orders.map(orow).join('') + '</div></td></tr>' : '');
     }).join('');
-    return '<div class="phead"><div class="t"><h1>Клиенты</h1><div class="sub">' + list.length + ' ' + plural(list.length, 'клиент', 'клиента', 'клиентов') + ' · база собирается сама из заказов по номеру телефона</div></div></div>' +
+    return '<div class="phead"><div class="t"><h1>Клиенты</h1><div class="sub">' + list.length + ' ' + plural(list.length, 'клиент', 'клиента', 'клиентов') + ' · база собирается сама из заказов по номеру телефона</div></div><div class="actions">' + xlBtn('clients') + '</div></div>' +
       '<div class="scroll"><table><thead><tr><th>Клиент</th><th>Телефон</th><th class="r">Заказов</th><th class="r">На сумму</th><th>Последний</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
   }
 
@@ -1072,9 +1077,9 @@ td .lock svg.i { width: 13px; height: 13px; }
     var m = MONTH, sv = shopVal(m), ov = ordersVal(m), prod = ordersCost(m);
     var exp = EXP.suppliers + EXP.target + EXP.rent + EXP.other;
     function ex(k, l) { return '<div><span class="l">' + l + '</span><input type="number" inputmode="numeric" min="0" step="500" data-exp="' + k + '" value="' + EXP[k] + '" aria-label="' + l + '"></div>'; }
-    return '<div class="phead"><div class="t"><h1>Деньги</h1><div class="sub">Октябрь 2026 · на 29 число</div></div></div>' +
+    return '<div class="phead"><div class="t"><h1>Деньги</h1><div class="sub">Октябрь 2026 · на 29 число</div></div><div class="actions">' + xlBtn('turnover', m, 'Оборот и расходы в Excel') + '</div></div>' +
       '<div class="grid2">' +
-      '<div class="block"><h2>Зашло на ФОП</h2><div class="calc">' +
+      '<div class="block"><div class="cashhead"><h2>Зашло на ФОП</h2>' + xlBtn('fop', m) + '</div><div class="calc">' +
       '<div><span class="l">Терминал<small>из кассы</small></span><span class="num">' + uah(cashSum(m, 'term')) + '</span></div>' +
       '<div><span class="l">Наложенные платежи<small>из кассы</small></span><span class="num">' + uah(cashSum(m, 'cod')) + '</span></div>' +
       '<div><span class="l">Счёт ФОП<small>из кассы</small></span><span class="num">' + uah(cashSum(m, 'fop')) + '</span></div>' +
@@ -1120,7 +1125,7 @@ td .lock svg.i { width: 13px; height: 13px; }
       '<div class="closecard"><h2>Закрыть октябрь</h2><p class="soft">Закрывай в последний день месяца, когда всё внесено и зарплаты посчитаны. После закрытия итоги месяца и зарплаты фиксируются, а кассу и выданные в этом месяце заказы сможешь менять только ты.</p>' +
       '<ul class="checklist">' + checks.map(function (c) { return '<li class="' + c[0] + '"><span>' + (c[0] === 'ok' ? '✓' : '!') + '</span>' + c[1] + '</li>'; }).join('') + '</ul>' +
       '<div class="actions"><button type="button" class="btn" data-act="closemonth">' + ic('lock') + 'Закрыть октябрь</button><span class="muted small">Закрыть можно и с замечаниями, они просто видны здесь.</span></div></div>';
-    return '<div class="phead"><div class="t"><h1>Зарплаты</h1><div class="sub">Октябрь 2026 · ' + (cl ? 'зафиксировано ' + fd(cl.d) : 'считается на последний день месяца') + '</div></div></div>' +
+    return '<div class="phead"><div class="t"><h1>Зарплаты</h1><div class="sub">Октябрь 2026 · ' + (cl ? 'зафиксировано ' + fd(cl.d) : 'считается на последний день месяца') + '</div></div><div class="actions">' + xlBtn('salary', MONTH) + '</div></div>' +
       (cl ? '' : '<div class="fld" style="max-width:260px"><label for="rate">Курс доллара на день расчёта, ₴</label><input type="text" inputmode="decimal" id="rate" data-rate value="' + esc(S.rate) + '"></div>') +
       '<div class="scroll"><table><thead><tr><th></th>' + GIRLS.map(function (g) { return '<th class="r">' + av(g) + g + '</th>'; }).join('') + '</tr></thead><tbody>' +
       row('Смены <span class="muted small">из графика</span>', function (g) { return s[g].shifts; }) +
@@ -1139,30 +1144,127 @@ td .lock svg.i { width: 13px; height: 13px; }
     var n = $('rate-note'); if (n) n.textContent = 'по курсу ' + rf(rate);
   }
 
-  /* ---------- export ---------- */
-  function download(name, rows) {
-    var csv = '\ufeff' + rows.map(function (r) { return r.map(function (c) { c = String(c == null ? '' : c); return /[;"\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c; }).join(';'); }).join('\r\n');
+  /* ---------- export to Excel (.xlsx) ---------- */
+  // SheetJS loads on the first press only: it is ~880 KB and most visits never export.
+  var XLSX_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+  var XLSX_SRI = 'sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==';
+  function withXlsx(cb) {
+    if (window.XLSX) return cb(window.XLSX);
+    if (withXlsx.q) { withXlsx.q.push(cb); return; }
+    withXlsx.q = [cb]; toast('Готовлю файл…');
+    var s = document.createElement('script');
+    s.src = XLSX_SRC; s.integrity = XLSX_SRI; s.crossOrigin = 'anonymous';
+    s.onload = function () { var q = withXlsx.q; withXlsx.q = null; q.forEach(function (f) { f(window.XLSX); }); };
+    s.onerror = function () { withXlsx.q = null; s.remove(); toast('Не загрузился модуль Excel, проверь интернет'); };
+    document.head.appendChild(s);
+  }
+  var NUM = '#,##0';
+  function xn(v) { return { t: 'n', v: Math.round(v), z: NUM }; }
+  function xd(s) { var p = s.split('-').map(Number); return { t: 'n', v: (Date.UTC(p[0], p[1] - 1, p[2]) - Date.UTC(1899, 11, 30)) / 864e5, z: 'dd.mm.yyyy' }; }
+  function xf(f, v) { return { t: 'n', f: f, v: Math.round(v), z: NUM }; }
+  function xcol(X, i) { return X.utils.encode_col(i); }
+  function xsum(X, col, r1, r2, v) { var c = xcol(X, col); return xf('SUM(' + c + r1 + ':' + c + r2 + ')', v); }
+  function xsheet(X, rows, widths) { var ws = X.utils.aoa_to_sheet(rows); ws['!cols'] = widths.map(function (w) { return { wch: w }; }); return ws; }
+  function xsave(X, name, sheets) {
     try {
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
-      a.download = name; document.body.appendChild(a); a.click();
-      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      var wb = X.utils.book_new();
+      sheets.forEach(function (s) { X.utils.book_append_sheet(wb, s[1], s[0]); });
+      X.writeFile(wb, name, { compression: true });
       toast('Файл ' + name + ' скачан');
     } catch (err) { toast('Браузер не дал скачать файл'); }
   }
-  function csvOrders(m) {
-    var rows = [['Статус', '№', 'Изделие', 'Клиент', 'Телефон', 'Проба', 'Цвет золота', 'Размер', 'Каратность', 'Детали', 'Стоимость, $', 'Предоплата', 'Валюта предоплаты', 'Оформила', 'Дата заказа', 'Дата выдачи', 'Себестоимость, $', 'Прибыль, $']];
-    issued(m).sort(function (a, b) { return a.iss.localeCompare(b.iss); }).forEach(function (o) {
-      var pre = o.pays[0];
-      rows.push(['выдан', o.id, o.t, o.cn, o.ph, o.pr, o.col, o.sz, o.ct, o.det, o.price, pre ? pre.amt : '', pre ? (pre.cur === 'USD' ? '$' : '₴') : '', o.by, fds(o.cr), fds(o.iss), o.cost, o.price - o.cost]);
+  function mtitle(m) { return MFULL[m] + ' ' + m.slice(0, 4); }
+
+  // Archive month: columns follow Ana's «Учет заказов», then what her sheet lacks.
+  function xlOrders(X, m) {
+    var head = ['Статус', 'Изделие', 'Проба', 'Цвет золота', 'Размер', 'Каратность', 'Детали', 'Стоимость, $', 'Предоплата', 'Валюта предоплаты', 'Оформила', 'Выдан', '№', 'Дата заказа', 'Клиент', 'Телефон', 'Себестоимость, $', 'Прибыль, $'];
+    var list = issued(m).sort(function (a, b) { return a.iss.localeCompare(b.iss); }), rows = [head];
+    list.forEach(function (o, i) {
+      var pre = o.pays[0], r = i + 2;
+      rows.push(['выдан', o.t, o.pr, o.col, o.sz, o.ct, o.det, xn(o.price), pre ? xn(pre.amt) : null, pre ? (pre.cur === 'USD' ? '$' : '₴') : null, o.by, xd(o.iss), o.id, xd(o.cr), o.cn, o.ph, xn(o.cost), xf('H' + r + '-Q' + r, o.price - o.cost)]);
     });
-    download('LIMERENCE-zakazy-' + m + '.csv', rows);
+    var n = list.length, last = n + 1, tot = ['Итого', n + ' ' + plural(n, 'заказ', 'заказа', 'заказов')];
+    tot[7] = xsum(X, 7, 2, last, ordersVal(m)); tot[16] = xsum(X, 16, 2, last, ordersCost(m)); tot[17] = xsum(X, 17, 2, last, ordersVal(m) - ordersCost(m));
+    rows.push(tot, []);
+    rows.push(['Кто оформил', 'Заказов', 'Сумма, $']);
+    ['Саша', 'Ангелина', 'Аня'].forEach(function (pn) { var l = list.filter(function (o) { return o.by === pn; }); rows.push([pn, l.length, xn(l.reduce(function (a, o) { return a + o.price; }, 0))]); });
+    rows.push(['Средний чек, $', null, xn(n ? ordersVal(m) / n : 0)]);
+    if (CLOSED[m]) rows.push(['Месяц закрыт', null, xd(CLOSED[m].d)], ['Курс для 2%, ₴ за $', null, { t: 'n', v: CLOSED[m].rate, z: '0.00' }]);
+    xsave(X, 'LIMERENCE-arhiv-' + m + '.xlsx', [[mtitle(m), xsheet(X, rows, [13, 26, 7, 12, 11, 10, 30, 13, 11, 10, 11, 11, 7, 12, 20, 18, 15, 12])]]);
   }
-  function csvCash(m) {
-    var rows = [['День', 'Наличные', 'Терминал', 'Наложка', 'Счёт ФОП', 'Итого', 'По программе', 'Внесла']];
-    cashDays(m).forEach(function (k) { var c = CASH[k]; rows.push([fds(k), c.cash, c.term, c.cod, c.fop, dayTotal(c), c.prog == null ? '' : c.prog, c.by]); });
-    download('LIMERENCE-kassa-' + m + '.csv', rows);
+
+  // Cash month: every day 1–31 like her Excel, missing days stay as empty rows.
+  function xlCash(X, m) {
+    var y = +m.slice(0, 4), mo = +m.slice(5, 7), days = new Date(y, mo, 0).getDate();
+    var rows = [['День', '', 'Наличные', 'Терминал', 'Наложка', 'Счёт ФОП', 'Итого', 'По программе', 'Расхождение', 'Внесла', 'Отметка']];
+    for (var dd = 1; dd <= days; dd++) {
+      var k = m + '-' + String(dd).padStart(2, '0'), c = CASH[k], r = dd + 1, row = [xd(k), WD[pd(k).getDay()]];
+      if (c && c.closed) {
+        var bad = c.prog != null && c.prog !== dayTotal(c);
+        row.push(xn(c.cash), xn(c.term), xn(c.cod), xn(c.fop), xf('SUM(C' + r + ':F' + r + ')', dayTotal(c)), c.prog == null ? null : xn(c.prog), c.prog == null ? null : xf('H' + r + '-G' + r, c.prog - dayTotal(c)), c.by, bad ? 'не сходится с программой' : null);
+      } else row.push(null, null, null, null, null, null, null, null, k > TODAY_S ? null : DRAFTS[k] ? 'открыт, не закрыт' : 'не внесено');
+      rows.push(row);
+    }
+    var last = days + 1, progSum = cashDays(m).reduce(function (a, k) { return a + (CASH[k].prog || 0); }, 0);
+    var tot = ['Итого', ''];
+    FIELDS.forEach(function (f, i) { tot.push(xsum(X, 2 + i, 2, last, cashSum(m, f[0]))); });
+    tot.push(xsum(X, 6, 2, last, shopVal(m)), xsum(X, 7, 2, last, progSum));
+    rows.push(tot);
+    if (isClosed(m)) rows.push([], ['Месяц закрыт', null, xd(CLOSED[m].d)]);
+    xsave(X, 'LIMERENCE-kassa-' + m + '.xlsx', [['Касса ' + mtitle(m), xsheet(X, rows, [11, 4, 11, 11, 11, 11, 12, 13, 12, 10, 24])]]);
   }
+
+  // FOP: every credit by date — three cash columns per day plus order payments to the FOP account.
+  function xlFop(X, m) {
+    var items = [];
+    cashDays(m).forEach(function (k) {
+      var c = CASH[k];
+      [['term', 'Касса: терминал'], ['cod', 'Касса: наложенный платёж'], ['fop', 'Касса: счёт ФОП']].forEach(function (f) { if (c[f[0]]) items.push([k, f[1], '', c[f[0]]]); });
+    });
+    ORDERS.forEach(function (o) { o.pays.forEach(function (p) { if (p.m === 'ФОП' && p.d.slice(0, 7) === m) items.push([p.d, 'Заказ №' + o.id + ', ' + o.t, o.cn, p.amt]); }); });
+    items.sort(function (a, b) { return a[0].localeCompare(b[0]); });
+    var rows = [['Дата зачисления', 'Откуда', 'Клиент', 'Сумма, ₴']];
+    items.forEach(function (it) { rows.push([xd(it[0]), it[1], it[2] || null, xn(it[3])]); });
+    var last = items.length + 1;
+    rows.push(['Итого за ' + MNAME[m], null, null, xsum(X, 3, 2, last, fopMonth(m))], []);
+    rows.push(['Из кассы: терминал', null, null, xn(cashSum(m, 'term'))], ['Из кассы: наложенные платежи', null, null, xn(cashSum(m, 'cod'))], ['Из кассы: счёт ФОП', null, null, xn(cashSum(m, 'fop'))], ['Оплаты заказов на ФОП', null, null, xn(fopOrders(m))]);
+    xsave(X, 'LIMERENCE-FOP-' + m + '.xlsx', [['ФОП ' + mtitle(m), xsheet(X, rows, [16, 34, 20, 13])]]);
+  }
+
+  function xlSalary(X, m) {
+    var cl = CLOSED[m], rate = cl ? cl.rate : rateNow(), s = {};
+    GIRLS.forEach(function (g) { s[g] = cl ? cl.snap.sal[g] : salaryOf(g, rate); });
+    function row(l, k) { return [l].concat(GIRLS.map(function (g) { return xn(s[g][k]); })); }
+    var rows = [[mtitle(m)].concat(GIRLS),
+      row('Смены', 'shifts'), row('За смены, ₴ (× ' + nf(RATE) + ')', 'sh'), row('2% с вала магазина, ₴', 'pShop'), row('2% с заказов, $ (без заказов Ани)', 'pOrd'),
+      row('2% с заказов в гривнах, ₴', 'conv'), row('Премия, ₴', 'bonus'), row('Доплата, ₴', 'extra'), row('К выплате, ₴', 'total'), [],
+      ['Курс $ → ₴', { t: 'n', v: rate, z: '0.00' }],
+      ['База 2%: вал магазина, ₴', xn(cl ? cl.snap.shop : shopVal(m))],
+      ['База 2%: заказы девочек, $', xn(staffBase(m))],
+      [cl ? 'Месяц закрыт' : 'Месяц не закрыт, цифры на ' + fds(TODAY_S), cl ? xd(cl.d) : null]];
+    xsave(X, 'LIMERENCE-zarplaty-' + m + '.xlsx', [['Зарплаты ' + mtitle(m), xsheet(X, rows, [36, 12, 12])]]);
+  }
+
+  function xlTurnover(X, m) {
+    var sv = shopVal(m), ov = ordersVal(m), prod = ordersCost(m), rows = [['Магазин', 'Сумма, ₴']];
+    rows.push(['Вал магазина (касса)', xn(sv)]);
+    FIELDS.forEach(function (f) { rows.push(['   ' + f[1], xn(cashSum(m, f[0]))]); });
+    var e1 = rows.length + 1;
+    rows.push(['Поставщики, золото и серебро', xn(-EXP.suppliers)], ['Таргет', xn(-EXP.target)], ['Аренда', xn(-EXP.rent)], ['Прочие траты', xn(-EXP.other)]);
+    rows.push(['Остаток магазина', xf('B2+SUM(B' + e1 + ':B' + (e1 + 3) + ')', sv - EXP.suppliers - EXP.target - EXP.rent - EXP.other)], []);
+    var o1 = rows.length + 2;
+    rows.push(['Индивидуальные заказы', 'Сумма, $'], ['Вал заказов (' + issued(m).length + ' выдано)', xn(ov)], ['Расчёт с производством', xn(-prod)], ['Остаток по заказам', xf('B' + o1 + '+B' + (o1 + 1), ov - prod)], []);
+    rows.push(['Пришло по заказам за месяц', 'Сумма'], ['   в долларах, $', xn(recv(m, 'USD'))], ['   в гривнах, ₴', xn(recv(m, 'UAH'))], [], ['Зашло на ФОП, ₴', xn(fopMonth(m))]);
+    xsave(X, 'LIMERENCE-oborot-' + m + '.xlsx', [['Оборот ' + mtitle(m), xsheet(X, rows, [34, 14])]]);
+  }
+
+  function xlClients(X) {
+    var list = clients(), rows = [['Клиент', 'Телефон', 'Заказов', 'На сумму, $', 'Последний заказ', 'Номера заказов']];
+    list.forEach(function (c) { rows.push([c.name, c.ph, c.orders.length, xn(c.sum), xd(c.last), c.orders.map(function (o) { return '№' + o.id; }).join(', ')]); });
+    xsave(X, 'LIMERENCE-klienty-' + TODAY_S + '.xlsx', [['Клиенты', xsheet(X, rows, [22, 18, 9, 13, 15, 30])]]);
+  }
+  var XL = { orders: xlOrders, cash: xlCash, fop: xlFop, salary: xlSalary, turnover: xlTurnover, clients: xlClients };
+  function xlBtn(k, m, label) { return '<button type="button" class="btn ghost xl" data-act="xl" data-k="' + k + '"' + (m ? ' data-m="' + m + '"' : '') + '>' + ic('dl') + (label || 'Скачать в Excel') + '</button>'; }
 
   /* ---------- drawer: order ---------- */
   function events(o) {
@@ -1338,8 +1440,7 @@ td .lock svg.i { width: 13px; height: 13px; }
         CLOSED[MONTH] = { rate: rt, d: TODAY_S, snap: snap }; toast('Октябрь закрыт, итоги зафиксированы'); break;
       }
       case 'openmonth': S.rate = rf(CLOSED[MONTH].rate); delete CLOSED[MONTH]; toast('Октябрь снова открыт'); break;
-      case 'csv-orders': csvOrders(a.getAttribute('data-m')); return;
-      case 'csv-cash': csvCash(a.getAttribute('data-m')); return;
+      case 'xl': { var xk = a.getAttribute('data-k'), xm = a.getAttribute('data-m'); if (isOwner()) withXlsx(function (X) { XL[xk](X, xm); }); return; }
       case 'client': { var ph = a.getAttribute('data-ph'); S.clientOpen = S.clientOpen === ph ? null : ph; break; }
       case 'copy': {
         var txt = a.getAttribute('data-t');
