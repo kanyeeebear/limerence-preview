@@ -443,6 +443,37 @@ td .lock svg.i { width: 13px; height: 13px; }
 .stdone { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--st-done); background: var(--done-wash); padding: 2px 8px; border-radius: 4px; }
 .monthnote { padding: 12px 0 4px; }
 #olist { display: grid; gap: 12px; min-width: 0; }
+.due.wait { color: var(--st-ready); font-weight: 600; }
+.chk { font-size: 14px; }
+.chk.ok { color: var(--st-done); } .chk.bad { color: var(--st-late); font-weight: 600; } .chk.none { color: var(--muted); }
+.cashhead { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+.pill { font-size: 12.5px; padding: 3px 9px; border-radius: 4px; background: var(--work-wash); color: var(--soft); }
+.pill.bad { background: var(--late-wash); color: var(--st-late); }
+.cashgrid tr.sel td { background: var(--accent-wash); }
+.cashgrid tr.missing td { color: var(--st-late); background: var(--late-wash); }
+.cashgrid tr.opened td { color: var(--st-ready); background: var(--ready-wash); }
+.cashgrid tr.mism td.pg { color: var(--st-late); font-weight: 600; }
+.cashgrid td .av { margin-right: 0; }
+.msum { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.msum > div { display: grid; gap: 3px; padding: 10px 12px 10px 0; }
+.msum .k { font-size: 12.5px; color: var(--muted); }
+.msum .v { font-weight: 600; }
+.lockline { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 13px; }
+.lockline svg.i { width: 15px; height: 15px; }
+.months button svg.i { width: 13px; height: 13px; vertical-align: -1px; }
+.stbtn svg.i { margin-left: 2px; }
+.closecard { border: 1px solid var(--line); border-radius: 6px; padding: 18px; display: grid; gap: 14px; max-width: 640px; }
+.closed { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; background: var(--done-wash); border-radius: 6px; padding: 14px 16px; max-width: 640px; }
+.closed > svg.i { color: var(--st-done); }
+.closed > div { flex: 1 1 260px; display: grid; gap: 4px; }
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14px; }
+.checklist li { display: grid; grid-template-columns: 18px 1fr; gap: 6px; }
+.checklist li.ok span { color: var(--st-done); font-weight: 700; }
+.checklist li.bad { color: var(--st-late); }
+.checklist li.bad span { font-weight: 700; }
+.cellin { width: 110px; text-align: right; border: 1px solid var(--field); border-radius: 4px; padding: 5px 8px; background: var(--bg); }
+.archh { padding-top: 18px; }
+#rate { width: 100%; border: 1px solid var(--field); border-radius: 4px; padding: 9px 11px; background: var(--bg); }
 </style>
 </head>
 <body>
@@ -567,6 +598,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     A(1017, 'Кольцо маркиз 1 ct', 'ring', '750', 'жёлтое', 'р. 17,5', '1 ct', 'лаб, острые лапки', 1650, 1160, 'Аня', 'Софія Бойко', '+380 50 000 08 47', '2026-08-29', '2026-09-22', [500, 500, 'USD', 'USDT']),
     A(1018, 'Пусеты груша 0,5 ct', 'studs', '585', 'розовое', '', '0,5 ct', 'две пары', 1110, 740, 'Ангелина', 'Дарина Ковтун', '+380 66 000 39 04', '2026-09-02', '2026-09-28', [200, 200, 'USD', 'нал'])
   );
+  ORDERS.push({ id: 1041, t: 'Колье сердце Тиффани', k: 'pendant', pr: '585', col: 'белое', sz: '45 см', ct: '0,46 ct', det: 'природные, наша модель, клеймо', price: 1590, cost: 1080, by: 'Ангелина', cn: 'Аліна Гриценко', ph: '+380 63 000 72 15', del: 'самовывоз', ch: 'офлайн', cr: '2026-09-23', due: '2026-10-16', st: 'ready', ready: '2026-10-14', pays: [P('2026-09-23', 9000, 'UAH', 215, 'ФОП', 'Ангелина')] });
   ORDERS.forEach(function (o) {
     o.log = [];
     if (o.ready) o.log.push({ d: o.ready, t: 'Статус «готов»', by: o.by });
@@ -594,15 +626,23 @@ td .lock svg.i { width: 13px; height: 13px; }
   (function () {
     for (var day = 1; day <= 28; day++) {
       var d = new Date(2026, 9, day), k = ds(d), f = d.getDay() === 0 ? 0.65 : (d.getDay() === 6 ? 1.25 : 1);
-      var who = (SHIFTS[k][0]) || 'Аня';
-      CASH[k] = {
+      var c = {
         cash: r50((5000 + rnd() * 9000) * f), term: r50((6000 + rnd() * 11000) * f),
         cod: rnd() < 0.6 ? r50(rnd() * 5200) : 0, fop: rnd() < 0.5 ? r50(rnd() * 3200) : 0,
-        by: who, closed: true
+        by: (SHIFTS[k][0]) || 'Аня', closed: true
       };
+      if (day === 19) continue; // example: a day nobody entered
+      c.prog = dayTotal(c) + (day === 24 ? 500 : 0); // example: a typo against the shop program
+      CASH[k] = c;
     }
   })();
-  var draft = { cash: 6450, term: 8900, cod: 0, fop: 1200, by: (SHIFTS[TODAY_S][0] || 'Саша') };
+  var DRAFTS = {};
+  DRAFTS[TODAY_S] = { cash: 6450, term: 8900, cod: 0, fop: 1200, prog: 16550, by: (SHIFTS[TODAY_S][0] || 'Саша') };
+  var CLOSED = { '2026-06': { rate: 41.3, d: '2026-06-30' }, '2026-07': { rate: 41.6, d: '2026-07-31' }, '2026-08': { rate: 41.4, d: '2026-08-31' }, '2026-09': { rate: 41.2, d: '2026-09-30' } };
+  function isClosed(m) { return !!CLOSED[m]; }
+  var MGEN = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+  function fdl(k) { var d = pd(k); return d.getDate() + ' ' + MGEN[d.getMonth()] + ', ' + WD[d.getDay()]; }
+  function rf(r) { return String(r).replace('.', ','); }
 
   var HIST = {
     '2026-06': { shop: 612400, fop: 366900 },
@@ -620,7 +660,8 @@ td .lock svg.i { width: 13px; height: 13px; }
   function paid(o) { return o.pays.reduce(function (s, p) { return s + p.usd; }, 0); }
   function bal(o) { return o.price - paid(o); }
   function payState(o) { var p = paid(o); return p === 0 ? 'не оплачен' : p < o.price ? 'частично оплачен' : p === o.price ? 'оплачен' : 'переплата'; }
-  function isLate(o) { return o.st !== 'done' && o.due < TODAY_S; }
+  function isLate(o) { return o.st === 'work' && o.due < TODAY_S; }
+  function waitDays(o) { if (o.st !== 'ready' || o.due >= TODAY_S) return 0; return diff(o.ready && o.ready > o.due ? o.ready : o.due, TODAY_S); }
   function isToday(o) { return o.st !== 'done' && o.due === TODAY_S; }
   function issued(m) { return ORDERS.filter(function (o) { return o.st === 'done' && o.iss && o.iss.slice(0, 7) === m; }); }
   function ordersVal(m) { return issued(m).reduce(function (s, o) { return s + o.price; }, 0); }
@@ -646,7 +687,7 @@ td .lock svg.i { width: 13px; height: 13px; }
   }
 
   /* ---------- state ---------- */
-  var S = { theme: 'light', role: 'owner', view: 'overview', filter: 'current', arch: null, q: '', layout: 'list', open: null, form: null, menu: null, sheet: null, who: draft.by, clientOpen: null };
+  var S = { theme: 'light', role: 'owner', view: 'overview', filter: 'current', arch: null, q: '', layout: 'list', open: null, form: null, menu: null, sheet: null, who: DRAFTS[TODAY_S].by, cashDay: TODAY_S, rate: '41,3', clientOpen: null };
   function isOwner() { return S.role === 'owner'; }
   function me() { return isOwner() ? 'Аня' : S.who; }
   var NAV_OWNER = [['overview', 'Обзор'], ['orders', 'Заказы'], ['cash', 'Касса'], ['schedule', 'График'], ['clients', 'Клиенты'], ['money', 'Деньги'], ['salary', 'Зарплаты']];
@@ -710,6 +751,7 @@ td .lock svg.i { width: 13px; height: 13px; }
   function specs(o) { return [o.pr, o.col, o.sz, o.ct].filter(Boolean).join(' · '); }
   function dueInfo(o) {
     if (o.st === 'done') return { t: 'выдан ' + fd(o.iss), c: '' };
+    if (o.st === 'ready' && o.due < TODAY_S) { var w = waitDays(o); return { t: w > 0 ? 'не забирают ' + w + ' ' + plural(w, 'день', 'дня', 'дней') : 'готов, ждёт клиента', c: 'wait' }; }
     var n = diff(TODAY_S, o.due);
     if (n < 0) return { t: 'просрочено на ' + (-n) + ' ' + plural(-n, 'день', 'дня', 'дней'), c: 'late' };
     if (n === 0) return { t: 'выдача сегодня', c: 'today' };
@@ -725,6 +767,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     return 'переплата <b class="num">' + usd(-b) + '</b>';
   }
   function stBtn(o) {
+    if (o.st === 'done' && isClosed(o.iss.slice(0, 7)) && !isOwner()) return '<span class="stbtn done"><span class="dot done"></span>выдан' + ic('lock') + '</span>';
     var menu = S.menu === o.id ? '<div class="menu" role="menu">' + ['work', 'ready', 'done'].map(function (s) {
       return '<button type="button" role="menuitem" data-act="setst" data-id="' + o.id + '" data-st="' + s + '"' + (o.st === s ? ' aria-current="true"' : '') + '><span class="dot ' + s + '"></span>' + ST[s] + '</button>';
     }).join('') + (bal(o) > 0 && o.st !== 'done' ? '<div class="hint">«Выдан» откроет расчёт: осталось ' + usd(bal(o)) + '</div>' : '') + '</div>' : '';
@@ -753,16 +796,17 @@ td .lock svg.i { width: 13px; height: 13px; }
       else if (o.iss.slice(0, 7) === MONTH) { counts.month++; counts.current++; }
       else counts.archive++;
     });
-    var late = ORDERS.filter(isLate).length, today = ORDERS.filter(isToday).length;
+    var late = ORDERS.filter(isLate).length, today = ORDERS.filter(isToday).length, wait = ORDERS.filter(function (o) { return o.st === 'ready' && o.due < TODAY_S; }).length;
     var owed = ORDERS.filter(function (o) { return o.st !== 'done' && bal(o) > 0; });
     var owedSum = owed.reduce(function (s, o) { return s + bal(o); }, 0);
-    var tabs = [['current', 'Текущие'], ['work', 'В работе'], ['ready', 'Готов'], ['month', 'Выданы в октябре'], ['archive', 'Архив']];
+    var tabs = [['current', 'Текущие'], ['work', 'В работе'], ['ready', 'Готов'], ['month', 'Выданы'], ['archive', 'Архив']];
     var board = S.layout === 'board' && window.matchMedia('(min-width: 900px)').matches;
     return '<div class="phead"><div class="t"><h1>Заказы</h1><div class="sub">Индивидуальные заказы, ближайшая выдача сверху</div></div>' +
       '<div class="actions"><div class="roleseg layoutseg" role="group" aria-label="Вид"><button type="button" data-act="layout" data-l="list" aria-pressed="' + !board + '">Список</button><button type="button" data-act="layout" data-l="board" aria-pressed="' + board + '">Доска</button></div>' +
       '<button type="button" class="btn hide-m" data-act="new">' + ic('plus') + 'Новый заказ</button></div></div>' +
       '<div class="attn">' +
       (late ? '<button type="button" class="late" data-act="filter" data-f="late" aria-pressed="' + (S.filter === 'late') + '"><b>' + late + '</b> просрочено</button>' : '') +
+      (wait ? '<button type="button" class="today" data-act="filter" data-f="wait" aria-pressed="' + (S.filter === 'wait') + '"><b>' + wait + '</b> не забирают</button>' : '') +
       (today ? '<button type="button" class="today" data-act="filter" data-f="today" aria-pressed="' + (S.filter === 'today') + '"><span class="dot ready"></span><b>' + today + '</b> выдача сегодня</button>' : '') +
       '<button type="button" class="owed" data-act="filter" data-f="owed" aria-pressed="' + (S.filter === 'owed') + '"><b>' + owed.length + '</b> ждут доплату · <span class="num">' + usd(owedSum) + '</span></button></div>' +
       (board ? '' : '<div class="tabs" role="group" aria-label="Статус">' + tabs.map(function (t) {
@@ -782,6 +826,7 @@ td .lock svg.i { width: 13px; height: 13px; }
       if (f === 'current') return o.st !== 'done' || o.iss.slice(0, 7) === MONTH;
       if (f === 'late') return isLate(o);
       if (f === 'today') return isToday(o);
+      if (f === 'wait') return o.st === 'ready' && o.due < TODAY_S;
       if (f === 'owed') return o.st !== 'done' && bal(o) > 0;
       if (f === 'month') return o.st === 'done' && o.iss.slice(0, 7) === MONTH;
       return o.st === f;
@@ -811,7 +856,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     var own = isOwner();
     var chips = '<div class="months" role="group" aria-label="Месяц">' + ms.map(function (m) {
       var l = issued(m);
-      return '<button type="button" data-act="arch" data-m="' + m + '" aria-pressed="' + (S.arch === m) + '">' + MFULL[m] + ' 2026<small>' + l.length + ' ' + plural(l.length, 'заказ', 'заказа', 'заказов') + (own ? ' · ' + usd(ordersVal(m)) : '') + '</small></button>';
+      return '<button type="button" data-act="arch" data-m="' + m + '" aria-pressed="' + (S.arch === m) + '">' + MFULL[m] + ' 2026' + (isClosed(m) ? ' ' + ic('lock') : '') + '<small>' + l.length + ' ' + plural(l.length, 'заказ', 'заказа', 'заказов') + (own ? ' · ' + usd(ordersVal(m)) : '') + '</small></button>';
     }).join('') + '</div>';
     var head = '<tr><th>Статус</th><th>Изделие</th><th>Проба</th><th>Размер</th><th>Детали</th><th class="r">Стоимость</th><th class="r">Предоплата</th><th>Оформила</th><th>Выдан</th>' + (own ? '<th class="r">Себест.</th><th class="r">Прибыль</th>' : '') + '</tr>';
     var body = rows.map(function (o) {
@@ -824,7 +869,14 @@ td .lock svg.i { width: 13px; height: 13px; }
     var sum = function (f) { return rows.reduce(function (s, o) { return s + f(o); }, 0); };
     var foot = '<tfoot><tr><td colspan="5">Итого за ' + MFULL[S.arch].toLowerCase() + ': ' + rows.length + ' ' + plural(rows.length, 'заказ', 'заказа', 'заказов') + '</td><td class="r num">' + usd(sum(function (o) { return o.price; })) + '</td><td colspan="3"></td>' +
       (own ? '<td class="r num">' + usd(sum(function (o) { return o.cost; })) + '</td><td class="r num">' + usd(sum(function (o) { return o.price - o.cost; })) + '</td>' : '') + '</tr></tfoot>';
-    return chips + '<h2 class="archh">' + MFULL[S.arch] + ' 2026</h2>' +
+    var cl = CLOSED[S.arch], cnt = all.length;
+    var summary = '<div class="msum">' + ['Саша', 'Ангелина', 'Аня'].map(function (pn) {
+      var l = all.filter(function (o) { return o.by === pn; });
+      return '<div><span class="k">' + av(pn) + pn + '</span><span class="v num">' + l.length + ' · ' + usd(l.reduce(function (a, o) { return a + o.price; }, 0)) + '</span></div>';
+    }).join('') + '<div><span class="k">Средний чек</span><span class="v num">' + usd(cnt ? ordersVal(S.arch) / cnt : 0) + '</span></div>' +
+      (own ? '<div><span class="k">Прибыль</span><span class="v num">' + usd(ordersVal(S.arch) - ordersCost(S.arch)) + '</span></div>' : '') + '</div>' +
+      (cl ? '<p class="lockline">' + ic('lock') + 'Месяц закрыт ' + fds(cl.d) + ', курс для 2% — ' + rf(cl.rate) + ' ₴ за $</p>' : '');
+    return chips + '<div class="blockh archh"><h2>' + MFULL[S.arch] + ' 2026</h2>' + (own ? '<button type="button" class="btn ghost" data-act="csv-orders" data-m="' + S.arch + '">Скачать в Excel</button>' : '') + '</div>' + summary +
       (rows.length ? '<div class="scroll"><table class="arch"><thead>' + head + '</thead><tbody>' + body + '</tbody>' + foot + '</table></div>' : '<p class="empty">В этом месяце ничего не найдено по поиску.</p>') +
       '<p class="muted small">Таблица месяца собирается сама: 1-го числа все заказы, выданные в прошлом месяце, переезжают сюда. Нажми на строку, чтобы открыть заказ.</p>';
   }
@@ -842,7 +894,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     var m = MONTH, prev = HIST['2026-09'];
     var sv = shopVal(m), ov = ordersVal(m), pr = ov - ordersCost(m), fop = fopMonth(m);
     var attn = ORDERS.filter(function (o) { return o.st !== 'done'; }).sort(function (a, b) { return a.due.localeCompare(b.due); }).slice(0, 5);
-    return '<div class="phead"><div class="t"><h1>Октябрь 2026</h1><div class="sub">На 29 октября. Касса закрыта по 28 число.</div></div>' +
+    return '<div class="phead"><div class="t"><h1>Октябрь 2026</h1><div class="sub">На 29 октября. ' + (function () { var st = cashStats(MONTH); return st.missing.length ? 'Касса не внесена за ' + st.missing.map(fd).join(', ') + '. ' : ''; })() + (CLOSED[MONTH] ? 'Месяц закрыт ' + fd(CLOSED[MONTH].d) + '.' : 'Месяц открыт.') + '</div></div>' +
       '<div class="actions"><button type="button" class="btn ghost" data-act="go" data-v="money">ФОП и расходы</button><button type="button" class="btn hide-m" data-act="new">' + ic('plus') + 'Новый заказ</button></div></div>' +
       '<div class="figs">' +
       fig('Вал магазина', uah(sv), 'сентябрь: ' + uah(prev.shop)) +
@@ -856,7 +908,7 @@ td .lock svg.i { width: 13px; height: 13px; }
       '<div class="block"><div class="blockh"><h2>По месяцам</h2></div>' +
       '<div class="block"><h3>Вал магазина, гривны</h3><div class="chart" data-chart="shop"></div></div>' +
       '<div class="block"><h3>Вал индивидуальных заказов, доллары</h3><div class="chart" data-chart="orders"></div></div>' +
-      '<p class="muted small">Октябрь посчитан на 29 число, поэтому столбец ещё вырастет.</p></div>' +
+      '<p class="muted small">Октябрь посчитан на 29 число, поэтому столбец ещё вырастет. Вал магазина — только закрытые дни кассы.</p></div>' +
       '</div>' +
       '<div class="grid2"><div class="block"><div class="blockh"><h2>Пришло по заказам в октябре</h2></div><div class="calc">' +
       '<div><span class="l">В долларах<small>предоплаты и расчёты</small></span><span class="num">' + usd(recv(m, 'USD')) + '</span></div>' +
@@ -908,25 +960,83 @@ td .lock svg.i { width: 13px; height: 13px; }
     var ft = foot ? '<tfoot><tr><td>Октябрь</td><td class="r num">' + nf(cashSum(MONTH, 'cash')) + '</td><td class="r num">' + nf(cashSum(MONTH, 'term')) + '</td><td class="r num">' + nf(cashSum(MONTH, 'cod')) + '</td><td class="r num">' + nf(cashSum(MONTH, 'fop')) + '</td><td class="r num">' + uah(shopVal(MONTH)) + '</td><td></td></tr></tfoot>' : '';
     return '<div class="scroll"><table><thead><tr><th>День</th><th class="r">Наличные</th><th class="r">Терминал</th><th class="r">Наложка</th><th class="r">Счёт ФОП</th><th class="r">Итого</th><th>Кто</th></tr></thead><tbody>' + rows + '</tbody>' + ft + '</table></div>';
   }
-  function viewCash() {
-    var closed = CASH[TODAY_S] && CASH[TODAY_S].closed;
-    var today = closed ? CASH[TODAY_S] : draft;
-    var form = closed ?
-      '<div class="cashcard"><div class="blockh"><h2>Сегодня, 29 октября</h2><span class="lock">' + ic('lock') + '</span></div>' +
-      '<p class="soft">День закрыт, ' + esc(today.by) + '. Итого <b class="num">' + uah(dayTotal(today)) + '</b>. Сумма ушла в вал магазина и ФОП.</p>' +
-      (isOwner() ? '<div><button type="button" class="btn ghost" data-act="reopen">Открыть день снова</button></div>' : '<p class="muted small">Исправить закрытый день может только Аня.</p>') + '</div>' :
-      '<form class="cashcard" id="cashform"><div class="blockh"><h2>Сегодня, 29 октября</h2><span class="muted small">открыт</span></div>' +
-      '<div class="fld"><span class="lb">Кто вносит</span><div class="seg">' + GIRLS.concat(['Аня']).map(function (g) { return '<label><input type="radio" name="cby" value="' + g + '"' + (today.by === g ? ' checked' : '') + '><span>' + g + '</span></label>'; }).join('') + '</div></div>' +
-      '<div class="frow">' + [['cash', 'Наличные'], ['term', 'Терминал'], ['cod', 'Наложенный платёж'], ['fop', 'Счёт ФОП']].map(function (f) {
-        return '<div class="fld"><label for="c-' + f[0] + '">' + f[1] + ', ₴</label><input type="number" inputmode="numeric" min="0" step="50" id="c-' + f[0] + '" data-cash="' + f[0] + '" value="' + today[f[0]] + '"></div>';
-      }).join('') + '</div>' +
-      '<div class="cashtot"><span class="soft">Итого за день</span><span class="v num" id="c-total">' + uah(dayTotal(today)) + '</span></div>' +
-      '<button type="submit" class="btn wide">' + ic('lock') + 'Закрыть день</button>' +
-      '<p class="muted small">Это продажи золота и серебра в магазине. После закрытия сумма сама попадёт в вал магазина, а терминал, наложка и счёт ФОП — в ФОП за месяц.</p></form>';
-    return '<div class="phead"><div class="t"><h1>Касса</h1><div class="sub">Вносится каждый день, в гривнах</div></div></div>' + form +
-      '<div class="block"><div class="blockh"><h2>Октябрь по дням</h2><span class="muted small">' + cashDays(MONTH).length + ' ' + plural(cashDays(MONTH).length, 'день', 'дня', 'дней') + ' закрыто</span></div>' + cashTable(cashDays(MONTH).slice().reverse(), true) + '</div>';
+  function cashStats(m) {
+    var y = +m.slice(0, 4), mo = +m.slice(5, 7), days = new Date(y, mo, 0).getDate(), st = { missing: [], mism: [], open: [], entered: 0, upto: 0 };
+    for (var dd = 1; dd <= days; dd++) {
+      var k = m + '-' + String(dd).padStart(2, '0');
+      if (k > TODAY_S) break;
+      st.upto++;
+      var c = CASH[k];
+      if (c && c.closed) { st.entered++; if (c.prog != null && c.prog !== dayTotal(c)) st.mism.push(k); }
+      else if (DRAFTS[k]) st.open.push(k);
+      else st.missing.push(k);
+    }
+    return st;
   }
-
+  function dayDraft(k) {
+    if (!DRAFTS[k]) DRAFTS[k] = { cash: 0, term: 0, cod: 0, fop: 0, prog: null, by: (SHIFTS[k] && SHIFTS[k][0]) || 'Саша' };
+    return DRAFTS[k];
+  }
+  function checkHtml(c) {
+    if (c.prog == null) return '<span class="chk none">Впиши итог из отчёта программы, и CRM сверит сумму.</span>';
+    var dl = dayTotal(c) - c.prog;
+    return dl === 0 ? '<span class="chk ok">Сходится с программой</span>' : '<span class="chk bad">Расхождение ' + uah(Math.abs(dl)) + ': в CRM ' + (dl > 0 ? 'больше' : 'меньше') + ', чем в программе</span>';
+  }
+  var FIELDS = [['cash', 'Наличные'], ['term', 'Терминал'], ['cod', 'Наложенный платёж'], ['fop', 'Счёт ФОП']];
+  function viewCash() {
+    var k = S.cashDay || TODAY_S, m = k.slice(0, 7), ent = CASH[k], mClosed = isClosed(m);
+    var title = (k === TODAY_S ? 'Сегодня, ' : '') + fdl(k), card;
+    var back = k !== TODAY_S ? '<button type="button" class="btn ghost wide" data-act="cashday" data-d="' + TODAY_S + '">Вернуться к сегодня</button>' : '';
+    function summary(c, note) {
+      return '<div class="cashcard"><div class="blockh"><h2>' + title + '</h2><span class="lock">' + ic('lock') + 'закрыт</span></div><div class="calc">' +
+        FIELDS.map(function (f) { return '<div><span class="l">' + f[1] + '</span><span class="num">' + uah(c[f[0]]) + '</span></div>'; }).join('') +
+        '<div class="tot"><span class="l">Итого за день</span><span class="num">' + uah(dayTotal(c)) + '</span></div></div>' +
+        '<p>' + checkHtml(c) + '</p><p class="muted small">Внесла ' + esc(c.by) + '.</p>' + note + back + '</div>';
+    }
+    if (ent && ent.closed) {
+      card = summary(ent, isOwner() ? '<button type="button" class="btn ghost" data-act="reopenday">Открыть день для правки</button>' : '<p class="muted small">Исправить закрытый день может только Аня.</p>');
+    } else if (mClosed && !isOwner()) {
+      card = '<div class="cashcard"><h2>' + title + '</h2><p class="soft">Месяц закрыт. Внести или исправить кассу может только Аня.</p>' + back + '</div>';
+    } else {
+      var c = dayDraft(k);
+      card = '<form class="cashcard" id="cashform" data-d="' + k + '"><div class="blockh"><h2>' + title + '</h2><span class="muted small">' + (ent ? 'правка' : 'открыт') + '</span></div>' +
+        '<div class="fld"><span class="lb">Кто вносит</span><div class="seg">' + GIRLS.concat(['Аня']).map(function (g) { return '<label><input type="radio" name="cby" value="' + g + '"' + (c.by === g ? ' checked' : '') + '><span>' + g + '</span></label>'; }).join('') + '</div></div>' +
+        '<div class="frow">' + FIELDS.map(function (f) {
+          return '<div class="fld"><label for="c-' + f[0] + '">' + f[1] + ', ₴</label><input type="number" inputmode="numeric" min="0" step="50" id="c-' + f[0] + '" data-cash="' + f[0] + '" value="' + (c[f[0]] || '') + '" placeholder="0"></div>';
+        }).join('') + '</div>' +
+        '<div class="fld"><label for="c-prog">Итого по программе, ₴</label><input type="number" inputmode="numeric" min="0" id="c-prog" data-cash="prog" value="' + (c.prog == null ? '' : c.prog) + '" placeholder="из дневного отчёта"><span class="hint">Сумма из отчёта программы магазина за этот день</span></div>' +
+        '<div class="cashtot"><span class="soft">Итого за день</span><span class="v num" id="c-total">' + uah(dayTotal(c)) + '</span></div>' +
+        '<p id="c-check">' + checkHtml(c) + '</p>' +
+        '<button type="submit" class="btn wide">' + ic('lock') + 'Сохранить и закрыть день</button>' + back +
+        '<p class="muted small">Продажи золота и серебра в магазине. Сумма дня сама попадёт в вал магазина, а терминал, наложка и счёт ФОП — в ФОП за месяц.</p></form>';
+    }
+    return '<div class="phead"><div class="t"><h1>Касса</h1><div class="sub">Вносится каждый день из отчёта программы, в гривнах</div></div></div>' + card + cashGrid(MONTH);
+  }
+  function cashGrid(m) {
+    var st = cashStats(m), sel = S.cashDay || TODAY_S, rows = '';
+    for (var dd = 1; dd <= st.upto; dd++) {
+      var k = m + '-' + String(dd).padStart(2, '0'), c = CASH[k], day = '<td class="num">' + fds(k) + ' <span class="muted">' + WD[pd(k).getDay()] + '</span></td>', cls = 'click' + (k === sel ? ' sel' : '');
+      if (c && c.closed) {
+        var bad = c.prog != null && c.prog !== dayTotal(c);
+        rows += '<tr class="' + cls + (bad ? ' mism' : '') + '" data-act="cashday" data-d="' + k + '">' + day +
+          FIELDS.map(function (f) { return '<td class="r num">' + nf(c[f[0]]) + '</td>'; }).join('') +
+          '<td class="r num"><b>' + nf(dayTotal(c)) + '</b></td><td class="r num pg">' + (c.prog == null ? '—' : nf(c.prog)) + (bad ? ' ≠' : '') + '</td><td>' + av(c.by) + '</td></tr>';
+      } else {
+        rows += '<tr class="' + cls + (DRAFTS[k] ? ' opened' : ' missing') + '" data-act="cashday" data-d="' + k + '">' + day + '<td colspan="7">' + (DRAFTS[k] ? 'открыт, ещё не закрыт' : 'не внесено — нажми, чтобы внести') + '</td></tr>';
+      }
+    }
+    var tot = function (f) { return cashSum(m, f); };
+    var progSum = cashDays(m).reduce(function (a, k) { return a + (CASH[k].prog || 0); }, 0);
+    var pills = '<span class="pill">внесено ' + st.entered + ' из ' + st.upto + ' ' + plural(st.upto, 'дня', 'дней', 'дней') + '</span>' +
+      (st.missing.length ? '<span class="pill bad">не внесено: ' + st.missing.map(fd).join(', ') + '</span>' : '') +
+      (st.mism.length ? '<span class="pill bad">расхождение с программой: ' + st.mism.map(fd).join(', ') + '</span>' : '');
+    return '<div class="block"><div class="cashhead"><h2>' + MFULL[m] + ' по дням</h2>' + (isOwner() ? '<button type="button" class="btn ghost" data-act="csv-cash" data-m="' + m + '">Скачать в Excel</button>' : '') + '</div>' +
+      '<div class="legend">' + pills + '</div>' +
+      (isClosed(m) ? '<p class="lockline">' + ic('lock') + 'Месяц закрыт ' + fds(CLOSED[m].d) + '. Менять кассу может только Аня.</p>' : '') +
+      '<div class="scroll"><table class="cashgrid"><thead><tr><th>День</th><th class="r">Наличные</th><th class="r">Терминал</th><th class="r">Наложка</th><th class="r">Счёт ФОП</th><th class="r">Итого</th><th class="r">Программа</th><th>Кто</th></tr></thead><tbody>' + rows + '</tbody>' +
+      '<tfoot><tr><td>' + MFULL[m] + '</td>' + FIELDS.map(function (f) { return '<td class="r num">' + nf(tot(f[0])) + '</td>'; }).join('') + '<td class="r num">' + uah(shopVal(m)) + '</td><td class="r num">' + nf(progSum) + '</td><td></td></tr></tfoot></table></div>' +
+      '<p class="muted small">Нажми на строку, чтобы открыть день наверху. В итоги месяца идут только закрытые дни.</p></div>';
+  }
   function viewSchedule() {
     var keys = Object.keys(SHIFTS).sort();
     var head = '<tr><th class="p"></th>' + keys.map(function (k) {
@@ -984,25 +1094,74 @@ td .lock svg.i { width: 13px; height: 13px; }
       '</div>';
   }
 
-  function salaryOf(g) {
-    var shifts = shiftCount(g), b = BONUS[g];
-    var uahPart = shifts * RATE + shopVal(MONTH) * 0.02 + (+b.bonus || 0) + (+b.extra || 0);
-    return { shifts: shifts, sh: shifts * RATE, pShop: shopVal(MONTH) * 0.02, pOrd: staffBase(MONTH) * 0.02, uah: uahPart };
+  function rateNow() { return CLOSED[MONTH] ? CLOSED[MONTH].rate : (+String(S.rate).replace(',', '.') || 0); }
+  function salaryOf(g, rate) {
+    var b = BONUS[g], shifts = shiftCount(g), sh = shifts * RATE, pShop = Math.round(shopVal(MONTH) * 0.02), pOrd = Math.round(staffBase(MONTH) * 0.02);
+    var bonus = +b.bonus || 0, extra = +b.extra || 0, uahPart = sh + pShop + bonus + extra, conv = Math.round(pOrd * rate);
+    return { shifts: shifts, sh: sh, pShop: pShop, pOrd: pOrd, bonus: bonus, extra: extra, uah: uahPart, conv: conv, total: uahPart + conv };
   }
   function viewSalary() {
-    var s = {}; GIRLS.forEach(function (g) { s[g] = salaryOf(g); });
+    var cl = CLOSED[MONTH], rate = rateNow(), s = {};
+    GIRLS.forEach(function (g) { s[g] = cl ? cl.snap.sal[g] : salaryOf(g, rate); });
     function row(l, f) { return '<tr><td>' + l + '</td>' + GIRLS.map(function (g) { return '<td class="r num">' + f(g) + '</td>'; }).join('') + '</tr>'; }
-    function inp(g, k) { return '<input type="number" inputmode="numeric" min="0" step="100" data-bonus="' + g + '" data-k="' + k + '" value="' + BONUS[g][k] + '" aria-label="' + (k === 'bonus' ? 'Премия' : 'Доплата') + ', ' + g + '" style="width:110px;text-align:right;border:1px solid var(--field);border-radius:4px;padding:5px 8px;background:var(--bg)">'; }
-    return '<div class="phead"><div class="t"><h1>Зарплаты</h1><div class="sub">Октябрь 2026 · считается на последний день месяца</div></div></div>' +
-      '<div class="scroll"><table><thead><tr><th></th>' + GIRLS.map(function (g) { return '<th class="r">' + g + '</th>'; }).join('') + '</tr></thead><tbody>' +
+    function inp(g, k) {
+      if (cl) return uah(s[g][k]);
+      return '<input type="number" inputmode="numeric" min="0" step="100" class="cellin" data-bonus="' + g + '" data-k="' + k + '" value="' + BONUS[g][k] + '" aria-label="' + (k === 'bonus' ? 'Премия' : 'Доплата') + ', ' + g + '">';
+    }
+    var st = cashStats(MONTH);
+    var checks = [
+      st.missing.length ? ['bad', 'Касса не внесена: ' + st.missing.map(fd).join(', ')] : ['ok', 'Касса внесена за все дни'],
+      st.mism.length ? ['bad', 'Расхождение с программой: ' + st.mism.map(fd).join(', ')] : ['ok', 'Касса сходится с программой'],
+      st.open.length ? ['bad', 'Не закрыты дни кассы: ' + st.open.map(fd).join(', ')] : ['ok', 'Все дни кассы закрыты'],
+      ['ok', 'Смены в графике: Саша ' + shiftCount('Саша') + ', Ангелина ' + shiftCount('Ангелина')]
+    ];
+    var close = cl ?
+      '<div class="closed">' + ic('lock') + '<div><b>Октябрь закрыт ' + fd(cl.d) + ' по курсу ' + rf(cl.rate) + ' ₴ за $</b><p class="muted small">Цифры зафиксированы. Девочки не могут менять кассу октября и заказы, выданные в октябре.</p></div><button type="button" class="btn ghost" data-act="openmonth">Открыть месяц снова</button></div>' :
+      '<div class="closecard"><h2>Закрыть октябрь</h2><p class="soft">Закрывай в последний день месяца, когда всё внесено и зарплаты посчитаны. После закрытия итоги месяца и зарплаты фиксируются, а кассу и выданные в этом месяце заказы сможешь менять только ты.</p>' +
+      '<ul class="checklist">' + checks.map(function (c) { return '<li class="' + c[0] + '"><span>' + (c[0] === 'ok' ? '✓' : '!') + '</span>' + c[1] + '</li>'; }).join('') + '</ul>' +
+      '<div class="actions"><button type="button" class="btn" data-act="closemonth">' + ic('lock') + 'Закрыть октябрь</button><span class="muted small">Закрыть можно и с замечаниями, они просто видны здесь.</span></div></div>';
+    return '<div class="phead"><div class="t"><h1>Зарплаты</h1><div class="sub">Октябрь 2026 · ' + (cl ? 'зафиксировано ' + fd(cl.d) : 'считается на последний день месяца') + '</div></div></div>' +
+      (cl ? '' : '<div class="fld" style="max-width:260px"><label for="rate">Курс доллара на день расчёта, ₴</label><input type="text" inputmode="decimal" id="rate" data-rate value="' + esc(S.rate) + '"></div>') +
+      '<div class="scroll"><table><thead><tr><th></th>' + GIRLS.map(function (g) { return '<th class="r">' + av(g) + g + '</th>'; }).join('') + '</tr></thead><tbody>' +
       row('Смены <span class="muted small">из графика</span>', function (g) { return s[g].shifts; }) +
       row('За смены <span class="muted small">× ' + uah(RATE) + '</span>', function (g) { return uah(s[g].sh); }) +
-      row('2% с вала магазина <span class="muted small">' + uah(shopVal(MONTH)) + '</span>', function (g) { return uah(s[g].pShop); }) +
-      row('2% с заказов <span class="muted small">' + usd(staffBase(MONTH)) + ', без заказов Ани</span>', function (g) { return usd(s[g].pOrd); }) +
+      row('2% с вала магазина', function (g) { return uah(s[g].pShop); }) +
+      row('2% с заказов <span class="muted small">без заказов Ани</span>', function (g) { return usd(s[g].pOrd); }) +
+      row('2% с заказов в гривнах <span class="muted small" id="rate-note">по курсу ' + rf(rate) + '</span>', function (g) { return '<span id="conv-' + g + '">' + uah(s[g].conv) + '</span>'; }) +
       row('Премия', function (g) { return inp(g, 'bonus'); }) +
       row('Доплата', function (g) { return inp(g, 'extra'); }) +
-      '</tbody><tfoot><tr><td>Итого</td>' + GIRLS.map(function (g) { return '<td class="r num" id="sal-' + g + '">' + uah(s[g].uah) + ' + ' + usd(s[g].pOrd) + '</td>'; }).join('') + '</tr></tfoot></table></div>' +
-      '<p class="muted small">Обе получают 2% с одной и той же суммы, даже если работали не весь месяц. Доллары в гривны ты переводишь сама в день расчёта. Вал магазина пока за 28 закрытых дней.</p>';
+      '</tbody><tfoot><tr><td>К выплате</td>' + GIRLS.map(function (g) { return '<td class="r num" id="tot-' + g + '">' + uah(s[g].total) + '</td>'; }).join('') + '</tr></tfoot></table></div>' +
+      '<p class="muted small">Обе получают 2% с одной и той же суммы, даже если работали не весь месяц. База: вал магазина ' + uah(cl ? cl.snap.shop : shopVal(MONTH)) + ' и заказы девочек ' + usd(staffBase(MONTH)) + '.</p>' + close;
+  }
+  function updateSalary() {
+    var rate = rateNow();
+    GIRLS.forEach(function (g) { var x = salaryOf(g, rate); $('conv-' + g).textContent = uah(x.conv); $('tot-' + g).textContent = uah(x.total); });
+    var n = $('rate-note'); if (n) n.textContent = 'по курсу ' + rf(rate);
+  }
+
+  /* ---------- export ---------- */
+  function download(name, rows) {
+    var csv = '\ufeff' + rows.map(function (r) { return r.map(function (c) { c = String(c == null ? '' : c); return /[;"\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c; }).join(';'); }).join('\r\n');
+    try {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+      a.download = name; document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      toast('Файл ' + name + ' скачан');
+    } catch (err) { toast('Браузер не дал скачать файл'); }
+  }
+  function csvOrders(m) {
+    var rows = [['Статус', '№', 'Изделие', 'Клиент', 'Телефон', 'Проба', 'Цвет золота', 'Размер', 'Каратность', 'Детали', 'Стоимость, $', 'Предоплата', 'Валюта предоплаты', 'Оформила', 'Дата заказа', 'Дата выдачи', 'Себестоимость, $', 'Прибыль, $']];
+    issued(m).sort(function (a, b) { return a.iss.localeCompare(b.iss); }).forEach(function (o) {
+      var pre = o.pays[0];
+      rows.push(['выдан', o.id, o.t, o.cn, o.ph, o.pr, o.col, o.sz, o.ct, o.det, o.price, pre ? pre.amt : '', pre ? (pre.cur === 'USD' ? '$' : '₴') : '', o.by, fds(o.cr), fds(o.iss), o.cost, o.price - o.cost]);
+    });
+    download('LIMERENCE-zakazy-' + m + '.csv', rows);
+  }
+  function csvCash(m) {
+    var rows = [['День', 'Наличные', 'Терминал', 'Наложка', 'Счёт ФОП', 'Итого', 'По программе', 'Внесла']];
+    cashDays(m).forEach(function (k) { var c = CASH[k]; rows.push([fds(k), c.cash, c.term, c.cod, c.fop, dayTotal(c), c.prog == null ? '' : c.prog, c.by]); });
+    download('LIMERENCE-kassa-' + m + '.csv', rows);
   }
 
   /* ---------- drawer: order ---------- */
@@ -1024,6 +1183,7 @@ td .lock svg.i { width: 13px; height: 13px; }
   }
   function drawerOrder(o) {
     var steps = ['work', 'ready', 'done'], idx = steps.indexOf(o.st), di = dueInfo(o);
+    var locked = o.st === 'done' && isClosed(o.iss.slice(0, 7));
     var next = o.st === 'work' ? '<button type="button" class="btn ready" data-act="ready" data-id="' + o.id + '">Отметить «готов»</button>' :
       o.st === 'ready' ? '<button type="button" class="btn done" data-act="handover" data-id="' + o.id + '">Выдать клиенту</button>' : '';
     var ledger = o.pays.length ? '<div class="ledger">' + o.pays.map(function (p) {
@@ -1035,6 +1195,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     return '<div class="dhead"><div><div class="tag">Заказ №' + o.id + '</div><h2>' + esc(o.t) + '</h2></div><button type="button" class="x" data-act="close" aria-label="Закрыть">' + ic('x') + '</button></div>' +
       '<div class="dbody">' +
       '<div class="steps" aria-label="Статус: ' + ST[o.st] + '">' + steps.map(function (s, i) { return '<div class="' + (i <= idx ? 'on' : '') + '">' + ST[s] + '</div>'; }).join('') + '</div>' +
+      (locked ? '<p class="lockline">' + ic('lock') + (isOwner() ? 'Месяц выдачи закрыт. Зафиксированные итоги и зарплаты от правок не меняются.' : 'Месяц выдачи закрыт. Править этот заказ может только Аня.') + '</p>' : '') +
       '<div class="hero"><div class="plate ' + mcls(o) + '">' + piece(o) + '<label class="up">' + (o.photo ? 'заменить фото' : '+ фото модели') + '<input type="file" accept="image/*" data-photo="' + o.id + '"></label></div>' +
       '<dl class="specs"><dt>Проба</dt><dd>' + esc(o.pr) + '</dd><dt>Золото</dt><dd><span class="mdot ' + mcls(o) + '"></span>' + esc(o.col) + '</dd>' + (o.sz ? '<dt>Размер</dt><dd>' + esc(o.sz) + '</dd>' : '') + (o.ct ? '<dt>Каратность</dt><dd>' + esc(o.ct) + '</dd>' : '') + (o.det ? '<dt>Детали</dt><dd>' + esc(o.det) + '</dd>' : '') +
       '<dt>Оформила</dt><dd>' + av(o.by) + esc(o.by) + '</dd><dt>Заказ</dt><dd>' + fd(o.cr) + '</dd><dt>Выдача</dt><dd class="due ' + di.c + '" style="white-space:normal">' + (o.st === 'done' ? fd(o.iss) : fd(o.due) + ' · ' + di.t.replace('выдача ', '')) + '</dd></dl></div>' +
@@ -1090,7 +1251,11 @@ td .lock svg.i { width: 13px; height: 13px; }
         'Всю базу клиентов видишь только ты.<span>Девочки видят телефон клиента в его заказе.</span>',
         'Премия, доплата и расходы месяца — в гривнах.',
         'Зарплаты не вычитаются в «Деньги → Магазин».<span>Если нужно, добавим строку.</span>',
-        'Закрытый день кассы правит только ты. Удалить заказ тоже можешь только ты.<span>В истории заказа видно, кто и когда что изменил.</span>'
+        'Закрытый день кассы правит только ты. Удалить заказ тоже можешь только ты.<span>В истории заказа видно, кто и когда что изменил.</span>',
+        'Месяц закрываешь ты, на экране «Зарплаты».<span>После закрытия итоги и зарплаты фиксируются, а кассу и выданные заказы этого месяца правишь только ты.</span>',
+        'Если сумма дня не сходится с отчётом программы, день всё равно сохраняется, но подсвечивается.',
+        'Выгрузка в Excel есть только у тебя.<span>В ней телефоны клиентов, поэтому девочкам её не показываем.</span>',
+        'Готовый заказ, который не забрали после даты выдачи, помечается «не забирают N дней».'
       ].map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ol>';
   }
 
@@ -1147,7 +1312,7 @@ td .lock svg.i { width: 13px; height: 13px; }
       case 'more': S.sheet = 'more'; break;
       case 'notes': S.sheet = 'notes'; break;
       case 'close': S.open = null; S.form = null; S.sheet = null; break;
-      case 'filter': if (['late', 'today', 'owed'].indexOf(a.getAttribute('data-f')) >= 0) S.layout = 'list'; S.filter = S.filter === a.getAttribute('data-f') && ['late', 'today', 'owed'].indexOf(S.filter) >= 0 ? 'current' : a.getAttribute('data-f'); break;
+      case 'filter': if (['late', 'today', 'owed', 'wait'].indexOf(a.getAttribute('data-f')) >= 0) S.layout = 'list'; S.filter = S.filter === a.getAttribute('data-f') && ['late', 'today', 'owed', 'wait'].indexOf(S.filter) >= 0 ? 'current' : a.getAttribute('data-f'); break;
       case 'layout': S.layout = a.getAttribute('data-l'); break;
       case 'arch': S.arch = a.getAttribute('data-m'); refreshList(); return;
       case 'open': S.open = id; S.form = null; break;
@@ -1163,7 +1328,18 @@ td .lock svg.i { width: 13px; height: 13px; }
         if (i >= 0) arr.splice(i, 1); else arr.push(p);
         break;
       }
-      case 'reopen': CASH[TODAY_S].closed = false; draft = Object.assign({}, CASH[TODAY_S]); delete CASH[TODAY_S]; toast('День снова открыт'); break;
+      case 'cashday': S.cashDay = a.getAttribute('data-d'); window.scrollTo(0, 0); break;
+      case 'reopenday': { var kd = S.cashDay; DRAFTS[kd] = Object.assign({}, CASH[kd]); delete DRAFTS[kd].closed; delete CASH[kd]; toast('День открыт для правки'); break; }
+      case 'closemonth': {
+        var rt = rateNow();
+        if (!rt) { toast('Впиши курс доллара'); $('rate').focus(); return; }
+        var snap = { shop: shopVal(MONTH), orders: ordersVal(MONTH), profit: ordersVal(MONTH) - ordersCost(MONTH), fop: fopMonth(MONTH), sal: {} };
+        GIRLS.forEach(function (g) { snap.sal[g] = salaryOf(g, rt); });
+        CLOSED[MONTH] = { rate: rt, d: TODAY_S, snap: snap }; toast('Октябрь закрыт, итоги зафиксированы'); break;
+      }
+      case 'openmonth': S.rate = rf(CLOSED[MONTH].rate); delete CLOSED[MONTH]; toast('Октябрь снова открыт'); break;
+      case 'csv-orders': csvOrders(a.getAttribute('data-m')); return;
+      case 'csv-cash': csvCash(a.getAttribute('data-m')); return;
       case 'client': { var ph = a.getAttribute('data-ph'); S.clientOpen = S.clientOpen === ph ? null : ph; break; }
       case 'copy': {
         var txt = a.getAttribute('data-t');
@@ -1184,9 +1360,14 @@ td .lock svg.i { width: 13px; height: 13px; }
   document.addEventListener('input', function (e) {
     var t = e.target;
     if (t.id === 'q') { S.q = t.value; refreshList(); return; }
-    if (t.hasAttribute('data-cash')) { draft[t.getAttribute('data-cash')] = +t.value || 0; $('c-total').textContent = uah(dayTotal(draft)); return; }
+    if (t.hasAttribute('data-cash')) {
+      var cd = dayDraft(S.cashDay || TODAY_S), fk = t.getAttribute('data-cash');
+      cd[fk] = t.value === '' ? (fk === 'prog' ? null : 0) : +t.value;
+      $('c-total').textContent = uah(dayTotal(cd)); $('c-check').innerHTML = checkHtml(cd); return;
+    }
+    if (t.hasAttribute('data-rate')) { S.rate = t.value; updateSalary(); return; }
     if (t.hasAttribute('data-exp')) { EXP[t.getAttribute('data-exp')] = +t.value || 0; $('m-shop').textContent = uah(shopVal(MONTH) - (EXP.suppliers + EXP.target + EXP.rent + EXP.other)); return; }
-    if (t.hasAttribute('data-bonus')) { var g = t.getAttribute('data-bonus'); BONUS[g][t.getAttribute('data-k')] = +t.value || 0; var s = salaryOf(g); $('sal-' + g).textContent = uah(s.uah) + ' + ' + usd(s.pOrd); return; }
+    if (t.hasAttribute('data-bonus')) { BONUS[t.getAttribute('data-bonus')][t.getAttribute('data-k')] = +t.value || 0; updateSalary(); return; }
     if (t.hasAttribute('data-cost')) { var o = ORDERS.find(function (x) { return x.id === +t.getAttribute('data-cost'); }); o.cost = +t.value || 0; $('o-profit').textContent = usd(o.price - o.cost); return; }
     if (t.id === 'n-ph2') { $('n-eq-wrap').hidden = !(+t.value > 0); return; }
     if (t.id === 'n-ph') {
@@ -1199,7 +1380,7 @@ td .lock svg.i { width: 13px; height: 13px; }
   document.addEventListener('change', function (e) {
     var t = e.target;
     if (t.name === 'pcur') { $('p-usd-wrap').hidden = t.value !== 'UAH'; return; }
-    if (t.name === 'cby') { draft.by = t.value; return; }
+    if (t.name === 'cby') { dayDraft(S.cashDay || TODAY_S).by = t.value; return; }
     if (t.id === 'n-photo') { $('n-photo-name').textContent = t.files[0] ? t.files[0].name : ''; return; }
     if (t.hasAttribute('data-photo')) { readPhoto(t.files[0], function (url) { var o = ORDERS.find(function (x) { return x.id === +t.getAttribute('data-photo'); }); o.photo = url; render(); toast('Фото добавлено'); }); }
   });
@@ -1209,7 +1390,11 @@ td .lock svg.i { width: 13px; height: 13px; }
     e.preventDefault();
     var f = e.target;
     if (f.id === 'cashform') {
-      var c = Object.assign({}, draft, { closed: true }); CASH[TODAY_S] = c; toast('Касса за 29 октября закрыта: ' + uah(dayTotal(c))); render(); return;
+      var kd = f.getAttribute('data-d'), c = Object.assign({}, dayDraft(kd), { closed: true });
+      CASH[kd] = c; delete DRAFTS[kd];
+      var dl = c.prog == null ? 0 : dayTotal(c) - c.prog;
+      toast(dl ? 'День сохранён с расхождением ' + uah(Math.abs(dl)) : 'Касса за ' + fd(kd) + ' закрыта: ' + uah(dayTotal(c)));
+      render(); return;
     }
     if (f.id === 'payform') {
       var o = ORDERS.find(function (x) { return x.id === +f.getAttribute('data-id'); });
