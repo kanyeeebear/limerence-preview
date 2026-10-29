@@ -1,0 +1,1168 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>CRM LIMÉRENCE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: an app shell in the LIMÉRENCE storefront language — white ground, graphite ink, light grey plates under each piece.
+   Desktop: left sidebar + content + right drawer for an order. Phone: top bar, bottom tab bar, floating "+", full-screen sheets. */
+:root {
+  --bg: #ffffff;
+  --side: #f8f9fb;
+  --plate: #f3f3f3;
+  --wash: #ebebeb;
+  --ink: #303030;
+  --soft: #555555;
+  --muted: #727272;
+  --line: #e4e4e4;
+  --field: #bdbdbd;
+  --btn: #303030;
+  --btn-hover: #1c1c1c;
+  --btn-ink: #ffffff;
+  --bar: #c8d3e6;
+  --scrim: rgba(20, 20, 20, 0.32);
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --accent: #2f4b7c; --accent-wash: #edf1f8; --accent-ink: #2a4470; --on-accent: #ffffff; --on-status: #ffffff;
+  --st-work: #7a7a7a; --work-wash: #f0f0f0;
+  --st-ready: #8a6a0e; --ready-wash: #faf3dc;
+  --st-done: #477a2e; --done-wash: #ecf4e6;
+  --st-late: #a04336; --late-wash: #fbeceb;
+  --p-sasha: #7b5cc4; --p-sasha-wash: #f1edfa; --p-angel: #c0622e; --p-angel-wash: #fcefe7; --p-ana: #4a4a4a; --p-ana-wash: #ececec;
+  --m-white: #7d8896; --m-white-plate: #eef1f5; --m-yellow: #a07a2c; --m-yellow-plate: #f8f1df; --m-rose: #a8624c; --m-rose-plate: #f8ebe5;
+  --logo-filter: none;
+  --font-display: 'Raleway', Arial, sans-serif;
+  --font-ui: 'Raleway', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151515; --side: #191a1d; --plate: #232323; --wash: #2c2c2c; --ink: #ececec; --soft: #c4c4c4;
+    --muted: #9b9b9b; --line: #2e2e2e; --field: #555555; --btn: #ececec; --btn-hover: #ffffff; --btn-ink: #151515;
+    --bar: #34405a; --scrim: rgba(0, 0, 0, 0.55); --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    --accent: #8fb0e6; --accent-wash: #1e2638; --accent-ink: #b8ccef; --on-accent: #121a2a; --on-status: #151515;
+    --work-wash: #2a2a2a; --ready-wash: #3a3018; --done-wash: #24311c;
+    --p-sasha: #9479dc; --p-sasha-wash: #2a2340; --p-angel: #d4773f; --p-angel-wash: #3a2619; --p-ana: #d0d0d0; --p-ana-wash: #2e2e2e;
+    --m-white: #aeb8c4; --m-white-plate: #22262c; --m-yellow: #d9b46a; --m-yellow-plate: #2b2619; --m-rose: #dc9a85; --m-rose-plate: #2e221e;
+    --st-work: #a8a8a8; --st-ready: #dcb456; --st-done: #9cc77f; --st-late: #e48877; --late-wash: #3a2421;
+    --logo-filter: invert(1) brightness(1.4); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151515; --side: #191a1d; --plate: #232323; --wash: #2c2c2c; --ink: #ececec; --soft: #c4c4c4;
+  --muted: #9b9b9b; --line: #2e2e2e; --field: #555555; --btn: #ececec; --btn-hover: #ffffff; --btn-ink: #151515;
+  --bar: #34405a; --scrim: rgba(0, 0, 0, 0.55); --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    --accent: #8fb0e6; --accent-wash: #1e2638; --accent-ink: #b8ccef; --on-accent: #121a2a; --on-status: #151515;
+    --work-wash: #2a2a2a; --ready-wash: #3a3018; --done-wash: #24311c;
+    --p-sasha: #9479dc; --p-sasha-wash: #2a2340; --p-angel: #d4773f; --p-angel-wash: #3a2619; --p-ana: #d0d0d0; --p-ana-wash: #2e2e2e;
+    --m-white: #aeb8c4; --m-white-plate: #22262c; --m-yellow: #d9b46a; --m-yellow-plate: #2b2619; --m-rose: #dc9a85; --m-rose-plate: #2e221e;
+  --st-work: #a8a8a8; --st-ready: #dcb456; --st-done: #9cc77f; --st-late: #e48877; --late-wash: #3a2421;
+  --logo-filter: invert(1) brightness(1.4); color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-ui); font-size: 15px; line-height: 1.5;
+  font-feature-settings: "lnum" 1;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.num { font-feature-settings: "lnum" 1, "tnum" 1; white-space: nowrap; }
+.muted { color: var(--muted); }
+.soft { color: var(--soft); }
+.small { font-size: 13px; }
+h1, h2, h3 { margin: 0; font-family: var(--font-display); text-wrap: balance; }
+h1 { font-weight: 300; font-size: clamp(26px, 4vw, 32px); line-height: 1.1; letter-spacing: -0.005em; }
+h2 { font-weight: 400; font-size: 19px; line-height: 1.25; }
+h3 { font-weight: 600; font-size: 14px; line-height: 1.3; }
+p { margin: 0; }
+
+/* shell */
+.app { min-height: 100%; display: grid; grid-template-columns: 1fr; }
+.side { display: none; }
+.mainwrap { min-width: 0; display: flex; flex-direction: column; }
+.mtop {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding-block: 10px; border-bottom: 1px solid var(--line);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+.logo img { display: block; height: 22px; width: auto; filter: var(--logo-filter); }
+.proto {
+  font-size: 12.5px; color: var(--muted); background: var(--side); border-bottom: 1px solid var(--line);
+  padding-block: 7px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.proto button { text-decoration: underline; text-underline-offset: 3px; color: var(--soft); font-size: 12.5px; }
+main {
+  padding-block: 24px calc(96px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 28px; align-content: start; min-width: 0; max-width: 1180px; width: 100%;
+}
+.roleseg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; gap: 2px; font-size: 13px; }
+.roleseg button { padding: 4px 11px; border-radius: 999px; color: var(--muted); white-space: nowrap; }
+.roleseg button[aria-pressed="true"] { background: var(--btn); color: var(--btn-ink); }
+
+.bnav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; background: var(--bg); border-top: 1px solid var(--line);
+  display: flex; justify-content: space-around;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px));
+}
+.bnav button { flex: 1; display: grid; justify-items: center; gap: 2px; padding: 8px 2px 7px; font-size: 11px; color: var(--muted); }
+.bnav button svg { width: 22px; height: 22px; }
+.bnav button[aria-current="page"] { color: var(--ink); font-weight: 600; }
+.fab {
+  position: fixed; z-index: 26; width: 54px; height: 54px; border-radius: 50%;
+  right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  background: var(--btn); color: var(--btn-ink); display: grid; place-items: center; box-shadow: var(--shadow);
+}
+.fab svg { width: 24px; height: 24px; }
+svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+@media (min-width: 900px) {
+  .app { grid-template-columns: 236px minmax(0, 1fr); }
+  .side {
+    display: flex; flex-direction: column; gap: 22px; position: sticky; top: 0; height: 100vh;
+    background: var(--side); border-right: 1px solid var(--line); padding: 26px 16px 20px 20px;
+  }
+  .side .logo img { height: 26px; }
+  .mtop, .bnav, .fab { display: none; }
+  main { padding-block: 32px 64px; padding-left: 40px; padding-right: 40px; }
+  .proto { padding-left: 40px; }
+}
+.snav { display: grid; gap: 2px; }
+.snav button { display: flex; align-items: center; gap: 12px; padding: 9px 10px; border-radius: 6px; color: var(--soft); text-align: left; }
+.snav button:hover { background: var(--wash); color: var(--ink); }
+.snav button[aria-current="page"] { background: var(--wash); color: var(--ink); font-weight: 600; }
+.snav .cnt { margin-left: auto; font-size: 12px; color: var(--muted); font-weight: 400; }
+.side .foot { margin-top: auto; display: grid; gap: 10px; font-size: 13px; color: var(--muted); }
+.side .foot .who { color: var(--ink); font-weight: 500; }
+.side .foot button.link { text-align: left; text-decoration: underline; text-underline-offset: 3px; color: var(--soft); font-size: 13px; }
+
+/* page head */
+.phead { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 20px; }
+.phead .t { display: grid; gap: 4px; }
+.phead .sub { color: var(--muted); font-size: 14px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 4px; background: var(--btn); color: var(--btn-ink); font-weight: 500; font-size: 14px; white-space: nowrap; }
+.btn:hover { background: var(--btn-hover); }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--field); }
+.btn.ghost:hover { background: var(--wash); }
+.btn.wide { width: 100%; justify-content: center; }
+.btn svg.i { width: 18px; height: 18px; }
+.tabs { display: flex; gap: 4px 18px; flex-wrap: wrap; border-bottom: 1px solid var(--line); }
+.tabs button { padding: 8px 0 9px; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; font-size: 14px; white-space: nowrap; }
+.tabs button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); font-weight: 600; }
+.tabs .c { font-size: 12px; margin-left: 4px; color: var(--muted); font-weight: 400; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.search { flex: 1 1 220px; max-width: 360px; display: flex; align-items: center; gap: 8px; border: 1px solid var(--field); border-radius: 4px; padding: 0 10px; }
+.search input { border: 0; background: transparent; padding: 9px 0; width: 100%; outline: none; }
+.search:focus-within { outline: 2px solid var(--ink); outline-offset: 1px; }
+.layoutseg { display: none; }
+@media (min-width: 900px) { .layoutseg { display: inline-flex; } }
+
+/* attention strip */
+.attn { display: flex; flex-wrap: wrap; gap: 8px; }
+.attn button { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 4px; font-size: 13.5px; color: var(--soft); background: var(--bg); }
+.attn button:hover { border-color: var(--field); }
+.attn button b { font-weight: 600; color: var(--ink); }
+.attn button.late { background: var(--late-wash); border-color: transparent; color: var(--st-late); }
+.attn button.late b { color: var(--st-late); }
+.attn button[aria-pressed="true"] { border-color: var(--ink); }
+
+/* status */
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--st-work); }
+.dot.ready { background: var(--st-ready); }
+.dot.done { background: var(--st-done); }
+.stbtn { display: inline-flex; align-items: center; gap: 7px; padding: 4px 8px 4px 9px; border-radius: 4px; font-size: 13px; color: var(--soft); border: 1px solid var(--line); background: var(--bg); white-space: nowrap; }
+.stbtn:hover { border-color: var(--field); color: var(--ink); }
+.stbtn svg.i { width: 14px; height: 14px; color: var(--muted); }
+.stwrap { position: relative; }
+.menu { position: absolute; right: 0; top: calc(100% + 4px); z-index: 15; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; box-shadow: var(--shadow); padding: 4px; min-width: 170px; display: grid; }
+.menu button { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 4px; font-size: 14px; text-align: left; }
+.menu button:hover { background: var(--wash); }
+.menu button[aria-current="true"] { font-weight: 600; }
+.menu .hint { font-size: 12px; color: var(--muted); padding: 4px 10px 6px; }
+
+/* order list */
+.olist { display: grid; border-top: 1px solid var(--line); }
+.orow { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 12px 6px 12px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+.orow:hover { background: linear-gradient(90deg, transparent, var(--side) 12%, var(--side)); }
+.plate { background: var(--plate); border-radius: 4px; display: grid; place-items: center; color: var(--muted); overflow: hidden; aspect-ratio: 1; max-width: 100%; }
+.plate svg { width: 70%; height: 70%; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.plate img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.om { display: grid; gap: 2px; min-width: 0; }
+.ot { display: flex; gap: 8px; align-items: baseline; min-width: 0; }
+.oname { font-weight: 600; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oid { font-size: 12px; color: var(--muted); flex: none; }
+.os, .oc { font-size: 13px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oc { color: var(--soft); }
+.oside { display: grid; justify-items: end; gap: 4px; text-align: right; }
+.due { font-size: 13px; color: var(--soft); white-space: nowrap; }
+.due.late { color: var(--st-late); font-weight: 600; }
+.due.today { color: var(--st-ready); font-weight: 600; }
+.bal { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.bal b { color: var(--ink); font-weight: 600; }
+@media (max-width: 560px) {
+  .orow { grid-template-columns: 56px minmax(0, 1fr); }
+  .oside { grid-column: 2; justify-items: start; text-align: left; grid-auto-flow: column; justify-content: start; align-items: center; gap: 10px; }
+}
+.empty { padding: 36px 0; color: var(--muted); }
+
+/* board */
+.board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.col { background: var(--side); border-radius: 6px; padding: 12px; display: grid; gap: 10px; min-width: 0; }
+.colh { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; padding: 2px 2px 4px; }
+.colh .c { margin-left: auto; color: var(--muted); font-weight: 400; font-size: 13px; }
+.card { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 10px; cursor: pointer; text-align: left; }
+.card:hover { border-color: var(--field); }
+.card .om { gap: 1px; }
+.card .oname { font-size: 14px; }
+
+/* overview */
+.figs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
+.fig { padding: 16px 18px 16px 0; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.fig + .fig { padding-left: 18px; border-left: 1px solid var(--line); }
+.fig .fl { font-size: 13px; color: var(--muted); }
+.fig .fv { font-family: var(--font-display); font-weight: 300; font-size: clamp(24px, 3vw, 32px); line-height: 1.1; }
+.fig .fs { font-size: 12.5px; color: var(--muted); }
+@media (max-width: 760px) {
+  .figs { grid-template-columns: 1fr 1fr; }
+  .fig:nth-child(3) { padding-left: 0; border-left: 0; }
+  .fig:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px 40px; }
+.block { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.blockh { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.blockh button { font-size: 13px; color: var(--soft); text-decoration: underline; text-underline-offset: 3px; }
+.chart { position: relative; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart .tip { position: absolute; pointer-events: none; background: var(--bg); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: 4px; padding: 6px 9px; font-size: 13px; white-space: nowrap; transform: translate(-50%, -100%); }
+.chart .tip b { font-weight: 600; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* tables */
+.scroll { overflow-x: auto; min-width: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th { text-align: left; font-weight: 500; font-size: 12.5px; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--ink); white-space: nowrap; }
+td { padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th:first-child, td:first-child { padding-left: 0; }
+th:last-child, td:last-child { padding-right: 0; }
+.r { text-align: right; }
+tfoot td { font-weight: 600; border-bottom: 0; border-top: 1px solid var(--ink); }
+tr.click { cursor: pointer; }
+tr.click:hover td { background: var(--side); }
+td .lock { color: var(--muted); font-size: 12px; display: inline-flex; gap: 4px; align-items: center; }
+td .lock svg.i { width: 13px; height: 13px; }
+
+/* forms */
+.form { display: grid; gap: 18px; }
+.fgroup { display: grid; gap: 12px; }
+.fgroup > .gt { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding-top: 4px; }
+.frow { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+.fld { display: grid; gap: 5px; min-width: 0; }
+.fld > label, .fld > .lb { font-size: 13px; color: var(--soft); }
+.fld input[type="text"], .fld input[type="number"], .fld input[type="tel"], .fld input[type="date"], .fld textarea {
+  width: 100%; border: 1px solid var(--field); border-radius: 4px; padding: 9px 11px; background: var(--bg); min-height: 40px;
+}
+.fld textarea { min-height: 64px; resize: vertical; }
+.fld input:focus, .fld textarea:focus { outline: 2px solid var(--ink); outline-offset: 0; border-color: var(--ink); }
+.fld .hint { font-size: 12.5px; color: var(--muted); }
+.fld .hint.ok { color: var(--st-done); }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg label { position: relative; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg span { display: inline-block; padding: 7px 12px; border: 1px solid var(--field); border-radius: 4px; font-size: 14px; color: var(--soft); white-space: nowrap; }
+.seg input:checked + span { background: var(--btn); color: var(--btn-ink); border-color: var(--btn); }
+.seg input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 2px; }
+.calc { display: grid; border-top: 1px solid var(--ink); }
+.calc > div { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.calc > div .l { min-width: 0; }
+.calc > div .l small { display: block; color: var(--muted); font-size: 12.5px; }
+.calc > div.tot { font-weight: 600; border-bottom: 0; border-top: 1px solid var(--ink); }
+.calc input { width: 130px; text-align: right; border: 1px solid var(--field); border-radius: 4px; padding: 6px 9px; background: var(--bg); }
+.auto { color: var(--muted); font-size: 12px; margin-left: 6px; font-weight: 400; }
+.cashcard { border: 1px solid var(--line); border-radius: 6px; padding: 18px; display: grid; gap: 16px; max-width: 560px; }
+.cashtot { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--ink); padding-top: 12px; }
+.cashtot .v { font-family: var(--font-display); font-weight: 300; font-size: 28px; }
+
+/* schedule */
+.sched { border-collapse: separate; border-spacing: 0; width: auto; min-width: 100%; }
+.sched th, .sched td { padding: 0; border: 0; text-align: center; }
+.sched thead th { font-size: 11px; color: var(--muted); font-weight: 500; padding: 4px 0 6px; border-bottom: 1px solid var(--line); min-width: 34px; }
+.sched thead th.we { color: var(--soft); }
+.sched thead th.today { color: var(--ink); font-weight: 700; }
+.sched thead th b { display: block; font-size: 13px; color: var(--ink); font-weight: 500; }
+.sched td.p, .sched th.p { text-align: left; padding-right: 14px; white-space: nowrap; font-weight: 500; position: sticky; left: 0; background: var(--bg); z-index: 1; }
+.sched td.p { padding-block: 6px; border-bottom: 1px solid var(--line); }
+.sched td.c { border-bottom: 1px solid var(--line); padding: 4px 2px; }
+.sched td.tot { padding-left: 14px; white-space: nowrap; font-weight: 600; text-align: right; border-bottom: 1px solid var(--line); }
+.shift { width: 30px; height: 30px; border-radius: 4px; border: 1px dashed var(--line); display: inline-grid; place-items: center; font-size: 12px; color: var(--muted); }
+.shift.on { background: var(--btn); color: var(--btn-ink); border: 1px solid var(--btn); font-weight: 600; }
+.shift.on.future { background: var(--wash); color: var(--ink); border-color: var(--wash); }
+.shift:hover { border-color: var(--field); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); align-items: center; }
+.legend .sw { display: inline-block; width: 14px; height: 14px; border-radius: 3px; vertical-align: -2px; margin-right: 6px; }
+
+/* drawer & sheets */
+.scrim { position: fixed; inset: 0; background: var(--scrim); z-index: 40; }
+.drawer {
+  position: fixed; z-index: 41; top: 0; right: 0; bottom: 0; width: min(540px, 100%); background: var(--bg);
+  box-shadow: var(--shadow); overflow-y: auto; overscroll-behavior: contain;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px);
+}
+.dhead { position: sticky; top: 0; z-index: 2; background: var(--bg); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+.dhead .x { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; }
+.dhead .x:hover { background: var(--wash); }
+.dbody { padding: 20px 20px 40px; display: grid; gap: 24px; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.steps div { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+.steps div::before { content: ""; height: 3px; border-radius: 2px; background: var(--wash); }
+.steps div.on { color: var(--ink); font-weight: 600; }
+.steps div.on::before { background: var(--ink); }
+.hero { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 460px) { .hero { grid-template-columns: 112px minmax(0, 1fr); gap: 14px; } }
+.hero .plate { position: relative; }
+.hero .plate .up { position: absolute; left: 6px; right: 6px; bottom: 6px; font-size: 11.5px; background: var(--bg); border-radius: 3px; padding: 3px 6px; text-align: center; color: var(--soft); cursor: pointer; }
+.hero .plate .up input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.specs { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; font-size: 14px; margin: 0; }
+.specs dt { color: var(--muted); }
+.specs dd { margin: 0; min-width: 0; }
+.dsec { display: grid; gap: 10px; }
+.dsec > h3 { padding-bottom: 6px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.dsec > h3 .pay { font-weight: 500; font-size: 13px; color: var(--soft); }
+.ledger { display: grid; }
+.ledger > div { display: grid; grid-template-columns: 62px minmax(0, 1fr) auto; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; align-items: baseline; }
+.ledger .eq { display: block; font-size: 12.5px; color: var(--muted); text-align: right; }
+.ledger .sum { font-weight: 600; border-bottom: 0; }
+.owed { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 14px; background: var(--side); border-radius: 4px; }
+.owed .v { font-family: var(--font-display); font-weight: 300; font-size: 24px; }
+.inline { border: 1px solid var(--line); border-radius: 6px; padding: 14px; display: grid; gap: 12px; }
+.client { display: grid; gap: 6px; font-size: 14px; }
+.client .phone { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.copy { font-size: 12.5px; color: var(--soft); border: 1px solid var(--line); border-radius: 4px; padding: 2px 8px; }
+.timeline { display: grid; gap: 0; }
+.timeline > div { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 10px; padding: 7px 0; font-size: 13.5px; position: relative; }
+.timeline > div span:first-child { color: var(--muted); }
+.timeline .by { color: var(--muted); }
+.ownerbox { background: var(--side); border-radius: 6px; padding: 14px; display: grid; gap: 8px; }
+.ownerbox .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; }
+.ownerbox input { width: 110px; text-align: right; border: 1px solid var(--field); border-radius: 4px; padding: 5px 8px; background: var(--bg); }
+.tag { font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+
+.sheet { position: fixed; z-index: 41; left: 0; right: 0; bottom: 0; background: var(--bg); border-radius: 14px 14px 0 0; box-shadow: var(--shadow); max-height: 85vh; overflow-y: auto;
+  padding: 18px max(20px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px)); display: grid; gap: 10px; }
+@media (min-width: 900px) { .sheet { left: 50%; right: auto; bottom: auto; top: 50%; transform: translate(-50%, -50%); width: min(560px, 92vw); border-radius: 10px; padding: 24px; } }
+.sheet .mlinks { display: grid; }
+.sheet .mlinks button { display: flex; align-items: center; gap: 14px; padding: 14px 4px; border-bottom: 1px solid var(--line); text-align: left; font-size: 15px; }
+.sheet ol { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; font-size: 14px; }
+.sheet ol li::marker { color: var(--muted); }
+.sheet ol li span { display: block; color: var(--muted); font-size: 13px; }
+.toast { position: fixed; z-index: 50; left: 50%; transform: translateX(-50%); bottom: calc(140px + env(safe-area-inset-bottom, 0px)); background: var(--btn); color: var(--btn-ink); padding: 10px 16px; border-radius: 4px; font-size: 14px; box-shadow: var(--shadow); white-space: nowrap; }
+@media (min-width: 900px) { .toast { bottom: 32px; } }
+@media (prefers-reduced-motion: no-preference) {
+  .drawer { animation: slidein .22s ease-out; }
+  .sheet { animation: fadeup .2s ease-out; }
+  @keyframes slidein { from { transform: translateX(24px); opacity: .6; } to { transform: none; opacity: 1; } }
+  @keyframes fadeup { from { opacity: 0; } to { opacity: 1; } }
+}
+/* colour layer: one sapphire accent for navigation and choices; status, staff and gold colour carry meaning */
+.proto { background: var(--accent-wash); color: var(--accent-ink); border-bottom-color: transparent; }
+.proto button { color: var(--accent-ink); }
+.snav button[aria-current="page"] { background: var(--accent-wash); color: var(--accent-ink); }
+.snav button[aria-current="page"] svg.i { color: var(--accent); }
+.bnav button[aria-current="page"] { color: var(--accent-ink); }
+.bnav button[aria-current="page"] svg { color: var(--accent); }
+.tabs button[aria-pressed="true"] { border-color: var(--accent); }
+.roleseg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.seg input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.figs { border-top: 2px solid var(--accent); }
+.fig .fl { color: var(--accent-ink); }
+.stbtn.work { background: var(--work-wash); border-color: transparent; }
+.stbtn.ready { background: var(--ready-wash); border-color: transparent; color: var(--st-ready); }
+.stbtn.done { background: var(--done-wash); border-color: transparent; color: var(--st-done); }
+.stbtn.ready svg.i, .stbtn.done svg.i { color: currentColor; }
+.stbtn:hover { border-color: currentColor; }
+.attn button.today { background: var(--ready-wash); border-color: transparent; color: var(--st-ready); }
+.attn button.owed { background: var(--accent-wash); border-color: transparent; color: var(--accent-ink); }
+.attn button.today b, .attn button.owed b { color: inherit; }
+.attn button[aria-pressed="true"] { border-color: currentColor; }
+.btn.ready { background: var(--st-ready); color: var(--on-status); }
+.btn.done { background: var(--st-done); color: var(--on-status); }
+.btn.ready:hover, .btn.done:hover { filter: brightness(0.93); }
+.plate.m-white { background: var(--m-white-plate); color: var(--m-white); }
+.plate.m-yellow { background: var(--m-yellow-plate); color: var(--m-yellow); }
+.plate.m-rose { background: var(--m-rose-plate); color: var(--m-rose); }
+.mdot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: 0; }
+.mdot.m-white { background: var(--m-white); } .mdot.m-yellow { background: var(--m-yellow); } .mdot.m-rose { background: var(--m-rose); }
+.av { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font-size: 11px; font-weight: 600; margin-right: 6px; vertical-align: -5px; font-style: normal; }
+.av.p-sasha { background: var(--p-sasha-wash); color: var(--p-sasha); }
+.av.p-angel { background: var(--p-angel-wash); color: var(--p-angel); }
+.av.p-ana { background: var(--p-ana-wash); color: var(--p-ana); }
+.shift.on.p-sasha { background: var(--p-sasha); border-color: var(--p-sasha); color: var(--on-status); }
+.shift.on.p-angel { background: var(--p-angel); border-color: var(--p-angel); color: var(--on-status); }
+.shift.on.future.p-sasha { background: var(--p-sasha-wash); border: 1px dashed var(--p-sasha); color: var(--p-sasha); }
+.shift.on.future.p-angel { background: var(--p-angel-wash); border: 1px dashed var(--p-angel); color: var(--p-angel); }
+.col { border-top: 3px solid var(--st-work); }
+.col.ready { border-top-color: var(--st-ready); }
+.col.done { border-top-color: var(--st-done); }
+.ownerbox { background: var(--accent-wash); }
+.ownerbox .tag { color: var(--accent-ink); }
+.owed .v { color: var(--accent-ink); }
+.themebtn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; color: var(--soft); flex: none; }
+.themebtn:hover { color: var(--ink); border-color: var(--field); }
+.themebtn svg.i { width: 18px; height: 18px; }
+.mtop .actions { flex-wrap: nowrap; }
+</style>
+</head>
+<body>
+
+
+<div class="app">
+  <aside class="side" id="side"></aside>
+  <div class="mainwrap">
+    <header class="mtop" id="mtop"></header>
+    <div class="proto">Прототип для обсуждения: данные выдуманы, изменения не сохраняются. <button type="button" data-act="notes">Что можно поменять</button></div>
+    <main id="main"></main>
+  </div>
+  <nav class="bnav" id="bnav" aria-label="Разделы"></nav>
+  <button type="button" class="fab" id="fab" data-act="new" aria-label="Новый заказ"></button>
+  <div class="scrim" id="scrim" data-act="close" hidden></div>
+  <aside class="drawer" id="drawer" hidden aria-label="Заказ"></aside>
+  <div class="sheet" id="sheet" hidden role="dialog"></div>
+  <div class="toast" id="toast" hidden role="status"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var LOGO = 'data:image/png;base64,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';
+  var TODAY_S = '2026-10-29', MONTH = '2026-10', RATE = 1200;
+  var GIRLS = ['Саша', 'Ангелина'];
+  var MON = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+  var WD = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+
+  function pd(s) { var p = s.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); }
+  function ds(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function diff(a, b) { return Math.round((pd(b) - pd(a)) / 864e5); }
+  function fd(s) { var d = pd(s); return d.getDate() + ' ' + MON[d.getMonth()]; }
+  function fds(s) { var d = pd(s); return String(d.getDate()).padStart(2, '0') + '.' + String(d.getMonth() + 1).padStart(2, '0'); }
+  function nf(n) { var r = Math.round(n); var s = Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); return (r < 0 ? '−' : '') + s; }
+  function usd(n) { return nf(n) + ' $'; }
+  function uah(n) { return nf(n) + ' ₴'; }
+  function money(n, c) { return c === 'USD' ? usd(n) : uah(n); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function plural(n, a, b, c) { var m = n % 10, h = n % 100; return (m === 1 && h !== 11) ? a : (m >= 2 && m <= 4 && (h < 12 || h > 14)) ? b : c; }
+  function digits(s) { return String(s || '').replace(/\D/g, ''); }
+  function mcls(o) { return 'm-' + ({ 'белое': 'white', 'жёлтое': 'yellow', 'розовое': 'rose' }[o.col] || 'white'); }
+  function pcls(n) { return n === 'Саша' ? 'p-sasha' : n === 'Ангелина' ? 'p-angel' : 'p-ana'; }
+  function av(n) { return '<span class="av ' + pcls(n) + '" aria-hidden="true">' + esc(String(n || '?').charAt(0)) + '</span>'; }
+  function specsHtml(o) {
+    var parts = [];
+    if (o.pr) parts.push(esc(o.pr));
+    if (o.col) parts.push('<span class="mdot ' + mcls(o) + '"></span>' + esc(o.col));
+    if (o.sz) parts.push(esc(o.sz));
+    if (o.ct) parts.push(esc(o.ct));
+    return parts.join(' · ');
+  }
+
+  /* ---------- icons ---------- */
+  var IC = {
+    overview: '<rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/>',
+    orders: '<path d="M6.5 3.5h11v17h-11z"/><path d="M9.5 8h5M9.5 12h5M9.5 16h3"/>',
+    cash: '<rect x="2.5" y="6.5" width="19" height="11" rx="1"/><circle cx="12" cy="12" r="2.4"/><path d="M6 9.5v5M18 9.5v5"/>',
+    schedule: '<rect x="3.5" y="5" width="17" height="15.5" rx="1"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+    clients: '<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c1.2-3.6 4-5.5 7-5.5s5.8 1.9 7 5.5"/>',
+    money: '<path d="M3 9.5 12 4l9 5.5"/><path d="M5.5 10.5v7M10 10.5v7M14 10.5v7M18.5 10.5v7M3.5 20.5h17"/>',
+    salary: '<rect x="3" y="6.5" width="18" height="13" rx="1.5"/><path d="M3 10.5h18M15.5 15h2.5"/><path d="M6 6.5 15 3.5l1 3"/>',
+    more: '<circle cx="5.5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18.5" cy="12" r="1.2"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    x: '<path d="M6 6l12 12M18 6 6 18"/>',
+    down: '<path d="m7 10 5 5 5-5"/>',
+    search: '<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>',
+    lock: '<rect x="5" y="11" width="14" height="9.5" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+    list: '<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
+    board: '<rect x="3.5" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="11" rx="1"/><rect x="16.5" y="4" width="4" height="7" rx="1"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M5.2 18.8l1.4-1.4M17.4 6.6l1.4-1.4"/>',
+    moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>'
+  };
+  function ic(n) { return '<svg class="i" viewBox="0 0 24 24" aria-hidden="true">' + IC[n] + '</svg>'; }
+  var PIECE = {
+    ring: '<circle cx="32" cy="39" r="14.5"/><circle cx="32" cy="39" r="11.5"/><path d="M27 23.5 32 17l5 6.5-5 4.5z"/><path d="M27 23.5h10"/>',
+    studs: '<circle cx="21" cy="28" r="6.5"/><circle cx="43" cy="28" r="6.5"/><path d="M17.5 24.5 24.5 31.5M24.5 24.5 17.5 31.5M39.5 24.5 46.5 31.5M46.5 24.5 39.5 31.5"/><path d="M21 34.5v10M43 34.5v10"/>',
+    chain: '<ellipse cx="13" cy="20" rx="4" ry="2.6" transform="rotate(62 13 20)"/><ellipse cx="17" cy="28" rx="4" ry="2.6" transform="rotate(48 17 28)"/><ellipse cx="23.5" cy="35" rx="4" ry="2.6" transform="rotate(30 23.5 35)"/><ellipse cx="32" cy="38" rx="4" ry="2.6"/><ellipse cx="40.5" cy="35" rx="4" ry="2.6" transform="rotate(-30 40.5 35)"/><ellipse cx="47" cy="28" rx="4" ry="2.6" transform="rotate(-48 47 28)"/><ellipse cx="51" cy="20" rx="4" ry="2.6" transform="rotate(-62 51 20)"/>',
+    pendant: '<path d="M15 10 32 33 49 10"/><circle cx="32" cy="35" r="2"/><path d="M32 37.5c-5 6.5-7.5 10-7.5 13.5a7.5 7.5 0 0 0 15 0c0-3.5-2.5-7-7.5-13.5z"/>',
+    bracelet: '<ellipse cx="32" cy="34" rx="21" ry="11"/><ellipse cx="32" cy="34" rx="17.5" ry="8.2"/><circle cx="32" cy="44.5" r="1.6"/><circle cx="22" cy="43" r="1.6"/><circle cx="42" cy="43" r="1.6"/><circle cx="14.5" cy="39" r="1.6"/><circle cx="49.5" cy="39" r="1.6"/>'
+  };
+  function piece(o) { return o.photo ? '<img src="' + o.photo + '" alt="Фото модели">' : '<svg viewBox="0 0 64 64" aria-hidden="true">' + (PIECE[o.k] || PIECE.ring) + '</svg>'; }
+
+  /* ---------- example data (invented) ---------- */
+  function P(d, amt, cur, u, m, by) { return { d: d, amt: amt, cur: cur, usd: u, m: m, by: by }; }
+  var ORDERS = [
+    { id: 1040, t: 'Кольцо с изумрудом', k: 'ring', pr: '750', col: 'жёлтое', sz: 'р. 17', ct: '1,1 ct', det: 'изумруд овал, паве по шинке', price: 1800, cost: 1240, by: 'Саша', cn: 'Олександра Ткач', ph: '+380 67 000 41 18', del: 'самовывоз', ch: 'офлайн', cr: '2026-08-30', due: '2026-10-04', st: 'done', ready: '2026-10-01', iss: '2026-10-04', pays: [P('2026-08-30', 200, 'USD', 200, 'нал', 'Саша'), P('2026-10-04', 1600, 'USD', 1600, 'нал', 'Саша')] },
+    { id: 1042, t: 'Кольцо багет', k: 'ring', pr: '750', col: 'белое', sz: 'р. 16', ct: '1 ct', det: 'без пробы', price: 1500, cost: 1000, by: 'Саша', cn: 'Олена Коваль', ph: '+380 67 000 12 34', del: 'самовывоз', ch: 'офлайн', cr: '2026-09-14', due: '2026-10-18', st: 'done', ready: '2026-10-15', iss: '2026-10-18', pays: [P('2026-09-14', 8400, 'UAH', 200, 'ФОП', 'Саша'), P('2026-10-18', 1300, 'USD', 1300, 'нал', 'Саша')] },
+    { id: 1043, t: 'Пусеты', k: 'studs', pr: '750', col: 'белое', sz: '', ct: '1,5 ct', det: 'застёжка двойная', price: 2500, cost: 1700, by: 'Ангелина', cn: 'Ірина Мельник', ph: '+380 50 000 77 02', del: 'самовывоз', ch: 'офлайн', cr: '2026-09-20', due: '2026-10-22', st: 'done', ready: '2026-10-20', iss: '2026-10-22', pays: [P('2026-09-20', 200, 'USD', 200, 'нал', 'Ангелина'), P('2026-10-22', 2300, 'USD', 2300, 'нал', 'Ангелина')] },
+    { id: 1044, t: 'Кольцо овал 2 ct', k: 'ring', pr: '750', col: 'жёлтое', sz: 'р. 17', ct: '2 ct', det: 'классическая крапановая закрепка', price: 3200, cost: 2350, by: 'Аня', cn: 'Марина Бондар', ph: '+380 63 000 50 90', del: 'самовывоз', ch: 'офлайн', cr: '2026-09-25', due: '2026-10-09', st: 'done', ready: '2026-10-08', iss: '2026-10-09', pays: [P('2026-09-25', 500, 'USD', 500, 'USDT', 'Аня'), P('2026-10-09', 2700, 'USD', 2700, 'USDT', 'Аня')] },
+    { id: 1045, t: 'Цепь Бисмарк', k: 'chain', pr: '585', col: 'жёлтое', sz: '50 см', ct: '', det: 'плетение плотное, 4 мм', price: 900, cost: 610, by: 'Саша', cn: 'Тетяна Шевчук', ph: '+380 97 000 33 61', del: 'почта', ch: 'онлайн', cr: '2026-10-02', due: '2026-10-27', st: 'work', pays: [P('2026-10-02', 8300, 'UAH', 200, 'ФОП', 'Саша')] },
+    { id: 1046, t: 'Кольцо с сапфиром', k: 'ring', pr: '750', col: 'белое', sz: 'р. 15,5', ct: '0,8 ct', det: 'сапфир васильковый', price: 1350, cost: 900, by: 'Ангелина', cn: 'Олена Коваль', ph: '+380 67 000 12 34', del: 'самовывоз', ch: 'офлайн', cr: '2026-10-06', due: '2026-10-29', st: 'ready', ready: '2026-10-27', pays: [P('2026-10-06', 200, 'USD', 200, 'нал', 'Ангелина')] },
+    { id: 1047, t: 'Подвеска капля', k: 'pendant', pr: '585', col: 'розовое', sz: '', ct: '0,5 ct', det: 'на тонкой цепи 42 см', price: 680, cost: 430, by: 'Саша', cn: 'Анна Лисенко', ph: '+380 66 000 18 45', del: 'почта', ch: 'онлайн', cr: '2026-10-10', due: '2026-11-03', st: 'work', pays: [P('2026-10-10', 8300, 'UAH', 200, 'ФОП', 'Саша')] },
+    { id: 1048, t: 'Обручальные кольца, пара', k: 'ring', pr: '585', col: 'белое', sz: 'р. 16 и 19', ct: '', det: 'матовые, гравировка внутри', price: 1100, cost: 720, by: 'Ангелина', cn: 'Дмитро Гончар', ph: '+380 93 000 64 27', del: 'самовывоз', ch: 'офлайн', cr: '2026-10-12', due: '2026-11-07', st: 'work', pays: [P('2026-10-12', 300, 'USD', 300, 'нал', 'Ангелина')] },
+    { id: 1049, t: 'Серьги-конго с паве', k: 'studs', pr: '750', col: 'жёлтое', sz: '', ct: '0,6 ct', det: 'диаметр 18 мм', price: 1450, cost: 980, by: 'Аня', cn: 'Вікторія Кравець', ph: '+380 68 000 90 13', del: 'почта', ch: 'онлайн', cr: '2026-10-15', due: '2026-10-24', st: 'done', ready: '2026-10-23', iss: '2026-10-24', pays: [P('2026-10-15', 200, 'USD', 200, 'USDT', 'Аня'), P('2026-10-24', 1250, 'USD', 1250, 'USDT', 'Аня')] },
+    { id: 1050, t: 'Теннисный браслет', k: 'bracelet', pr: '750', col: 'белое', sz: '17 см', ct: '3 ct', det: 'камни 2,2 мм', price: 4200, cost: 3100, by: 'Саша', cn: 'Юлія Савчук', ph: '+380 67 000 25 80', del: 'самовывоз', ch: 'офлайн', cr: '2026-10-19', due: '2026-11-14', st: 'work', pays: [P('2026-10-19', 1000, 'USD', 1000, 'нал', 'Саша')] },
+    { id: 1051, t: 'Кольцо солитер', k: 'ring', pr: '750', col: 'белое', sz: 'р. 16,5', ct: '1,2 ct', det: 'шесть крапанов', price: 2100, cost: 1450, by: 'Ангелина', cn: 'Катерина Олійник', ph: '+380 50 000 31 66', del: 'почта', ch: 'онлайн', cr: '2026-10-21', due: '2026-11-10', st: 'work', pays: [P('2026-10-21', 8300, 'UAH', 200, 'ФОП', 'Ангелина')] },
+    { id: 1052, t: 'Пусеты 0,5 ct', k: 'studs', pr: '585', col: 'белое', sz: '', ct: '0,5 ct', det: '', price: 520, cost: 340, by: 'Саша', cn: 'Ірина Мельник', ph: '+380 50 000 77 02', del: 'самовывоз', ch: 'офлайн', cr: '2026-10-26', due: '2026-10-31', st: 'ready', ready: '2026-10-28', pays: [P('2026-10-26', 200, 'USD', 200, 'нал', 'Саша')] },
+    { id: 1053, t: 'Кольцо багет 0,7 ct', k: 'ring', pr: '750', col: 'жёлтое', sz: 'р. 17', ct: '0,7 ct', det: 'ждём согласования эскиза', price: 1250, cost: 830, by: 'Ангелина', cn: 'Наталя Руденко', ph: '+380 99 000 48 52', del: 'самовывоз', ch: 'офлайн', cr: '2026-10-28', due: '2026-11-20', st: 'work', pays: [] }
+  ];
+  ORDERS.forEach(function (o) {
+    o.log = [];
+    if (o.ready) o.log.push({ d: o.ready, t: 'Статус «готов»', by: o.by });
+    if (o.iss) o.log.push({ d: o.iss, t: 'Выдан клиенту', by: o.by });
+  });
+  var nextId = 1054;
+
+  // seeded random, so the example month is stable
+  var seed = 20261029;
+  function rnd() { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }
+  function r50(n) { return Math.round(n / 50) * 50; }
+
+  var SHIFTS = {};
+  (function () {
+    var turn = 0;
+    for (var day = 1; day <= 31; day++) {
+      var d = new Date(2026, 9, day), k = ds(d), w = d.getDay();
+      if (w === 6) SHIFTS[k] = ['Саша', 'Ангелина'];
+      else if (w === 1) SHIFTS[k] = [];
+      else SHIFTS[k] = [GIRLS[turn++ % 2]];
+    }
+  })();
+
+  var CASH = {};
+  (function () {
+    for (var day = 1; day <= 28; day++) {
+      var d = new Date(2026, 9, day), k = ds(d), f = d.getDay() === 0 ? 0.65 : (d.getDay() === 6 ? 1.25 : 1);
+      var who = (SHIFTS[k][0]) || 'Аня';
+      CASH[k] = {
+        cash: r50((5000 + rnd() * 9000) * f), term: r50((6000 + rnd() * 11000) * f),
+        cod: rnd() < 0.6 ? r50(rnd() * 5200) : 0, fop: rnd() < 0.5 ? r50(rnd() * 3200) : 0,
+        by: who, closed: true
+      };
+    }
+  })();
+  var draft = { cash: 6450, term: 8900, cod: 0, fop: 1200, by: (SHIFTS[TODAY_S][0] || 'Саша') };
+
+  var HIST = {
+    '2026-06': { shop: 612400, orders: 7450, profit: 2210, fop: 366900 },
+    '2026-07': { shop: 655900, orders: 9120, profit: 2730, fop: 391300 },
+    '2026-08': { shop: 598300, orders: 9800, profit: 2900, fop: 352800 },
+    '2026-09': { shop: 684750, orders: 8300, profit: 2640, fop: 405100 }
+  };
+  var MNAME = { '2026-06': 'июнь', '2026-07': 'июль', '2026-08': 'август', '2026-09': 'сентябрь', '2026-10': 'октябрь' };
+
+  var EXP = { suppliers: 318000, target: 24000, rent: 40000, other: 9500 };
+  var BONUS = { 'Саша': { bonus: 2000, extra: 0 }, 'Ангелина': { bonus: 0, extra: 1000 } };
+
+  /* ---------- calculations ---------- */
+  function paid(o) { return o.pays.reduce(function (s, p) { return s + p.usd; }, 0); }
+  function bal(o) { return o.price - paid(o); }
+  function payState(o) { var p = paid(o); return p === 0 ? 'не оплачен' : p < o.price ? 'частично оплачен' : p === o.price ? 'оплачен' : 'переплата'; }
+  function isLate(o) { return o.st !== 'done' && o.due < TODAY_S; }
+  function isToday(o) { return o.st !== 'done' && o.due === TODAY_S; }
+  function issued(m) { return ORDERS.filter(function (o) { return o.st === 'done' && o.iss && o.iss.slice(0, 7) === m; }); }
+  function ordersVal(m) { return issued(m).reduce(function (s, o) { return s + o.price; }, 0); }
+  function ordersCost(m) { return issued(m).reduce(function (s, o) { return s + o.cost; }, 0); }
+  function staffBase(m) { return issued(m).filter(function (o) { return o.by !== 'Аня'; }).reduce(function (s, o) { return s + o.price; }, 0); }
+  function allPays(m) { var a = []; ORDERS.forEach(function (o) { o.pays.forEach(function (p) { if (p.d.slice(0, 7) === m) a.push(p); }); }); return a; }
+  function recv(m, cur) { return allPays(m).filter(function (p) { return p.cur === cur; }).reduce(function (s, p) { return s + p.amt; }, 0); }
+  function fopOrders(m) { return allPays(m).filter(function (p) { return p.m === 'ФОП'; }).reduce(function (s, p) { return s + p.amt; }, 0); }
+  function dayTotal(c) { return c.cash + c.term + c.cod + c.fop; }
+  function cashDays(m) { return Object.keys(CASH).filter(function (k) { return k.slice(0, 7) === m && CASH[k].closed; }).sort(); }
+  function cashSum(m, f) { return cashDays(m).reduce(function (s, k) { return s + (f ? CASH[k][f] : dayTotal(CASH[k])); }, 0); }
+  function shopVal(m) { return cashSum(m); }
+  function fopMonth(m) { return cashSum(m, 'term') + cashSum(m, 'cod') + cashSum(m, 'fop') + fopOrders(m); }
+  function shiftCount(p) { return Object.keys(SHIFTS).filter(function (k) { return SHIFTS[k].indexOf(p) >= 0; }).length; }
+  function clients() {
+    var map = {};
+    ORDERS.forEach(function (o) {
+      var key = digits(o.ph);
+      if (!map[key]) map[key] = { name: o.cn, ph: o.ph, orders: [], sum: 0, last: o.cr };
+      var c = map[key]; c.orders.push(o); c.sum += o.price; if (o.cr > c.last) c.last = o.cr;
+    });
+    return Object.keys(map).map(function (k) { return map[k]; }).sort(function (a, b) { return b.last.localeCompare(a.last); });
+  }
+
+  /* ---------- state ---------- */
+  var S = { theme: 'light', role: 'owner', view: 'overview', filter: 'active', q: '', layout: 'list', open: null, form: null, menu: null, sheet: null, who: draft.by, clientOpen: null };
+  function isOwner() { return S.role === 'owner'; }
+  function me() { return isOwner() ? 'Аня' : S.who; }
+  var NAV_OWNER = [['overview', 'Обзор'], ['orders', 'Заказы'], ['cash', 'Касса'], ['schedule', 'График'], ['clients', 'Клиенты'], ['money', 'Деньги'], ['salary', 'Зарплаты']];
+  var NAV_STAFF = [['orders', 'Заказы'], ['cash', 'Касса'], ['schedule', 'График']];
+  var ST = { work: 'в работе', ready: 'готов', done: 'выдан' };
+
+  var $ = function (id) { return document.getElementById(id); };
+  function toast(msg) { var t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(function () { t.hidden = true; }, 2400); }
+
+  /* ---------- shell ---------- */
+  function roleSeg() {
+    return '<div class="roleseg" role="group" aria-label="Смотреть как">' +
+      '<button type="button" data-act="role" data-r="owner" aria-pressed="' + isOwner() + '">Аня</button>' +
+      '<button type="button" data-act="role" data-r="staff" aria-pressed="' + !isOwner() + '">Девочки</button></div>';
+  }
+  function renderShell() {
+    var nav = isOwner() ? NAV_OWNER : NAV_STAFF;
+    var active = ORDERS.filter(function (o) { return o.st !== 'done'; }).length;
+    $('side').innerHTML =
+      '<div class="logo"><img src="' + LOGO + '" alt="LIMÉRENCE"></div>' +
+      '<nav class="snav" aria-label="Разделы">' + nav.map(function (n) {
+        return '<button type="button" data-act="go" data-v="' + n[0] + '"' + (S.view === n[0] ? ' aria-current="page"' : '') + '>' + ic(n[0]) + n[1] +
+          (n[0] === 'orders' ? '<span class="cnt">' + active + '</span>' : '') + '</button>';
+      }).join('') + '</nav>' +
+      '<div class="foot">' +
+      (isOwner() ? '<div>Вход: <span class="who">Аня</span>, владелица</div>' :
+        '<div>Общий вход девочек</div>' + whoSeg()) +
+      '<div>Тема</div>' + themeSeg() +
+      '<div>Смотреть как</div>' + roleSeg() +
+      '<button type="button" class="link" data-act="notes">Что можно поменять</button></div>';
+    $('mtop').innerHTML = '<div class="logo"><img src="' + LOGO + '" alt="LIMÉRENCE"></div><div class="actions">' + themeBtn() + roleSeg() + '</div>';
+    var bn = isOwner() ? [['overview', 'Обзор'], ['orders', 'Заказы'], ['cash', 'Касса'], ['schedule', 'График'], ['more', 'Ещё']] : NAV_STAFF;
+    var inMore = ['clients', 'money', 'salary'].indexOf(S.view) >= 0;
+    $('bnav').innerHTML = bn.map(function (n) {
+      var cur = S.view === n[0] || (n[0] === 'more' && inMore);
+      return '<button type="button" data-act="' + (n[0] === 'more' ? 'more' : 'go') + '" data-v="' + n[0] + '"' + (cur ? ' aria-current="page"' : '') + '>' + ic(n[0]) + '<span>' + n[1] + '</span></button>';
+    }).join('');
+    $('fab').innerHTML = ic('plus');
+    $('fab').hidden = !(S.view === 'orders' || S.view === 'overview');
+  }
+  function themeSeg() {
+    return '<div class="roleseg" role="group" aria-label="Тема">' +
+      '<button type="button" data-act="theme" data-th="light" aria-pressed="' + (S.theme === 'light') + '">Светлая</button>' +
+      '<button type="button" data-act="theme" data-th="dark" aria-pressed="' + (S.theme === 'dark') + '">Тёмная</button></div>';
+  }
+  function themeBtn() {
+    var dark = S.theme === 'dark';
+    return '<button type="button" class="themebtn" data-act="theme" data-th="' + (dark ? 'light' : 'dark') + '" aria-label="' + (dark ? 'Светлая тема' : 'Тёмная тема') + '">' + ic(dark ? 'sun' : 'moon') + '</button>';
+  }
+  function applyTheme() {
+    document.documentElement.setAttribute('data-theme', S.theme);
+    try { localStorage.setItem('limerence-crm-theme', S.theme); } catch (err) {}
+  }
+  function whoSeg() {
+    return '<div class="roleseg" role="group" aria-label="Кто сейчас на смене">' + GIRLS.map(function (g) {
+      return '<button type="button" data-act="who" data-w="' + g + '" aria-pressed="' + (S.who === g) + '">' + g + '</button>';
+    }).join('') + '</div>';
+  }
+
+  /* ---------- order bits ---------- */
+  function specs(o) { return [o.pr, o.col, o.sz, o.ct].filter(Boolean).join(' · '); }
+  function dueInfo(o) {
+    if (o.st === 'done') return { t: 'выдан ' + fd(o.iss), c: '' };
+    var n = diff(TODAY_S, o.due);
+    if (n < 0) return { t: 'просрочено на ' + (-n) + ' ' + plural(-n, 'день', 'дня', 'дней'), c: 'late' };
+    if (n === 0) return { t: 'выдача сегодня', c: 'today' };
+    if (n === 1) return { t: 'выдача завтра', c: '' };
+    if (n <= 7) return { t: 'выдача через ' + n + ' ' + plural(n, 'день', 'дня', 'дней'), c: '' };
+    return { t: 'выдача ' + fd(o.due), c: '' };
+  }
+  function balInfo(o) {
+    var b = bal(o), p = paid(o);
+    if (p === 0) return 'не оплачен · <b class="num">' + usd(o.price) + '</b>';
+    if (b > 0) return 'осталось <b class="num">' + usd(b) + '</b>';
+    if (b === 0) return 'оплачен';
+    return 'переплата <b class="num">' + usd(-b) + '</b>';
+  }
+  function stBtn(o) {
+    var menu = S.menu === o.id ? '<div class="menu" role="menu">' + ['work', 'ready', 'done'].map(function (s) {
+      return '<button type="button" role="menuitem" data-act="setst" data-id="' + o.id + '" data-st="' + s + '"' + (o.st === s ? ' aria-current="true"' : '') + '><span class="dot ' + s + '"></span>' + ST[s] + '</button>';
+    }).join('') + (bal(o) > 0 && o.st !== 'done' ? '<div class="hint">«Выдан» откроет расчёт: осталось ' + usd(bal(o)) + '</div>' : '') + '</div>' : '';
+    return '<div class="stwrap"><button type="button" class="stbtn ' + o.st + '" data-act="stmenu" data-id="' + o.id + '" aria-haspopup="menu" aria-expanded="' + (S.menu === o.id) + '"><span class="dot ' + o.st + '"></span>' + ST[o.st] + ic('down') + '</button>' + menu + '</div>';
+  }
+  function orow(o) {
+    var di = dueInfo(o);
+    return '<div class="orow" data-act="open" data-id="' + o.id + '" role="button" tabindex="0" aria-label="Заказ ' + o.id + ', ' + esc(o.t) + '">' +
+      '<div class="plate ' + mcls(o) + '">' + piece(o) + '</div>' +
+      '<div class="om"><div class="ot"><span class="oname">' + esc(o.t) + '</span><span class="oid">№' + o.id + '</span></div>' +
+      '<div class="os">' + specsHtml(o) + '</div><div class="oc">' + av(o.by) + esc(o.cn) + ' <span class="muted">· ' + esc(o.by) + '</span></div></div>' +
+      '<div class="oside">' + stBtn(o) + '<div class="due ' + di.c + '">' + di.t + '</div><div class="bal">' + balInfo(o) + '</div></div></div>';
+  }
+  function card(o) {
+    var di = dueInfo(o);
+    return '<button type="button" class="card" data-act="open" data-id="' + o.id + '"><div class="plate ' + mcls(o) + '">' + piece(o) + '</div>' +
+      '<div class="om"><div class="ot"><span class="oname">' + esc(o.t) + '</span></div><div class="os">' + av(o.by) + esc(o.cn) + '</div>' +
+      '<div class="due ' + di.c + '">' + di.t + '</div><div class="bal">' + balInfo(o) + '</div></div></button>';
+  }
+
+  /* ---------- views ---------- */
+  function viewOrders() {
+    var counts = { active: 0, work: 0, ready: 0, done: 0, all: ORDERS.length };
+    ORDERS.forEach(function (o) { counts[o.st]++; if (o.st !== 'done') counts.active++; });
+    var late = ORDERS.filter(isLate).length, today = ORDERS.filter(isToday).length;
+    var owed = ORDERS.filter(function (o) { return o.st !== 'done' && bal(o) > 0; });
+    var owedSum = owed.reduce(function (s, o) { return s + bal(o); }, 0);
+    var tabs = [['active', 'Активные'], ['work', 'В работе'], ['ready', 'Готов'], ['done', 'Выдан'], ['all', 'Все']];
+    var board = S.layout === 'board' && window.matchMedia('(min-width: 900px)').matches;
+    return '<div class="phead"><div class="t"><h1>Заказы</h1><div class="sub">Индивидуальные заказы, ближайшая выдача сверху</div></div>' +
+      '<div class="actions"><div class="roleseg layoutseg" role="group" aria-label="Вид"><button type="button" data-act="layout" data-l="list" aria-pressed="' + !board + '">Список</button><button type="button" data-act="layout" data-l="board" aria-pressed="' + board + '">Доска</button></div>' +
+      '<button type="button" class="btn" data-act="new">' + ic('plus') + 'Новый заказ</button></div></div>' +
+      '<div class="attn">' +
+      (late ? '<button type="button" class="late" data-act="filter" data-f="late" aria-pressed="' + (S.filter === 'late') + '"><b>' + late + '</b> просрочено</button>' : '') +
+      (today ? '<button type="button" class="today" data-act="filter" data-f="today" aria-pressed="' + (S.filter === 'today') + '"><span class="dot ready"></span><b>' + today + '</b> выдача сегодня</button>' : '') +
+      '<button type="button" class="owed" data-act="filter" data-f="owed" aria-pressed="' + (S.filter === 'owed') + '"><b>' + owed.length + '</b> ждут доплату · <span class="num">' + usd(owedSum) + '</span></button></div>' +
+      (board ? '' : '<div class="tabs" role="group" aria-label="Статус">' + tabs.map(function (t) {
+        return '<button type="button" data-act="filter" data-f="' + t[0] + '" aria-pressed="' + (S.filter === t[0]) + '">' + t[1] + '<span class="c">' + counts[t[0]] + '</span></button>';
+      }).join('') + '</div>') +
+      '<div class="toolbar"><label class="search">' + ic('search') + '<input id="q" type="text" placeholder="Клиент, телефон, изделие или номер" value="' + esc(S.q) + '" aria-label="Поиск"></label></div>' +
+      '<div id="olist">' + (board ? boardHtml() : listHtml()) + '</div>';
+  }
+  function matchQ(o) {
+    if (!S.q) return true;
+    var q = S.q.toLowerCase(), qd = digits(S.q);
+    return (o.t + ' ' + o.cn + ' ' + o.id + ' ' + o.by).toLowerCase().indexOf(q) >= 0 || (qd.length >= 3 && digits(o.ph).indexOf(qd) >= 0);
+  }
+  function filtered() {
+    var f = S.filter;
+    var list = ORDERS.filter(function (o) {
+      if (f === 'active') return o.st !== 'done';
+      if (f === 'late') return isLate(o);
+      if (f === 'today') return isToday(o);
+      if (f === 'owed') return o.st !== 'done' && bal(o) > 0;
+      if (f === 'all') return true;
+      return o.st === f;
+    }).filter(matchQ);
+    return list.sort(function (a, b) {
+      if (a.st === 'done' && b.st === 'done') return b.iss.localeCompare(a.iss);
+      if (a.st === 'done') return 1; if (b.st === 'done') return -1;
+      return a.due.localeCompare(b.due);
+    });
+  }
+  function listHtml() {
+    var l = filtered();
+    if (!l.length) return '<p class="empty">Таких заказов нет. Попробуйте другой фильтр или очистите поиск.</p>';
+    return '<div class="olist">' + l.map(orow).join('') + '</div>';
+  }
+  function boardHtml() {
+    var cols = [['work', 'В работе'], ['ready', 'Готов'], ['done', 'Выдан в октябре']];
+    return '<div class="board">' + cols.map(function (c) {
+      var l = ORDERS.filter(function (o) { return o.st === c[0] && (c[0] !== 'done' || (o.iss || '').slice(0, 7) === MONTH); }).filter(matchQ)
+        .sort(function (a, b) { return c[0] === 'done' ? b.iss.localeCompare(a.iss) : a.due.localeCompare(b.due); });
+      return '<div class="col ' + c[0] + '"><div class="colh"><span class="dot ' + c[0] + '"></span>' + c[1] + '<span class="c">' + l.length + '</span></div>' +
+        (l.length ? l.map(card).join('') : '<p class="muted small">Пусто</p>') + '</div>';
+    }).join('') + '</div>';
+  }
+
+  function viewOverview() {
+    var m = MONTH, prev = HIST['2026-09'];
+    var sv = shopVal(m), ov = ordersVal(m), pr = ov - ordersCost(m), fop = fopMonth(m);
+    var attn = ORDERS.filter(function (o) { return o.st !== 'done'; }).sort(function (a, b) { return a.due.localeCompare(b.due); }).slice(0, 5);
+    return '<div class="phead"><div class="t"><h1>Октябрь 2026</h1><div class="sub">На 29 октября. Касса закрыта по 28 число.</div></div>' +
+      '<div class="actions"><button type="button" class="btn ghost" data-act="go" data-v="money">ФОП и расходы</button><button type="button" class="btn" data-act="new">' + ic('plus') + 'Новый заказ</button></div></div>' +
+      '<div class="figs">' +
+      fig('Вал магазина', uah(sv), 'сентябрь: ' + uah(prev.shop)) +
+      fig('Вал индивидуальных заказов', usd(ov), issued(m).length + ' ' + plural(issued(m).length, 'заказ выдан', 'заказа выдано', 'заказов выдано') + ' · сентябрь: ' + usd(prev.orders)) +
+      fig('Прибыль по заказам', usd(pr), 'цена минус себестоимость · сентябрь: ' + usd(prev.profit)) +
+      fig('Зашло на ФОП', uah(fop), 'сентябрь: ' + uah(prev.fop)) +
+      '</div>' +
+      '<div class="grid2">' +
+      '<div class="block"><div class="blockh"><h2>Ближайшие выдачи</h2><button type="button" data-act="go" data-v="orders">Все заказы</button></div>' +
+      '<div class="olist">' + attn.map(orow).join('') + '</div></div>' +
+      '<div class="block"><div class="blockh"><h2>По месяцам</h2></div>' +
+      '<div class="block"><h3>Вал магазина, гривны</h3><div class="chart" data-chart="shop"></div></div>' +
+      '<div class="block"><h3>Вал индивидуальных заказов, доллары</h3><div class="chart" data-chart="orders"></div></div>' +
+      '<p class="muted small">Октябрь посчитан на 29 число, поэтому столбец ещё вырастет.</p></div>' +
+      '</div>' +
+      '<div class="grid2"><div class="block"><div class="blockh"><h2>Пришло по заказам в октябре</h2></div><div class="calc">' +
+      '<div><span class="l">В долларах<small>предоплаты и расчёты</small></span><span class="num">' + usd(recv(m, 'USD')) + '</span></div>' +
+      '<div><span class="l">В гривнах<small>предоплаты и расчёты</small></span><span class="num">' + uah(recv(m, 'UAH')) + '</span></div></div>' +
+      '<p class="muted small">Это деньги, которые пришли за месяц. Вал заказов считается иначе: по полной цене заказа, в месяце выдачи, один раз.</p></div>' +
+      '<div class="block"><div class="blockh"><h2>Касса за последние дни</h2><button type="button" data-act="go" data-v="cash">Вся касса</button></div>' + cashTable(cashDays(m).slice(-5).reverse(), false) + '</div></div>';
+  }
+  function fig(l, v, s) { return '<div class="fig"><div class="fl">' + l + '</div><div class="fv num">' + v + '</div><div class="fs">' + s + '</div></div>'; }
+
+  function barChart(el, key) {
+    var months = ['2026-06', '2026-07', '2026-08', '2026-09', '2026-10'];
+    var vals = months.map(function (m) { return m === MONTH ? (key === 'shop' ? shopVal(m) : ordersVal(m)) : HIST[m][key]; });
+    var fmt = key === 'shop' ? uah : usd;
+    var W = 360, H = 170, top = 26, base = 140, max = Math.max.apply(null, vals) * 1.08, slot = W / months.length, bw = 34;
+    var out = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + (key === 'shop' ? 'Вал магазина' : 'Вал заказов') + ' по месяцам">';
+    out += '<line x1="0" x2="' + W + '" y1="' + base + '" y2="' + base + '" stroke="var(--line)" stroke-width="1"/>';
+    months.forEach(function (m, i) {
+      var h = (vals[i] / max) * (base - top), x = i * slot + (slot - bw) / 2, y = base - h, r = 4, cur = m === MONTH;
+      out += '<path d="M' + x + ',' + base + ' V' + (y + r) + ' Q' + x + ',' + y + ' ' + (x + r) + ',' + y + ' H' + (x + bw - r) + ' Q' + (x + bw) + ',' + y + ' ' + (x + bw) + ',' + (y + r) + ' V' + base + ' Z" fill="' + (cur ? 'var(--accent)' : 'var(--bar)') + '"/>';
+      out += '<text x="' + (x + bw / 2) + '" y="' + (base + 18) + '" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="Raleway, Arial, sans-serif">' + MNAME[m].slice(0, 3) + '</text>';
+      if (cur) out += '<text x="' + (x + bw / 2) + '" y="' + (y - 8) + '" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink)" font-family="Raleway, Arial, sans-serif">' + fmt(vals[i]) + '</text>';
+      out += '<rect class="hit" data-i="' + i + '" x="' + (i * slot) + '" y="' + top + '" width="' + slot + '" height="' + (base - top + 20) + '" fill="transparent" tabindex="0" aria-label="' + MNAME[m] + ': ' + fmt(vals[i]) + '"/>';
+    });
+    out += '</svg><div class="tip" hidden></div>';
+    out += '<table class="sr"><caption>' + (key === 'shop' ? 'Вал магазина' : 'Вал заказов') + '</caption>' + months.map(function (m, i) { return '<tr><th>' + MNAME[m] + '</th><td>' + fmt(vals[i]) + '</td></tr>'; }).join('') + '</table>';
+    el.innerHTML = out;
+    var tip = el.querySelector('.tip');
+    function show(e) {
+      var i = +e.target.getAttribute('data-i'), rb = e.target.getBoundingClientRect(), cb = el.getBoundingClientRect();
+      var h = (vals[i] / max) * (base - top), scale = cb.width / W;
+      tip.innerHTML = MNAME[months[i]] + (months[i] === MONTH ? ', на 29 число' : '') + '<br><b class="num">' + fmt(vals[i]) + '</b>';
+      tip.style.left = (rb.left - cb.left + rb.width / 2) + 'px';
+      tip.style.top = ((base - h) * scale - 10) + 'px';
+      tip.hidden = false;
+    }
+    function hide() { tip.hidden = true; }
+    el.querySelectorAll('.hit').forEach(function (h) {
+      h.addEventListener('pointerenter', show); h.addEventListener('focus', show);
+      h.addEventListener('pointerleave', hide); h.addEventListener('blur', hide);
+    });
+  }
+
+  function cashTable(keys, foot) {
+    if (!keys.length) return '<p class="empty">За этот месяц касса ещё не закрывалась.</p>';
+    var rows = keys.map(function (k) {
+      var c = CASH[k], d = pd(k);
+      return '<tr><td class="num">' + fds(k) + ' <span class="muted">' + WD[d.getDay()] + '</span></td><td class="r num">' + nf(c.cash) + '</td><td class="r num">' + nf(c.term) + '</td><td class="r num">' + nf(c.cod) + '</td><td class="r num">' + nf(c.fop) + '</td><td class="r num"><b>' + uah(dayTotal(c)) + '</b></td><td class="soft" style="white-space:nowrap">' + av(c.by) + esc(c.by) + '</td></tr>';
+    }).join('');
+    var ft = foot ? '<tfoot><tr><td>Октябрь</td><td class="r num">' + nf(cashSum(MONTH, 'cash')) + '</td><td class="r num">' + nf(cashSum(MONTH, 'term')) + '</td><td class="r num">' + nf(cashSum(MONTH, 'cod')) + '</td><td class="r num">' + nf(cashSum(MONTH, 'fop')) + '</td><td class="r num">' + uah(shopVal(MONTH)) + '</td><td></td></tr></tfoot>' : '';
+    return '<div class="scroll"><table><thead><tr><th>День</th><th class="r">Наличные</th><th class="r">Терминал</th><th class="r">Наложка</th><th class="r">Счёт ФОП</th><th class="r">Итого</th><th>Кто</th></tr></thead><tbody>' + rows + '</tbody>' + ft + '</table></div>';
+  }
+  function viewCash() {
+    var closed = CASH[TODAY_S] && CASH[TODAY_S].closed;
+    var today = closed ? CASH[TODAY_S] : draft;
+    var form = closed ?
+      '<div class="cashcard"><div class="blockh"><h2>Сегодня, 29 октября</h2><span class="lock">' + ic('lock') + '</span></div>' +
+      '<p class="soft">День закрыт, ' + esc(today.by) + '. Итого <b class="num">' + uah(dayTotal(today)) + '</b>. Сумма ушла в вал магазина и ФОП.</p>' +
+      (isOwner() ? '<div><button type="button" class="btn ghost" data-act="reopen">Открыть день снова</button></div>' : '<p class="muted small">Исправить закрытый день может только Аня.</p>') + '</div>' :
+      '<form class="cashcard" id="cashform"><div class="blockh"><h2>Сегодня, 29 октября</h2><span class="muted small">открыт</span></div>' +
+      '<div class="fld"><span class="lb">Кто вносит</span><div class="seg">' + GIRLS.concat(['Аня']).map(function (g) { return '<label><input type="radio" name="cby" value="' + g + '"' + (today.by === g ? ' checked' : '') + '><span>' + g + '</span></label>'; }).join('') + '</div></div>' +
+      '<div class="frow">' + [['cash', 'Наличные'], ['term', 'Терминал'], ['cod', 'Наложенный платёж'], ['fop', 'Счёт ФОП']].map(function (f) {
+        return '<div class="fld"><label for="c-' + f[0] + '">' + f[1] + ', ₴</label><input type="number" inputmode="numeric" min="0" step="50" id="c-' + f[0] + '" data-cash="' + f[0] + '" value="' + today[f[0]] + '"></div>';
+      }).join('') + '</div>' +
+      '<div class="cashtot"><span class="soft">Итого за день</span><span class="v num" id="c-total">' + uah(dayTotal(today)) + '</span></div>' +
+      '<button type="submit" class="btn wide">' + ic('lock') + 'Закрыть день</button>' +
+      '<p class="muted small">Это продажи золота и серебра в магазине. После закрытия сумма сама попадёт в вал магазина, а терминал, наложка и счёт ФОП — в ФОП за месяц.</p></form>';
+    return '<div class="phead"><div class="t"><h1>Касса</h1><div class="sub">Вносится каждый день, в гривнах</div></div></div>' + form +
+      '<div class="block"><div class="blockh"><h2>Октябрь по дням</h2><span class="muted small">' + cashDays(MONTH).length + ' ' + plural(cashDays(MONTH).length, 'день', 'дня', 'дней') + ' закрыто</span></div>' + cashTable(cashDays(MONTH).slice().reverse(), true) + '</div>';
+  }
+
+  function viewSchedule() {
+    var keys = Object.keys(SHIFTS).sort();
+    var head = '<tr><th class="p"></th>' + keys.map(function (k) {
+      var d = pd(k), w = d.getDay();
+      return '<th class="' + (w === 0 || w === 6 ? 'we ' : '') + (k === TODAY_S ? 'today' : '') + '">' + WD[w] + '<b>' + d.getDate() + '</b></th>';
+    }).join('') + '<th class="r">Смен</th></tr>';
+    var rows = GIRLS.map(function (g) {
+      return '<tr><td class="p">' + av(g) + g + '</td>' + keys.map(function (k) {
+        var on = SHIFTS[k].indexOf(g) >= 0, fut = k > TODAY_S;
+        return '<td class="c"><button type="button" class="shift ' + pcls(g) + (on ? ' on' : '') + (fut ? ' future' : '') + '" data-act="shift" data-d="' + k + '" data-p="' + g + '" aria-pressed="' + on + '" aria-label="' + g + ', ' + fd(k) + '">' + (on ? g[0] : '') + '</button></td>';
+      }).join('') + '<td class="tot num">' + shiftCount(g) + '</td></tr>';
+    }).join('');
+    var money = isOwner() ? '<div class="calc" style="max-width:520px">' + GIRLS.map(function (g) {
+      return '<div><span class="l">' + g + '<small>' + shiftCount(g) + ' ' + plural(shiftCount(g), 'смена', 'смены', 'смен') + ' × ' + uah(RATE) + '</small></span><span class="num">' + uah(shiftCount(g) * RATE) + '</span></div>';
+    }).join('') + '</div><p class="muted small">Эти суммы сами уходят в зарплаты. Сумму видишь только ты.</p>' : '';
+    return '<div class="phead"><div class="t"><h1>График смен</h1><div class="sub">Октябрь 2026 · нажми на клетку, чтобы поставить или снять смену</div></div></div>' +
+      '<div class="scroll"><table class="sched"><thead>' + head + '</thead><tbody>' + rows + '</tbody></table></div>' +
+      '<div class="legend"><span><span class="sw" style="background:var(--p-sasha)"></span>Саша</span><span><span class="sw" style="background:var(--p-angel)"></span>Ангелина</span><span>залитая клетка — отработана, пунктир — запланирована</span><span>Смена ' + uah(RATE) + ', одинаково для всех</span></div>' + money;
+  }
+
+  function viewClients() {
+    var list = clients();
+    var rows = list.map(function (c) {
+      var open = S.clientOpen === digits(c.ph);
+      return '<tr class="click" data-act="client" data-ph="' + digits(c.ph) + '" aria-expanded="' + open + '"><td><b>' + esc(c.name) + '</b></td><td class="num">' + esc(c.ph) + '</td><td class="r num">' + c.orders.length + '</td><td class="r num">' + usd(c.sum) + '</td><td class="num">' + fd(c.last) + '</td></tr>' +
+        (open ? '<tr><td colspan="5"><div class="olist">' + c.orders.map(orow).join('') + '</div></td></tr>' : '');
+    }).join('');
+    return '<div class="phead"><div class="t"><h1>Клиенты</h1><div class="sub">' + list.length + ' ' + plural(list.length, 'клиент', 'клиента', 'клиентов') + ' · база собирается сама из заказов по номеру телефона</div></div></div>' +
+      '<div class="scroll"><table><thead><tr><th>Клиент</th><th>Телефон</th><th class="r">Заказов</th><th class="r">На сумму</th><th>Последний</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+
+  function viewMoney() {
+    var m = MONTH, sv = shopVal(m), ov = ordersVal(m), prod = ordersCost(m);
+    var exp = EXP.suppliers + EXP.target + EXP.rent + EXP.other;
+    function ex(k, l) { return '<div><span class="l">' + l + '</span><input type="number" inputmode="numeric" min="0" step="500" data-exp="' + k + '" value="' + EXP[k] + '" aria-label="' + l + '"></div>'; }
+    return '<div class="phead"><div class="t"><h1>Деньги</h1><div class="sub">Октябрь 2026 · на 29 число</div></div></div>' +
+      '<div class="grid2">' +
+      '<div class="block"><h2>Зашло на ФОП</h2><div class="calc">' +
+      '<div><span class="l">Терминал<small>из кассы</small></span><span class="num">' + uah(cashSum(m, 'term')) + '</span></div>' +
+      '<div><span class="l">Наложенные платежи<small>из кассы</small></span><span class="num">' + uah(cashSum(m, 'cod')) + '</span></div>' +
+      '<div><span class="l">Счёт ФОП<small>из кассы</small></span><span class="num">' + uah(cashSum(m, 'fop')) + '</span></div>' +
+      '<div><span class="l">Оплаты заказов на ФОП<small>по курсу дня оплаты</small></span><span class="num">' + uah(fopOrders(m)) + '</span></div>' +
+      '<div class="tot"><span class="l">Всего за октябрь</span><span class="num">' + uah(fopMonth(m)) + '</span></div></div>' +
+      '<p class="muted small">По дате зачисления.</p></div>' +
+      '<div class="block"><h2>Магазин, гривны</h2><div class="calc">' +
+      '<div><span class="l">Вал магазина<small>из кассы</small></span><span class="num">' + uah(sv) + '</span></div>' +
+      ex('suppliers', 'Поставщики, золото и серебро') + ex('target', 'Таргет') + ex('rent', 'Аренда') + ex('other', 'Прочие траты') +
+      '<div class="tot"><span class="l">Остаток магазина</span><span class="num" id="m-shop">' + uah(sv - exp) + '</span></div></div>' +
+      '<p class="muted small">Расходы вносишь ты, остаток пересчитывается сразу.</p></div>' +
+      '<div class="block"><h2>Индивидуальные заказы, доллары</h2><div class="calc">' +
+      '<div><span class="l">Вал заказов<small>' + issued(m).length + ' выдано в октябре</small></span><span class="num">' + usd(ov) + '</span></div>' +
+      '<div><span class="l">Расчёт с производством<small>сумма себестоимостей</small></span><span class="num">' + usd(-prod) + '</span></div>' +
+      '<div class="tot"><span class="l">Остаток по заказам</span><span class="num">' + usd(ov - prod) + '</span></div></div>' +
+      '<p class="muted small">Гривны и доллары считаются отдельно и не смешиваются.</p></div>' +
+      '</div>';
+  }
+
+  function salaryOf(g) {
+    var shifts = shiftCount(g), b = BONUS[g];
+    var uahPart = shifts * RATE + shopVal(MONTH) * 0.02 + (+b.bonus || 0) + (+b.extra || 0);
+    return { shifts: shifts, sh: shifts * RATE, pShop: shopVal(MONTH) * 0.02, pOrd: staffBase(MONTH) * 0.02, uah: uahPart };
+  }
+  function viewSalary() {
+    var s = {}; GIRLS.forEach(function (g) { s[g] = salaryOf(g); });
+    function row(l, f) { return '<tr><td>' + l + '</td>' + GIRLS.map(function (g) { return '<td class="r num">' + f(g) + '</td>'; }).join('') + '</tr>'; }
+    function inp(g, k) { return '<input type="number" inputmode="numeric" min="0" step="100" data-bonus="' + g + '" data-k="' + k + '" value="' + BONUS[g][k] + '" aria-label="' + (k === 'bonus' ? 'Премия' : 'Доплата') + ', ' + g + '" style="width:110px;text-align:right;border:1px solid var(--field);border-radius:4px;padding:5px 8px;background:var(--bg)">'; }
+    return '<div class="phead"><div class="t"><h1>Зарплаты</h1><div class="sub">Октябрь 2026 · считается на последний день месяца</div></div></div>' +
+      '<div class="scroll"><table><thead><tr><th></th>' + GIRLS.map(function (g) { return '<th class="r">' + g + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      row('Смены <span class="muted small">из графика</span>', function (g) { return s[g].shifts; }) +
+      row('За смены <span class="muted small">× ' + uah(RATE) + '</span>', function (g) { return uah(s[g].sh); }) +
+      row('2% с вала магазина <span class="muted small">' + uah(shopVal(MONTH)) + '</span>', function (g) { return uah(s[g].pShop); }) +
+      row('2% с заказов <span class="muted small">' + usd(staffBase(MONTH)) + ', без заказов Ани</span>', function (g) { return usd(s[g].pOrd); }) +
+      row('Премия', function (g) { return inp(g, 'bonus'); }) +
+      row('Доплата', function (g) { return inp(g, 'extra'); }) +
+      '</tbody><tfoot><tr><td>Итого</td>' + GIRLS.map(function (g) { return '<td class="r num" id="sal-' + g + '">' + uah(s[g].uah) + ' + ' + usd(s[g].pOrd) + '</td>'; }).join('') + '</tr></tfoot></table></div>' +
+      '<p class="muted small">Обе получают 2% с одной и той же суммы, даже если работали не весь месяц. Доллары в гривны ты переводишь сама в день расчёта. Вал магазина пока за 28 закрытых дней.</p>';
+  }
+
+  /* ---------- drawer: order ---------- */
+  function events(o) {
+    var ev = [{ d: o.cr, t: 'Заказ создан', by: o.by }];
+    o.pays.forEach(function (p) { ev.push({ d: p.d, t: 'Платёж ' + money(p.amt, p.cur) + ', ' + p.m + (p.cur === 'UAH' ? ' (= ' + usd(p.usd) + ')' : ''), by: p.by }); });
+    return ev.concat(o.log).sort(function (a, b) { return a.d.localeCompare(b.d); });
+  }
+  function payForm(o, mode) {
+    var b = Math.max(bal(o), 0);
+    return '<form class="inline" id="payform" data-mode="' + mode + '" data-id="' + o.id + '">' +
+      '<h3>' + (mode === 'handover' ? 'Выдача и окончательный расчёт' : 'Новый платёж') + '</h3>' +
+      '<div class="fld"><span class="lb">Валюта</span><div class="seg"><label><input type="radio" name="pcur" value="USD" checked><span>доллары, $</span></label><label><input type="radio" name="pcur" value="UAH"><span>гривны, ₴</span></label></div></div>' +
+      '<div class="frow"><div class="fld"><label for="p-amt">Сумма</label><input type="number" inputmode="decimal" min="0" id="p-amt" value="' + (mode === 'handover' ? b : '') + '" placeholder="0"></div>' +
+      '<div class="fld" id="p-usd-wrap" hidden><label for="p-usd">Это в долларах</label><input type="number" inputmode="decimal" min="0" id="p-usd" placeholder="0"></div></div>' +
+      '<div class="fld"><span class="lb">Способ</span><div class="seg">' + ['нал', 'USDT', 'ФОП'].map(function (m, i) { return '<label><input type="radio" name="pm" value="' + m + '"' + (i === 0 ? ' checked' : '') + '><span>' + (m === 'ФОП' ? 'счёт ФОП' : m) + '</span></label>'; }).join('') + '</div></div>' +
+      '<div class="actions"><button type="submit" class="btn' + (mode === 'handover' ? ' done' : '') + '">' + (mode === 'handover' ? 'Выдать заказ' : 'Записать платёж') + '</button><button type="button" class="btn ghost" data-act="cancelform">Отмена</button></div>' +
+      (mode === 'handover' ? '<p class="muted small">Если всё уже оплачено, оставьте сумму 0. Дата выдачи — сегодня, заказ войдёт в оборот октября.</p>' : '') + '</form>';
+  }
+  function drawerOrder(o) {
+    var steps = ['work', 'ready', 'done'], idx = steps.indexOf(o.st), di = dueInfo(o);
+    var next = o.st === 'work' ? '<button type="button" class="btn ready" data-act="ready" data-id="' + o.id + '">Отметить «готов»</button>' :
+      o.st === 'ready' ? '<button type="button" class="btn done" data-act="handover" data-id="' + o.id + '">Выдать клиенту</button>' : '';
+    var ledger = o.pays.length ? '<div class="ledger">' + o.pays.map(function (p) {
+      return '<div><span class="num muted">' + fds(p.d) + '</span><span>' + (p.m === 'ФОП' ? 'счёт ФОП' : p.m) + ' <span class="muted">· ' + esc(p.by) + '</span></span><span class="r num">' + money(p.amt, p.cur) + (p.cur === 'UAH' ? '<span class="eq">= ' + usd(p.usd) + '</span>' : '') + '</span></div>';
+    }).join('') + '<div class="sum"><span></span><span>Оплачено</span><span class="r num">' + usd(paid(o)) + '</span></div></div>' : '<p class="muted">Платежей ещё нет.</p>';
+    var owner = isOwner() ? '<div class="ownerbox"><span class="tag">Видишь только ты</span>' +
+      '<div class="row"><label for="o-cost">Себестоимость, $</label><input type="number" id="o-cost" data-cost="' + o.id + '" value="' + o.cost + '"></div>' +
+      '<div class="row"><span>Прибыль</span><b class="num" id="o-profit">' + usd(o.price - o.cost) + '</b></div></div>' : '';
+    return '<div class="dhead"><div><div class="tag">Заказ №' + o.id + '</div><h2>' + esc(o.t) + '</h2></div><button type="button" class="x" data-act="close" aria-label="Закрыть">' + ic('x') + '</button></div>' +
+      '<div class="dbody">' +
+      '<div class="steps" aria-label="Статус: ' + ST[o.st] + '">' + steps.map(function (s, i) { return '<div class="' + (i <= idx ? 'on' : '') + '">' + ST[s] + '</div>'; }).join('') + '</div>' +
+      '<div class="hero"><div class="plate ' + mcls(o) + '">' + piece(o) + '<label class="up">' + (o.photo ? 'заменить фото' : '+ фото модели') + '<input type="file" accept="image/*" data-photo="' + o.id + '"></label></div>' +
+      '<dl class="specs"><dt>Проба</dt><dd>' + esc(o.pr) + '</dd><dt>Золото</dt><dd><span class="mdot ' + mcls(o) + '"></span>' + esc(o.col) + '</dd>' + (o.sz ? '<dt>Размер</dt><dd>' + esc(o.sz) + '</dd>' : '') + (o.ct ? '<dt>Каратность</dt><dd>' + esc(o.ct) + '</dd>' : '') + (o.det ? '<dt>Детали</dt><dd>' + esc(o.det) + '</dd>' : '') +
+      '<dt>Оформила</dt><dd>' + av(o.by) + esc(o.by) + '</dd><dt>Заказ</dt><dd>' + fd(o.cr) + '</dd><dt>Выдача</dt><dd class="due ' + di.c + '" style="white-space:normal">' + (o.st === 'done' ? fd(o.iss) : fd(o.due) + ' · ' + di.t.replace('выдача ', '')) + '</dd></dl></div>' +
+      (S.form ? payForm(o, S.form) : (next ? '<div class="actions">' + next + '</div>' : '')) +
+      '<div class="dsec"><h3>Оплата <span class="pay">' + payState(o) + '</span></h3>' +
+      '<div class="owed"><span class="soft">Цена ' + usd(o.price) + '</span><span><span class="muted small">' + (bal(o) > 0 ? 'осталось ' : bal(o) < 0 ? 'переплата ' : '') + '</span><span class="v num">' + (bal(o) === 0 ? 'оплачен' : usd(Math.abs(bal(o)))) + '</span></span></div>' +
+      ledger + (o.st !== 'done' && !S.form ? '<div><button type="button" class="btn ghost" data-act="addpay" data-id="' + o.id + '">' + ic('plus') + 'Добавить платёж</button></div>' : '') + '</div>' +
+      '<div class="dsec"><h3>Клиент</h3><div class="client"><b>' + esc(o.cn) + '</b><div class="phone"><span class="num" id="ph-' + o.id + '">' + esc(o.ph) + '</span><button type="button" class="copy" data-act="copy" data-t="' + esc(o.ph) + '">Скопировать</button></div>' +
+      '<div class="muted">' + esc(o.del) + ' · ' + esc(o.ch) + '</div></div></div>' +
+      owner +
+      '<div class="dsec"><h3>История</h3><div class="timeline">' + events(o).map(function (e) { return '<div><span class="num">' + fds(e.d) + '</span><span>' + e.t + ' <span class="by">· ' + esc(e.by) + '</span></span></div>'; }).join('') + '</div></div>' +
+      '</div>';
+  }
+  function drawerNew() {
+    function radios(name, opts, def) { return '<div class="seg">' + opts.map(function (v) { return '<label><input type="radio" name="' + name + '" value="' + v + '"' + (v === def ? ' checked' : '') + '><span>' + v + '</span></label>'; }).join('') + '</div>'; }
+    return '<div class="dhead"><div><div class="tag">№' + nextId + '</div><h2>Новый заказ</h2></div><button type="button" class="x" data-act="close" aria-label="Закрыть">' + ic('x') + '</button></div>' +
+      '<form class="dbody form" id="newform">' +
+      '<div class="fld"><span class="lb">Кто оформляет</span>' + radios('by', ['Саша', 'Ангелина', 'Аня'], me()) + '</div>' +
+      '<div class="fgroup"><div class="gt">Изделие</div>' +
+      '<div class="fld"><label for="n-t">Название</label><input type="text" id="n-t" name="t" required placeholder="Например, кольцо багет"></div>' +
+      '<div class="frow"><div class="fld"><span class="lb">Проба</span>' + radios('pr', ['585', '750'], '750') + '</div><div class="fld"><span class="lb">Цвет золота</span>' + radios('col', ['белое', 'жёлтое', 'розовое'], 'белое') + '</div></div>' +
+      '<div class="frow"><div class="fld"><label for="n-sz">Размер</label><input type="text" id="n-sz" name="sz" placeholder="р. 16 или 45 см"></div><div class="fld"><label for="n-ct">Каратность</label><input type="text" id="n-ct" name="ct" placeholder="1 ct"></div></div>' +
+      '<div class="fld"><label for="n-det">Детали</label><textarea id="n-det" name="det" placeholder="Застёжка, закрепка, гравировка"></textarea></div>' +
+      '<div class="fld"><label for="n-photo">Фото модели</label><input type="file" id="n-photo" name="photo" accept="image/*"></div></div>' +
+      '<div class="fgroup"><div class="gt">Деньги</div>' +
+      '<div class="frow"><div class="fld"><label for="n-price">Цена, $</label><input type="number" id="n-price" name="price" required min="1" inputmode="decimal" placeholder="0"></div>' +
+      (isOwner() ? '<div class="fld"><label for="n-cost">Себестоимость, $</label><input type="number" id="n-cost" name="cost" min="0" inputmode="decimal" placeholder="видишь только ты"></div>' : '') + '</div>' +
+      '<div class="frow"><div class="fld"><label for="n-pu">Предоплата, $</label><input type="number" id="n-pu" name="pu" min="0" inputmode="decimal" placeholder="0"></div><div class="fld"><label for="n-ph2">Предоплата, ₴</label><input type="number" id="n-ph2" name="pg" min="0" inputmode="decimal" placeholder="0"></div></div>' +
+      '<div class="fld" id="n-eq-wrap" hidden><label for="n-eq">Предоплата в гривнах — это сколько в долларах?</label><input type="number" id="n-eq" name="eq" min="0" inputmode="decimal" placeholder="например, 200"><span class="hint">Нужно, чтобы правильно посчитать остаток к оплате.</span></div>' +
+      '<div class="fld"><span class="lb">Способ предоплаты</span>' + radios('pm', ['нал', 'USDT', 'ФОП'], 'нал') + '</div></div>' +
+      '<div class="fgroup"><div class="gt">Даты</div><div class="frow"><div class="fld"><label for="n-cr">Дата заказа</label><input type="date" id="n-cr" name="cr" value="' + TODAY_S + '"></div><div class="fld"><label for="n-due">Дата выдачи</label><input type="date" id="n-due" name="due" required value="2026-11-26"></div></div></div>' +
+      '<div class="fgroup"><div class="gt">Клиент</div>' +
+      '<div class="frow"><div class="fld"><label for="n-cn">Имя</label><input type="text" id="n-cn" name="cn" required></div><div class="fld"><label for="n-ph">Телефон</label><input type="tel" id="n-ph" name="ph" required placeholder="+380"><span class="hint" id="ph-hint"></span></div></div>' +
+      '<div class="frow"><div class="fld"><span class="lb">Получение</span>' + radios('del', ['самовывоз', 'почта'], 'самовывоз') + '</div><div class="fld"><span class="lb">Заказ</span>' + radios('ch', ['офлайн', 'онлайн'], 'офлайн') + '</div></div></div>' +
+      '<p class="muted small" id="new-err" hidden></p>' +
+      '<button type="submit" class="btn wide">Сохранить заказ</button>' +
+      '<p class="muted small">Заказ получит статус «в работе», появится в общей таблице, а клиент — в базе клиентов.</p></form>';
+  }
+
+  /* ---------- sheets ---------- */
+  function sheetMore() {
+    return '<div class="blockh"><h2>Ещё</h2><button type="button" class="x" data-act="close" aria-label="Закрыть">' + ic('x') + '</button></div><div class="mlinks">' +
+      [['clients', 'Клиенты'], ['money', 'Деньги: ФОП, оборот, расходы'], ['salary', 'Зарплаты']].map(function (n) { return '<button type="button" data-act="go" data-v="' + n[0] + '">' + ic(n[0]) + n[1] + '</button>'; }).join('') +
+      '<button type="button" data-act="notes">' + ic('orders') + 'Что можно поменять</button></div>';
+  }
+  function sheetNotes() {
+    return '<div class="blockh"><h2>Что можно поменять</h2><button type="button" class="x" data-act="close" aria-label="Закрыть">' + ic('x') + '</button></div>' +
+      '<p class="soft">Эти пункты мы додумали сами и сделали так, как предложили. Скажи, если где-то иначе.</p><ol>' +
+      ['Если платят гривнами, рядом вписывают сумму в долларах.<span>Иначе не посчитать остаток к оплате.</span>',
+        'Заказ входит в оборот месяца, когда его выдали.<span>Заказ от 12 июля, выданный 18 августа, считается в августе.</span>',
+        'Колонка кассы «счёт ФОП» тоже входит в ФОП за месяц.',
+        'Расчёт с производством — это сумма себестоимостей выданных заказов.<span>Можно сделать отдельной суммой, которую ты вносишь сама.</span>',
+        'Всю базу клиентов видишь только ты.<span>Девочки видят телефон клиента в его заказе.</span>',
+        'Премия, доплата и расходы месяца — в гривнах.',
+        'Зарплаты не вычитаются в «Деньги → Магазин».<span>Если нужно, добавим строку.</span>',
+        'Закрытый день кассы правит только ты. Удалить заказ тоже можешь только ты.<span>В истории заказа видно, кто и когда что изменил.</span>'
+      ].map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ol>';
+  }
+
+  /* ---------- render ---------- */
+  function allowed(v) { return (isOwner() ? NAV_OWNER : NAV_STAFF).some(function (n) { return n[0] === v; }); }
+  function render() {
+    if (!allowed(S.view)) S.view = 'orders';
+    renderShell();
+    var v = { overview: viewOverview, orders: viewOrders, cash: viewCash, schedule: viewSchedule, clients: viewClients, money: viewMoney, salary: viewSalary }[S.view];
+    $('main').innerHTML = v();
+    $('main').querySelectorAll('[data-chart]').forEach(function (el) { barChart(el, el.getAttribute('data-chart')); });
+    renderOverlays();
+  }
+  function renderOverlays() {
+    var d = $('drawer'), sh = $('sheet');
+    if (S.open) {
+      var o = S.open === 'new' ? null : ORDERS.find(function (x) { return x.id === S.open; });
+      d.innerHTML = o ? drawerOrder(o) : drawerNew();
+      d.hidden = false;
+    } else d.hidden = true;
+    if (S.sheet) { sh.innerHTML = S.sheet === 'more' ? sheetMore() : sheetNotes(); sh.hidden = false; } else sh.hidden = true;
+    $('scrim').hidden = !(S.open || S.sheet);
+    document.body.style.overflow = (S.open || S.sheet) ? 'hidden' : '';
+  }
+  function refreshList() { var l = $('olist'); if (l) l.innerHTML = (S.layout === 'board' && window.matchMedia('(min-width: 900px)').matches) ? boardHtml() : listHtml(); }
+
+  /* ---------- actions ---------- */
+  function setStatus(o, st) {
+    if (st === o.st) return;
+    if (st === 'done') { S.open = o.id; S.form = 'handover'; S.menu = null; render(); return; }
+    o.st = st; delete o.iss;
+    o.log.push({ d: TODAY_S, t: 'Статус «' + ST[st] + '»', by: me() });
+    toast('Заказ №' + o.id + ': ' + ST[st]);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-act]');
+    if (S.menu && !(a && (a.getAttribute('data-act') === 'setst' || a.getAttribute('data-act') === 'stmenu'))) { S.menu = null; if (!a) { render(); return; } }
+    if (!a) return;
+    var act = a.getAttribute('data-act'), id = +a.getAttribute('data-id'), o = ORDERS.find(function (x) { return x.id === id; });
+    switch (act) {
+      case 'go': S.view = a.getAttribute('data-v'); S.sheet = null; S.open = null; S.form = null; window.scrollTo(0, 0); break;
+      case 'role': S.role = a.getAttribute('data-r'); S.open = null; S.form = null; S.sheet = null; S.view = isOwner() ? 'overview' : 'orders'; break;
+      case 'who': S.who = a.getAttribute('data-w'); break;
+      case 'theme': S.theme = a.getAttribute('data-th'); applyTheme(); break;
+      case 'more': S.sheet = 'more'; break;
+      case 'notes': S.sheet = 'notes'; break;
+      case 'close': S.open = null; S.form = null; S.sheet = null; break;
+      case 'filter': if (['late', 'today', 'owed'].indexOf(a.getAttribute('data-f')) >= 0) S.layout = 'list'; S.filter = S.filter === a.getAttribute('data-f') && ['late', 'today', 'owed'].indexOf(S.filter) >= 0 ? 'active' : a.getAttribute('data-f'); break;
+      case 'layout': S.layout = a.getAttribute('data-l'); break;
+      case 'open': S.open = id; S.form = null; break;
+      case 'new': S.open = 'new'; S.form = null; break;
+      case 'stmenu': e.stopPropagation(); S.menu = S.menu === id ? null : id; break;
+      case 'setst': setStatus(o, a.getAttribute('data-st')); S.menu = null; if (S.form) return; break;
+      case 'ready': setStatus(o, 'ready'); break;
+      case 'handover': S.form = 'handover'; break;
+      case 'addpay': S.form = 'pay'; break;
+      case 'cancelform': S.form = null; break;
+      case 'shift': {
+        var k = a.getAttribute('data-d'), p = a.getAttribute('data-p'), arr = SHIFTS[k], i = arr.indexOf(p);
+        if (i >= 0) arr.splice(i, 1); else arr.push(p);
+        break;
+      }
+      case 'reopen': CASH[TODAY_S].closed = false; draft = Object.assign({}, CASH[TODAY_S]); delete CASH[TODAY_S]; toast('День снова открыт'); break;
+      case 'client': { var ph = a.getAttribute('data-ph'); S.clientOpen = S.clientOpen === ph ? null : ph; break; }
+      case 'copy': {
+        var txt = a.getAttribute('data-t');
+        try { navigator.clipboard.writeText(txt).then(function () { toast('Телефон скопирован'); }, function () { selectPhone(a); }); } catch (err) { selectPhone(a); }
+        return;
+      }
+      default: return;
+    }
+    render();
+  });
+  function selectPhone(a) { var s = a.previousElementSibling; if (!s) return; var r = document.createRange(); r.selectNodeContents(s); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); toast('Номер выделен, скопируйте вручную'); }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && (S.open || S.sheet || S.menu)) { S.open = null; S.sheet = null; S.menu = null; S.form = null; render(); return; }
+    var row = e.target.closest && e.target.closest('.orow');
+    if (row && e.target === row && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); S.open = +row.getAttribute('data-id'); render(); }
+  });
+
+  document.addEventListener('input', function (e) {
+    var t = e.target;
+    if (t.id === 'q') { S.q = t.value; refreshList(); return; }
+    if (t.hasAttribute('data-cash')) { draft[t.getAttribute('data-cash')] = +t.value || 0; $('c-total').textContent = uah(dayTotal(draft)); return; }
+    if (t.hasAttribute('data-exp')) { EXP[t.getAttribute('data-exp')] = +t.value || 0; $('m-shop').textContent = uah(shopVal(MONTH) - (EXP.suppliers + EXP.target + EXP.rent + EXP.other)); return; }
+    if (t.hasAttribute('data-bonus')) { var g = t.getAttribute('data-bonus'); BONUS[g][t.getAttribute('data-k')] = +t.value || 0; var s = salaryOf(g); $('sal-' + g).textContent = uah(s.uah) + ' + ' + usd(s.pOrd); return; }
+    if (t.hasAttribute('data-cost')) { var o = ORDERS.find(function (x) { return x.id === +t.getAttribute('data-cost'); }); o.cost = +t.value || 0; $('o-profit').textContent = usd(o.price - o.cost); return; }
+    if (t.id === 'n-ph2') { $('n-eq-wrap').hidden = !(+t.value > 0); return; }
+    if (t.id === 'n-ph') {
+      var d = digits(t.value), h = $('ph-hint'), found = d.length >= 9 ? clients().find(function (c) { return digits(c.ph).slice(-9) === d.slice(-9); }) : null;
+      h.className = 'hint' + (found ? ' ok' : '');
+      h.textContent = found ? 'Уже в базе: ' + found.name + ', ' + found.orders.length + ' ' + plural(found.orders.length, 'заказ', 'заказа', 'заказов') : '';
+      if (found) { var cn = $('n-cn'); if (!cn.value) cn.value = found.name; }
+    }
+  });
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.name === 'pcur') { $('p-usd-wrap').hidden = t.value !== 'UAH'; return; }
+    if (t.name === 'cby') { draft.by = t.value; return; }
+    if (t.hasAttribute('data-photo')) { readPhoto(t.files[0], function (url) { var o = ORDERS.find(function (x) { return x.id === +t.getAttribute('data-photo'); }); o.photo = url; render(); toast('Фото добавлено'); }); }
+  });
+  function readPhoto(f, cb) { if (!f) return; var r = new FileReader(); r.onload = function () { cb(r.result); }; r.readAsDataURL(f); }
+
+  document.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target;
+    if (f.id === 'cashform') {
+      var c = Object.assign({}, draft, { closed: true }); CASH[TODAY_S] = c; toast('Касса за 29 октября закрыта: ' + uah(dayTotal(c))); render(); return;
+    }
+    if (f.id === 'payform') {
+      var o = ORDERS.find(function (x) { return x.id === +f.getAttribute('data-id'); });
+      var cur = f.querySelector('[name="pcur"]:checked').value, amt = +$('p-amt').value || 0, m = f.querySelector('[name="pm"]:checked').value;
+      var u = cur === 'USD' ? amt : (+$('p-usd').value || 0);
+      if (cur === 'UAH' && amt > 0 && !u) { $('p-usd').focus(); toast('Укажите, сколько это в долларах'); return; }
+      if (amt > 0) o.pays.push(P(TODAY_S, amt, cur, u, m, me()));
+      if (f.getAttribute('data-mode') === 'handover') {
+        o.st = 'done'; o.iss = TODAY_S; o.log.push({ d: TODAY_S, t: 'Выдан клиенту', by: me() });
+        toast('Заказ №' + o.id + ' выдан, вошёл в оборот октября');
+      } else if (amt > 0) toast('Платёж записан');
+      S.form = null; render(); return;
+    }
+    if (f.id === 'newform') {
+      var fd2 = new FormData(f), pu = +fd2.get('pu') || 0, pg = +fd2.get('pg') || 0, eq = +fd2.get('eq') || 0, by = fd2.get('by');
+      var err = $('new-err');
+      if (pg > 0 && !eq) { err.hidden = false; err.textContent = 'Укажите, сколько гривневая предоплата в долларах.'; $('n-eq').focus(); return; }
+      var o2 = { id: nextId++, t: fd2.get('t'), k: kindOf(fd2.get('t')), pr: fd2.get('pr'), col: fd2.get('col'), sz: fd2.get('sz'), ct: fd2.get('ct'), det: fd2.get('det'),
+        price: +fd2.get('price'), cost: +fd2.get('cost') || 0, by: by, cn: fd2.get('cn'), ph: fd2.get('ph'), del: fd2.get('del'), ch: fd2.get('ch'),
+        cr: fd2.get('cr') || TODAY_S, due: fd2.get('due'), st: 'work', pays: [], log: [] };
+      if (pu > 0) o2.pays.push(P(o2.cr, pu, 'USD', pu, fd2.get('pm'), by));
+      if (pg > 0) o2.pays.push(P(o2.cr, pg, 'UAH', eq, fd2.get('pm'), by));
+      var file = $('n-photo').files[0];
+      var done = function () { ORDERS.push(o2); S.open = o2.id; S.view = 'orders'; S.filter = 'active'; render(); toast('Заказ №' + o2.id + ' сохранён'); };
+      if (file) readPhoto(file, function (url) { o2.photo = url; done(); }); else done();
+    }
+  });
+  function kindOf(t) {
+    t = String(t || '').toLowerCase();
+    if (/пусет|серьг|конго/.test(t)) return 'studs';
+    if (/цеп/.test(t)) return 'chain';
+    if (/подвес|кулон/.test(t)) return 'pendant';
+    if (/браслет/.test(t)) return 'bracelet';
+    return 'ring';
+  }
+  window.addEventListener('resize', function () { if (S.view === 'orders' && S.layout === 'board') refreshList(); });
+
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('limerence-crm-theme'); } catch (err) {}
+    S.theme = saved === 'dark' || saved === 'light' ? saved : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme();
+  })();
+  render();
+})();
+</script>
+
+</body>
+</html>
