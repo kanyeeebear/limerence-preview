@@ -1028,8 +1028,17 @@ td .lock svg.i { width: 13px; height: 13px; }
     if (!allowed(S.view)) S.view = 'orders';
     renderShell();
     var v = { overview: viewOverview, orders: viewOrders, cash: viewCash, schedule: viewSchedule, clients: viewClients, money: viewMoney, salary: viewSalary }[S.view];
-    $('main').innerHTML = v();
-    $('main').querySelectorAll('[data-chart]').forEach(function (el) { barChart(el, el.getAttribute('data-chart')); });
+    var main = $('main'), same = S.shown === S.view;
+    var keep = same ? Array.prototype.map.call(main.querySelectorAll('.scroll'), function (e) { return e.scrollLeft; }) : null;
+    main.innerHTML = v();
+    main.querySelectorAll('[data-chart]').forEach(function (el) { barChart(el, el.getAttribute('data-chart')); });
+    if (keep) main.querySelectorAll('.scroll').forEach(function (e, i) { e.scrollLeft = keep[i] || 0; });
+    else if (S.view === 'schedule') {
+      // open the month on today, so the phone does not start at the 1st
+      var th = main.querySelector('.sched th.today'), sc = main.querySelector('.scroll');
+      if (th && sc) sc.scrollLeft = Math.max(0, th.offsetLeft - sc.clientWidth / 2);
+    }
+    S.shown = S.view;
     renderOverlays();
   }
   function renderOverlays() {
