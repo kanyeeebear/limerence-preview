@@ -431,6 +431,18 @@ td .lock svg.i { width: 13px; height: 13px; }
 .filebtn { position: relative; overflow: hidden; cursor: pointer; justify-self: start; }
 .filebtn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .filename { font-size: 13px; color: var(--muted); }
+.months { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.months::-webkit-scrollbar { display: none; }
+.months button { display: grid; gap: 1px; text-align: left; padding: 8px 14px; border: 1px solid var(--line); border-radius: 4px; font-size: 14px; white-space: nowrap; font-weight: 500; }
+.months button small { font-size: 12px; color: var(--muted); font-weight: 400; }
+.months button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-wash); color: var(--accent-ink); }
+.months button[aria-pressed="true"] small { color: var(--accent-ink); }
+.archh { padding-top: 18px; }
+.arch td { white-space: nowrap; vertical-align: top; }
+.arch td.det { white-space: normal; min-width: 170px; max-width: 260px; font-size: 13px; color: var(--soft); }
+.stdone { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--st-done); background: var(--done-wash); padding: 2px 8px; border-radius: 4px; }
+.monthnote { padding: 12px 0 4px; }
+#olist { display: grid; gap: 12px; min-width: 0; }
 </style>
 </head>
 <body>
@@ -531,6 +543,30 @@ td .lock svg.i { width: 13px; height: 13px; }
     { id: 1052, t: 'Пусеты 0,5 ct', k: 'studs', pr: '585', col: 'белое', sz: '', ct: '0,5 ct', det: '', price: 520, cost: 340, by: 'Саша', cn: 'Ірина Мельник', ph: '+380 50 000 77 02', del: 'самовывоз', ch: 'офлайн', cr: '2026-10-26', due: '2026-10-31', st: 'ready', ready: '2026-10-28', pays: [P('2026-10-26', 200, 'USD', 200, 'нал', 'Саша')] },
     { id: 1053, t: 'Кольцо багет 0,7 ct', k: 'ring', pr: '750', col: 'жёлтое', sz: 'р. 17', ct: '0,7 ct', det: 'ждём согласования эскиза', price: 1250, cost: 830, by: 'Ангелина', cn: 'Наталя Руденко', ph: '+380 99 000 48 52', del: 'самовывоз', ch: 'офлайн', cr: '2026-10-28', due: '2026-11-20', st: 'work', pays: [] }
   ];
+  function A(id, t, k, pr, col, sz, ct, det, price, cost, by, cn, ph, cr, iss, pre) {
+    var pays = [P(cr, pre[0], pre[2], pre[1], pre[3], by), P(iss, price - pre[1], 'USD', price - pre[1], 'нал', by)];
+    return { id: id, t: t, k: k, pr: pr, col: col, sz: sz, ct: ct, det: det, price: price, cost: cost, by: by, cn: cn, ph: ph, del: 'самовывоз', ch: 'офлайн', cr: cr, due: iss, st: 'done', ready: iss, iss: iss, pays: pays };
+  }
+  ORDERS.unshift(
+    A(1001, 'Кольцо багет 1 ct', 'ring', '750', 'белое', 'р. 16', '1 ct', 'багет, тонкая шинка', 1550, 1060, 'Саша', 'Марія Литвин', '+380 67 000 20 11', '2026-05-12', '2026-06-05', [200, 200, 'USD', 'нал']),
+    A(1002, 'Серьги-конго', 'studs', '585', 'жёлтое', '', '0,4 ct', 'диаметр 15 мм', 1350, 930, 'Ангелина', 'Олена Коваль', '+380 67 000 12 34', '2026-05-20', '2026-06-14', [8200, 200, 'UAH', 'ФОП']),
+    A(1003, 'Кольцо с изумрудом', 'ring', '750', 'жёлтое', 'р. 17,5', '1,3 ct', 'изумруд октагон', 2300, 1600, 'Аня', 'Софія Бойко', '+380 50 000 08 47', '2026-05-28', '2026-06-20', [500, 500, 'USD', 'USDT']),
+    A(1004, 'Колье круг 1 ct', 'pendant', '750', 'белое', '45 см', '1 ct', 'четыре крапана', 2250, 1650, 'Саша', 'Аліна Гриценко', '+380 63 000 72 15', '2026-06-02', '2026-06-27', [200, 200, 'USD', 'нал']),
+    A(1005, 'Обручальные кольца, пара', 'ring', '585', 'жёлтое', 'р. 17 и 20', '', 'классика, полировка', 1200, 840, 'Ангелина', 'Роман Петренко', '+380 93 000 55 30', '2026-06-15', '2026-07-03', [200, 200, 'USD', 'нал']),
+    A(1006, 'Кольцо солитер 1,5 ct', 'ring', '750', 'белое', 'р. 16', '1,5 ct', 'лаб, шесть крапанов', 3100, 2180, 'Аня', 'Ірина Мельник', '+380 50 000 77 02', '2026-06-20', '2026-07-11', [500, 500, 'USD', 'USDT']),
+    A(1007, 'Пусеты 1 ct', 'studs', '750', 'белое', '', '1 ct', 'застёжка-винт', 2350, 1600, 'Саша', 'Дарина Ковтун', '+380 66 000 39 04', '2026-06-28', '2026-07-18', [8250, 200, 'UAH', 'ФОП']),
+    A(1008, 'Подвеска груша 0,7 ct', 'pendant', '585', 'розовое', '', '0,7 ct', 'на цепи 42 см', 1050, 720, 'Ангелина', 'Анна Лисенко', '+380 66 000 18 45', '2026-07-05', '2026-07-24', [200, 200, 'USD', 'нал']),
+    A(1009, 'Тонкий браслет', 'bracelet', '585', 'белое', '17 см', '0,3 ct', 'три камня', 1420, 1050, 'Саша', 'Вікторія Кравець', '+380 68 000 90 13', '2026-07-08', '2026-07-30', [200, 200, 'USD', 'нал']),
+    A(1010, 'Кольцо овал 2 ct', 'ring', '750', 'белое', 'р. 16,5', '2 ct', 'ровное, без клейма', 2400, 1700, 'Ангелина', 'Катерина Олійник', '+380 50 000 31 66', '2026-07-14', '2026-08-06', [200, 200, 'USD', 'нал']),
+    A(1011, 'Кольцо Тиффани', 'ring', '750', 'белое', 'р. 17,5', '1 ct', '1:1, лапки жёлтые', 1800, 1280, 'Саша', 'Юлія Савчук', '+380 67 000 25 80', '2026-07-20', '2026-08-12', [8250, 200, 'UAH', 'ФОП']),
+    A(1012, 'Серьги по 3 ct', 'studs', '750', 'белое', '', '3 ct', 'Мартини, тарелки', 3800, 2700, 'Аня', 'Марина Бондар', '+380 63 000 50 90', '2026-07-25', '2026-08-20', [1000, 1000, 'USD', 'USDT']),
+    A(1013, 'Кольцо маркиз 0,7 ct', 'ring', '750', 'жёлтое', 'р. 17', '0,7 ct', 'острые лапки', 1800, 1220, 'Ангелина', 'Олександра Ткач', '+380 67 000 41 18', '2026-08-01', '2026-08-27', [200, 200, 'USD', 'нал']),
+    A(1014, 'Кольцо фенси кушон', 'ring', '750', 'белое', 'р. 17', '1,5 ct', 'кушон и груши, граф', 2050, 1390, 'Саша', 'Олена Коваль', '+380 67 000 12 34', '2026-08-10', '2026-09-04', [200, 200, 'USD', 'нал']),
+    A(1015, 'Серьги Мартини по 1 ct', 'studs', '750', 'белое', '', '2 ct', 'закрутка', 1900, 1290, 'Ангелина', 'Тетяна Шевчук', '+380 97 000 33 61', '2026-08-18', '2026-09-11', [8250, 200, 'UAH', 'ФОП']),
+    A(1016, 'Колье сердце', 'pendant', '585', 'белое', '45 см', '0,5 ct', 'природный, клеймо', 1590, 1080, 'Саша', 'Наталя Руденко', '+380 99 000 48 52', '2026-08-22', '2026-09-17', [8300, 200, 'UAH', 'ФОП']),
+    A(1017, 'Кольцо маркиз 1 ct', 'ring', '750', 'жёлтое', 'р. 17,5', '1 ct', 'лаб, острые лапки', 1650, 1160, 'Аня', 'Софія Бойко', '+380 50 000 08 47', '2026-08-29', '2026-09-22', [500, 500, 'USD', 'USDT']),
+    A(1018, 'Пусеты груша 0,5 ct', 'studs', '585', 'розовое', '', '0,5 ct', 'две пары', 1110, 740, 'Ангелина', 'Дарина Ковтун', '+380 66 000 39 04', '2026-09-02', '2026-09-28', [200, 200, 'USD', 'нал'])
+  );
   ORDERS.forEach(function (o) {
     o.log = [];
     if (o.ready) o.log.push({ d: o.ready, t: 'Статус «готов»', by: o.by });
@@ -569,11 +605,12 @@ td .lock svg.i { width: 13px; height: 13px; }
   var draft = { cash: 6450, term: 8900, cod: 0, fop: 1200, by: (SHIFTS[TODAY_S][0] || 'Саша') };
 
   var HIST = {
-    '2026-06': { shop: 612400, orders: 7450, profit: 2210, fop: 366900 },
-    '2026-07': { shop: 655900, orders: 9120, profit: 2730, fop: 391300 },
-    '2026-08': { shop: 598300, orders: 9800, profit: 2900, fop: 352800 },
-    '2026-09': { shop: 684750, orders: 8300, profit: 2640, fop: 405100 }
+    '2026-06': { shop: 612400, fop: 366900 },
+    '2026-07': { shop: 655900, fop: 391300 },
+    '2026-08': { shop: 598300, fop: 352800 },
+    '2026-09': { shop: 684750, fop: 405100 }
   };
+  var MFULL = { '2026-06': 'Июнь', '2026-07': 'Июль', '2026-08': 'Август', '2026-09': 'Сентябрь', '2026-10': 'Октябрь' };
   var MNAME = { '2026-06': 'июнь', '2026-07': 'июль', '2026-08': 'август', '2026-09': 'сентябрь', '2026-10': 'октябрь' };
 
   var EXP = { suppliers: 318000, target: 24000, rent: 40000, other: 9500 };
@@ -609,7 +646,7 @@ td .lock svg.i { width: 13px; height: 13px; }
   }
 
   /* ---------- state ---------- */
-  var S = { theme: 'light', role: 'owner', view: 'overview', filter: 'active', q: '', layout: 'list', open: null, form: null, menu: null, sheet: null, who: draft.by, clientOpen: null };
+  var S = { theme: 'light', role: 'owner', view: 'overview', filter: 'current', arch: null, q: '', layout: 'list', open: null, form: null, menu: null, sheet: null, who: draft.by, clientOpen: null };
   function isOwner() { return S.role === 'owner'; }
   function me() { return isOwner() ? 'Аня' : S.who; }
   var NAV_OWNER = [['overview', 'Обзор'], ['orders', 'Заказы'], ['cash', 'Касса'], ['schedule', 'График'], ['clients', 'Клиенты'], ['money', 'Деньги'], ['salary', 'Зарплаты']];
@@ -710,12 +747,16 @@ td .lock svg.i { width: 13px; height: 13px; }
 
   /* ---------- views ---------- */
   function viewOrders() {
-    var counts = { active: 0, work: 0, ready: 0, done: 0, all: ORDERS.length };
-    ORDERS.forEach(function (o) { counts[o.st]++; if (o.st !== 'done') counts.active++; });
+    var counts = { current: 0, work: 0, ready: 0, month: 0, archive: 0 };
+    ORDERS.forEach(function (o) {
+      if (o.st !== 'done') { counts[o.st]++; counts.current++; }
+      else if (o.iss.slice(0, 7) === MONTH) { counts.month++; counts.current++; }
+      else counts.archive++;
+    });
     var late = ORDERS.filter(isLate).length, today = ORDERS.filter(isToday).length;
     var owed = ORDERS.filter(function (o) { return o.st !== 'done' && bal(o) > 0; });
     var owedSum = owed.reduce(function (s, o) { return s + bal(o); }, 0);
-    var tabs = [['active', 'Активные'], ['work', 'В работе'], ['ready', 'Готов'], ['done', 'Выдан'], ['all', 'Все']];
+    var tabs = [['current', 'Текущие'], ['work', 'В работе'], ['ready', 'Готов'], ['month', 'Выданы в октябре'], ['archive', 'Архив']];
     var board = S.layout === 'board' && window.matchMedia('(min-width: 900px)').matches;
     return '<div class="phead"><div class="t"><h1>Заказы</h1><div class="sub">Индивидуальные заказы, ближайшая выдача сверху</div></div>' +
       '<div class="actions"><div class="roleseg layoutseg" role="group" aria-label="Вид"><button type="button" data-act="layout" data-l="list" aria-pressed="' + !board + '">Список</button><button type="button" data-act="layout" data-l="board" aria-pressed="' + board + '">Доска</button></div>' +
@@ -728,7 +769,7 @@ td .lock svg.i { width: 13px; height: 13px; }
         return '<button type="button" data-act="filter" data-f="' + t[0] + '" aria-pressed="' + (S.filter === t[0]) + '">' + t[1] + '<span class="c">' + counts[t[0]] + '</span></button>';
       }).join('') + '</div>') +
       '<div class="toolbar"><label class="search">' + ic('search') + '<input id="q" type="text" placeholder="Клиент, телефон, изделие или номер" value="' + esc(S.q) + '" aria-label="Поиск"></label></div>' +
-      '<div id="olist">' + (board ? boardHtml() : listHtml()) + '</div>';
+      '<div id="olist">' + (board ? boardHtml() : S.filter === 'archive' ? archiveHtml() : listHtml()) + '</div>';
   }
   function matchQ(o) {
     if (!S.q) return true;
@@ -738,11 +779,11 @@ td .lock svg.i { width: 13px; height: 13px; }
   function filtered() {
     var f = S.filter;
     var list = ORDERS.filter(function (o) {
-      if (f === 'active') return o.st !== 'done';
+      if (f === 'current') return o.st !== 'done' || o.iss.slice(0, 7) === MONTH;
       if (f === 'late') return isLate(o);
       if (f === 'today') return isToday(o);
       if (f === 'owed') return o.st !== 'done' && bal(o) > 0;
-      if (f === 'all') return true;
+      if (f === 'month') return o.st === 'done' && o.iss.slice(0, 7) === MONTH;
       return o.st === f;
     }).filter(matchQ);
     return list.sort(function (a, b) {
@@ -753,8 +794,39 @@ td .lock svg.i { width: 13px; height: 13px; }
   }
   function listHtml() {
     var l = filtered();
-    if (!l.length) return '<p class="empty">Таких заказов нет. Попробуйте другой фильтр или очистите поиск.</p>';
-    return '<div class="olist">' + l.map(orow).join('') + '</div>';
+    var note = S.filter === 'month' ? '<p class="muted small monthnote">1 ноября эти заказы сами уйдут в архив, в таблицу «Октябрь 2026». Здесь останутся только заказы в работе и выданные в ноябре.</p>' : '';
+    if (!l.length) return note + '<p class="empty">Таких заказов нет. Попробуйте другой фильтр или очистите поиск.</p>';
+    return note + '<div class="olist">' + l.map(orow).join('') + '</div>';
+  }
+  function archMonths() {
+    var set = {};
+    ORDERS.forEach(function (o) { if (o.st === 'done' && o.iss.slice(0, 7) < MONTH) set[o.iss.slice(0, 7)] = 1; });
+    return Object.keys(set).sort().reverse();
+  }
+  function archiveHtml() {
+    var ms = archMonths();
+    if (!ms.length) return '<p class="empty">Архив пока пуст. Он заполнится 1-го числа следующего месяца.</p>';
+    if (ms.indexOf(S.arch) < 0) S.arch = ms[0];
+    var all = issued(S.arch), rows = all.filter(matchQ).sort(function (a, b) { return a.iss.localeCompare(b.iss); });
+    var own = isOwner();
+    var chips = '<div class="months" role="group" aria-label="Месяц">' + ms.map(function (m) {
+      var l = issued(m);
+      return '<button type="button" data-act="arch" data-m="' + m + '" aria-pressed="' + (S.arch === m) + '">' + MFULL[m] + ' 2026<small>' + l.length + ' ' + plural(l.length, 'заказ', 'заказа', 'заказов') + (own ? ' · ' + usd(ordersVal(m)) : '') + '</small></button>';
+    }).join('') + '</div>';
+    var head = '<tr><th>Статус</th><th>Изделие</th><th>Проба</th><th>Размер</th><th>Детали</th><th class="r">Стоимость</th><th class="r">Предоплата</th><th>Оформила</th><th>Выдан</th>' + (own ? '<th class="r">Себест.</th><th class="r">Прибыль</th>' : '') + '</tr>';
+    var body = rows.map(function (o) {
+      var pre = o.pays[0];
+      return '<tr class="click" data-act="open" data-id="' + o.id + '"><td><span class="stdone"><span class="dot done"></span>выдан</span></td><td><b>' + esc(o.t) + '</b><div class="muted small">№' + o.id + ' · ' + esc(o.cn) + '</div></td>' +
+        '<td class="num">' + esc(o.pr) + '<div class="muted small"><span class="mdot ' + mcls(o) + '"></span>' + esc(o.col) + '</div></td><td>' + esc(o.sz || '—') + '</td><td class="det">' + esc([o.ct, o.det].filter(Boolean).join(', ')) + '</td>' +
+        '<td class="r num">' + usd(o.price) + '</td><td class="r num">' + (pre ? money(pre.amt, pre.cur) : '—') + '</td><td>' + av(o.by) + esc(o.by) + '</td><td class="num">' + fds(o.iss) + '</td>' +
+        (own ? '<td class="r num">' + usd(o.cost) + '</td><td class="r num">' + usd(o.price - o.cost) + '</td>' : '') + '</tr>';
+    }).join('');
+    var sum = function (f) { return rows.reduce(function (s, o) { return s + f(o); }, 0); };
+    var foot = '<tfoot><tr><td colspan="5">Итого за ' + MFULL[S.arch].toLowerCase() + ': ' + rows.length + ' ' + plural(rows.length, 'заказ', 'заказа', 'заказов') + '</td><td class="r num">' + usd(sum(function (o) { return o.price; })) + '</td><td colspan="3"></td>' +
+      (own ? '<td class="r num">' + usd(sum(function (o) { return o.cost; })) + '</td><td class="r num">' + usd(sum(function (o) { return o.price - o.cost; })) + '</td>' : '') + '</tr></tfoot>';
+    return chips + '<h2 class="archh">' + MFULL[S.arch] + ' 2026</h2>' +
+      (rows.length ? '<div class="scroll"><table class="arch"><thead>' + head + '</thead><tbody>' + body + '</tbody>' + foot + '</table></div>' : '<p class="empty">В этом месяце ничего не найдено по поиску.</p>') +
+      '<p class="muted small">Таблица месяца собирается сама: 1-го числа все заказы, выданные в прошлом месяце, переезжают сюда. Нажми на строку, чтобы открыть заказ.</p>';
   }
   function boardHtml() {
     var cols = [['work', 'В работе'], ['ready', 'Готов'], ['done', 'Выдан в октябре']];
@@ -774,8 +846,8 @@ td .lock svg.i { width: 13px; height: 13px; }
       '<div class="actions"><button type="button" class="btn ghost" data-act="go" data-v="money">ФОП и расходы</button><button type="button" class="btn hide-m" data-act="new">' + ic('plus') + 'Новый заказ</button></div></div>' +
       '<div class="figs">' +
       fig('Вал магазина', uah(sv), 'сентябрь: ' + uah(prev.shop)) +
-      fig('Вал индивидуальных заказов', usd(ov), issued(m).length + ' ' + plural(issued(m).length, 'заказ выдан', 'заказа выдано', 'заказов выдано') + ' · сентябрь: ' + usd(prev.orders)) +
-      fig('Прибыль по заказам', usd(pr), 'цена минус себестоимость · сентябрь: ' + usd(prev.profit)) +
+      fig('Вал индивидуальных заказов', usd(ov), issued(m).length + ' ' + plural(issued(m).length, 'заказ выдан', 'заказа выдано', 'заказов выдано') + ' · сентябрь: ' + usd(ordersVal('2026-09'))) +
+      fig('Прибыль по заказам', usd(pr), 'цена минус себестоимость · сентябрь: ' + usd(ordersVal('2026-09') - ordersCost('2026-09'))) +
       fig('Зашло на ФОП', uah(fop), 'сентябрь: ' + uah(prev.fop)) +
       '</div>' +
       '<div class="grid2">' +
@@ -796,7 +868,7 @@ td .lock svg.i { width: 13px; height: 13px; }
 
   function barChart(el, key) {
     var months = ['2026-06', '2026-07', '2026-08', '2026-09', '2026-10'];
-    var vals = months.map(function (m) { return m === MONTH ? (key === 'shop' ? shopVal(m) : ordersVal(m)) : HIST[m][key]; });
+    var vals = months.map(function (m) { return key === 'shop' ? (m === MONTH ? shopVal(m) : HIST[m].shop) : ordersVal(m); });
     var fmt = key === 'shop' ? uah : usd;
     var W = 360, H = 170, top = 26, base = 140, max = Math.max.apply(null, vals) * 1.08, slot = W / months.length, bw = 34;
     var out = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + (key === 'shop' ? 'Вал магазина' : 'Вал заказов') + ' по месяцам">';
@@ -1052,7 +1124,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     $('scrim').hidden = !(S.open || S.sheet);
     document.body.style.overflow = (S.open || S.sheet) ? 'hidden' : '';
   }
-  function refreshList() { var l = $('olist'); if (l) l.innerHTML = (S.layout === 'board' && window.matchMedia('(min-width: 900px)').matches) ? boardHtml() : listHtml(); }
+  function refreshList() { var l = $('olist'); if (l) l.innerHTML = (S.layout === 'board' && window.matchMedia('(min-width: 900px)').matches) ? boardHtml() : S.filter === 'archive' ? archiveHtml() : listHtml(); }
 
   /* ---------- actions ---------- */
   function setStatus(o, st) {
@@ -1075,8 +1147,9 @@ td .lock svg.i { width: 13px; height: 13px; }
       case 'more': S.sheet = 'more'; break;
       case 'notes': S.sheet = 'notes'; break;
       case 'close': S.open = null; S.form = null; S.sheet = null; break;
-      case 'filter': if (['late', 'today', 'owed'].indexOf(a.getAttribute('data-f')) >= 0) S.layout = 'list'; S.filter = S.filter === a.getAttribute('data-f') && ['late', 'today', 'owed'].indexOf(S.filter) >= 0 ? 'active' : a.getAttribute('data-f'); break;
+      case 'filter': if (['late', 'today', 'owed'].indexOf(a.getAttribute('data-f')) >= 0) S.layout = 'list'; S.filter = S.filter === a.getAttribute('data-f') && ['late', 'today', 'owed'].indexOf(S.filter) >= 0 ? 'current' : a.getAttribute('data-f'); break;
       case 'layout': S.layout = a.getAttribute('data-l'); break;
+      case 'arch': S.arch = a.getAttribute('data-m'); refreshList(); return;
       case 'open': S.open = id; S.form = null; break;
       case 'new': S.open = 'new'; S.form = null; break;
       case 'stmenu': e.stopPropagation(); S.menu = S.menu === id ? null : id; break;
@@ -1160,7 +1233,7 @@ td .lock svg.i { width: 13px; height: 13px; }
       if (pu > 0) o2.pays.push(P(o2.cr, pu, 'USD', pu, fd2.get('pm'), by));
       if (pg > 0) o2.pays.push(P(o2.cr, pg, 'UAH', eq, fd2.get('pm'), by));
       var file = $('n-photo').files[0];
-      var done = function () { ORDERS.push(o2); S.open = o2.id; S.view = 'orders'; S.filter = 'active'; render(); toast('Заказ №' + o2.id + ' сохранён'); };
+      var done = function () { ORDERS.push(o2); S.open = o2.id; S.view = 'orders'; S.filter = 'current'; render(); toast('Заказ №' + o2.id + ' сохранён'); };
       if (file) readPhoto(file, function (url) { o2.photo = url; done(); }); else done();
     }
   });
