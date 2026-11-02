@@ -214,7 +214,7 @@ Available to try on</p></div></details>    <div class="lm-lab-options" data-lm-l
                             <label class="lm-lab-options__carat"><input type="radio" name="lab_carat" value="3" form="lm-inquiry-form-677" required=""><span>3.0 ct</span></label>
                             <label class="lm-lab-options__carat"><input type="radio" name="lab_carat" value="4" form="lm-inquiry-form-677" required=""><span>4.0 ct</span></label>
                         </div></fieldset>
-        <p class="lm-lab-options__note" data-lm-lab-note="order" hidden="">We will confirm the price of your chosen combination before making your piece.</p>        <p class="lm-lab-options__note">The photo shows a sample of this design. Gold colour and stone size may differ.</p>
+        <p class="lm-lab-options__note">The photo shows a sample of this design. Gold colour and stone size may differ.</p>
         <p class="lm-lab-options__note" data-lm-lab-photo-note="" role="status"></p>
     </div>
     <button type="button" class="button lm-save-product" data-lm-wish="677" aria-pressed="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg> Save to wishlist</button><p class="lm-feedback" role="status"></p><div class="lm-variant-media" data-default="[]"></div>        <section class="lm-inquiry" data-product="677">
@@ -371,7 +371,6 @@ Available to try on</p></div></details>    <div class="lm-lab-options" data-lm-l
         inquiry.hidden = mode !== 'ask' && mode !== 'order';
         inquiry.querySelectorAll('[data-lm-inquiry-head]').forEach(head => { head.hidden = head.dataset.lmInquiryHead !== mode; });
       }
-      group.querySelectorAll('[data-lm-lab-note]').forEach(note => { note.hidden = note.dataset.lmLabNote !== mode; });
     };
     const sync = () => {
       const button = cart?.querySelector('button[name="add-to-cart"]');
