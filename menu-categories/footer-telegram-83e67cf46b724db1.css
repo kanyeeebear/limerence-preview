@@ -13,6 +13,6 @@
   .lm-foot[data-lm-footer-ready] .lm-foot__contact{margin-top:20px}
   .lm-foot__contact .lm-foot__hours{margin-top:12px}
 }
-@media(max-width:359px){
+@media(max-width:389px){
   .lm-foot__actions{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px 20px}
 }
