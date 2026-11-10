@@ -173,6 +173,12 @@ function gallery() {
   const allowVideo=['hero','category-video'].includes(draft.kind);
   container.innerHTML=`<div class="gallery-main ${!isProduct?'media-photo':''}">${allowVideo&&video?`<video controls playsinline preload="none" poster="${esc(current)}" src="${esc(video)}" aria-label="Перегляд відео"></video>`:`<img src="${esc(current)}" alt="${isProduct?esc(draft.name):'Фото блоку'}">`}${isProduct&&photoIndex===0?'<span class="cover-label">Головне фото</span>':''}</div>${isProduct||draft.kind==='gallery'?`<div class="thumbnails">${draft.photos.map((src,i)=>`<button type="button" class="thumbnail" aria-label="Фото ${i+1}" aria-pressed="${i===photoIndex}" data-photo="${i}"><img src="${esc(src)}" alt=""></button>`).join('')}<button type="button" class="upload-button" id="add-photo" aria-label="Додати фото">${icon('plus')}</button></div><div class="gallery-tools"><button type="button" class="text-button" id="make-cover" ${photoIndex===0?'disabled':''}>Зробити головним</button><button type="button" class="icon-button" id="delete-photo" aria-label="Видалити вибране фото" ${draft.photos.length<2?'disabled':''}>${icon('trash')}</button></div>`:`<div class="media-choice"><button type="button" class="secondary" id="replace-photo">${icon('photo')}${allowVideo?'Змінити обкладинку':'Змінити фото'}</button>${allowVideo?`<button type="button" class="secondary" id="add-video">${icon('video')}${video?'Замінити відео':'Додати відео'}</button>`:''}</div>`}${allowVideo?`<p class="file-note">${draft.videoName?esc(draft.videoName):'Оберіть власне відео з телефону. У макеті воно зберігається тільки на цьому пристрої.'}</p>${video?'<button type="button" id="remove-video" class="text-button">Прибрати відео</button>':''}`:''}<input type="file" id="photo-file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" hidden><input type="file" id="video-file" accept="video/*" hidden>`;
   $$('[data-photo]',container).forEach(b=>b.onclick=()=>{photoIndex=Number(b.dataset.photo);gallery();});
+  // A single photo needs no duplicated thumbnail or unavailable ordering actions.
+  if (draft.photos.length === 1 && (isProduct || draft.kind === 'gallery')) {
+    $('.thumbnail', container)?.remove();
+    $('.gallery-tools', container)?.remove();
+  }
+  if ($('#add-photo')) $('#add-photo').innerHTML = icon('plus') + 'Додати фото';
   if($('#make-cover'))$('#make-cover').onclick=()=>{const [img]=draft.photos.splice(photoIndex,1);draft.photos.unshift(img);photoIndex=0;setDirty();gallery();};
   if($('#delete-photo'))$('#delete-photo').onclick=async()=>{if(await ask('Прибрати фото?', 'Фото зникне лише з цієї пробної картки.', 'Прибрати фото','Скасувати')){draft.photos.splice(photoIndex,1);photoIndex=0;setDirty();gallery();}};
   if($('#add-photo'))$('#add-photo').onclick=()=>{$('#photo-file').dataset.replace='no';$('#photo-file').click();};
@@ -259,6 +265,8 @@ async function saveDraft(e) {
     else if(draftType==='block')blocks=next.blocks;else categoryVideos=next.categoryVideos;
     dirty=false;pendingVideo=null;
     if(pendingVideoURL){URL.revokeObjectURL(pendingVideoURL);pendingVideoURL='';}
+    // The player must switch from the temporary selection URL to the saved blob.
+    if (draft.videoKey) gallery();
     $('#save-status').textContent='Збережено в макеті';toast('Збережено в макеті. Магазин не змінено.');
   } catch {error.textContent='Не вдалося зберегти на пристрої. Можливо, бракує місця. Спробуйте менший файл або скиньте попередні пробні зміни.';}
   finally {saveBusy=false;$('#save').disabled=false;$('#save').innerHTML=icon('check')+'Зберегти';}
@@ -300,7 +308,7 @@ async function reset() {
   try {localStorage.removeItem(STORAGE);}catch{toast('Не вдалося очистити сховище.');return;}
   try {const db=await openMediaDB();await new Promise((resolve,reject)=>{const tx=db.transaction('files','readwrite');tx.objectStore('files').clear();tx.oncomplete=resolve;tx.onerror=reject;});db.close();}catch{}
   mediaURLs.forEach(URL.revokeObjectURL);mediaURLs.clear();
-  changes={products:{},blocks:null,categoryVideos:null};products=copy(INITIAL.products);blocks=copy(INITIAL.blocks);categoryVideos=copy(INITIAL.categoryVideos);query='';category='Усі';visibility='all';dirty=false;
+  changes={products:{},blocks:null,categoryVideos:null};products=copy(INITIAL.products);blocks=copy(INITIAL.blocks);categoryVideos=copy(INITIAL.categoryVideos);query='';category='Усі';visibility='all';listScroll=0;dirty=false;
   renderRoute(route==='site'?'site':'products');toast('Макет повернуто до початкового вигляду');
 }
 function renderRoute(next) {
