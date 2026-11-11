@@ -514,6 +514,13 @@ td .lock svg.i { width: 13px; height: 13px; }
 .scrim.top { z-index: 41; }
 .blankimg { display: block; width: 100%; max-width: 330px; min-height: 240px; margin: 0 auto; border: 1px solid var(--line); border-radius: 4px; background: #ffffff; }
 .dsec > h3 .pay svg.i { width: 13px; height: 13px; vertical-align: -2px; margin-right: 4px; }
+.pcard.off .plate { opacity: 0.45; }
+.pcard.off .pt, .pcard.off .pf { color: var(--muted); }
+.msg { background: var(--side); border-radius: 6px; padding: 12px 14px; display: grid; gap: 6px; font-size: 14px; }
+.msg .mh { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.msg p { color: var(--soft); }
+.dlist { display: grid; gap: 6px; font-size: 14px; justify-items: start; }
+.dlist button { text-align: left; color: var(--soft); text-decoration: underline; text-underline-offset: 3px; }
 </style>
 </head>
 <body>
@@ -588,7 +595,8 @@ td .lock svg.i { width: 13px; height: 13px; }
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M5.2 18.8l1.4-1.4M17.4 6.6l1.4-1.4"/>',
     moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
     price: '<path d="M3.5 11.5v-8h8l9 9-8 8z"/><circle cx="8" cy="8" r="1.4"/>',
-    share: '<path d="M12 15V4M8 7.5l4-4 4 4M5 12.5v7h14v-7"/>'
+    share: '<path d="M12 15V4M8 7.5l4-4 4 4M5 12.5v7h14v-7"/>',
+    edit: '<path d="M4 20h4L19.5 8.5l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>'
   };
   function ic(n) { return '<svg class="i" viewBox="0 0 24 24" aria-hidden="true">' + IC[n] + '</svg>'; }
   var PIECE = {
@@ -604,8 +612,8 @@ td .lock svg.i { width: 13px; height: 13px; }
   function P(d, amt, cur, u, m, by) { return { d: d, amt: amt, cur: cur, usd: u, m: m, by: by }; }
   var ORDERS = [
     { id: 1040, t: 'Кольцо с изумрудом', k: 'ring', pr: '750', col: 'жёлтое', sz: 'р. 17', ct: '1,1 ct', det: 'изумруд овал, паве по шинке', price: 1800, cost: 1240, by: 'Саша', cn: 'Олександра Ткач', ph: '+380 67 000 41 18', del: 'самовывоз', ch: 'офлайн', cr: '2026-08-30', due: '2026-10-04', st: 'done', ready: '2026-10-01', iss: '2026-10-04', pays: [P('2026-08-30', 200, 'USD', 200, 'нал', 'Саша'), P('2026-10-04', 1600, 'USD', 1600, 'нал', 'Саша')] },
-    { id: 1042, t: 'Кольцо багет', k: 'ring', pr: '750', col: 'белое', sz: 'р. 16', ct: '1 ct', det: 'без пробы', price: 1500, cost: 1000, by: 'Саша', cn: 'Олена Коваль', ph: '+380 67 000 12 34', del: 'самовывоз', ch: 'офлайн', cr: '2026-09-14', due: '2026-10-18', st: 'done', ready: '2026-10-15', iss: '2026-10-18', pays: [P('2026-09-14', 8400, 'UAH', 200, 'ФОП', 'Саша'), P('2026-10-18', 1300, 'USD', 1300, 'нал', 'Саша')] },
-    { id: 1043, t: 'Пусеты', k: 'studs', pr: '750', col: 'белое', sz: '', ct: '1,5 ct', det: 'застёжка двойная', price: 2500, cost: 1700, by: 'Ангелина', cn: 'Ірина Мельник', ph: '+380 50 000 77 02', del: 'самовывоз', ch: 'офлайн', cr: '2026-09-20', due: '2026-10-22', st: 'done', ready: '2026-10-20', iss: '2026-10-22', pays: [P('2026-09-20', 200, 'USD', 200, 'нал', 'Ангелина'), P('2026-10-22', 2300, 'USD', 2300, 'нал', 'Ангелина')] },
+    { id: 1042, t: 'Кольцо багет', k: 'ring', pr: '750', col: 'белое', sz: 'р. 16', ct: '1 ct', det: 'без пробы', price: 1500, cost: 1000, model: 4, stone: 'lab', list: 1600, by: 'Саша', cn: 'Олена Коваль', ph: '+380 67 000 12 34', del: 'самовывоз', ch: 'офлайн', cr: '2026-09-14', due: '2026-10-18', st: 'done', ready: '2026-10-15', iss: '2026-10-18', pays: [P('2026-09-14', 8400, 'UAH', 200, 'ФОП', 'Саша'), P('2026-10-18', 1300, 'USD', 1300, 'нал', 'Саша')] },
+    { id: 1043, t: 'Пусеты', k: 'studs', pr: '750', col: 'белое', sz: '', ct: '1,5 ct', det: 'застёжка двойная', price: 2500, cost: 1700, model: 2, stone: 'lab', list: 2650, by: 'Ангелина', cn: 'Ірина Мельник', ph: '+380 50 000 77 02', del: 'самовывоз', ch: 'офлайн', cr: '2026-09-20', due: '2026-10-22', st: 'done', ready: '2026-10-20', iss: '2026-10-22', pays: [P('2026-09-20', 200, 'USD', 200, 'нал', 'Ангелина'), P('2026-10-22', 2300, 'USD', 2300, 'нал', 'Ангелина')] },
     { id: 1044, t: 'Кольцо овал 2 ct', k: 'ring', pr: '750', col: 'жёлтое', sz: 'р. 17', ct: '2 ct', det: 'классическая крапановая закрепка', price: 3200, cost: 2350, by: 'Аня', cn: 'Марина Бондар', ph: '+380 63 000 50 90', del: 'самовывоз', ch: 'офлайн', cr: '2026-09-25', due: '2026-10-09', st: 'done', ready: '2026-10-08', iss: '2026-10-09', pays: [P('2026-09-25', 500, 'USD', 500, 'USDT', 'Аня'), P('2026-10-09', 2700, 'USD', 2700, 'USDT', 'Аня')] },
     { id: 1045, t: 'Цепь Бисмарк', k: 'chain', pr: '585', col: 'жёлтое', sz: '50 см', ct: '', det: 'плетение плотное, 4 мм', price: 900, cost: 610, by: 'Саша', cn: 'Тетяна Шевчук', ph: '+380 97 000 33 61', del: 'почта', ch: 'онлайн', cr: '2026-10-02', due: '2026-10-27', st: 'work', pays: [P('2026-10-02', 8300, 'UAH', 200, 'ФОП', 'Саша')] },
     { id: 1046, t: 'Кольцо с сапфиром', k: 'ring', pr: '750', col: 'белое', sz: 'р. 15,5', ct: '0,8 ct', det: 'сапфир васильковый', price: 1350, cost: 900, by: 'Ангелина', cn: 'Олена Коваль', ph: '+380 67 000 12 34', del: 'самовывоз', ch: 'офлайн', cr: '2026-10-06', due: '2026-10-29', st: 'ready', ready: '2026-10-27', pays: [P('2026-10-06', 200, 'USD', 200, 'нал', 'Ангелина')] },
@@ -659,9 +667,9 @@ td .lock svg.i { width: 13px; height: 13px; }
   // each row is one carat from CTS, the pair is [585, 750]; 0 means no price yet
   var PRICE = [
     { n: 1, t: 'Пусеты круг', k: 'studs', photo: PH.studs, lab: [[950, 1100], [1250, 1400], [1600, 1800], [2400, 2650]], nat: [[1350, 1500], [2100, 2300], [3300, 3500], [5900, 6200]] },
-    { n: 2, t: 'Пусеты груша', k: 'studs', lab: [[1050, 1200], [1400, 1550], [1750, 1950], [2600, 2850]], nat: [[1500, 1650], [2350, 2550], [3650, 3850], [6400, 6700]] },
+    { n: 2, t: 'Пусеты груша', k: 'studs', lab: [[1700, 1900], [2350, 2650], [2900, 3250], [4000, 4400]], nat: [[2100, 2300], [3100, 3400], [4500, 4850], [7600, 8000]] },
     { n: 3, t: 'Кольцо змея', k: 'ring', photo: PH.ring, lab: [[1200, 1400], [1500, 1700], [1850, 2100], [2700, 3000]], nat: [[1700, 1900], [2600, 2850], [3900, 4200], [6800, 7200]] },
-    { n: 4, t: 'Кольцо солитер', k: 'ring', lab: [[1000, 1150], [1300, 1450], [1650, 1850], [2450, 2700]], nat: [[1450, 1600], [2250, 2450], [3500, 3750], [6200, 6500]] },
+    { n: 4, t: 'Кольцо багет', k: 'ring', lab: [[1400, 1600], [1700, 1900], [2050, 2300], [2900, 3200]], nat: [[1900, 2100], [2800, 3050], [4100, 4400], [7000, 7400]] },
     { n: 5, t: 'Браслет пять камней', k: 'bracelet', photo: PH.bracelet, lab: [[1100, 1300], [1400, 1600], [1750, 2000], [2550, 2850]], nat: [[1550, 1750], [2400, 2650], [3700, 4000], [6500, 6900]] },
     { n: 6, t: 'Теннисный браслет', k: 'bracelet', lab: [[2100, 2400], [2700, 3000], [3300, 3650], [4000, 4400]], nat: [[0, 0], [0, 0], [0, 0], [0, 0]] },
     { n: 7, t: 'Колье подкова', k: 'pendant', photo: PH.pendant, lab: [[1050, 1200], [1350, 1500], [1700, 1900], [2500, 2750]], nat: [[1500, 1650], [2300, 2500], [3550, 3800], [6300, 6600]] },
@@ -768,7 +776,7 @@ td .lock svg.i { width: 13px; height: 13px; }
   }
 
   /* ---------- state ---------- */
-  var S = { theme: 'light', role: 'owner', view: 'overview', filter: 'current', arch: null, q: '', layout: 'list', open: null, form: null, menu: null, sheet: null, who: DRAFTS[TODAY_S].by, cashDay: TODAY_S, rate: '41,3', clientOpen: null, pcat: 'all', pmodel: null, psel: { stone: 'lab', ct: '1', pr: '750' }, draft: null, blank: null };
+  var S = { theme: 'light', role: 'owner', view: 'overview', filter: 'current', arch: null, q: '', layout: 'list', open: null, form: null, menu: null, sheet: null, who: DRAFTS[TODAY_S].by, cashDay: TODAY_S, rate: '41,3', clientOpen: null, pcat: 'all', pq: '', pmodel: null, psel: { stone: 'lab', ct: '1', pr: '750' }, draft: null, blank: null };
   function isOwner() { return S.role === 'owner'; }
   function me() { return isOwner() ? 'Аня' : S.who; }
   var NAV_OWNER = [['overview', 'Обзор'], ['orders', 'Заказы'], ['price', 'Прайс'], ['cash', 'Касса'], ['schedule', 'График'], ['clients', 'Клиенты'], ['money', 'Деньги'], ['salary', 'Зарплаты']];
@@ -955,7 +963,7 @@ td .lock svg.i { width: 13px; height: 13px; }
       var l = all.filter(function (o) { return o.by === pn; });
       return '<div><span class="k">' + av(pn) + pn + '</span><span class="v num">' + l.length + ' · ' + usd(l.reduce(function (a, o) { return a + o.price; }, 0)) + '</span></div>';
     }).join('') + '<div><span class="k">Средний чек</span><span class="v num">' + usd(cnt ? ordersVal(S.arch) / cnt : 0) + '</span></div>' +
-      (own ? '<div><span class="k">Прибыль</span><span class="v num">' + usd(ordersVal(S.arch) - ordersCost(S.arch)) + '</span></div>' : '') + '</div>' +
+      (own ? '<div><span class="k">Прибыль</span><span class="v num">' + usd(ordersVal(S.arch) - ordersCost(S.arch)) + '</span></div><div><span class="k">Скидки от прайса</span><span class="v num">' + usd(discSum(all)) + '</span></div>' : '') + '</div>' +
       (cl ? '<p class="lockline">' + ic('lock') + 'Месяц закрыт ' + fds(cl.d) + ', курс для 2% — ' + rf(cl.rate) + ' ₴ за $</p>' : '');
     return chips + '<div class="blockh archh"><h2>' + MFULL[S.arch] + ' 2026</h2>' + (own ? xlBtn('orders', S.arch) : '') + '</div>' + summary +
       (rows.length ? '<div class="scroll"><table class="arch"><thead>' + head + '</thead><tbody>' + body + '</tbody>' + foot + '</table></div>' : '<p class="empty">В этом месяце ничего не найдено по поиску.</p>') +
@@ -1172,6 +1180,7 @@ td .lock svg.i { width: 13px; height: 13px; }
       '<div><span class="l">Расчёт с производством<small>сумма себестоимостей</small></span><span class="num">' + usd(-prod) + '</span></div>' +
       '<div class="tot"><span class="l">Остаток по заказам</span><span class="num">' + usd(ov - prod) + '</span></div></div>' +
       '<p class="muted small">Гривны и доллары считаются отдельно и не смешиваются.</p></div>' +
+      '<div class="block"><h2>Скидки от прайса, доллары</h2>' + discBlock(m) + '</div>' +
       '</div>';
   }
 
@@ -1350,19 +1359,26 @@ td .lock svg.i { width: 13px; height: 13px; }
   function ctOpts(stone) { return CTS[stone].map(function (c) { return [c, c + ' ct']; }); }
   function pcard(m) {
     var mp = minPrice(m);
-    return '<button type="button" class="pcard" data-act="pmodel" data-n="' + m.n + '"><div class="plate">' + piece(m) + '</div>' +
-      '<div><div class="pn">№' + m.n + ' · ' + catName(m.k) + '</div><div class="pt">' + esc(m.t) + '</div><div class="pf num">' + (mp ? 'от ' + usd(mp) : 'цены не внесены') + '</div></div></button>';
+    return '<button type="button" class="pcard' + (m.off ? ' off' : '') + '" data-act="pmodel" data-n="' + m.n + '"><div class="plate">' + piece(m) + '</div>' +
+      '<div><div class="pn">№' + m.n + ' · ' + catName(m.k) + (m.off ? ' · скрыта' : '') + '</div><div class="pt">' + esc(m.t) + '</div><div class="pf num">' + (mp ? 'от ' + usd(mp) : 'цены не внесены') + '</div></div></button>';
+  }
+  function priceSeen() { return PRICE.filter(function (m) { return isOwner() || !m.off; }); }
+  function priceGrid() {
+    var q = S.pq.trim().toLowerCase().replace(/^№\s*/, '');
+    var l = priceSeen().filter(function (m) { return (S.pcat === 'all' || m.k === S.pcat) && (!q || String(m.n) === q || m.t.toLowerCase().indexOf(q) >= 0); })
+      .sort(function (a, b) { return (a.off ? 1 : 0) - (b.off ? 1 : 0) || a.n - b.n; });
+    return l.length ? '<div class="pgrid">' + l.map(pcard).join('') + '</div>' : '<p class="empty">' + (q ? 'Ничего не нашлось. Проверьте номер или название.' : 'В этой категории моделей пока нет.') + '</p>';
   }
   function viewPrice() {
-    var tabs = [['all', 'Все']].concat(CATS);
-    var list = PRICE.filter(function (m) { return S.pcat === 'all' || m.k === S.pcat; });
+    var tabs = [['all', 'Все']].concat(CATS), seen = priceSeen();
     return '<div class="phead"><div class="t"><h1>Прайс</h1><div class="sub">Модели под заказ, цены в долларах</div></div>' +
       (isOwner() ? '<div class="actions"><button type="button" class="btn" data-act="newmodel">' + ic('plus') + 'Новая модель</button></div>' : '') + '</div>' +
       '<div class="tabs" role="group" aria-label="Категория">' + tabs.map(function (t) {
-        var c = t[0] === 'all' ? PRICE.length : PRICE.filter(function (m) { return m.k === t[0]; }).length;
+        var c = t[0] === 'all' ? seen.length : seen.filter(function (m) { return m.k === t[0]; }).length;
         return '<button type="button" data-act="pcat" data-c="' + t[0] + '" aria-pressed="' + (S.pcat === t[0]) + '">' + t[1] + '<span class="c">' + c + '</span></button>';
       }).join('') + '</div>' +
-      (list.length ? '<div class="pgrid">' + list.map(pcard).join('') + '</div>' : '<p class="empty">В этой категории моделей пока нет.</p>') +
+      '<div class="toolbar"><label class="search">' + ic('search') + '<input id="pq" type="text" placeholder="Номер или название модели" value="' + esc(S.pq) + '" aria-label="Поиск по прайсу"></label></div>' +
+      '<div id="plist">' + priceGrid() + '</div>' +
       '<p class="muted small">Откройте модель, выберите камень, каратность и пробу — цена покажется сразу. Оттуда же можно оформить заказ. ' + (isOwner() ? 'Цены и модели меняешь только ты.' : 'Цены меняет Аня.') + '</p>';
   }
   function drawerModel(m) {
@@ -1378,6 +1394,7 @@ td .lock svg.i { width: 13px; height: 13px; }
     }
     return '<div class="dhead"><div><div class="tag" id="pm-tag">Модель №' + m.n + ' · ' + catName(m.k) + '</div><h2 id="pm-title">' + esc(m.t) + '</h2></div><button type="button" class="x" data-act="close" aria-label="Закрыть">' + ic('x') + '</button></div>' +
       '<div class="dbody">' +
+      (m.off ? '<p class="lockline">' + ic('lock') + 'Модель скрыта из прайса: девочки её не видят.</p>' : '') +
       '<div class="plate pm-photo">' + piece(m) + (own ? '<label class="up">' + (m.photo ? 'заменить фото' : '+ фото модели') + '<input type="file" accept="image/*" data-mphoto="' + m.n + '"></label>' : '') + '</div>' +
       '<div class="form">' +
       '<div class="fld"><span class="lb">Камень</span>' + pseg('ps-stone', STONE_OPTS, s.stone) + '</div>' +
@@ -1390,7 +1407,9 @@ td .lock svg.i { width: 13px; height: 13px; }
       '<p class="muted small">Цена зависит от камня, каратности и пробы. Цвет золота и размер её не меняют.' + (own ? ' Пустая клетка — цены нет, девочки увидят прочерк.' : '') + '</p></div>' +
       (own ? '<div class="mbox"><span class="tag">Меняешь только ты</span>' +
         '<div class="fld"><label for="pm-name">Название модели</label><input type="text" id="pm-name" data-mname value="' + esc(m.t) + '"></div>' +
-        '<div class="fld"><span class="lb">Категория</span>' + pseg('mcat', CATS, m.k) + '</div></div>' : '') +
+        '<div class="fld"><span class="lb">Категория</span>' + pseg('mcat', CATS, m.k) + '</div>' +
+        '<div><button type="button" class="btn ghost" data-act="togglemodel">' + (m.off ? 'Вернуть в прайс' : 'Скрыть из прайса') + '</button></div>' +
+        '<p class="muted small">Скрытую модель девочки не видят и не могут выбрать в заказе. Старые заказы с ней не меняются.</p></div>' : '') +
       '</div>';
   }
   // the price-list block inside the new order form
@@ -1440,6 +1459,58 @@ td .lock svg.i { width: 13px; height: 13px; }
     try { navigator.clipboard.writeText(txt).then(function () { toast(ok); }, fallback); } catch (err) { fallback(); }
   }
 
+  /* ---------- shop facts printed for the client: taken from the shop site, 10.11.2026 ---------- */
+  var SHOP = { addr: 'м. Київ, вул. Саксаганського, 63/28', hours: 'щодня 11:00–19:00', ig: '@limerence_jewelry', tg: '@Limerencejewelry', site: 'limerence-jewelry.com', warranty: '6 місяців' };
+
+  /* ---------- discounts against the price list ---------- */
+  function disc(o) { return o.list && o.list > o.price ? o.list - o.price : 0; }
+  function discSum(l) { return l.reduce(function (s, o) { return s + disc(o); }, 0); }
+  function discBlock(m) {
+    var l = issued(m).filter(function (o) { return o.list; }), cut = l.filter(function (o) { return disc(o) > 0; });
+    var pend = ORDERS.filter(function (o) { return o.st !== 'done' && disc(o) > 0; });
+    return '<div class="calc">' + ['Саша', 'Ангелина', 'Аня'].map(function (p) {
+      var pl = l.filter(function (o) { return o.by === p; }), d = discSum(pl);
+      return '<div><span class="l">' + av(p) + p + '<small>' + (pl.length ? pl.length + ' ' + plural(pl.length, 'заказ', 'заказа', 'заказов') + ' из прайса' : 'заказов из прайса нет') + '</small></span><span class="num">' + (d ? usd(d) : '—') + '</span></div>';
+    }).join('') + '<div class="tot"><span class="l">Всего скидок за ' + MNAME[m] + '</span><span class="num">' + usd(discSum(l)) + '</span></div></div>' +
+      (cut.length ? '<div class="dlist">' + cut.map(function (o) { return '<button type="button" data-act="open" data-id="' + o.id + '">№' + o.id + ' ' + esc(o.t) + ' · ' + esc(o.by) + ' · скидка ' + usd(disc(o)) + '</button>'; }).join('') + '</div>' : '') +
+      '<p class="muted small">Считаются выданные за месяц заказы из прайса: цена по прайсу минус цена в заказе.' +
+      (pend.length ? ' Ещё не выдано со скидкой: ' + pend.length + ' ' + plural(pend.length, 'заказ', 'заказа', 'заказов') + ' на ' + usd(discSum(pend)) + '.' : '') + '</p>';
+  }
+
+  /* ---------- ready texts for the client, Ukrainian ---------- */
+  function clientMsgs(o) {
+    var b = bal(o), nm = '№' + o.id + ' «' + o.t + '»', post = o.del === 'почта', a = [];
+    var left = b > 0 ? ' Залишок до сплати — ' + usd(b) + '.' : '';
+    var where = post ? ' Напишіть, будь ласка, коли вам зручно отримати відправлення.' : ' Чекаємо на вас у шоурумі: ' + SHOP.addr + ', ' + SHOP.hours + '.';
+    if (o.st === 'work') a.push(['Заказ принят', 'Добрий день! Ваше замовлення ' + nm + ' прийняте в роботу. Орієнтовна дата готовності — ' + dfull(o.due) + '.' + left + ' Дякуємо, що обрали LIMÉRENCE!']);
+    if (o.st === 'ready') {
+      a.push(['Заказ готов', 'Добрий день! Ваше замовлення ' + nm + ' готове.' + left + where]);
+      if (waitDays(o) > 0) a.push(['Напоминание', 'Добрий день! Нагадуємо, що ваше замовлення ' + nm + ' готове й чекає на вас.' + left + where]);
+    }
+    if (o.st === 'done') a.push(['Спасибо', 'Дякуємо за замовлення! Носіть із задоволенням. Гарантія на виріб — ' + SHOP.warranty + ', умови на ' + SHOP.site + '.']);
+    return a;
+  }
+
+  /* ---------- drawer: edit a saved order ---------- */
+  function drawerEdit(o) {
+    function radios(name, opts, def) { return '<div class="seg">' + opts.map(function (v) { return '<label><input type="radio" name="' + name + '" value="' + v + '"' + (v === def ? ' checked' : '') + '><span>' + v + '</span></label>'; }).join('') + '</div>'; }
+    function inp(id, name, label, val, extra) { return '<div class="fld"><label for="' + id + '">' + label + '</label><input type="text" id="' + id + '" name="' + name + '" value="' + esc(val || '') + '"' + (extra || '') + '></div>'; }
+    return '<div class="dhead"><div><div class="tag">Заказ №' + o.id + '</div><h2>Изменить заказ</h2></div><button type="button" class="x" data-act="cancelform" aria-label="Отменить правку">' + ic('x') + '</button></div>' +
+      '<form class="dbody form" id="editform" data-id="' + o.id + '">' +
+      '<div class="fgroup"><div class="gt">Изделие</div>' + inp('e-t', 't', 'Название', o.t, ' required') +
+      '<div class="fld"><span class="lb">Проба</span>' + radios('pr', ['585', '750'], o.pr) + '</div><div class="fld"><span class="lb">Цвет золота</span>' + radios('col', ['белое', 'жёлтое', 'розовое'], o.col) + '</div>' +
+      '<div class="frow">' + inp('e-sz', 'sz', 'Размер', o.sz) + inp('e-ct', 'ct', 'Каратность', o.ct) + '</div>' +
+      '<div class="fld"><span class="lb">Камень</span>' + pseg('stone', [['', 'не указан']].concat(STONE_OPTS), o.stone || '') + '</div>' +
+      '<div class="fld"><label for="e-det">Детали</label><textarea id="e-det" name="det">' + esc(o.det || '') + '</textarea></div></div>' +
+      '<div class="fgroup"><div class="gt">Цена и даты</div>' +
+      '<div class="fld"><label for="e-price">Цена, $</label><input type="number" id="e-price" name="price" required min="1" inputmode="decimal" value="' + o.price + '" data-list="' + (o.list || 0) + '"><span class="hint" id="e-price-hint">' + (o.list ? hintText(o.list, o.price) : '') + '</span></div>' +
+      '<div class="frow"><div class="fld"><label for="e-cr">Дата заказа</label><input type="date" id="e-cr" name="cr" required value="' + o.cr + '"></div><div class="fld"><label for="e-due">Дата выдачи</label><input type="date" id="e-due" name="due" required value="' + o.due + '"></div></div></div>' +
+      '<div class="fgroup"><div class="gt">Клиент</div><div class="frow">' + inp('e-cn', 'cn', 'Имя', o.cn, ' required') + '<div class="fld"><label for="e-ph">Телефон</label><input type="tel" id="e-ph" name="ph" required value="' + esc(o.ph) + '"></div></div>' +
+      '<div class="frow"><div class="fld"><span class="lb">Получение</span>' + radios('del', ['самовывоз', 'почта'], o.del) + '</div><div class="fld"><span class="lb">Заказ</span>' + radios('ch', ['офлайн', 'онлайн'], o.ch) + '</div></div></div>' +
+      '<div class="actions"><button type="submit" class="btn">Сохранить изменения</button><button type="button" class="btn ghost" data-act="cancelform">Отмена</button></div>' +
+      '<p class="muted small">Платежи' + (isOwner() ? ' и себестоимость' : '') + ' меняются в карточке заказа. Все правки попадут в историю заказа.</p></form>';
+  }
+
   /* ---------- drawer: order ---------- */
   function events(o) {
     var ev = [{ d: o.cr, t: 'Заказ создан', by: o.by }];
@@ -1475,12 +1546,15 @@ td .lock svg.i { width: 13px; height: 13px; }
       '<div class="hero"><div class="plate ' + mcls(o) + '">' + piece(o) + '<label class="up">' + (o.photo ? 'заменить фото' : '+ фото модели') + '<input type="file" accept="image/*" data-photo="' + o.id + '"></label></div>' +
       '<dl class="specs"><dt>Проба</dt><dd>' + esc(o.pr) + '</dd><dt>Золото</dt><dd><span class="mdot ' + mcls(o) + '"></span>' + esc(o.col) + '</dd>' + (o.sz ? '<dt>Размер</dt><dd>' + esc(o.sz) + '</dd>' : '') + (o.ct ? '<dt>Каратность</dt><dd>' + esc(o.ct) + '</dd>' : '') + (o.stone ? '<dt>Камень</dt><dd>' + STONES[o.stone] + (o.stone === 'nat' ? ', ' + NATSPEC : '') + '</dd>' : '') + (o.det ? '<dt>Детали</dt><dd>' + esc(o.det) + '</dd>' : '') + (o.model ? '<dt>Модель</dt><dd>№' + o.model + ' из прайса</dd>' : '') +
       '<dt>Оформила</dt><dd>' + av(o.by) + esc(o.by) + '</dd><dt>Заказ</dt><dd>' + fd(o.cr) + '</dd><dt>Выдача</dt><dd class="due ' + di.c + '" style="white-space:normal">' + (o.st === 'done' ? fd(o.iss) : fd(o.due) + (di.t === 'выдача ' + fd(o.due) ? '' : ' · ' + di.t.replace('выдача ', ''))) + '</dd></dl></div>' +
-      (S.form ? payForm(o, S.form) : '<div class="actions">' + next + '<button type="button" class="btn ghost" data-act="blank" data-id="' + o.id + '">' + ic('share') + 'Бланк для клиента</button></div>') +
+      (S.form ? payForm(o, S.form) : '<div class="actions">' + next + '<button type="button" class="btn ghost" data-act="blank" data-id="' + o.id + '">' + ic('share') + 'Бланк для клиента</button>' + (locked && !isOwner() ? '' : '<button type="button" class="btn ghost" data-act="edit" data-id="' + o.id + '">' + ic('edit') + 'Изменить</button>') + '</div>') +
       '<div class="dsec"><h3>Оплата <span class="pay">' + payState(o) + '</span></h3>' +
       '<div class="owed"><span class="soft">Цена ' + usd(o.price) + (o.list && o.list !== o.price ? '<span class="muted small"> · по прайсу ' + usd(o.list) + '</span>' : '') + '</span><span><span class="muted small">' + (bal(o) > 0 ? 'осталось ' : bal(o) < 0 ? 'переплата ' : '') + '</span><span class="v num">' + (bal(o) === 0 ? 'оплачен' : usd(Math.abs(bal(o)))) + '</span></span></div>' +
       ledger + (o.st !== 'done' && !S.form ? '<div><button type="button" class="btn ghost" data-act="addpay" data-id="' + o.id + '">' + ic('plus') + 'Добавить платёж</button></div>' : '') + '</div>' +
       '<div class="dsec"><h3>Клиент</h3><div class="client"><b>' + esc(o.cn) + '</b><div class="phone"><span class="num" id="ph-' + o.id + '">' + esc(o.ph) + '</span><button type="button" class="copy" data-act="copy" data-t="' + esc(o.ph) + '">Скопировать</button></div>' +
       '<div class="muted">' + esc(o.del) + ' · ' + esc(o.ch) + '</div></div></div>' +
+      '<div class="dsec"><h3>Сообщение клиенту</h3>' + clientMsgs(o).map(function (mm, i) {
+        return '<div class="msg"><div class="mh"><b>' + mm[0] + '</b><button type="button" class="copy" data-act="copymsg" data-id="' + o.id + '" data-i="' + i + '">Скопировать</button></div><p>' + esc(mm[1]) + '</p></div>';
+      }).join('') + '<p class="muted small">Текст на украинском. Скопируйте и вставьте в переписку с клиентом.</p></div>' +
       owner +
       '<div class="dsec"><h3>История</h3><div class="timeline">' + events(o).map(function (e) { return '<div><span class="num">' + fds(e.d) + '</span><span>' + e.t + ' <span class="by">· ' + esc(e.by) + '</span></span></div>'; }).join('') + '</div></div>' +
       '</div>';
@@ -1493,7 +1567,7 @@ td .lock svg.i { width: 13px; height: 13px; }
       '<div class="fld"><span class="lb">Кто оформляет</span>' + radios('by', ['Саша', 'Ангелина', 'Аня'], me()) + '</div>' +
       '<div class="fgroup"><div class="gt">Изделие</div>' +
       '<div class="plbox"><div class="fld"><label for="n-model">Модель из прайса</label><select id="n-model" name="model"><option value="">Без прайса — ввести всё вручную</option>' +
-      PRICE.map(function (m) { return '<option value="' + m.n + '"' + (dm && dm.n === m.n ? ' selected' : '') + '>№' + m.n + ' · ' + esc(m.t) + '</option>'; }).join('') + '</select></div>' +
+      PRICE.filter(function (m) { return !m.off || (dm && dm.n === m.n); }).map(function (m) { return '<option value="' + m.n + '"' + (dm && dm.n === m.n ? ' selected' : '') + '>№' + m.n + ' · ' + esc(m.t) + '</option>'; }).join('') + '</select></div>' +
       '<div id="n-pl">' + (dm ? plOpts(dm, d.stone, d.ct) : '') + '</div></div>' +
       '<div class="fld"><label for="n-t">Название</label><input type="text" id="n-t" name="t" required placeholder="Например, кольцо багет" value="' + (dm ? esc(dm.t) : '') + '"></div>' +
       '<div class="fld"><span class="lb">Проба</span>' + radios('pr', ['585', '750'], d.pr || '750') + '</div><div class="fld"><span class="lb">Цвет золота</span>' + radios('col', ['белое', 'жёлтое', 'розовое'], 'белое') + '</div>' +
@@ -1541,7 +1615,12 @@ td .lock svg.i { width: 13px; height: 13px; }
         'Если цену в заказе исправили, рядом остаётся пометка «по прайсу».<span>Так видно, где была скидка.</span>',
         'На бланке для клиента есть номер заказа, дата заказа и дата выдачи.<span>Реквизитов ФОП, телефона и себестоимости на бланке нет.</span>',
         'Бланк и текст кнопки «Скопировать параметры и цену» — на украинском, как письма клиентам с сайта.<span>Название и детали попадают туда так, как их вписали.</span>',
-        'На телефоне «График» у тебя теперь в «Ещё», на его месте «Прайс».'
+        'На телефоне «График» у тебя теперь в «Ещё», на его месте «Прайс».',
+        'Сохранённый заказ можно изменить: изделие, цену, даты, клиента.<span>Каждая правка видна в истории заказа. Выданный заказ закрытого месяца правишь только ты.</span>',
+        'В заказе есть готовые тексты для клиента на украинском: «принят», «готов», «напоминание», «спасибо».<span>Скажи, если формулировки нужны другие.</span>',
+        'Скидки от прайса считаются по каждой из вас: в «Деньгах» за текущий месяц и в архиве месяца.<span>Девочки этих сумм не видят.</span>',
+        'Модель можно скрыть из прайса, а не удалять.<span>Старые заказы с ней не меняются.</span>',
+        'Внизу бланка — гарантия 6 месяцев, Instagram, Telegram и адрес шоурума, как на сайте.<span>Проверь, что гарантия действует и на индивидуальные заказы.</span>'
       ].map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ol>';
   }
 
@@ -1615,7 +1694,10 @@ td .lock svg.i { width: 13px; height: 13px; }
     y += 34; rule(y, INK, 2);
     y += 82; font(600, 34); text(d.total[0], M, y, 'left', d.total[1] ? INK : OK);
     if (d.total[1]) { font(300, 64); text(d.total[1], W - M, y + 6, 'right', ACC); }
-    y += 100; font(400, 26); text('Дякуємо, що обрали LIMÉRENCE', W / 2, y, 'center', MUT);
+    y += 92; rule(y, LINE, 1);
+    font(400, 24);
+    ['Гарантія на виріб — ' + SHOP.warranty + '. Умови на ' + SHOP.site, 'Instagram ' + SHOP.ig + ' · Telegram ' + SHOP.tg, 'Шоурум: ' + SHOP.addr + ', ' + SHOP.hours].forEach(function (l, i) { y += i ? 38 : 58; text(l, W / 2, y, 'center', MUT); });
+    y += 70; font(400, 26); text('Дякуємо, що обрали LIMÉRENCE', W / 2, y, 'center', INK);
     return y + 76;
   }
   function loadImg(src, cb) { if (!src) { cb(null); return; } var im = new Image(); im.onload = function () { cb(im); }; im.onerror = function () { cb(null); }; im.src = src; }
@@ -1682,13 +1764,13 @@ td .lock svg.i { width: 13px; height: 13px; }
     if (S.sheet === 'blank' && !bo) S.sheet = null;
     if (S.open) {
       var o = S.open === 'new' ? null : ORDERS.find(function (x) { return x.id === S.open; });
-      d.innerHTML = o ? drawerOrder(o) : drawerNew();
+      d.innerHTML = o ? (S.form === 'edit' ? drawerEdit(o) : drawerOrder(o)) : drawerNew();
       d.setAttribute('aria-label', 'Заказ'); d.hidden = false;
     } else if (pm) {
       d.innerHTML = drawerModel(pm);
       d.setAttribute('aria-label', 'Модель из прайса'); d.hidden = false;
     } else d.hidden = true;
-    var under = !!(S.open || pm), kind = S.open ? 'o' + S.open : pm ? 'm' + pm.n : '';
+    var under = !!(S.open || pm), kind = S.open ? 'o' + S.open + (S.form === 'edit' ? 'e' : '') : pm ? 'm' + pm.n : '';
     if (d.getAttribute('data-kind') !== kind) { d.setAttribute('data-kind', kind); d.scrollTop = 0; }
     if (S.sheet) { sh.innerHTML = S.sheet === 'more' ? sheetMore() : bo ? sheetBlank(bo) : sheetNotes(); sh.hidden = false; } else sh.hidden = true;
     $('scrim').hidden = !(under || S.sheet);
@@ -1737,6 +1819,9 @@ td .lock svg.i { width: 13px; height: 13px; }
         return;
       }
       case 'blank': S.blank = id; S.sheet = 'blank'; break;
+      case 'edit': if (o.st === 'done' && isClosed(o.iss.slice(0, 7)) && !isOwner()) return; S.open = id; S.form = 'edit'; break;
+      case 'copymsg': copyText(clientMsgs(o)[+a.getAttribute('data-i')][1], 'Текст скопирован'); return;
+      case 'togglemodel': { if (!isOwner()) return; var tm = modelBy(S.pmodel); tm.off = !tm.off; toast(tm.off ? 'Модель скрыта из прайса' : 'Модель снова в прайсе'); break; }
       case 'shareblank': {
         if (!BL.blob) { toast('Картинка ещё готовится'); return; }
         try { navigator.share({ files: [new File([BL.blob], BL.name, { type: 'image/png' })], title: 'LIMÉRENCE' }).catch(function () {}); } catch (err) { toast('Не получилось. Скачайте картинку или сделайте скриншот'); }
@@ -1809,6 +1894,8 @@ td .lock svg.i { width: 13px; height: 13px; }
     if (t.hasAttribute('data-cost')) { var o = ORDERS.find(function (x) { return x.id === +t.getAttribute('data-cost'); }); o.cost = +t.value || 0; $('o-profit').textContent = usd(o.price - o.cost); return; }
     if (t.id === 'n-ph2') { $('n-eq-wrap').hidden = !(+t.value > 0); return; }
     if (t.id === 'n-price') { priceHint(); return; }
+    if (t.id === 'pq') { S.pq = t.value; $('plist').innerHTML = priceGrid(); return; }
+    if (t.id === 'e-price') { var el = +t.getAttribute('data-list'); if (el) $('e-price-hint').textContent = hintText(el, +t.value || 0); return; }
     if (t.hasAttribute('data-pp')) {
       if (!isOwner()) return;
       var q = t.getAttribute('data-pp').split('|'), qm = modelBy(q[0]);
@@ -1863,6 +1950,28 @@ td .lock svg.i { width: 13px; height: 13px; }
         o.st = 'done'; o.iss = TODAY_S; o.log.push({ d: TODAY_S, t: 'Выдан клиенту', by: me() });
         toast('Заказ №' + o.id + ' выдан, вошёл в оборот октября');
       } else if (amt > 0) toast('Платёж записан');
+      S.form = null; render(); return;
+    }
+    if (f.id === 'editform') {
+      var eo = ORDERS.find(function (x) { return x.id === +f.getAttribute('data-id'); }), fe = new FormData(f), chg = [];
+      var put = function (key, label, val, fmt) {
+        if (val == null) return;
+        var old = eo[key] == null ? '' : eo[key];
+        if (String(old) === String(val)) return;
+        chg.push(label + ' ' + esc(fmt ? fmt(old) : (old || '—')) + ' → ' + esc(fmt ? fmt(val) : (val || '—')));
+        if (key === 'stone' && !val) delete eo.stone; else eo[key] = val;
+      };
+      var txt = function (k) { return String(fe.get(k) || '').trim(); };
+      put('t', 'название', txt('t')); put('pr', 'проба', fe.get('pr')); put('col', 'золото', fe.get('col'));
+      put('sz', 'размер', txt('sz')); put('ct', 'каратность', txt('ct'));
+      put('stone', 'камень', fe.get('stone'), function (v) { return STONES[v] || 'не указан'; });
+      put('det', 'детали', txt('det')); put('price', 'цена', +fe.get('price'), usd);
+      put('cr', 'дата заказа', fe.get('cr'), fd); put('due', 'дата выдачи', fe.get('due'), fd);
+      put('cn', 'клиент', txt('cn')); put('ph', 'телефон', txt('ph'));
+      put('del', 'получение', fe.get('del')); put('ch', 'заказ', fe.get('ch'));
+      if (!eo.model) eo.k = kindOf(eo.t);
+      if (chg.length) eo.log.push({ d: TODAY_S, t: 'Изменено: ' + chg.join('; '), by: me() });
+      toast(chg.length ? 'Заказ №' + eo.id + ' обновлён' : 'Ничего не изменилось');
       S.form = null; render(); return;
     }
     if (f.id === 'newform') {
